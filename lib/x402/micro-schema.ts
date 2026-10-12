@@ -1,6 +1,6 @@
 /** JSON-only, bounded schema subset. No product or corpus imports. */
 export type MicroSchema = {
-  type?: 'object' | 'array' | 'string' | 'integer' | 'boolean' | 'null'
+  type?: 'object' | 'array' | 'string' | 'integer' | 'number' | 'boolean' | 'null'
   properties?: Record<string, MicroSchema>; required?: string[]; additionalProperties?: false
   items?: MicroSchema; minItems?: number; maxItems?: number
   minLength?: number; maxLength?: number; pattern?: string
@@ -22,6 +22,7 @@ export function schemaAccepts(schema: MicroSchema, value: unknown, depth = 0): b
     case 'null': return value === null
     case 'boolean': return typeof value === 'boolean'
     case 'string': return typeof value === 'string' && Array.from(value).length >= (schema.minLength ?? 0) && Array.from(value).length <= (schema.maxLength ?? 100000) && (!schema.pattern || new RegExp(schema.pattern, 'u').test(value))
+    case 'number': return typeof value === 'number' && Number.isFinite(value) && value >= (schema.minimum ?? -Number.MAX_VALUE) && value <= (schema.maximum ?? Number.MAX_VALUE)
     case 'integer': return typeof value === 'number' && Number.isSafeInteger(value) && value >= (schema.minimum ?? Number.MIN_SAFE_INTEGER) && value <= (schema.maximum ?? Number.MAX_SAFE_INTEGER)
     case 'array': return Array.isArray(value) && value.length >= (schema.minItems ?? 0) && value.length <= (schema.maxItems ?? 1000) && value.every(v => schemaAccepts(schema.items!, v, depth + 1))
     case 'object': {

@@ -2,6 +2,10 @@ import { X402_OFFERS, type X402Offer } from './offers.ts'
 import { isExpansionProduct, EXPANSION_SPECS } from './expansion-registry.ts'
 
 export const PRODUCT_CATEGORIES = [
+  { id: 'quantum', title: 'Quantum research utilities' },
+  { id: 'biology', title: 'Biology research utilities' },
+  { id: 'chemistry', title: 'Chemistry research utilities' },
+  { id: 'materials', title: 'Materials science utilities' },
   { id: 'context', title: 'Context and evidence services' },
   { id: 'physical-ai', title: 'Physical AI and manufacturing planning' },
   { id: 'public-finance', title: 'Public finance checks' },
@@ -17,6 +21,7 @@ export const PRODUCT_CATEGORIES = [
 export type ProductCategoryId = typeof PRODUCT_CATEGORIES[number]['id']
 
 export function categoryForOffer(offer: X402Offer): ProductCategoryId {
+  for (const category of ['quantum', 'biology', 'chemistry', 'materials'] as const) if (offer.tags.includes(category)) return category
   if (isExpansionProduct(offer.id)) return EXPANSION_SPECS[offer.id].category as ProductCategoryId
   if (['evidence-scope-check', 'evidence-version-selection-check', 'context-manifest-check'].includes(offer.id)) return 'context'
   if (offer.tags.includes('physical-ai')) return 'physical-ai'

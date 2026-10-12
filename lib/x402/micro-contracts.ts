@@ -4,6 +4,7 @@ import { COMPATIBILITY_PRODUCTS, COMPATIBILITY_INPUT_SCHEMAS } from './compatibi
 import { PLANNING_PRODUCTS, planningInputSchemas } from './micro-planning-contracts.ts'
 import { EVIDENCE_CHECK_PRODUCTS, EVIDENCE_CHECK_INPUT_SCHEMAS } from './evidence-check-contracts.ts'
 import { EXPANSION_PRODUCTS, EXPANSION_INPUT_SCHEMAS } from './expansion-registry.ts'
+import { SCIENCE_PRODUCTS, SCIENCE_INPUT_SCHEMAS } from './science/contracts.ts'
 export const MICRO_VERSION = 'maha-microproducts/0.1' as const
 export const MICRO_MAX_REQUEST_BYTES = 32768
 export const MICRO_MAX_RESPONSE_BYTES = 65536
@@ -23,6 +24,7 @@ export const MICRO_PRODUCTS = {
   ...PLANNING_PRODUCTS,
   ...EVIDENCE_CHECK_PRODUCTS,
   ...EXPANSION_PRODUCTS,
+  ...SCIENCE_PRODUCTS,
 } as const
 export type MicroProductId = keyof typeof MICRO_PRODUCTS
 export const MICRO_IDS = Object.keys(MICRO_PRODUCTS) as MicroProductId[]
@@ -40,6 +42,7 @@ const observation = objectSchema({ observationId: ID_SCHEMA, normalizedClaimId: 
 const envelope = (properties: Record<string, MicroSchema>) => objectSchema({ dataClass: enumSchema('public', 'synthetic'), ...properties })
 
 export const MICRO_INPUT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
+  ...SCIENCE_INPUT_SCHEMAS,
   ...COMPATIBILITY_INPUT_SCHEMAS,
   ...nextInputSchemas(),
   ...planningInputSchemas(),

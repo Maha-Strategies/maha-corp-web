@@ -14,7 +14,9 @@ if (process.env.X402_CABEZON_EBOOKS_ENABLED === 'true' && process.env.X402_EBOOK
 }
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['@rdkit/rdkit'],
   outputFileTracingIncludes: {
+    '/api/v1/micro/chemistry-*': ['./node_modules/@rdkit/rdkit/dist/RDKit_minimal.wasm'],
     // Shared microproduct contracts read pinned local book metadata; licensed
     // paid packs need the original Markdown in their private server bundle.
     '/api/v1/micro/*': ['./content/books/the-maha-principle/*.md', './content/books/the-orbital-mind/*.md', './content/books/the-volcanic-engine/The-Volcanic-Engine-Introduction.md'],

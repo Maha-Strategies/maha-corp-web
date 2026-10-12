@@ -1,0 +1,552 @@
+[
+  {
+    "id": "quantum-measurement-uncertainty",
+    "title": "Measurement uncertainty",
+    "description": "For agents reviewing shot-count results: return probabilities and binomial confidence intervals with the interval method and independence assumptions.",
+    "amount": "12001",
+    "tags": [
+      "quantum",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "quantum-state-validity",
+    "title": "Quantum-state validity",
+    "description": "Check a supplied single-qubit complex density matrix for unit trace, Hermiticity and positive semidefiniteness with explicit tolerance; no hardware validation.",
+    "amount": "14001",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-observable-expectations",
+    "title": "Observable expectation values",
+    "description": "Calculate X, Y and Z Pauli expectations for a supplied valid single-qubit density matrix. Returns basis conventions; not a hardware measurement.",
+    "amount": "16001",
+    "tags": [
+      "quantum",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "quantum-state-fidelity-purity",
+    "title": "State fidelity and purity",
+    "description": "Calculate squared Uhlmann fidelity and purity for two supplied single-qubit density matrices. Explicit conventions; no experimental certification.",
+    "amount": "19001",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-coherence-budget",
+    "title": "Coherence-budget calculator",
+    "description": "Compare circuit durations with supplied T1/T2 values using an explicit relaxation/dephasing model. For scenario planning; not a measured device-fidelity guarantee.",
+    "amount": "22001",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-readout-calibration",
+    "title": "Readout-calibration analysis",
+    "description": "Invert a supplied single-qubit readout calibration and report sensitivity and nonphysical corrected fractions without clipping. Calibration uncertainty not estimated.",
+    "amount": "26001",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-circuit-lint",
+    "title": "Quantum-circuit lint",
+    "description": "Lint up to 128 declared gates on eight qubits for arity, target, angle and post-measurement errors. Returns scheduling depth; no simulation or equivalence proof.",
+    "amount": "33001",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-randomized-benchmarking-fit",
+    "title": "Randomized-benchmarking fit",
+    "description": "Fit supplied randomized-benchmarking decay observations with residuals and protocol-bound error estimates. Not a platform-independent quantum-computer ranking.",
+    "amount": "41001",
+    "tags": [
+      "quantum",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "quantum-rabi-ramsey-analysis",
+    "title": "Rabi/Ramsey trace analysis",
+    "description": "Fit a bounded damped Rabi/Ramsey trace by frequency-decay grid search; report residuals, resolution, aliasing refusal and edge hits. No parameter confidence interval.",
+    "amount": "57001",
+    "tags": [
+      "quantum",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "quantum-stabilizer-consistency",
+    "title": "Stabilizer consistency check",
+    "description": "Check supplied stabilizer generators for commutation, independence and inconsistent constraints before analysing a code. No logical-error or fault-tolerance guarantee.",
+    "amount": "81000",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-surface-code-resource-scenario",
+    "title": "Surface-code resource scenario",
+    "description": "Calculate a surface-code resource scenario under an explicitly named layout and supplied error assumptions. For planning; not a demonstrated physical implementation.",
+    "amount": "99000",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-benchmark-comparability",
+    "title": "Quantum benchmark comparability",
+    "description": "Compare structured benchmark protocol, workload, metric, noise and overhead declarations. Flags mismatches; labels are not independently validated.",
+    "amount": "135000",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "quantum-architecture-requirements",
+    "title": "Qubit architecture requirements map",
+    "description": "Compare caller-declared qubit count, connectivity and gate-duration requirements with supplied architecture capability records. No verified best-platform recommendation.",
+    "amount": "215000",
+    "tags": [
+      "quantum",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-fasta-quality",
+    "title": "FASTA quality check",
+    "description": "Check supplied FASTA records for malformed headers, duplicate identifiers and invalid sequence characters before dataset ingestion. No functional or safety inference.",
+    "amount": "4001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-dna-rna-composition",
+    "title": "DNA/RNA composition",
+    "description": "Count DNA/RNA bases and ambiguities and calculate GC fraction on called bases only. Refuses mixed DNA/RNA alphabets; no sequence design or clinical inference.",
+    "amount": "6001",
+    "tags": [
+      "biology",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "biology-protein-sequence-descriptors",
+    "title": "Protein sequence descriptors",
+    "description": "Calculate composition, molecular mass and model-based charge descriptors from supplied protein sequences. For dataset analysis; not a folding or function prediction.",
+    "amount": "13001",
+    "tags": [
+      "biology",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "biology-pairwise-sequence-comparison",
+    "title": "Pairwise sequence comparison",
+    "description": "Globally align two DNA sequences of up to 400 bases using fixed Needleman-Wunsch scores; report aligned strings, identity and gaps. No pathogenicity inference.",
+    "amount": "18001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-accession-version-check",
+    "title": "Biological accession/version check",
+    "description": "Match accession, isoform and version declarations against a caller-supplied hashed snapshot. Report missing or ambiguous matches; no authoritative database lookup.",
+    "amount": "24001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-protein-confidence-audit",
+    "title": "Protein confidence-map audit",
+    "description": "Summarize supplied per-residue pLDDT scores into explicit confidence bins. Does not assess missing residues, folding correctness, function or clinical suitability.",
+    "amount": "32001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-qpcr-run-quality",
+    "title": "qPCR run-quality check",
+    "description": "Check supplied Ct replicates, efficiency and control declarations against fixed research QC bands; report Ct SD and failed conditions. No diagnostic validation.",
+    "amount": "42001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-qpcr-relative-expression",
+    "title": "qPCR relative-expression calculator",
+    "description": "Calculate a Pfaffl expression ratio from supplied Ct values and amplification efficiencies; require a declared stable reference. No diagnostic interpretation.",
+    "amount": "58001",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-assay-control-coverage",
+    "title": "Assay-control coverage",
+    "description": "Compare a declared assay with a reviewed control checklist and flag missing positive, negative, vehicle or technical controls. No experimental-success guarantee.",
+    "amount": "79000",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-research-dose-response-fit",
+    "title": "Research dose-response fit",
+    "description": "Fit normalized assay responses using a fixed-bottom/top logit-linear Hill model. Return half-response, slope and residuals; no dosing or nonlinear-fit guarantee.",
+    "amount": "105000",
+    "tags": [
+      "biology",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "biology-replicate-batch-confounding",
+    "title": "Replicate and batch-confounding check",
+    "description": "Inspect structured sample assignments for technical/biological replication and batch confounding before comparing experimental groups. No causal conclusion from labels alone.",
+    "amount": "149000",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-translation-boundary-check",
+    "title": "Biological translation-boundary check",
+    "description": "Compare declared in-vitro, animal and human evidence frames against a requested claim frame. Flag mismatches; no truth certification or clinical endorsement.",
+    "amount": "185000",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "biology-design-assay-evidence-brief",
+    "title": "Design-to-assay evidence brief",
+    "description": "Check declared design hash, assay identity, evidence records and control gaps for a research handoff. Does not validate the design, sequence or biological efficacy.",
+    "amount": "275000",
+    "tags": [
+      "biology",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-formula-mass-check",
+    "title": "Formula and molecular-mass check",
+    "description": "Parse a bounded formula with parentheses using a pinned 30-element average-mass table. Return composition and molar mass; no isotopes, purity or safety claim.",
+    "amount": "2000",
+    "tags": [
+      "chemistry",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "chemistry-dilution-calculator",
+    "title": "Dilution calculator",
+    "description": "Calculate stock and working concentrations from supplied quantities with unit and feasibility checks. For arithmetic verification; no chemical-handling or safety guidance.",
+    "amount": "5005",
+    "tags": [
+      "chemistry",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "chemistry-concentration-basis",
+    "title": "Concentration-basis reconciliation",
+    "description": "Reconcile molarity, mass concentration and fractions when required density and composition inputs exist. Flag missing assumptions; no invented material properties.",
+    "amount": "8001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-smiles-validation",
+    "title": "SMILES structure validation",
+    "description": "Parse supplied SMILES and report valence, stereochemistry and representation problems before molecular-data processing. Structural parsing does not establish safety.",
+    "amount": "11001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-molecular-descriptor-pack",
+    "title": "Molecular descriptor pack",
+    "description": "Calculate a bounded set of molecular descriptors using a pinned toolkit version. For research dataset preparation; descriptors do not certify drug suitability or toxicity.",
+    "amount": "17001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-molecular-identity-comparison",
+    "title": "Molecular identity comparison",
+    "description": "Compare supplied structures with explicit salt, protonation and stereochemical handling. For dataset reconciliation; no empirical identity or purity confirmation.",
+    "amount": "21001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-fingerprint-similarity",
+    "title": "Fingerprint similarity",
+    "description": "Compare supplied molecules using a declared fingerprint and similarity metric. For dataset analysis; chemical similarity does not establish equivalent function or safety.",
+    "amount": "28001",
+    "tags": [
+      "chemistry",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "chemistry-reaction-conservation",
+    "title": "Reaction conservation check",
+    "description": "Check supplied reaction declarations for atom and charge accounting. For record quality control; no reaction feasibility, synthesis procedure or safety claim.",
+    "amount": "37001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-spectrum-peak-comparison",
+    "title": "Spectrum peak-table comparison",
+    "description": "Match supplied reference and sample peak lists under declared tolerances. For spectrum-data comparison; no unique compound identification from peaks alone.",
+    "amount": "49001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-arrhenius-fit",
+    "title": "Arrhenius fit",
+    "description": "Fit positive rate-temperature observations by log-linear Arrhenius OLS; return activation energy, residuals and transformed-fit errors. No mechanism or extrapolation claim.",
+    "amount": "69001",
+    "tags": [
+      "chemistry",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "chemistry-electrochemical-normalizer",
+    "title": "Electrochemical record normalizer",
+    "description": "Convert electrode potentials with supplied SHE offsets only when declared conditions match. Explicit sign convention; no reference-data or area validation.",
+    "amount": "119001",
+    "tags": [
+      "chemistry",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "chemistry-enzyme-kinetics-fit",
+    "title": "Enzyme-kinetics fit",
+    "description": "Fit supplied substrate/rate pairs by reciprocal Lineweaver-Burk OLS; report Km, Vmax and residuals. Exposes noise bias; no parameter confidence interval.",
+    "amount": "169000",
+    "tags": [
+      "chemistry",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-property-record-check",
+    "title": "Material-property record check",
+    "description": "Check declared property, unit, temperature, method, uncertainty, source and revision against supported unit conventions. No independent measurement verification.",
+    "amount": "9001",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-particle-size-summary",
+    "title": "Particle-size distribution summary",
+    "description": "Summarize supplied particle-size distributions while preserving number, mass or volume weighting. For metrology-data analysis; no toxicology or safety inference.",
+    "amount": "15001",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-sheet-resistance",
+    "title": "Thin-film sheet-resistance calculator",
+    "description": "Relate supplied film thickness, resistivity and sheet resistance under stated uniform-film assumptions. For arithmetic checks; no measured device-performance claim.",
+    "amount": "23001",
+    "tags": [
+      "materials",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-thermal-expansion-mismatch",
+    "title": "Thermal-expansion mismatch",
+    "description": "Estimate differential strain from supplied expansion coefficients and temperature changes. For preliminary scenarios; no stress, delamination or reliability certification.",
+    "amount": "31001",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-thermal-stack-resistance",
+    "title": "Thermal-stack resistance",
+    "description": "Calculate a one-dimensional layer and interface thermal-resistance scenario from supplied inputs. No hotspot, convection, transient or validated package-safety claim.",
+    "amount": "43001",
+    "tags": [
+      "materials",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-stress-strain-analysis",
+    "title": "Stress-strain curve analysis",
+    "description": "Extract supported metrics from bounded supplied stress-strain data under a declared method. Report fit and sampling limits; no structural design approval.",
+    "amount": "61001",
+    "tags": [
+      "materials",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-xrd-peak-analysis",
+    "title": "XRD peak-position analysis",
+    "description": "Calculate first-order Bragg spacings from supplied two-theta peaks and wavelength. Explicit units; no lattice indexing or unique phase identification.",
+    "amount": "85000",
+    "tags": [
+      "materials",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-optical-bandgap-fit",
+    "title": "Optical band-gap fit audit",
+    "description": "Evaluate supplied absorption observations under a declared band-gap model with fit-window sensitivity. No universal band-gap or integrated-device performance claim.",
+    "amount": "109001",
+    "tags": [
+      "materials",
+      "science",
+      "calculator"
+    ]
+  },
+  {
+    "id": "materials-raman-reference-comparison",
+    "title": "Raman reference comparison",
+    "description": "Match supplied Raman peak positions by nearest unused reference within an absolute tolerance. No linewidth analysis or unique material identification.",
+    "amount": "159000",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-candidate-comparison",
+    "title": "Material-candidate comparison",
+    "description": "Score supplied material candidates by weighted cohort min-max criteria; withhold incomplete scores without imputation. No qualification or engineering approval.",
+    "amount": "199000",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-deposition-compatibility",
+    "title": "Deposition-process compatibility map",
+    "description": "Check declared process temperature and corrosivity against substrate constraints and supplied evidence records. Flags conflicts; no fabrication recipe or compatibility approval.",
+    "amount": "249000",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  },
+  {
+    "id": "materials-qualification-evidence-brief",
+    "title": "Materials qualification evidence brief",
+    "description": "Reconcile required qualification tests with supplied pass/fail/not-run evidence records. List declared passes, failures and gaps; no material certification.",
+    "amount": "298962",
+    "tags": [
+      "materials",
+      "science",
+      "research"
+    ]
+  }
+]

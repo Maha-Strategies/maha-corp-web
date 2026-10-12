@@ -1,14 +1,16 @@
 import { createPublicClient, http, parseAbiItem } from 'viem'
-import { base } from 'viem/chains'
-import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
+import { base, arbitrum } from 'viem/chains'
+import { MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
 import { payableOffers } from './offers.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 import { RPC_LOG_MAX_BLOCKS, scanRpcLogs } from './rpc-log-scan.ts'
 import { settlementRefreshFailure, settlementRpcQueue, settlementRpcUrl } from './settlement-rpc.ts'
+import { usdcNetwork, type UsdcNetwork } from './networks.ts'
 
 export type Transfer = { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; logIndex: number }
 export type SettlementReader = {
+  caip2Network?: UsdcNetwork
   finalizedBlock(): Promise<bigint>
   transfers(from: bigint, to: bigint): Promise<Transfer[]>
   timestamp(block: bigint): Promise<string>
@@ -17,22 +19,32 @@ export type SettlementReader = {
 export const RECHECK_BLOCKS = BigInt(128)
 export const SCAN_CHUNK = RPC_LOG_MAX_BLOCKS
 export const MAX_SCAN_BLOCKS = SCAN_CHUNK * BigInt(12)
+// Covers the approved fifty-call launch even when every transfer lands in a
+// different block. At 350 ms pacing, 80 timestamps plus 48 Arbitrum ranges use
+// about 45 seconds before network latency; heavier history stays offline-only.
+export const MAX_TIMESTAMP_BLOCKS = 80
 
 export function baseSettlementReader(options: { timeout?: number; retryCount?: number; minRpcIntervalMs?: number; minLogIntervalMs?: number } = {}): SettlementReader {
+  return evmSettlementReader('eip155:8453', options)
+}
+
+export function evmSettlementReader(network: UsdcNetwork, options: { timeout?: number; retryCount?: number; minRpcIntervalMs?: number; minLogIntervalMs?: number } = {}): SettlementReader {
+  const definition = usdcNetwork(network), chain = network === 'eip155:8453' ? base : arbitrum
   // Retain the offline CLI's old option, but apply it to all reads, not just logs.
   const queue = settlementRpcQueue(options.minRpcIntervalMs ?? options.minLogIntervalMs ?? 350)
   const read = <T>(request: () => Promise<T>) => queue(request).catch((error: unknown) => {
     throw new Error(`settlement_rpc_${settlementRefreshFailure(error)}`)
   })
-  const client = createPublicClient({ chain: base, transport: http(settlementRpcUrl(), {
+  const client = createPublicClient({ chain, transport: http(settlementRpcUrl(process.env, network), {
     timeout: options.timeout ?? 12000, retryCount: options.retryCount ?? 0,
   }) })
   const event = parseAbiItem('event Transfer(address indexed from, address indexed to, uint256 value)')
   let checkedChain: Promise<void> | undefined
   return {
+    caip2Network: network,
     async finalizedBlock() {
       checkedChain ??= read(() => client.getChainId()).then(chainId => {
-        if (chainId !== base.id) throw new Error('settlement_rpc_chain_mismatch')
+        if (chainId !== definition.chainId) throw new Error('settlement_rpc_chain_mismatch')
       }).catch(error => { checkedChain = undefined; throw error })
       await checkedChain
       const block = await read(() => client.getBlock({ blockTag: 'finalized' }))
@@ -42,7 +54,7 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
     async transfers(fromBlock, toBlock) {
       const transfers: Transfer[] = []
       for await (const log of scanRpcLogs({ fromBlock, toBlock,
-        getLogs: (fromBlock, toBlock) => read(() => client.getLogs({ address: BASE_USDC as `0x${string}`, event,
+        getLogs: (fromBlock, toBlock) => read(() => client.getLogs({ address: definition.asset as `0x${string}`, event,
           args: { to: MAHA_PAYEE as `0x${string}` }, fromBlock, toBlock, strict: true })),
       })) {
         if (log.removed || log.blockNumber === null || log.logIndex === null || log.transactionHash === null
@@ -60,10 +72,11 @@ export function baseSettlementReader(options: { timeout?: number; retryCount?: n
 }
 
 /** Recompute summaries; amounts are only an attribution hint, never proof of a route or delivery. */
-export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settlements'], fromBlock: bigint, toBlock: bigint, observedAt: string) {
+export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settlements'], fromBlock: bigint, toBlock: bigint, observedAt: string, network: UsdcNetwork = 'eip155:8453') {
   return buildLedger({ settlements: rows, fromBlock, toBlock, observedAt,
+    caip2Network: network,
     operatorWallets: [...OPERATOR_WALLETS, MAHA_PAYEE],
-    operatorReceipts: OPERATOR_SETTLEMENT_RECEIPTS,
+    operatorReceipts: network === 'eip155:8453' ? OPERATOR_SETTLEMENT_RECEIPTS : [],
     // Superseded amounts must travel with the offer. The hourly cron rebuilds
     // the public ledger from chain logs alone, so an offer that has been
     // repriced stops matching its own historical settlements unless the old
@@ -83,12 +96,17 @@ export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settleme
 
 /** Bounded incremental scan. A failed chunk never advances the cursor or publishes a partial scan. */
 export async function refreshSettlementLedger(previous: SettlementLedger, reader: SettlementReader, now = new Date()) {
+  const network = (previous.caip2Network ?? 'eip155:8453') as UsdcNetwork
+  if (reader.caip2Network && reader.caip2Network !== network) throw new Error('settlement_reader_network_mismatch')
   const finalized = await reader.finalizedBlock()
   const cursor = BigInt(previous.scannedToBlock)
   if (finalized < cursor) throw new Error('finalized_head_behind_snapshot')
   const earliest = BigInt(previous.scannedFromBlock)
   const start = cursor - RECHECK_BLOCKS > earliest ? cursor - RECHECK_BLOCKS : earliest
-  const end = finalized < start + MAX_SCAN_BLOCKS - BigInt(1) ? finalized : start + MAX_SCAN_BLOCKS - BigInt(1)
+  // Arbitrum block numbers advance faster; a Base-sized hourly scan would fall
+  // farther behind on every run. Keep each range bounded and cursor atomic.
+  const limit = network === 'eip155:42161' ? MAX_SCAN_BLOCKS * BigInt(4) : MAX_SCAN_BLOCKS
+  const end = finalized < start + limit - BigInt(1) ? finalized : start + limit - BigInt(1)
   const ranges: Array<[bigint, bigint]> = []
   for (let from = start; from <= end; from += SCAN_CHUNK) ranges.push([from, from + SCAN_CHUNK - BigInt(1) < end ? from + SCAN_CHUNK - BigInt(1) : end])
   const found: Transfer[] = []
@@ -116,7 +134,7 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
   }
   const times = new Map<bigint, string>()
   const blocks = [...new Set([...unique.values()].map((row) => row.blockNumber))]
-  if (blocks.length > 40) throw new Error('scan_requires_offline_backfill')
+  if (blocks.length > MAX_TIMESTAMP_BLOCKS) throw new Error('scan_requires_offline_backfill')
   for (let i = 0; i < blocks.length; i += 4) {
     await Promise.all(blocks.slice(i, i + 4).map(async (block) => {
       const timestamp = await reader.timestamp(block)
@@ -129,6 +147,6 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
     payer: row.payer, amountBaseUnits: BigInt(row.amountBaseUnits), blockNumber: BigInt(row.blockNumber),
     transactionHash: row.transactionHash, timestampUtc: row.timestampUtc, logIndex: row.logIndex,
   }))
-  const ledger = ledgerFromRows([...retained, ...[...unique.values()].map((row) => ({ ...row, timestampUtc: times.get(row.blockNumber)! }))], earliest, end, now.toISOString())
+  const ledger = ledgerFromRows([...retained, ...[...unique.values()].map((row) => ({ ...row, timestampUtc: times.get(row.blockNumber)! }))], earliest, end, now.toISOString(), network)
   return { ledger, caughtUp: end === finalized, finalizedBlock: finalized.toString() }
 }

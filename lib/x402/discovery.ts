@@ -19,7 +19,7 @@ export const OFFER_EXTENSION = 'maha-offer'
  * Bumped whenever any published offer's declaration changes. A catalog uses it
  * with the declaration digest to tell a re-index from a genuine revision.
  */
-export const OFFER_METADATA_VERSION = '2026-10-11'
+export const OFFER_METADATA_VERSION = '2026-08-10'
 
 /** Where the complete, uncompacted declaration for an offer is published. */
 export function declarationUrl(origin: string, offerId: string): string {
@@ -135,15 +135,17 @@ const declarationCache = new Map<string, Record<string, unknown>>()
 export async function discoveryExtensionsFor(
   resource: PricedResource,
   resourceUrl: string,
-  requirement?: PaymentRequirement,
+  paymentTerms?: PaymentRequirement | PaymentRequirement[],
 ): Promise<Record<string, unknown> | undefined> {
+  const requirements = paymentTerms ? (Array.isArray(paymentTerms) ? paymentTerms : [paymentTerms]) : []
+  const requirement = requirements[0]
   const offer = offerById(resource.offerId)
   if (!offer) return undefined
 
   // Payment terms are part of the digest. A warm process must not reuse a
   // declaration after a price, recipient, asset or network change. A request
   // without requirements must never receive a cached complete declaration.
-  const cacheKey = JSON.stringify([offer.id, resourceUrl, resource.amount, requirement ?? null])
+  const cacheKey = JSON.stringify([offer.id, resourceUrl, resource.amount, requirements])
   const cached = declarationCache.get(cacheKey)
   if (cached) return cached
 
@@ -195,6 +197,7 @@ export async function discoveryExtensionsFor(
     asset: 'USDC',
     assetDecimals: USDC_DECIMALS,
     network: requirement?.network ?? BASE_MAINNET_CAIP2,
+    ...(requirements.length > 1 ? { networks: requirements.map(term => term.network) } : {}),
     status: offer.status,
     payableInProduction: offer.availability.payableInProduction,
     maxRequestBytes: offer.maxRequestBytes,
@@ -217,7 +220,7 @@ export async function discoveryExtensionsFor(
       {
         x402Version: X402_VERSION,
         resource: resourceInfoFor(resource, resourceUrl) as unknown as Record<string, unknown>,
-        accepts: [requirement],
+        accepts: requirements,
         extensions,
       },
       OFFER_METADATA_VERSION,

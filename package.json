@@ -148,6 +148,7 @@
     "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
+    "@rdkit/rdkit": "2026.9.1",
     "@anthropic-ai/sdk": "^0.131.0",
     "@openai/agents": "^0.18.0",
     "@scalar/api-reference-react": "^0.9.60",

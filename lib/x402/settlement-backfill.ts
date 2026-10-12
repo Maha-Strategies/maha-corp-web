@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { bundledLedger, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from './settlement-live-store.ts'
+import { networkSeed, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from './settlement-live-store.ts'
 import { refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
 
 /** Scan outside the short publication lock; publish only a complete, unchanged-base repair. */
@@ -10,8 +10,10 @@ export async function backfillSettlements(options: {
   maxPasses?: number
   progress?: (cursor: string, target: string) => void
 }) {
+  const network = options.reader.caip2Network ?? 'eip155:8453'
+  const bundledLedger = networkSeed(network)
   const previous = await options.store.read()
-  if (previous && !validLiveSnapshot(previous)) throw new Error('invalid_saved_snapshot')
+  if (previous && !validLiveSnapshot(previous, network)) throw new Error('invalid_saved_snapshot')
   const initial = JSON.stringify(previous)
   let ledger = previous && BigInt(previous.ledger.scannedToBlock) >= BigInt(bundledLedger.scannedToBlock)
     ? previous.ledger : bundledLedger
@@ -30,7 +32,7 @@ export async function backfillSettlements(options: {
     }
   }
   if (!complete) throw new Error('backfill_limit_exceeded_no_publication')
-  if (!validLiveSnapshot(complete)) throw new Error('invalid_backfill_snapshot')
+  if (!validLiveSnapshot(complete, network)) throw new Error('invalid_backfill_snapshot')
   await options.backup(previous)
   const owner = randomUUID()
   if (!await options.store.acquire(owner)) throw new Error('refresh_already_running')

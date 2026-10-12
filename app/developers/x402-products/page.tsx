@@ -30,7 +30,7 @@ export default async function X402ProductsPage() {
   return <main className="evidence-page"><div className="evidence-container">
     <SettlementAutoRefresh />
     <header className="max-w-4xl">
-      <p className="evidence-kicker">Base Mainnet · USDC · x402 v2</p>
+      <p className="evidence-kicker">{snapshot.ledger.network} · native USDC · x402 v2</p>
       <h1 className="evidence-title">x402 products and prices</h1>
       <p className="evidence-lede mt-6">Choose a bounded service, inspect its contract, and confirm the exact payment terms before signing.</p>
       <p className="evidence-copy mt-4">{X402_OFFERS.length} declared products: {available} released and {X402_OFFERS.length - available} withheld or preview. Prices below are per request or bounded batch, not per input record. Withheld prices are proposals, not purchase invitations.</p>

@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs'
 import { x402Config } from '../lib/x402/config.ts'
 import { PLANNING_IDS } from '../lib/x402/micro-planning-contracts.ts'
 import { EXPANSION_INDEXING_IDS, EXPANSION_MAX_SERVICE_BASE_UNITS } from '../lib/x402/expansion-registry.ts'
+import { SCIENCE_IDS } from '../lib/x402/science/contracts.ts'
 
 test('new planning opt-in does not widen the prior production flag or mutate its resource list', () => {
   const env = { X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https://facilitator.example/x402', X402_PAY_TO: MAHA_PAYEE,
@@ -46,8 +47,8 @@ test('authorized microproduct cohorts are released at distinct amounts without w
   // so any two amounts closer than a fee apart are one perturbation away from
   // being indistinguishable.
   const total = released.reduce((n, o) => n + BigInt(o.amount), BigInt(0))
-  assert.equal(total, BigInt(1447500) + BigInt(EXPANSION_MAX_SERVICE_BASE_UNITS))
-  assert.equal(released.length, 30 + EXPANSION_INDEXING_IDS.length)
+  assert.equal(total, BigInt(1447500) + BigInt(EXPANSION_MAX_SERVICE_BASE_UNITS) + BigInt(3577000))
+  assert.equal(released.length, 30 + EXPANSION_INDEXING_IDS.length + SCIENCE_IDS.length)
   const amounts = [...payableOffers()].filter(o => !o.id.startsWith('book-epub-')).map(o => BigInt(o.amount)).sort((a, b) => (a < b ? -1 : 1))
   const gaps = amounts.slice(1).map((a, i) => a - amounts[i])
   assert.ok(gaps.every(g => g > BigInt(0)), 'every payable amount remains distinct')

@@ -43,7 +43,7 @@ function recapture(value: ReturnType<typeof fixture>) {
 }
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', async () => {
-  assert.equal(X402_OFFERS.length, 107)
+  assert.equal(X402_OFFERS.length, 157)
   // Bundles are tested against actual private pinned files below, not against
   // advertising placeholders or copyrighted bytes checked into test fixtures.
   for (const offer of X402_OFFERS.filter(o => !o.id.startsWith('book-epub-'))) {

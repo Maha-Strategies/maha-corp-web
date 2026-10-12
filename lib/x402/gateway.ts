@@ -1,4 +1,4 @@
-import { priceFor, requirementFor, x402Config, type X402Config } from './config.ts'
+import { priceFor, requirementsFor, x402Config, type X402Config } from './config.ts'
 import { isMicroProduct } from './micro-contracts.ts'
 import { acquireSlot, releaseSlot, type SlotResult } from './concurrency.ts'
 import { createFacilitator } from './facilitator.ts'
@@ -10,6 +10,7 @@ import {
   encodeChallengeHeader,
   encodePaymentResponse,
   matchesPaymentContext,
+  matchRequirement,
   parsePaymentHeader,
   readPaymentSignature,
   type PaymentFacilitator,
@@ -23,7 +24,12 @@ import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
 import { createAdmissionGuard, readAdmissionClaim } from './admission.ts'
 import { validateAdmissionBody } from './admission-body.ts'
+import { readMicroBody } from './micro-body.ts'
+import { readMicroPurchase } from './micro-purchase.ts'
+import { buildMicroProduct, microDigest } from './micro-products.ts'
+import { isScienceProduct } from './science/contracts.ts'
 import { validatePreSettlementBody } from './pre-settlement-body.ts'
+import { createMicroAdmissionGuard } from './micro-recovery.ts'
 import { offerById } from './offers.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
@@ -39,10 +45,13 @@ export type X402Outcome =
       kind: 'paid'
       /** True when this settled earlier and was not charged again. */
       replayed?: boolean
+      /** Server-computed commitment; never read from client headers. */
+      microResponseDigest?: string
       header: string
       transaction: string
       payer: string
       amountPaid: string
+      network?: string
       /** The capacity slot this request holds. Whoever observes the work finish
        *  must release it; see lib/x402/slot.ts. */
       slot: { resource: string; token: string }
@@ -67,14 +76,15 @@ type Dependencies = {
  * recipient this server actually asked for.
  */
 function confirmerFor(config: X402Config, requirement: PaymentRequirement): SettlementConfirmer | undefined {
-  if (!config.chainRpcUrl) return undefined
+  const network = (config.paymentNetworks ?? [config]).find(option => option.network === requirement.network && option.asset.toLowerCase() === requirement.asset.toLowerCase() && option.payTo.toLowerCase() === requirement.payTo.toLowerCase())
+  if (!network?.chainRpcUrl) return undefined
   return async ({ transaction, payer }) => confirmSettlement({
-    rpcUrl: config.chainRpcUrl!,
-    caip2Network: config.caip2Network,
+    rpcUrl: network.chainRpcUrl!,
+    caip2Network: requirement.network,
     transaction,
-    asset: config.asset,
+    asset: requirement.asset,
     payer,
-    payTo: config.payTo,
+    payTo: requirement.payTo,
     minAmount: requirement.amount,
   })
 }
@@ -105,21 +115,23 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // The requirement binds to the exact URL without query string, so a
   // challenge cannot be answered against a different resource.
   const resourceUrl = `${url.origin}${url.pathname}`
-  const requirement = requirementFor(resource, resourceUrl, config)
+  const requirements = requirementsFor(resource, resourceUrl, config)
   const resourceInfo = resourceInfoFor(resource, resourceUrl)
   // The requirement is passed through so the declaration digest covers the
   // accepts array this challenge actually carries. Awaited once per request,
   // served from a per-offer cache after the first.
-  const extensions = await discoveryExtensionsFor(resource, resourceUrl, requirement)
+  const extensions = await discoveryExtensionsFor(resource, resourceUrl, requirements)
 
   const signature = readPaymentSignature(request.headers)
-  if (!signature) return challenge(requirement, resourceInfo, extensions, 'Payment is required for this resource.')
+  if (!signature) return challenge(requirements, resourceInfo, extensions, 'Payment is required for this resource.')
 
   const parsed = parsePaymentHeader(signature)
-  if (!parsed.ok) return challenge(requirement, resourceInfo, extensions, parsed.reason)
+  if (!parsed.ok) return challenge(requirements, resourceInfo, extensions, parsed.reason)
   if (!matchesPaymentContext(parsed.payment, resourceInfo, extensions)) {
-    return challenge(requirement, resourceInfo, extensions, 'payment_context_mismatch')
+    return challenge(requirements, resourceInfo, extensions, 'payment_context_mismatch')
   }
+  const requirement = matchRequirement(parsed.payment, requirements)
+  if (!requirement) return challenge(requirements, resourceInfo, extensions, 'no_matching_requirement')
 
   const ledger = dependencies.ledger !== undefined ? dependencies.ledger : createAgentInquiryLedger()
   if (!ledger) {
@@ -139,6 +151,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // and pays twice, and the route -- which only ever runs after the money has
   // moved -- reports `idempotentReplay: true` beside a second charge.
   const offer = offerById(resource.offerId)
+  let microResponseDigest: string | undefined
   let admissionGuard: Parameters<typeof acceptPayment>[0]['admissionGuard']
   if (offer?.requiresIdempotency) {
     const claim = readAdmissionClaim(request.headers, offer, resourceUrl)
@@ -156,18 +169,28 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     const bodyDecision = await validateAdmissionBody(request, offer, claim.claim)
     if (!bodyDecision.ok) return { kind: 'refused', ...bodyDecision }
 
-    const guard = createAdmissionGuard(claim.claim, dependencies.admissionLedger)
+    let guard: ReturnType<typeof createAdmissionGuard>
+    if (isScienceProduct(offer.id)) {
+      try {
+        if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') ?? '') ||
+            (request.headers.has('content-encoding') && request.headers.get('content-encoding') !== 'identity')) {
+          return { kind: 'refused', status: 415, code: 'unsupported_media_type', message: 'Only uncompressed JSON is accepted. No payment attempted.' }
+        }
+        const input = await readMicroBody(request.clone())
+        const binding = readMicroPurchase(request.headers, offer.id, input)
+        const prepared = await buildMicroProduct(offer.id, input)
+        microResponseDigest = microDigest(prepared)
+        guard = createMicroAdmissionGuard(claim.claim, { secretHash: binding.secretHash, responseDigest: microResponseDigest }, dependencies.admissionLedger)
+      } catch (error) {
+        return { kind: 'refused', status: error instanceof Error && error.message === 'payload_too_large' ? 413 : 400,
+          code: 'invalid_micro_purchase', message: 'Purchase identity, input binding or bounded input is invalid. No payment attempted.' }
+      }
+    } else guard = createAdmissionGuard(claim.claim, dependencies.admissionLedger)
     if (!guard) {
       return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Idempotency cannot be guaranteed right now, so no payment was taken. Retry shortly.' }
     }
     admissionGuard = guard
   } else if (offer) {
-    // Every other proxy-priced route rejects a wrong media type, an oversized
-    // body or an invalid field from its handler, which runs only after
-    // settlement. Apply that same contract to a clone now, so a rejected body
-    // costs the caller nothing: no verify, no settle, no replay claim and no
-    // capacity slot. Unsigned requests never reach this line and still receive
-    // the discovery challenge without their body being read.
     const bodyDecision = await validatePreSettlementBody(request, offer)
     if (!bodyDecision.ok) return { kind: 'refused', ...bodyDecision }
   }
@@ -190,10 +213,14 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   let accepted: Awaited<ReturnType<typeof acceptPayment>>
   try { accepted = await acceptPayment({
     payment: parsed.payment,
-    requirements: [requirement],
+    requirements,
     facilitator,
-    replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset, resource: resourceUrl }, requirement),
+    replayGuard: createReplayGuard(ledger, { network: requirement.network, asset: requirement.asset, resource: resourceUrl }, requirement),
     confirmOnChain: dependencies.confirmOnChain ?? confirmerFor(config, requirement),
+    confirmRecoveryOnChain: network => {
+      const original = requirements.find(term => term.network === network)
+      return original ? dependencies.confirmOnChain ?? confirmerFor(config, original) : undefined
+    },
     ...(admissionGuard ? { admissionGuard } : {}),
   }) } catch (error) {
     if (reserved) await release(resource.offerId, reserved.token ?? '')
@@ -204,7 +231,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     if (reserved) await release(resource.offerId, reserved.token ?? '')
     if (accepted.reason === 'settlement_outcome_unknown') {
       return { kind: 'refused', status: 503, code: 'settlement_outcome_unknown',
-        message: 'The payment outcome is unknown and the original reservation remains locked. Do not sign or submit another payment; contact the seller for reconciliation.' }
+        message: 'Payment may have settled. Do not sign or submit another payment; reconciliation is required.' }
     }
     // Checked before the reason-string match below, which is a broad pattern
     // that must not be given the chance to read a chain contradiction as a
@@ -219,17 +246,22 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
       }
     }
 
+    if (isMicroProduct(resource.offerId) && accepted.status === 409) return {
+      kind: 'refused', status: 409, code: accepted.reason,
+      message: 'Recover this purchase using its saved identity before authorizing another payment.',
+    }
     // FIX: Catch any string that hints the payment was already used/settled/replayed
     if (accepted.status === 409 || /used|replay|settled|conflict|duplicate|already/i.test(accepted.reason)) {
       return { kind: 'refused', status: 409, code: 'payment_already_used', message: 'This payment has already been used.' }
     }
     
+    if (isMicroProduct(resource.offerId) && accepted.status === 503) return { kind: 'refused', status: 503, code: 'purchase_recovery_required', message: 'Purchase accounting is unavailable. Recover the saved purchase before authorizing another payment.' }
     if (accepted.status === 503) {
       // Nothing settled, so the caller's authorization is still spendable.
       return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Payment could not be recorded and was not settled. Retry with the same payment.' }
     }
     
-    return challenge(requirement, resourceInfo, extensions, accepted.reason)
+    return challenge(requirements, resourceInfo, extensions, accepted.reason)
   }
 
   // Legacy offers acquire after settlement; calculations reuse their reservation.
@@ -246,24 +278,27 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     }
   }
 
+  const deliveredPayer = isMicroProduct(resource.offerId) ? accepted.payer.toLowerCase() : accepted.payer
   return {
     kind: 'paid',
+    ...(microResponseDigest ? { microResponseDigest } : {}),
     ...(accepted.replayed ? { replayed: true } : {}),
-    header: encodePaymentResponse({ transaction: accepted.transaction, network: config.caip2Network, payer: accepted.payer }),
+    network: accepted.network ?? requirement.network,
+    header: encodePaymentResponse({ transaction: accepted.transaction, network: accepted.network ?? requirement.network, payer: deliveredPayer }),
     transaction: accepted.transaction,
-    payer: accepted.payer,
+    payer: deliveredPayer,
     amountPaid: accepted.amountPaid,
     slot: { resource: resource.offerId, token: slot.token ?? '' },
   }
 }
 
 function challenge(
-  requirement: PaymentRequirement,
+  requirements: PaymentRequirement[],
   resource: Parameters<typeof buildPaymentRequired>[1],
   extensions: Record<string, unknown> | undefined,
   error: string,
 ): X402Outcome {
-  const body = buildPaymentRequired([requirement], resource, error, extensions)
+  const body = buildPaymentRequired(requirements, resource, error, extensions)
   return { kind: 'challenge', status: 402, header: encodeChallengeHeader(body), body }
 }
 
@@ -286,6 +321,7 @@ export function paidRequestHeaders(outcome: Extract<X402Outcome, { kind: 'paid' 
     'x-maha-payment-transaction': outcome.transaction,
     'x-maha-payment-payer': outcome.payer,
     'x-maha-payment-amount': outcome.amountPaid,
+    ...(outcome.network ? { 'x-maha-payment-network': outcome.network } : {}),
     // Tells the route this settled earlier and was not charged again, so it
     // returns the original job instead of starting a second one.
     'x-maha-payment-replayed': outcome.replayed ? 'true' : 'false',

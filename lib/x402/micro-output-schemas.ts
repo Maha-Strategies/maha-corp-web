@@ -4,11 +4,13 @@ import { COMPATIBILITY_RESULT_SCHEMAS } from './compatibility-contracts.ts'
 import { planningResultSchemas } from './micro-planning-contracts.ts'
 import { EVIDENCE_CHECK_RESULT_SCHEMAS } from './evidence-check-contracts.ts'
 import { EXPANSION_RESULT_SCHEMAS } from './expansion-registry.ts'
+import { SCIENCE_RESULT_SCHEMAS } from './science/contracts.ts'
 const bool: MicroSchema = { type: 'boolean' }, no: MicroSchema = { type: 'boolean', enum: [false] }
 const strings = arr(str(4000), 0, 128)
 const source = obj({ sourceId: str(), title: str(1000), url: { oneOf: [str(4096), { type: 'null' }] }, locator: str(4096), scope: str(8000), boundary: str(8000), rightsBasis: str(4000), inspectionDepth: str() })
 const rational = obj({ numerator: { type: 'string', pattern: '^-?[0-9]+$', maxLength: 80 }, denominator: { type: 'string', pattern: '^[1-9][0-9]*$', maxLength: 80 }, method: en('two-node-linear-interpolation', 'composite-trapezoidal-rule'), xUnit: str(32), yUnit: str(32), resultUnit: str(70), unitBasis: str(), arithmetic: en('exact-rational'), approximationError: en('not-estimated'), measurementUncertainty: en('not-estimated') })
 export const MICRO_RESULT_SCHEMAS: Record<MicroProductId, MicroSchema> = {
+  ...SCIENCE_RESULT_SCHEMAS,
   ...COMPATIBILITY_RESULT_SCHEMAS,
   ...nextResultSchemas(),
   ...planningResultSchemas(),

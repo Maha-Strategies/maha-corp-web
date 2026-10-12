@@ -4,9 +4,11 @@ import { COMPATIBILITY_SAMPLES } from './compatibility-contracts.ts'
 import { PLANNING_SAMPLES } from './micro-planning-samples.ts'
 import { EVIDENCE_CHECK_SAMPLES } from './evidence-check-contracts.ts'
 import { EXPANSION_SAMPLES } from './expansion-registry.ts'
+import { SCIENCE_SAMPLES } from './science/contracts.ts'
 const hash = (c: string) => `sha256:${c.repeat(64)}`
 const locator = { sourceId: 'synthetic-source', sourceRevision: hash('1'), kind: 'section', value: '3.2' }
 export const MICRO_SAMPLE_INPUTS: Record<MicroProductId, Record<string, unknown>> = {
+  ...SCIENCE_SAMPLES,
   ...COMPATIBILITY_SAMPLES,
   ...NEXT_SAMPLES,
   ...PLANNING_SAMPLES,

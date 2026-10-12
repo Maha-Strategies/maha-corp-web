@@ -2,6 +2,17 @@ import { isValidServiceName, sanitizeTags } from '@x402/extensions/bazaar'
 
 /** Human-facing catalogue titles stay intact; Bazaar requires 1-32 printable ASCII characters. */
 export const BAZAAR_SERVICE_NAMES: Readonly<Record<string, string>> = Object.freeze({
+  'quantum-architecture-requirements': 'Qubit Architecture Requirements',
+  'biology-accession-version-check': 'Biological Accession Versions',
+  'biology-qpcr-relative-expression': 'qPCR Relative Expression',
+  'biology-replicate-batch-confounding': 'Replicate Batch Confounding',
+  'biology-translation-boundary-check': 'Biology Translation Boundaries',
+  'chemistry-concentration-basis': 'Concentration Basis Reconcile',
+  'chemistry-electrochemical-normalizer': 'Electrochemical Normalizer',
+  'materials-particle-size-summary': 'Particle Size Summary',
+  'materials-sheet-resistance': 'Thin Film Sheet Resistance',
+  'materials-deposition-compatibility': 'Deposition Compatibility Map',
+  'materials-qualification-evidence-brief': 'Materials Qualification Brief',
   'governed-context-verification-pack': 'Maha Governed Context Pack',
   'book-section-the-imagined-life': 'The Imagined Life - Section',
   'book-section-the-volcanic-engine': 'The Volcanic Engine - Section',

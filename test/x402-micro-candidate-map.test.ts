@@ -11,8 +11,8 @@ import { EXPANSION_IDS, EXPANSION_UTILITY_IDS } from '../lib/x402/expansion-regi
 
 const root = resolve(import.meta.dirname, '..'), read = (path: string) => readFileSync(resolve(root, path), 'utf8')
 const freeze = JSON.parse(read('content/discovery/micro-candidate-freeze-v1.json'))
-const selection = JSON.parse(read('content/discovery/micro60-selection-v5.json'))
-const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v10.json'))
+const selection = JSON.parse(read('content/discovery/micro60-selection-v6.json'))
+const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v11.json'))
 const unsigned = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 // Owner approval permits exactly these formerly withheld status/price changes;
 // it does not authorize rewriting the original 24-offer frozen snapshot.
@@ -143,9 +143,9 @@ test('sixty semantic decisions partition honestly; merged entries name a retaine
 
 test('selected scores require actual bounded local observations, not zero-cost guesses for unmeasured products', () => {
   assert.equal(costs.digest, microDigest(unsigned(costs)))
-  assert.equal(costs.version, 'micro-next12-cost-observation/10')
-  assert.equal(costs.supersedes, 'micro-next12-cost-observation-v9.json')
-  assert.equal(selection.version, 'micro60-selection/5'); assert.equal(selection.supersedes, 'micro60-selection-v4.json')
+  assert.equal(costs.version, 'micro-next12-cost-observation/11')
+  assert.equal(costs.supersedes, 'micro-next12-cost-observation-v10.json')
+  assert.equal(selection.version, 'micro60-selection/6'); assert.equal(selection.supersedes, 'micro60-selection-v5.json')
   assert.equal(costs.workloadsDigest, JSON.parse(read('content/discovery/micro-next12-cost-observation-v9.json')).workloadsDigest)
   assert.equal(costs.cloudBillingMeasured, false); assert.equal(costs.exhaustiveWorstCaseProof, false)
   assert.equal(costs.remoteCalls, 0); assert.equal(costs.deploymentBuilds, 0); assert.equal(costs.paymentAttempts, 0); assert.equal(costs.indexingPurchases, 0)
@@ -170,14 +170,14 @@ test('selected scores require actual bounded local observations, not zero-cost g
 })
 
 test('map and examples regenerate deterministically; profiled implementation remains bound', () => {
-  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v10.json', 'content/discovery/micro-planning-build-list-v6.json', 'content/discovery/micro60-selection-v5.json', 'content/discovery/microproduct-examples.json']
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro60-selection-v6.json', 'content/discovery/microproduct-examples.json']
   const before = files.map(read)
   for (let i = 0; i < 2; i++) for (const script of ['freeze-micro-candidates', 'profile-next12', 'review-micro-candidates', 'generate-microproduct-examples', 'sync-microproduct-discovery']) execFileSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, '--check'], { cwd: root })
   assert.deepEqual(files.map(read), before)
 })
 
 test('fresh versioned records cannot be recaptured or overwritten; every historical artifact stays byte-identical', () => {
-  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v10.json', 'content/discovery/micro-planning-build-list-v6.json', 'content/discovery/micro60-selection-v5.json']
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro60-selection-v6.json']
   const before = files.map(read)
   for (const [script, arg] of [['profile-next12', '--capture'], ['profile-planning-ten', '--capture'], ['review-micro-candidates', '--write']]) {
     const attempt = spawnSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, arg], { cwd: root })

@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false, "plugins": [] },
+  "include": ["lib/x402/**/*.ts", "lib/proxy-request-headers.ts", "app/developers/settlement/page.tsx", "app/developers/x402-products/page.tsx", "test/x402-multichain.test.ts", "scripts/check-x402-usdc-networks.ts", "scripts/run-science50-indexing.ts", "scripts/watch-x402-settlements.ts", "scripts/backfill-x402-settlements.ts"],
+  "exclude": ["node_modules", ".next", "packages"]
+}

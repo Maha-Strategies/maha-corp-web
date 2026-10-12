@@ -9,7 +9,7 @@ import { SettlementAutoRefresh } from './auto-refresh'
 
 const title = 'Autonomous Settlement & Verification Ledger | Maha Strategies'
 const description =
-  'A cumulative, on-chain record of x402 machine settlements into Maha on Base Mainnet. Every figure is derived from the ledger rows and independently verifiable on the block explorer.'
+  'A cumulative on-chain record of native USDC transfers into Maha, with chain-specific proof links and refresh status. Settlement is distinct from successful API delivery.'
 
 export const metadata: Metadata = {
   title,
@@ -69,7 +69,7 @@ export default async function SettlementLedgerPage() {
   return (
     <main className="evidence-page mx-auto max-w-5xl px-6 py-16">
       <SettlementAutoRefresh />
-      <p className="evidence-kicker">Base Mainnet · HTTP 402 v2</p>
+      <p className="evidence-kicker">{record.network} · HTTP 402 v2</p>
       <h1 className="evidence-section-title mt-3 text-3xl">Autonomous Settlement &amp; Verification Ledger</h1>
       <p className="mt-4"><Link href="/developers/x402-products" className="evidence-link">Browse all x402 products by category and price ↗</Link></p>
       <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">
@@ -78,16 +78,22 @@ export default async function SettlementLedgerPage() {
         being checkable.
       </p>
       <p className="mt-4 font-mono text-xs uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
-        Observed {observed.toISOString().slice(0, 16).replace('T', ' ')} UTC · blocks {record.scannedFromBlock}–{record.scannedToBlock}
+        {'networks' in snapshot ? 'Independent finalized ranges shown below; block numbers cannot be compared across chains.' : `Observed ${observed.toISOString().slice(0, 16).replace('T', ' ')} UTC · blocks ${record.scannedFromBlock}–${record.scannedToBlock}`}
       </p>
       <p className="mt-3 text-sm text-[var(--text-secondary)]" data-settlement-source={snapshot.source}>
-        Scheduled refresh: hourly, at 17 minutes past the hour. This view checks for saved updates every five minutes while visible. Finalized Base blocks only; this is not a real-time feed.
+        Scheduled refresh: hourly, at 17 minutes past the hour. This view checks for saved updates every five minutes while visible. Finalized blocks only; this is not a real-time feed.
         {' '}{snapshot.source === 'bundled_fallback'
           ? 'Live snapshot unavailable; showing the dated deployment fallback.'
           : snapshot.stale ? 'Refresh is overdue; showing the last successful snapshot.'
             : !snapshot.caughtUp ? 'Catching up with chain history; more blocks remain to be scanned.'
               : 'The latest scheduled scan is current.'}
       </p>
+
+      {'networks' in snapshot && <section className="evidence-card mt-6" aria-label="Independent network refresh status">
+        {snapshot.networks.map(view => <p key={view.ledger.caip2Network ?? 'eip155:8453'} className="mt-2 text-sm">
+          {view.ledger.network}: blocks {view.ledger.scannedFromBlock}–{view.ledger.scannedToBlock}; observed {view.ledger.observedAt}; {view.stale ? 'refresh overdue or not initialized' : view.caughtUp ? 'caught up' : 'catching up'}.
+        </p>)}
+      </section>}
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
@@ -104,13 +110,14 @@ export default async function SettlementLedgerPage() {
         <table className="mt-4 w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--border-default)] text-left font-mono text-xs uppercase tracking-[0.18em]">
-              <th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service (how attributed)</th>
+              <th className="pb-2">Network</th><th className="pb-2">Timestamp (UTC)</th><th className="pb-2">Service (how attributed)</th>
               <th className="pb-2">Payer wallet</th><th className="pb-2">Amount</th><th className="pb-2">Proof</th>
             </tr>
           </thead>
           <tbody>
             {record.entries.filter((e) => e.product !== null || e.amountUsdc !== '0').map((entry) => (
-              <tr key={`${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
+              <tr key={`${entry.caip2Network ?? 'eip155:8453'}:${entry.transactionHash}:${entry.logIndex ?? 'legacy'}`} className="border-b border-[var(--border-subtle)]">
+                <td className="py-2 text-xs">{entry.caip2Network === 'eip155:42161' ? 'Arbitrum' : 'Base'}</td>
                 <td className="py-2 font-mono text-xs">{entry.timestampUtc?.slice(0, 19).replace('T', ' ') ?? '—'}</td>
                 <td className="py-2">
                   {entry.product?.title ?? 'Unknown — amount does not uniquely identify a product'}

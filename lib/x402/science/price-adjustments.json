@@ -1,0 +1,208 @@
+{
+  "totalBaseUnits": "3577000",
+  "releaseAdjustments": [
+    { "id": "biology-protein-confidence-audit", "before": "32000", "after": "32001", "reason": "avoid a current production historical price reservation" },
+    { "id": "biology-qpcr-run-quality", "before": "42000", "after": "42001", "reason": "avoid a current production historical price reservation" },
+    { "id": "materials-qualification-evidence-brief", "before": "298964", "after": "298962", "reason": "offset the two base-unit adjustments within the unchanged 3.577 USDC cap" }
+  ],
+  "adjustments": [
+    {
+      "id": "quantum-measurement-uncertainty",
+      "before": "12000",
+      "after": "12001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-state-validity",
+      "before": "14000",
+      "after": "14001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-observable-expectations",
+      "before": "16000",
+      "after": "16001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-state-fidelity-purity",
+      "before": "19000",
+      "after": "19001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-coherence-budget",
+      "before": "22000",
+      "after": "22001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-readout-calibration",
+      "before": "26000",
+      "after": "26001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-circuit-lint",
+      "before": "33000",
+      "after": "33001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-randomized-benchmarking-fit",
+      "before": "41000",
+      "after": "41001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "quantum-rabi-ramsey-analysis",
+      "before": "57000",
+      "after": "57001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-fasta-quality",
+      "before": "4000",
+      "after": "4001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-dna-rna-composition",
+      "before": "6000",
+      "after": "6001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-protein-sequence-descriptors",
+      "before": "13000",
+      "after": "13001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-pairwise-sequence-comparison",
+      "before": "18000",
+      "after": "18001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-accession-version-check",
+      "before": "24000",
+      "after": "24001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "biology-qpcr-relative-expression",
+      "before": "58000",
+      "after": "58001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-dilution-calculator",
+      "before": "5000",
+      "after": "5005",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-concentration-basis",
+      "before": "8000",
+      "after": "8001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-smiles-validation",
+      "before": "11000",
+      "after": "11001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-molecular-descriptor-pack",
+      "before": "17000",
+      "after": "17001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-molecular-identity-comparison",
+      "before": "21000",
+      "after": "21001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-fingerprint-similarity",
+      "before": "28000",
+      "after": "28001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-reaction-conservation",
+      "before": "37000",
+      "after": "37001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-spectrum-peak-comparison",
+      "before": "49000",
+      "after": "49001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-arrhenius-fit",
+      "before": "69000",
+      "after": "69001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "chemistry-electrochemical-normalizer",
+      "before": "119000",
+      "after": "119001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-property-record-check",
+      "before": "9000",
+      "after": "9001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-particle-size-summary",
+      "before": "15000",
+      "after": "15001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-sheet-resistance",
+      "before": "23000",
+      "after": "23001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-thermal-expansion-mismatch",
+      "before": "31000",
+      "after": "31001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-thermal-stack-resistance",
+      "before": "43000",
+      "after": "43001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-stress-strain-analysis",
+      "before": "61000",
+      "after": "61001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-optical-bandgap-fit",
+      "before": "109000",
+      "after": "109001",
+      "reason": "avoid existing public/local/historical price reservation"
+    },
+    {
+      "id": "materials-qualification-evidence-brief",
+      "before": "299000",
+      "after": "298964",
+      "reason": "rebalance within unchanged 3.577 USDC cap"
+    }
+  ]
+}

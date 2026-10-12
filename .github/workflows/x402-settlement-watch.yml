@@ -74,11 +74,20 @@ jobs:
   watch:
     if: ${{ github.event_name != 'schedule' || github.event.schedule != '43 * * * *' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - network: eip155:8453
+            name: base
+          - network: eip155:42161
+            name: arbitrum
     env:
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL || vars.BASE_RPC_URL }}
       VERCEL_ENV: production
-      X402_WATCH_OUTPUT_PATH: ${{ github.workspace }}/x402-settlement-watch.json
+      ARBITRUM_RPC_URL: https://arb1.arbitrum.io/rpc
+      X402_WATCH_OUTPUT_PATH: ${{ github.workspace }}/x402-settlement-watch-${{ matrix.name }}.json
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -92,13 +101,13 @@ jobs:
         if: always()
         run: node --experimental-strip-types scripts/check-x402-settlement-health.ts
 
-      - name: Scan Base for settlements
+      - name: Scan configured chain for settlements
         id: watch
         if: ${{ !cancelled() }}
         run: |
           set -o pipefail
           node --experimental-strip-types scripts/watch-x402-settlements.ts \
-            --days "${{ inputs.days || '2' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
+            --network "${{ matrix.network }}" --days "${{ inputs.days || '2' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch-${{ matrix.name }}.log"
 
       # Production publishes cumulative snapshots through its hourly Redis
       # worker. This independent watch scans a recent window only; never replace
@@ -108,10 +117,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: x402-settlement-watch-${{ github.run_id }}
+          name: x402-settlement-watch-${{ matrix.name }}-${{ github.run_id }}
           path: |
             ${{ env.X402_WATCH_OUTPUT_PATH }}
-            ${{ runner.temp }}/settlement-watch.log
+            ${{ runner.temp }}/settlement-watch-${{ matrix.name }}.log
           if-no-files-found: warn
           retention-days: 90
 
@@ -121,9 +130,10 @@ jobs:
         env:
           HEALTH_OUTCOME: ${{ steps.health.outcome }}
           WATCH_OUTCOME: ${{ steps.watch.outcome }}
+          NETWORK_NAME: ${{ matrix.name }}
         with:
           script: |
-            const label = 'x402-settlement-monitoring';
+            const label = `x402-settlement-monitoring-${process.env.NETWORK_NAME}`;
             const failed = process.env.HEALTH_OUTCOME !== 'success' || process.env.WATCH_OUTCOME !== 'success';
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               ...context.repo, state: 'open', labels: label, per_page: 100,

@@ -20,6 +20,7 @@ const TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a
 export const DEFAULT_RPC_URLS: Record<string, string> = {
   'eip155:8453': 'https://mainnet.base.org',
   'eip155:84532': 'https://sepolia.base.org',
+  'eip155:42161': 'https://arb1.arbitrum.io/rpc',
 }
 
 export type ChainConfirmation =

@@ -1,0 +1,2899 @@
+{
+  "version": "maha-science50/1.0.0",
+  "basis": "synthetic local fixtures; no payments, remote inference or deployment",
+  "inputs": {
+    "quantum-measurement-uncertainty": {
+      "dataClass": "synthetic",
+      "counts": [
+        50,
+        50
+      ]
+    },
+    "quantum-state-validity": {
+      "dataClass": "synthetic",
+      "state": {
+        "real": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "imag": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "quantum-observable-expectations": {
+      "dataClass": "synthetic",
+      "state": {
+        "real": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "imag": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "quantum-state-fidelity-purity": {
+      "dataClass": "synthetic",
+      "state": {
+        "real": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "imag": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference": {
+        "real": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "imag": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "quantum-coherence-budget": {
+      "dataClass": "synthetic",
+      "durationSeconds": 0.00001,
+      "T1Seconds": 0.0001,
+      "T2Seconds": 0.00008
+    },
+    "quantum-readout-calibration": {
+      "dataClass": "synthetic",
+      "observedZeroFraction": 0.5,
+      "pZeroGivenZero": 0.95,
+      "pZeroGivenOne": 0.1
+    },
+    "quantum-circuit-lint": {
+      "dataClass": "synthetic",
+      "qubits": 2,
+      "operations": [
+        {
+          "gate": "H",
+          "targets": [
+            0
+          ],
+          "angleRadians": 0
+        },
+        {
+          "gate": "CX",
+          "targets": [
+            0,
+            1
+          ],
+          "angleRadians": 0
+        }
+      ]
+    },
+    "quantum-randomized-benchmarking-fit": {
+      "dataClass": "synthetic",
+      "lengths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "survival": [
+        0.95,
+        0.905,
+        0.8645,
+        0.82805
+      ],
+      "offset": 0.5,
+      "dimension": 2
+    },
+    "quantum-rabi-ramsey-analysis": {
+      "dataClass": "synthetic",
+      "kind": "ramsey",
+      "timesSeconds": [
+        0,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.07,
+        0.08,
+        0.09,
+        0.1,
+        0.11,
+        0.12,
+        0.13,
+        0.14,
+        0.15,
+        0.16,
+        0.17,
+        0.18,
+        0.19,
+        0.2
+      ],
+      "signal": [
+        0.9,
+        0.8078243079882315,
+        0.611844055727784,
+        0.39361064323623424,
+        0.23505316277700555,
+        0.188479686771438,
+        0.260266187890352,
+        0.4128957618173199,
+        0.5828561143580838,
+        0.7063408043015601,
+        0.7426122638850534,
+        0.6867048805996868,
+        0.5678368489055095,
+        0.4354715932556705,
+        0.3393016200303615,
+        0.3110533789035941,
+        0.35459409278571064,
+        0.4471686089512926,
+        0.5502547737028339,
+        0.6251520241586606,
+        0.6471517764685769
+      ],
+      "frequencyRangeHz": [
+        5,
+        15
+      ],
+      "decayRangeSeconds": [
+        0.1,
+        0.3
+      ]
+    },
+    "quantum-stabilizer-consistency": {
+      "dataClass": "synthetic",
+      "generators": [
+        {
+          "pauli": "XX",
+          "sign": "+"
+        },
+        {
+          "pauli": "ZZ",
+          "sign": "+"
+        }
+      ]
+    },
+    "quantum-surface-code-resource-scenario": {
+      "dataClass": "synthetic",
+      "distance": 5,
+      "logicalQubits": 2,
+      "cycles": 100,
+      "physicalError": 0.001,
+      "threshold": 0.01,
+      "prefactor": 0.1
+    },
+    "quantum-benchmark-comparability": {
+      "dataClass": "synthetic",
+      "baseline": {
+        "protocolVersion": "synthetic-v1",
+        "workload": "synthetic-circuit",
+        "metric": "success-fraction",
+        "noiseModel": "synthetic-noise-v1",
+        "shots": 1000,
+        "qubits": 2,
+        "compilationPolicy": "synthetic-compiler-v1",
+        "overheadIncluded": true
+      },
+      "candidate": {
+        "protocolVersion": "synthetic-v1",
+        "workload": "synthetic-circuit",
+        "metric": "success-fraction",
+        "noiseModel": "synthetic-noise-v1",
+        "shots": 1000,
+        "qubits": 2,
+        "compilationPolicy": "synthetic-compiler-v1",
+        "overheadIncluded": true
+      }
+    },
+    "quantum-architecture-requirements": {
+      "dataClass": "synthetic",
+      "requiredQubits": 10,
+      "requiredConnectivity": "grid",
+      "maximumGateSeconds": 0.001,
+      "options": [
+        {
+          "id": "synthetic-device",
+          "qubits": 20,
+          "connectivity": "grid",
+          "gateSeconds": 0.0001,
+          "source": "synthetic-v1"
+        }
+      ]
+    },
+    "biology-fasta-quality": {
+      "dataClass": "synthetic",
+      "fasta": ">synthetic\nACGTN",
+      "alphabet": "DNA"
+    },
+    "biology-dna-rna-composition": {
+      "dataClass": "synthetic",
+      "sequence": "ACGTNN",
+      "alphabet": "DNA"
+    },
+    "biology-protein-sequence-descriptors": {
+      "dataClass": "synthetic",
+      "sequence": "ACDE"
+    },
+    "biology-pairwise-sequence-comparison": {
+      "dataClass": "synthetic",
+      "left": "ACGT",
+      "right": "AGT"
+    },
+    "biology-accession-version-check": {
+      "dataClass": "synthetic",
+      "requestedAccession": "SYNTHETIC1",
+      "requestedVersion": "v1",
+      "snapshotVersion": "synthetic-snapshot-v1",
+      "records": [
+        {
+          "accession": "SYNTHETIC1",
+          "version": "v1",
+          "isoform": "canonical",
+          "sequenceSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    "biology-protein-confidence-audit": {
+      "dataClass": "synthetic",
+      "plddt": [
+        95,
+        80,
+        60,
+        40
+      ]
+    },
+    "biology-qpcr-run-quality": {
+      "dataClass": "synthetic",
+      "ct": [
+        22,
+        22.2,
+        22.1
+      ],
+      "efficiency": 1,
+      "referenceStable": true,
+      "noTemplateNegative": true,
+      "noRTNegative": true,
+      "meltSinglePeak": true
+    },
+    "biology-qpcr-relative-expression": {
+      "dataClass": "synthetic",
+      "targetSampleCt": 20,
+      "targetControlCt": 22,
+      "referenceSampleCt": 18,
+      "referenceControlCt": 18,
+      "targetEfficiency": 1,
+      "referenceEfficiency": 1,
+      "referenceStable": true
+    },
+    "biology-assay-control-coverage": {
+      "dataClass": "synthetic",
+      "assay": "qpcr",
+      "controls": [
+        "positive",
+        "negative",
+        "no-template",
+        "no-RT",
+        "reference"
+      ]
+    },
+    "biology-research-dose-response-fit": {
+      "dataClass": "synthetic",
+      "dose": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "normalizedResponse": [
+        0.2,
+        0.3333333333333333,
+        0.5,
+        0.6666666666666666
+      ]
+    },
+    "biology-replicate-batch-confounding": {
+      "dataClass": "synthetic",
+      "observations": [
+        {
+          "id": "a",
+          "biologicalUnit": "u1",
+          "condition": "control",
+          "batch": "b1"
+        },
+        {
+          "id": "b",
+          "biologicalUnit": "u2",
+          "condition": "treated",
+          "batch": "b2"
+        }
+      ]
+    },
+    "biology-translation-boundary-check": {
+      "dataClass": "synthetic",
+      "evidenceFrame": "animal",
+      "claimFrame": "human-controlled",
+      "records": [
+        {
+          "id": "synthetic-1",
+          "source": "synthetic-source",
+          "version": "v1",
+          "locator": "table-1",
+          "context": "research-only"
+        }
+      ]
+    },
+    "biology-design-assay-evidence-brief": {
+      "dataClass": "synthetic",
+      "designId": "synthetic-design",
+      "sequenceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "assayId": "synthetic-assay",
+      "records": [
+        {
+          "id": "synthetic-1",
+          "source": "synthetic-source",
+          "version": "v1",
+          "locator": "table-1",
+          "context": "research-only"
+        }
+      ],
+      "controls": [
+        "positive",
+        "negative"
+      ]
+    },
+    "chemistry-formula-mass-check": {
+      "dataClass": "synthetic",
+      "formula": "C6H12O6"
+    },
+    "chemistry-dilution-calculator": {
+      "dataClass": "synthetic",
+      "stockMolPerL": 1,
+      "targetMolPerL": 0.1,
+      "finalVolumeL": 0.01
+    },
+    "chemistry-concentration-basis": {
+      "dataClass": "synthetic",
+      "value": 1,
+      "from": "mol/L",
+      "to": "g/L",
+      "molarMassGPerMol": 58.44,
+      "densityGPerML": 1
+    },
+    "chemistry-smiles-validation": {
+      "dataClass": "synthetic",
+      "smiles": "CCO"
+    },
+    "chemistry-molecular-descriptor-pack": {
+      "dataClass": "synthetic",
+      "smiles": "CCO"
+    },
+    "chemistry-molecular-identity-comparison": {
+      "dataClass": "synthetic",
+      "left": "CCO",
+      "right": "OCC"
+    },
+    "chemistry-fingerprint-similarity": {
+      "dataClass": "synthetic",
+      "left": "CCO",
+      "right": "CCO"
+    },
+    "chemistry-reaction-conservation": {
+      "dataClass": "synthetic",
+      "reactants": [
+        {
+          "formula": "H2",
+          "coefficient": 2,
+          "charge": 0
+        },
+        {
+          "formula": "O2",
+          "coefficient": 1,
+          "charge": 0
+        }
+      ],
+      "products": [
+        {
+          "formula": "H2O",
+          "coefficient": 2,
+          "charge": 0
+        }
+      ]
+    },
+    "chemistry-spectrum-peak-comparison": {
+      "dataClass": "synthetic",
+      "observed": [
+        100,
+        200,
+        300
+      ],
+      "reference": [
+        100.2,
+        202,
+        400
+      ],
+      "tolerance": 0.5,
+      "unit": "m/z"
+    },
+    "chemistry-arrhenius-fit": {
+      "dataClass": "synthetic",
+      "kelvin": [
+        280,
+        300,
+        320,
+        340
+      ],
+      "rate": [
+        0.0003869779446438603,
+        0.0012726338013398068,
+        0.0036065631360157305,
+        0.009041932521329801
+      ]
+    },
+    "chemistry-electrochemical-normalizer": {
+      "dataClass": "synthetic",
+      "potentialV": 0.3,
+      "sourceReferenceOffsetToSHEV": 0.197,
+      "targetReferenceOffsetToSHEV": 0.244,
+      "sourceConditions": "25C-3M-KCl",
+      "targetConditions": "25C-3M-KCl",
+      "referenceDataSource": "synthetic-reference"
+    },
+    "chemistry-enzyme-kinetics-fit": {
+      "dataClass": "synthetic",
+      "substrate": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "velocity": [
+        3.3333333333333335,
+        5,
+        6.666666666666667,
+        8
+      ]
+    },
+    "materials-property-record-check": {
+      "dataClass": "synthetic",
+      "property": "thermal-conductivity",
+      "value": 10,
+      "unit": "W/m/K",
+      "temperatureK": 300,
+      "method": "synthetic-method",
+      "uncertainty": 0.1,
+      "source": "synthetic-source",
+      "materialRevision": "v1"
+    },
+    "materials-particle-size-summary": {
+      "dataClass": "synthetic",
+      "diametersMicrometers": [
+        1,
+        2,
+        4
+      ],
+      "weights": [
+        1,
+        2,
+        1
+      ],
+      "weighting": "number"
+    },
+    "materials-sheet-resistance": {
+      "dataClass": "synthetic",
+      "resistivityOhmM": 0.000001,
+      "thicknessM": 1e-7
+    },
+    "materials-thermal-expansion-mismatch": {
+      "dataClass": "synthetic",
+      "alphaFilmPerK": 0.00001,
+      "alphaSubstratePerK": 0.000005,
+      "deltaTemperatureK": 100
+    },
+    "materials-thermal-stack-resistance": {
+      "dataClass": "synthetic",
+      "layers": [
+        {
+          "thicknessM": 0.001,
+          "conductivityWPerMK": 10
+        },
+        {
+          "thicknessM": 0.002,
+          "conductivityWPerMK": 20
+        }
+      ],
+      "interfaceResistanceM2KPerW": [
+        0
+      ],
+      "areaM2": 0.01
+    },
+    "materials-stress-strain-analysis": {
+      "dataClass": "synthetic",
+      "strain": [
+        0,
+        0.001,
+        0.002,
+        0.003,
+        0.01
+      ],
+      "stressMPa": [
+        0,
+        100,
+        200,
+        250,
+        300
+      ],
+      "elasticFitEndIndex": 2
+    },
+    "materials-xrd-peak-analysis": {
+      "dataClass": "synthetic",
+      "twoThetaDegrees": [
+        30,
+        45,
+        60
+      ],
+      "wavelengthAngstrom": 1.5406
+    },
+    "materials-optical-bandgap-fit": {
+      "dataClass": "synthetic",
+      "energyEV": [
+        1.5,
+        2,
+        2.5,
+        3,
+        3.5
+      ],
+      "absorptionPerM": [
+        0.47140452079103173,
+        0.5,
+        0.4898979485566356,
+        0.47140452079103173,
+        0.45175395145262565
+      ],
+      "transition": "direct-allowed",
+      "fitStartIndex": 0,
+      "fitEndIndex": 4
+    },
+    "materials-raman-reference-comparison": {
+      "dataClass": "synthetic",
+      "observedCmInverse": [
+        100,
+        200,
+        300
+      ],
+      "referenceCmInverse": [
+        100,
+        201,
+        400
+      ],
+      "toleranceCmInverse": 2
+    },
+    "materials-candidate-comparison": {
+      "dataClass": "synthetic",
+      "criteria": [
+        {
+          "id": "conductivity",
+          "weight": 1,
+          "direction": "higher"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "a",
+          "values": [
+            2
+          ]
+        },
+        {
+          "id": "b",
+          "values": [
+            null
+          ]
+        }
+      ]
+    },
+    "materials-deposition-compatibility": {
+      "dataClass": "synthetic",
+      "substrateMaximumK": 500,
+      "processPeakK": 600,
+      "substrateCorrosionSensitive": true,
+      "processCorrosive": true,
+      "records": [
+        {
+          "id": "synthetic-1",
+          "source": "synthetic-source",
+          "version": "v1",
+          "locator": "table-1",
+          "context": "research-only"
+        }
+      ]
+    },
+    "materials-qualification-evidence-brief": {
+      "dataClass": "synthetic",
+      "application": "synthetic-coupon",
+      "requiredTests": [
+        "adhesion",
+        "thermal-cycle"
+      ],
+      "evidence": [
+        {
+          "test": "adhesion",
+          "status": "pass",
+          "record": {
+            "id": "synthetic-1",
+            "source": "synthetic-source",
+            "version": "v1",
+            "locator": "table-1",
+            "context": "research-only"
+          }
+        }
+      ]
+    }
+  },
+  "outputs": {
+    "quantum-measurement-uncertainty": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-measurement-uncertainty",
+      "amountBaseUnits": "12001",
+      "inputDigest": "sha256:5f869a55498f110d3eae1f72a39aab2e1306024a02b3adb7809080774bcf59e9",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "shots": 100,
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "intervals": [
+            {
+              "lower": 0.403831530366,
+              "upper": 0.596168469634
+            },
+            {
+              "lower": 0.403831530366,
+              "upper": 0.596168469634
+            }
+          ],
+          "coverage": "95% marginal per outcome; not simultaneous multinomial coverage",
+          "method": "Wilson-score-binomial"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:d5a6c36624ecadf2f1c59a03ee9bcca4d3738f542f3e73b037a45a958fabc20a"
+    },
+    "quantum-state-validity": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-state-validity",
+      "amountBaseUnits": "14001",
+      "inputDigest": "sha256:f388b3554df1ecac34cb11528806f2cb2079d56e5e782ee2baf2985e847d403e",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "valid": true,
+          "traceReal": 1,
+          "traceImag": 0,
+          "hermitian": true,
+          "minimumEigenvalue": 0,
+          "tolerance": 1e-9,
+          "issues": []
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:391a3de49eade74a251ebf7f7dcab9f22bd7923c30d1f98e4990424af7b25c37"
+    },
+    "quantum-observable-expectations": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-observable-expectations",
+      "amountBaseUnits": "16001",
+      "inputDigest": "sha256:f388b3554df1ecac34cb11528806f2cb2079d56e5e782ee2baf2985e847d403e",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "X": 1,
+          "Y": 0,
+          "Z": 0,
+          "convention": "single-qubit computational basis [0,1]; Pauli Y=[[0,-i],[i,0]]"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:ed1c6822ebe8eaf5ab6381dd10f7cac5fa99f70cba1da561575ac5ba5cd73787"
+    },
+    "quantum-state-fidelity-purity": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-state-fidelity-purity",
+      "amountBaseUnits": "19001",
+      "inputDigest": "sha256:79ef652d52cbf2b0e9a9c65115e08897804be170e701e776f8e22d8b09ca138b",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "fidelity": 0.5,
+          "purity": 1,
+          "referencePurity": 1,
+          "convention": "squared Uhlmann fidelity; Tr(rho*sigma)+2*sqrt(det(rho)*det(sigma)); purity Tr(rho^2)"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:51c1b254098e1d230f3ff53a08f26548c200ecf455891bf8010a4909d7908852"
+    },
+    "quantum-coherence-budget": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-coherence-budget",
+      "amountBaseUnits": "22001",
+      "inputDigest": "sha256:61103e42ede9496906c5e1facf11946ed5fef4292a8d5610ea965f61c1f8bf4d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "relaxationSurvival": 0.904837418036,
+          "coherenceFraction": 0.882496902585,
+          "pureDephasingSeconds": 0.000133333333333,
+          "physicalT2Constraint": true,
+          "model": "Markovian-exponential; no device performance prediction"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:6c74a5035ec8310bc205d5fb5a159673aad38c4deba58dd6312541905644ead8"
+    },
+    "quantum-readout-calibration": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-readout-calibration",
+      "amountBaseUnits": "26001",
+      "inputDigest": "sha256:2940f20b26fb8d9c5c7ca374ff050052ba4a410ecddd2da16d653801f0b1b9ab",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "correctedZeroFraction": 0.470588235294,
+          "physical": true,
+          "determinant": 0.85,
+          "inverseSensitivity": 1.17647058824,
+          "correctedClipped": false,
+          "convention": "rows observed, columns true; unregularized single-qubit inversion; calibration uncertainty not estimated"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:25610db6afbabede0e933c95a3245572e31bb1cf51bbab9c88f2ae12c171061e"
+    },
+    "quantum-circuit-lint": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-circuit-lint",
+      "amountBaseUnits": "33001",
+      "inputDigest": "sha256:810464023d340488ea86a07f326dec1422126a8462085de8fab6de8965280e37",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "valid": true,
+          "issues": [],
+          "operationCount": 2,
+          "depth": 2,
+          "simulated": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:e26aa999e855d5bc5b3853abbef1a2edc61b95e5ebcd3b8d65b881555e38b2e0"
+    },
+    "quantum-randomized-benchmarking-fit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-randomized-benchmarking-fit",
+      "amountBaseUnits": "41001",
+      "inputDigest": "sha256:ae3ba52b04d3e91ab56ce365315a512b4ed9d5c6bcb54add810d689de00fbab9",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "decayPerClifford": 0.9,
+          "errorPerClifford": 0.05,
+          "physicalDecay": true,
+          "transformedFit": {
+            "slope": -0.105360515658,
+            "intercept": -0.69314718056,
+            "rSquared": 1,
+            "residuals": [
+              -2.22044604925e-16,
+              0,
+              0,
+              -4.4408920985e-16
+            ],
+            "residualStandardError": 3.51083346858e-16,
+            "slopeStandardError": 1.57009245868e-16,
+            "degreesOfFreedom": 2
+          },
+          "residuals": [
+            -2.22044604925e-16,
+            -1.11022302463e-16,
+            0,
+            -1.11022302463e-16
+          ],
+          "method": "fixed-offset log-linear unweighted RB; offset assumed, not fitted; not error per native gate"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:3f22271749d7a6400275970cb1b5d10db9f4183c1d0628648e59fbe26684afa5"
+    },
+    "quantum-rabi-ramsey-analysis": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-rabi-ramsey-analysis",
+      "amountBaseUnits": "57001",
+      "inputDigest": "sha256:7c8f5f7400a24ae29e2b20c73765559c5eb5b072bcd92c1ffef308fd0238ceb5",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "frequency": 10,
+          "decay": 0.2,
+          "offset": 0.5,
+          "amplitude": 0.4,
+          "phaseRadians": 2.61997948129e-16,
+          "residuals": [
+            0,
+            1.11022302463e-16,
+            1.11022302463e-16,
+            1.11022302463e-16,
+            5.55111512313e-17,
+            0,
+            -5.55111512313e-17,
+            -5.55111512313e-17,
+            -1.11022302463e-16,
+            0,
+            0,
+            -1.11022302463e-16,
+            0,
+            5.55111512313e-17,
+            5.55111512313e-17,
+            0,
+            0,
+            -5.55111512313e-17,
+            0,
+            0,
+            0
+          ],
+          "residualStandardError": 7.07631108375e-17,
+          "boundaryHit": false,
+          "frequencyResolution": 0.5,
+          "decayResolution": 0.01,
+          "parameterConfidenceInterval": null,
+          "evaluatedModels": 441,
+          "kind": "ramsey",
+          "method": "21x21 frequency-decay grid; linear offset/sine/cosine amplitudes; resolution and boundary diagnostic, not a confidence interval"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:6ff8a2336c41f3f5d120dc2404d2a9809a4cdcaf29bea6436fe5f3c13a596995"
+    },
+    "quantum-stabilizer-consistency": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-stabilizer-consistency",
+      "amountBaseUnits": "81000",
+      "inputDigest": "sha256:1481b418e10e58b435e3080c06130f32fd3923e89f17cf3419f0a5748ae4a27d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "commuting": true,
+          "consistent": true,
+          "independentGenerators": 2,
+          "logicalQubits": 0,
+          "issues": [],
+          "method": "phase-aware-Pauli-GF2-elimination"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:e7274d38ed2dc4c1fbaf3876ad2df4a10f7db822bc07264b4f747928de0a4544"
+    },
+    "quantum-surface-code-resource-scenario": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-surface-code-resource-scenario",
+      "amountBaseUnits": "99000",
+      "inputDigest": "sha256:7a5002685cca6dfb2a6fb74d7198343eee105fbf4a1415bc657160dc0560bb54",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "physicalQubits": 98,
+          "errorPerLogicalCycle": 0.0001,
+          "unionBoundFailure": 0.02,
+          "assumptions": [
+            "rotated patches: 2*d^2-1 physical qubits per logical qubit",
+            "no routing, factory or spare-qubit overhead",
+            "caller-supplied threshold and prefactor; phenomenological scaling below threshold",
+            "union bound, not empirical logical error rate"
+          ]
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:de7baecbb0bbe60f95ac9c5a32c504bca5fe2304d2d149dc71bcf256c5c2d4e3"
+    },
+    "quantum-benchmark-comparability": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-benchmark-comparability",
+      "amountBaseUnits": "135000",
+      "inputDigest": "sha256:d4c9db854030ec2d7df42c2edbdd804391e12c7dad94243417a165bc76f14da3",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "comparableDeclarations": true,
+          "mismatches": [],
+          "independentProtocolValidation": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:843fb62cc76a568c06ea9e0502523a2f6736280c936663d97dfc111c8d30323a"
+    },
+    "quantum-architecture-requirements": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "quantum-architecture-requirements",
+      "amountBaseUnits": "215000",
+      "inputDigest": "sha256:a0c7d29a80c6bdaafab08000b0f58078dd86e282fe220a7b14ad899eea7affe5",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "assessments": [
+            {
+              "id": "synthetic-device",
+              "meetsDeclaredConstraints": true,
+              "gaps": []
+            }
+          ],
+          "factualCapabilitiesVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:bf7dd8277ba72b554e70e519da47d7681d767d90b7799abe4a720f5344a904cb"
+    },
+    "biology-fasta-quality": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-fasta-quality",
+      "amountBaseUnits": "4001",
+      "inputDigest": "sha256:c4a05b7289350b5edbacbde80a6f0a1e5e5c78b0c9682d0d0c6ac604858c4c1d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "valid": true,
+          "records": [
+            {
+              "id": "synthetic",
+              "length": 5,
+              "ambiguous": 1
+            }
+          ],
+          "issues": []
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:bd14a021209bd1801afbd9579582ddf9ba0241dbac8a48bef56c41d27b42bd4a"
+    },
+    "biology-dna-rna-composition": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-dna-rna-composition",
+      "amountBaseUnits": "6001",
+      "inputDigest": "sha256:ac560e89cdf8467db58556615d2c74edac8fef1de7464665ebc85df01c6b9691",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "counts": {
+            "A": 1,
+            "C": 1,
+            "G": 1,
+            "T": 1,
+            "U": 0,
+            "N": 2
+          },
+          "calledBases": 4,
+          "gcFractionOfCalledBases": 0.5,
+          "ambiguousFraction": 0.333333333333
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:6bb75c0d73b1643757f6c9853c3a6ec94d8f37c6bc5c354998a8bb44e1dfed8c"
+    },
+    "biology-protein-sequence-descriptors": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-protein-sequence-descriptors",
+      "amountBaseUnits": "13001",
+      "inputDigest": "sha256:10e1f8b794d24228491243c479f885683e78d7404e2e0c683f46e1e29dfbeb1e",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "length": 4,
+          "composition": [
+            {
+              "residue": "A",
+              "count": 1
+            },
+            {
+              "residue": "C",
+              "count": 1
+            },
+            {
+              "residue": "D",
+              "count": 1
+            },
+            {
+              "residue": "E",
+              "count": 1
+            },
+            {
+              "residue": "F",
+              "count": 0
+            },
+            {
+              "residue": "G",
+              "count": 0
+            },
+            {
+              "residue": "H",
+              "count": 0
+            },
+            {
+              "residue": "I",
+              "count": 0
+            },
+            {
+              "residue": "K",
+              "count": 0
+            },
+            {
+              "residue": "L",
+              "count": 0
+            },
+            {
+              "residue": "M",
+              "count": 0
+            },
+            {
+              "residue": "N",
+              "count": 0
+            },
+            {
+              "residue": "P",
+              "count": 0
+            },
+            {
+              "residue": "Q",
+              "count": 0
+            },
+            {
+              "residue": "R",
+              "count": 0
+            },
+            {
+              "residue": "S",
+              "count": 0
+            },
+            {
+              "residue": "T",
+              "count": 0
+            },
+            {
+              "residue": "V",
+              "count": 0
+            },
+            {
+              "residue": "W",
+              "count": 0
+            },
+            {
+              "residue": "Y",
+              "count": 0
+            }
+          ],
+          "averageMassDa": 436.43698,
+          "aromaticFraction": 0,
+          "chargeAtPH7Approx": -2.0442001757,
+          "massConvention": "unmodified neutral linear peptide; average residue masses plus one water; fixed pKa Henderson-Hasselbalch approximation, not structure-dependent charge",
+          "modifiedResiduesSupported": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:ac232b76a443d3c679f7c1ef9ab3e98390a7af2c2d0712f1ef638bea44a23440"
+    },
+    "biology-pairwise-sequence-comparison": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-pairwise-sequence-comparison",
+      "amountBaseUnits": "18001",
+      "inputDigest": "sha256:111ec9898d0fcc9c45e813faf478f59d5b16dd0ea00662a6109a717631d0a359",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "score": 4,
+          "alignedLeft": "ACGT",
+          "alignedRight": "A-GT",
+          "identityFraction": 0.75,
+          "gaps": 1,
+          "method": "Needleman-Wunsch global DNA alignment; match=2 mismatch=-1 linear gap=-2; tie order diagonal/up/left; identity includes gap columns"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:b6cdaebdb5dfd0ac6f73154a30cea08c3a339e8a4cce1fb03de1322a11368a57"
+    },
+    "biology-accession-version-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-accession-version-check",
+      "amountBaseUnits": "24001",
+      "inputDigest": "sha256:8d520fcf959333a0365382c124ef3e47c285708fe6ecc8c4d49d4c2999b32509",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "found": true,
+          "uniqueMatch": true,
+          "matches": [
+            {
+              "accession": "SYNTHETIC1",
+              "isoform": "canonical",
+              "sequenceSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "version": "v1"
+            }
+          ],
+          "snapshotVersion": "synthetic-snapshot-v1",
+          "authoritativeDatabaseQueried": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:57308feee18d8aed5a2137c485e8a2a45cdcb8e9c449e802f1a4a339b8b1b38d"
+    },
+    "biology-protein-confidence-audit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-protein-confidence-audit",
+      "amountBaseUnits": "32001",
+      "inputDigest": "sha256:8e556ac560944848e32cbde6275b1bbfc01f63116b27852e6b66dd5bead0d855",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "meanPlddt": 68.75,
+          "veryHighFraction": 0.25,
+          "confidentFraction": 0.25,
+          "lowFraction": 0.25,
+          "veryLowFraction": 0.25,
+          "functionalValidation": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:e368939d9322161dd952c434399bfb2de893bca36105d05e5b0481b216289061"
+    },
+    "biology-qpcr-run-quality": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-qpcr-run-quality",
+      "amountBaseUnits": "42001",
+      "inputDigest": "sha256:ce837e5ed4d4bd86f7a5c37959631499e2f0bae9ff126faaf3a1a0d1c64d62dc",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "meanCt": 22.1,
+          "ctSD": 0.1,
+          "issues": [],
+          "declarationsComplete": true,
+          "assayValidated": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:31d6ef5a2a1bf3ba7d823ef71b06a935a42e396347ecc1bb8f5178a208fb7107"
+    },
+    "biology-qpcr-relative-expression": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-qpcr-relative-expression",
+      "amountBaseUnits": "58001",
+      "inputDigest": "sha256:b3c2d52ef73e664ccdb18443e77c7892ada057676d13c750336c963382366c05",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "expressionRatio": 4,
+          "deltaDeltaCt": -2,
+          "method": "Pfaffl ratio; efficiencies supplied as amplification increment (1=100%); stable reference required",
+          "referenceStabilityAssumed": true
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:0b1237155ed67a9c3a98f11700432739dd7c5f44557cbf58588386059459f26d"
+    },
+    "biology-assay-control-coverage": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-assay-control-coverage",
+      "amountBaseUnits": "79000",
+      "inputDigest": "sha256:84f886163ed146c3d9c8d06276b9b8319b0ef48fdd2481bace7aa2d4d6f77766",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "required": [
+            "positive",
+            "negative",
+            "no-template",
+            "no-RT",
+            "reference"
+          ],
+          "missing": [],
+          "covered": true,
+          "controlEffectivenessVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:62f2c8dba9a46726e566b75a30e149206d64b00a65814f40eab048283f97525e"
+    },
+    "biology-research-dose-response-fit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-research-dose-response-fit",
+      "amountBaseUnits": "105000",
+      "inputDigest": "sha256:fe93359c4121213e671050f69c3060886be624e2ed9f58e30282913227a38a49",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "halfResponseDose": 4,
+          "hillSlope": 1,
+          "transformedFit": {
+            "slope": 1,
+            "intercept": -1.38629436112,
+            "rSquared": 1,
+            "residuals": [
+              0,
+              -1.11022302463e-16,
+              0,
+              0
+            ],
+            "residualStandardError": 7.85046229342e-17,
+            "slopeStandardError": 5.0650620345e-17,
+            "degreesOfFreedom": 2
+          },
+          "residuals": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "fixed bottom=0 top=1 logit-linear Hill fit; endpoints excluded, unweighted; not a four-parameter nonlinear fit or treatment dose",
+          "clinicalInterpretation": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:d21c513c0c7ff1dfbcb1f970b6924c5f26a55ac4d8ec929fded9a484be36dbe5"
+    },
+    "biology-replicate-batch-confounding": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-replicate-batch-confounding",
+      "amountBaseUnits": "149000",
+      "inputDigest": "sha256:6581552e4c0188e8ad71baccd471a2fa10737f3713ceb6d6a6e086be4cfad87e",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "biologicalUnits": 2,
+          "technicalReplicateCount": 0,
+          "fullyConditionConfoundedBatches": [
+            "b1",
+            "b2"
+          ],
+          "crossConditionUnits": [],
+          "independentReplicationVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:96436ba25d91c5fcf3c7b9d834c781377be35d86c167b5a608d3bbf70ff7ca4e"
+    },
+    "biology-translation-boundary-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-translation-boundary-check",
+      "amountBaseUnits": "185000",
+      "inputDigest": "sha256:83def10d6fb9fb410702f2c3473a30b1f55799d757aa90f3cb3b2b9ceaf84cc0",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "frameMatches": false,
+          "issues": [
+            "evidence-frame-does-not-match-claim-frame; bridge-validation-required"
+          ],
+          "humanEfficacyEstablished": false,
+          "recordsChecked": 1
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:d3219cf7bdaa596aae8b408059d5fd32712da2690bfe80b95037db7f34d8e274"
+    },
+    "biology-design-assay-evidence-brief": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "biology-design-assay-evidence-brief",
+      "amountBaseUnits": "275000",
+      "inputDigest": "sha256:b0e1b288c3aa097c4eee2e4ae2c6ee7f060c9b9e861be27108dbe5ac561e336d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "designId": "synthetic-design",
+          "assayId": "synthetic-assay",
+          "evidenceIds": [
+            "synthetic-1"
+          ],
+          "gaps": [],
+          "provenanceDeclarationsComplete": true,
+          "designOrAssayVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:a5b3a611e3e0bce6f217b109e9482b67b5f1cbdf1f95af54b2171b60d62cdc52"
+    },
+    "chemistry-formula-mass-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-formula-mass-check",
+      "amountBaseUnits": "2000",
+      "inputDigest": "sha256:d63d113e470c8c37e0d8a22d111dc0f0e8564050eb6562df61f98acbb9a5796e",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "elements": [
+            {
+              "symbol": "C",
+              "count": 6
+            },
+            {
+              "symbol": "H",
+              "count": 12
+            },
+            {
+              "symbol": "O",
+              "count": 6
+            }
+          ],
+          "molarMassGPerMol": 180.156,
+          "convention": "30-element rounded conventional average atomic mass table v1; neutral composition; parentheses supported; no isotopes, charges or hydrate dots",
+          "isotopeSpecific": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:8674ab5322874fb7d4636ff1ab08208d88788e34a4d0f3f9ed9d8822ff9fb0e8"
+    },
+    "chemistry-dilution-calculator": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-dilution-calculator",
+      "amountBaseUnits": "5005",
+      "inputDigest": "sha256:ba924335482d1ee10a8321b6b81508822c2844184378ceb977dee005931d2228",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "stockVolumeL": 0.001,
+          "diluentVolumeL": 0.009,
+          "assumption": "C1*V1=C2*V2; additive volumes; no mixing/safety instructions"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:0def36555fc778fc089cee35fda8662b2f439faf2e768bb0d788163104c89154"
+    },
+    "chemistry-concentration-basis": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-concentration-basis",
+      "amountBaseUnits": "8001",
+      "inputDigest": "sha256:b8f49035e599e04671d6b81b782fbb30ccd97e644cd039a04b82d59c1390f0d9",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "value": 58.44,
+          "unit": "g/L",
+          "intermediateGPerL": 58.44,
+          "densityAssumedGPerML": 1
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:9268345cf03f388519e15a5a3a0bf581725d5f07fb9b4e7bd60e8b6638c66fc8"
+    },
+    "chemistry-smiles-validation": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-smiles-validation",
+      "amountBaseUnits": "11001",
+      "inputDigest": "sha256:2ed72634eba6dc41a8bb6bf2708d94862110e6d111fe50eed734e450f1465654",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "valid": true,
+          "canonicalSmiles": "CCO",
+          "atoms": 3,
+          "fragments": 1,
+          "warnings": [],
+          "toolkit": "RDKit MinimalLib 2026.09.1 / npm @rdkit/rdkit 2026.9.1"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:9ff2956fdc98238c1f63fb15a2a7ad59891053e00e64ddeabdd5c5e91a515ca5"
+    },
+    "chemistry-molecular-descriptor-pack": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-molecular-descriptor-pack",
+      "amountBaseUnits": "17001",
+      "inputDigest": "sha256:2ed72634eba6dc41a8bb6bf2708d94862110e6d111fe50eed734e450f1465654",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "canonicalSmiles": "CCO",
+          "averageMass": 46.069,
+          "exactMass": 46.041864812,
+          "logP": -0.0014,
+          "tpsa": 20.23,
+          "hydrogenBondDonors": 1,
+          "hydrogenBondAcceptors": 1,
+          "toolkit": "RDKit MinimalLib 2026.09.1 / npm @rdkit/rdkit 2026.9.1"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:87fe4104174ab52f1231b9c34988427d9bb44e36f0310151ea5685abc053e2c8"
+    },
+    "chemistry-molecular-identity-comparison": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-molecular-identity-comparison",
+      "amountBaseUnits": "21001",
+      "inputDigest": "sha256:4bccc96aea5aa66c66356b5eda19b598da2f366455fb9411d2e40e2c0ba6eada",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "identicalCanonicalStructure": true,
+          "leftCanonical": "CCO",
+          "rightCanonical": "CCO",
+          "saltProtonationStereoPolicy": "canonical isomeric SMILES; preserve salts, charge, isotope and declared stereo; no tautomer/protonation normalization; not specimen identity",
+          "toolkit": "RDKit MinimalLib 2026.09.1 / npm @rdkit/rdkit 2026.9.1"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:f43a7718c4ec2fb29f996394536fc3c0b98f0110a359b2f153b5c57bd49d2ed0"
+    },
+    "chemistry-fingerprint-similarity": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-fingerprint-similarity",
+      "amountBaseUnits": "28001",
+      "inputDigest": "sha256:3f6b2f260025fa764379e4226859d00a94b069649159a86c53222f9d3edaf111",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "tanimoto": 1,
+          "intersectionBits": 6,
+          "unionBits": 6,
+          "fingerprint": "Morgan radius=2 nBits=2048 useChirality=true; bit collisions possible",
+          "toolkit": "RDKit MinimalLib 2026.09.1 / npm @rdkit/rdkit 2026.9.1",
+          "identityEstablished": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:0016f0f78502717fbd0c9f41d01444f7a0926317cdcab360633b6e7438064fb0"
+    },
+    "chemistry-reaction-conservation": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-reaction-conservation",
+      "amountBaseUnits": "37001",
+      "inputDigest": "sha256:11b89509b3fc9adbf2511d88bc6df21a54192a322af2d5b67c9639ba81dee026",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "balanced": true,
+          "differences": [],
+          "chargeDelta": 0,
+          "feasibilityEstablished": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:b5e9631ebc4b49bd1e68abca5fd7b180d51f65dbb2bb5e76c3eb73d88c3ce3ec"
+    },
+    "chemistry-spectrum-peak-comparison": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-spectrum-peak-comparison",
+      "amountBaseUnits": "49001",
+      "inputDigest": "sha256:30fbb88bf917898186ff69b92c103ae866e886aecabd482948cc79f5c2eeed39",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "matches": [
+            {
+              "observedIndex": 0,
+              "referenceIndex": 0,
+              "delta": -0.2
+            },
+            {
+              "observedIndex": 1,
+              "referenceIndex": null,
+              "delta": null
+            },
+            {
+              "observedIndex": 2,
+              "referenceIndex": null,
+              "delta": null
+            }
+          ],
+          "unmatchedReferenceIndices": [
+            1,
+            2
+          ],
+          "method": "nearest-unused-reference within absolute tolerance; input-order greedy",
+          "unit": "m/z",
+          "compoundIdentityEstablished": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:396397e505481f744a7a21061b271e4a739a89730d87e7c26193ca3f90ad1878"
+    },
+    "chemistry-arrhenius-fit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-arrhenius-fit",
+      "amountBaseUnits": "69001",
+      "inputDigest": "sha256:25248ed49eef45c5b26f7752a6339d3d520c7fba4d01ce71fa88284495a7c031",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "activationEnergyJPerMol": 41572.3130908,
+          "preExponential": 22026.4657948,
+          "transformedFit": {
+            "slope": -5000,
+            "intercept": 10,
+            "rSquared": 1,
+            "residuals": [
+              -1.7763568394e-15,
+              1.7763568394e-15,
+              0,
+              0
+            ],
+            "residualStandardError": 1.7763568394e-15,
+            "slopeStandardError": 3.77822914688e-12,
+            "degreesOfFreedom": 2
+          },
+          "method": "unweighted OLS ln(rate) vs 1/K; R=8.31446261815324 J/mol/K; rate units inherited; no extrapolation or mechanism claim"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:d5e472c18b460e207153ddb2c44339333707fbccb1d465e2ad1ffd9ec12e3057"
+    },
+    "chemistry-electrochemical-normalizer": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-electrochemical-normalizer",
+      "amountBaseUnits": "119001",
+      "inputDigest": "sha256:6c766414841f5259dd390281a0a9ec37e109577445259d23fbf434779ae16b8c",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "convertedPotentialV": 0.253,
+          "comparableDeclaredConditions": true,
+          "issues": [],
+          "signConvention": "E_target=E_source+source_vs_SHE-target_vs_SHE; offsets are caller declarations",
+          "offsetsIndependentlyVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:dbb41dc6f923b522316bb650b88fc90635174e5e58eda4bec72cf4385c17f564"
+    },
+    "chemistry-enzyme-kinetics-fit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "chemistry-enzyme-kinetics-fit",
+      "amountBaseUnits": "169000",
+      "inputDigest": "sha256:8987952611c1b0692cfe27c718e5f3b3def1d1dc1fee3415fc68903c2edb8b9d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "Vmax": 10,
+          "Km": 2,
+          "transformedFit": {
+            "slope": 0.2,
+            "intercept": 0.1,
+            "rSquared": 1,
+            "residuals": [
+              -5.55111512313e-17,
+              0,
+              -2.77555756156e-17,
+              0
+            ],
+            "residualStandardError": 4.38854183572e-17,
+            "slopeStandardError": 6.54773818076e-17,
+            "degreesOfFreedom": 2
+          },
+          "residuals": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "Lineweaver-Burk unweighted reciprocal OLS; low-substrate noise amplified; no inhibition or identifiability guarantee",
+          "parameterConfidenceInterval": null
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:918df90db474d104ec62803a9424b408a0cd8cc876fd887274ae8288ba27bb77"
+    },
+    "materials-property-record-check": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-property-record-check",
+      "amountBaseUnits": "9001",
+      "inputDigest": "sha256:f2135fda2f4df4584e8a9db7e0487a63bf9d0fd15673499c184c8e865e7d2c71",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "declarationsComplete": true,
+          "issues": [],
+          "relativeUncertainty": 0.01,
+          "measurementVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:4db97e5387bc1f90952a314350668d3c848a3a28b42b0eff80bf449c672e0ab6"
+    },
+    "materials-particle-size-summary": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-particle-size-summary",
+      "amountBaseUnits": "15001",
+      "inputDigest": "sha256:e28feaad90ae0a5bae06158d9bf97d144c949a1b02664047207c0e481ee43628",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "D10Micrometers": 1,
+          "D50Micrometers": 2,
+          "D90Micrometers": 4,
+          "weightedMeanMicrometers": 2.25,
+          "weighting": "number",
+          "method": "inverse weighted empirical CDF, no interpolation; supplied weights already in declared basis, not converted"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:9757603fcf136e5f76bb64e279e6771715e84f6bd07a648dd3e4d8e90faef4ca"
+    },
+    "materials-sheet-resistance": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-sheet-resistance",
+      "amountBaseUnits": "23001",
+      "inputDigest": "sha256:f796d17acd79c9a72a9cc3c08bb9b01dea39f07a2fee7b2af5d73d907cc5aa5c",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "sheetResistanceOhmPerSquare": 10,
+          "uniformFilmAssumed": true
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:68a493ff5b7da0c57427483be93d1a6c64e2c63703519e097571b1c62f949f93"
+    },
+    "materials-thermal-expansion-mismatch": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-thermal-expansion-mismatch",
+      "amountBaseUnits": "31001",
+      "inputDigest": "sha256:2243f488bafc8e8e986e62a2aeaaf79ed642cc4e86da01fef686cc5f4027f235",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "mismatchStrain": 0.0005,
+          "linearConstantCTEAssumed": true,
+          "stressCalculated": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:4a549808cab241740e21d8266b03943aec4bce52205c1caf671aabef214396bd"
+    },
+    "materials-thermal-stack-resistance": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-thermal-stack-resistance",
+      "amountBaseUnits": "43001",
+      "inputDigest": "sha256:9e06955e0d18ec1f3a765c2c18dca85f7c6ae0062b845ab82354ffc29cb766af",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "areaNormalizedResistanceM2KPerW": 0.0002,
+          "resistanceKPerW": 0.02,
+          "model": "steady-state 1D series conduction; identical area; interface resistances supplied; no convection/radiation/lateral spreading"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:1ec1d1aec723770a47ba6c5b40204946706ecedfb35f6ce8306daa865e00d738"
+    },
+    "materials-stress-strain-analysis": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-stress-strain-analysis",
+      "amountBaseUnits": "61001",
+      "inputDigest": "sha256:eefd89b7e92c7d8615516e3ff4b146f97c1a59ed0d48dbcb52d40d82c1baadc1",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "elasticModulusMPa": 100000,
+          "elasticFit": {
+            "slope": 100000,
+            "intercept": -1.42108547152e-14,
+            "rSquared": 1,
+            "residuals": [
+              1.42108547152e-14,
+              0,
+              0
+            ],
+            "residualStandardError": 1.42108547152e-14,
+            "slopeStandardError": 1.00485917356e-11,
+            "degreesOfFreedom": 1
+          },
+          "ultimateStressMPa": 300,
+          "energyDensityMJPerM3": 2.35,
+          "offsetYieldMPa": 261.538461538,
+          "method": "engineering input; declared inclusive elastic window OLS; first piecewise-linear 0.2% offset crossing; trapezoidal energy over supplied range only, not toughness unless fracture captured"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:1cee68c359e900070dac5fc7d962aafb99ba90911ab4e0e161a496447e1f3029"
+    },
+    "materials-xrd-peak-analysis": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-xrd-peak-analysis",
+      "amountBaseUnits": "85000",
+      "inputDigest": "sha256:520f8a69f9c8ccf734112198faf904145acc72ad0ca1f466d71970653104cd4d",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "dSpacingAngstrom": [
+            2.97621065596,
+            2.01289090369,
+            1.5406
+          ],
+          "diffractionOrder": 1,
+          "phaseIdentityEstablished": false,
+          "method": "Bragg n=1; two-theta input degrees; no lattice indexing or phase identification"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:0b757fb1e85c2400155e1804f91372713ae0a9ed2dfed350525dfdf51cca480b"
+    },
+    "materials-optical-bandgap-fit": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-optical-bandgap-fit",
+      "amountBaseUnits": "109001",
+      "inputDigest": "sha256:5305285dfc93d851efc37ee098ac8618f40a840979f84f44bc26b53883238950",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "bandgapEV": 1,
+          "transformedFit": {
+            "slope": 1,
+            "intercept": -1,
+            "rSquared": 1,
+            "residuals": [
+              3.33066907388e-16,
+              0,
+              -2.22044604925e-16,
+              0,
+              -4.4408920985e-16
+            ],
+            "residualStandardError": 3.45182366138e-16,
+            "slopeStandardError": 2.18312497025e-16,
+            "degreesOfFreedom": 3
+          },
+          "trimmedWindowBandgapEV": 1,
+          "fitWindowSensitivityEV": 0,
+          "transition": "direct-allowed",
+          "method": "Tauc linear extrapolation: (alpha*E)^2 direct allowed, ^0.5 indirect allowed; caller selects fit window; trim-one-each-end sensitivity, not bandgap validation"
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:0aaaa6aed0d3be49e2d24c58af2cd1ccd1b209808fdaa71a4b2fe1e750984eb6"
+    },
+    "materials-raman-reference-comparison": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-raman-reference-comparison",
+      "amountBaseUnits": "159000",
+      "inputDigest": "sha256:2f10b384a380d65a9fea5ce7df5b431a759cf00974cee7ee2c62805f3f32daa2",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "matches": [
+            {
+              "observedIndex": 0,
+              "referenceIndex": 0,
+              "delta": 0
+            },
+            {
+              "observedIndex": 1,
+              "referenceIndex": 1,
+              "delta": -1
+            },
+            {
+              "observedIndex": 2,
+              "referenceIndex": null,
+              "delta": null
+            }
+          ],
+          "unmatchedReferenceIndices": [
+            2
+          ],
+          "method": "nearest-unused-reference absolute cm^-1 tolerance; input-order greedy; intensity not assessed",
+          "uniqueMaterialIdentityEstablished": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:8103722567679ad363dfc00b3e88fe55ff6f801b8793b01fa43000d873b30cb5"
+    },
+    "materials-candidate-comparison": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-candidate-comparison",
+      "amountBaseUnits": "199000",
+      "inputDigest": "sha256:f09a9f278b2a71a060a5de34bfa204c71eaa997696ac52c706a3238fc1fb3c29",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "assessments": [
+            {
+              "id": "a",
+              "score": 0.5,
+              "missingCriteria": []
+            },
+            {
+              "id": "b",
+              "score": null,
+              "missingCriteria": [
+                "conductivity"
+              ]
+            }
+          ],
+          "normalization": "min-max observed candidate cohort per criterion; equal range=0.5; any missing criterion withholds entire score; no imputation",
+          "evidenceVerified": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:c65c83a5b332899e741336f62dccc9cecf4b0118d17ab2d4dd5462973aef6ed5"
+    },
+    "materials-deposition-compatibility": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-deposition-compatibility",
+      "amountBaseUnits": "249000",
+      "inputDigest": "sha256:2e9b3377487d840516eade6ee63ee611263d27d2c1294c48942fe1fa26508286",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "declaredConstraintConflicts": [
+            "process-temperature-exceeds-declared-substrate-limit",
+            "declared-corrosion-sensitivity-conflict"
+          ],
+          "noDeclaredConflict": false,
+          "compatibilityValidated": false,
+          "processRecipeProvided": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:dc6243dba0082b8b656a09ba13d00e80734a7a045490786d91bcffe6e75bfd5a"
+    },
+    "materials-qualification-evidence-brief": {
+      "version": "maha-microproducts/0.1",
+      "offerId": "materials-qualification-evidence-brief",
+      "amountBaseUnits": "298962",
+      "inputDigest": "sha256:e6077a25fec36d483405c845d011347c9b96c90076cad2eaa8da7831d7193ae0",
+      "result": {
+        "methodVersion": "maha-science50/1.0.0",
+        "numericPrecision": "IEEE754-double; finite outputs rounded to 12 significant digits",
+        "findings": {
+          "application": "synthetic-coupon",
+          "passedDeclarations": [
+            "adhesion"
+          ],
+          "failedDeclarations": [],
+          "missingTests": [
+            "thermal-cycle"
+          ],
+          "qualificationEstablished": false
+        },
+        "limitations": [
+          "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+          "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+          "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+          "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+          "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+        ]
+      },
+      "boundaries": [
+        "Public or synthetic inputs only. Caller labels are declarations, not independently verified facts.",
+        "No source acquisition, model inference, expert review, regulatory certification or prediction is performed.",
+        "Receipt hashes bind the supplied input, version and result. They are not signatures, trusted timestamps, anonymization or proof of truth.",
+        "Request and result bodies and their digests are not persisted by this service. Payment metadata remains in the existing settlement ledger.",
+        "Stateless delivery: save the response locally. A lost response is not recoverable from a stored job. Do not sign a new payment after an ambiguous outcome without checking settlement.",
+        "A paid negative finding is a completed check, not approval. Malformed or unsupported inputs are refused before settlement.",
+        "Public or synthetic research inputs only; no patient, personal genetic, confidential or regulated-use data.",
+        "Offline bounded calculations and caller-declaration checks, not source acquisition, physical experiments or independent verification.",
+        "No clinical, treatment, synthesis, hazardous-process, production-safety or regulatory certification advice.",
+        "Models and linearized fits are assumption-dependent; fit residuals are not validation or guaranteed parameter confidence intervals.",
+        "Research utilities with synthetic and analytical regression tests; not independently certified. Live payment availability requires an enabled deployment."
+      ],
+      "receiptDigest": "sha256:c0074cbfe0c3e68c768bec941628d38757b0018f3ea082a0435c012d152cc4e9"
+    }
+  },
+  "digest": "sha256:a9f51ec47677085466134f7037387d45f440c8a22f836f7ee21b3fb5b91459f3"
+}

@@ -9,6 +9,8 @@ import { EBOOK_IDS, ebookOfferId, ebookPath } from './ebook-contract.ts'
 import { LICENSED_SECTION_OFFERS } from './licensed-book-sections.ts'
 import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
+import { SCIENCE_IDS } from './science/contracts.ts'
+import { USDC_NETWORKS, networkRpc, type PaymentNetworkConfig } from './networks.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -55,6 +57,7 @@ export type PricedResource = {
 }
 
 export type X402Config = {
+  paymentNetworks?: PaymentNetworkConfig[]
   facilitatorUrl: string
   facilitatorAuthHeaders?: Record<string, string>
   cdpCredentials?: CdpApiCredentials
@@ -178,13 +181,31 @@ export function x402Config(environment: Environment = process.env): X402Config |
   for (const contradiction of catalogContradictions) {
     console.error('x402 deployment configuration contradicts the public offer catalog:', contradiction)
   }
+  if (environment.X402_SCIENCE50_ENABLED === 'true') {
+    const extra = SCIENCE_IDS.filter(id => !resources.some(r => r.offerId === id)).map(id => ({ method: 'POST', path: `/api/v1/micro/${id}` }))
+    resources.push(...parseResources(JSON.stringify(extra), catalogContradictions))
+  }
 
   const slotTtlSeconds = Number(environment.X402_SLOT_TTL_SECONDS ?? '120')
   if (!Number.isInteger(slotTtlSeconds) || slotTtlSeconds < 5 || slotTtlSeconds > 900) {
     throw new Error('X402_SLOT_TTL_SECONDS must be an integer between 5 and 900.')
   }
 
+  const primary: PaymentNetworkConfig = {
+    network, payTo, asset,
+    assetEip712: { name: environment.X402_ASSET_EIP712_NAME?.trim() || 'USD Coin', version: environment.X402_ASSET_EIP712_VERSION?.trim() || '2' },
+    chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL || (network === 'eip155:8453' ? environment.BASE_RPC_URL : network === 'eip155:42161' ? environment.ARBITRUM_RPC_URL : undefined)),
+  }
+  const paymentNetworks = [primary]
+  if (environment.X402_ARBITRUM_ENABLED === 'true') {
+    if (!/^[1-9]\d*$/.test(environment.X402_ARBITRUM_FROM_BLOCK?.trim() ?? '')) throw new Error('X402_ARBITRUM_FROM_BLOCK is required before advertising Arbitrum payments.')
+    const base = USDC_NETWORKS['eip155:8453'], arb = USDC_NETWORKS['eip155:42161']
+    if (network !== 'eip155:8453' || asset.toLowerCase() !== base.asset.toLowerCase() || !/^0x[\da-f]{40}$/i.test(payTo)
+      || primary.assetEip712.name !== base.domain.name || primary.assetEip712.version !== base.domain.version) throw new Error('Base + Arbitrum requires native USDC and its correct domain.')
+    paymentNetworks.push({ network: 'eip155:42161', asset: arb.asset, payTo, assetEip712: { ...arb.domain }, chainRpcUrl: networkRpc('eip155:42161', environment) })
+  }
   return {
+    paymentNetworks,
     facilitatorUrl,
     facilitatorAuthHeaders: parseAuthHeaders(environment.X402_FACILITATOR_AUTH_HEADERS),
     ...(cdpApiKeyId && cdpApiKeySecret ? { cdpCredentials: { apiKeyId: cdpApiKeyId, apiKeySecret: cdpApiKeySecret } } : {}),
@@ -201,7 +222,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
     resources,
     catalogContradictions,
     slotTtlSeconds,
-    chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL),
+    chainRpcUrl: primary.chainRpcUrl,
   }
 }
 
@@ -327,4 +348,9 @@ export function requirementFor(resource: PricedResource, resourceUrl: string, co
     // refuses the payment as invalid_exact_evm_missing_eip712_domain.
     extra: { name: config.assetEip712.name, version: config.assetEip712.version },
   }
+}
+
+/** Same price and resource, with ordered chain alternatives rather than duplicate products. */
+export function requirementsFor(resource: PricedResource, resourceUrl: string, config: X402Config): PaymentRequirement[] {
+  return (config.paymentNetworks ?? [config]).map(option => requirementFor(resource, resourceUrl, { ...config, ...option }))
 }

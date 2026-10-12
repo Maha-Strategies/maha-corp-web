@@ -16,7 +16,7 @@ test('monitor inventories every active x402 offer, excluding previews and other 
   assert.deepEqual(result.include, [{ offer: offer.id, name: 'Context Compression', subject, method: 'POST' }])
   const manifest = JSON.parse(readFileSync(new URL('../public/.well-known/x402-public-manifest.json', import.meta.url), 'utf8')) as X402PublicManifest
   assert.equal(discoveryMonitorMatrix(manifest).include.length, manifest.offers.filter(row => row.status === 'active' && row.payment?.protocol === 'x402').length)
-  assert.equal(discoveryMonitorMatrix(manifest).include.length, 105)
+  assert.equal(discoveryMonitorMatrix(manifest).include.length, 155)
   assert.ok(discoveryMonitorMatrix(manifest).include.length > 2)
 })
 

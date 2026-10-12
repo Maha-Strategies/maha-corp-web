@@ -1,0 +1,44 @@
+name: Fifty science product publisher-funded indexing
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'One Base authorization per product; PUBLISHER_FUNDED_SCIENCE_50_ONCE_MAX_3_577_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      SCIENCE_CANARY_OUTPUT_PATH: ${{ github.workspace }}/science50-indexing-evidence.json
+      SCIENCE_CANARY_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate every unpaid challenge before allowing signer access
+        run: node --experimental-strip-types scripts/run-science50-indexing.ts
+      - name: Purchase or recover one original result per product without repayments
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-science50-indexing.ts --pay
+      - name: Preserve sanitized settlement and delivery evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: science50-indexing-${{ github.run_id }}
+          path: ${{ env.SCIENCE_CANARY_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90

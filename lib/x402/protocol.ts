@@ -350,7 +350,7 @@ export type PreSettlementGuard = {
 }
 
 export type AcceptPaymentResult =
-  | { ok: true; payer: string; transaction: string; amountPaid: string; replayed?: boolean }
+  | { ok: true; payer: string; transaction: string; amountPaid: string; network?: string; replayed?: boolean }
   // 502 is the chain contradicting the facilitator: an upstream told us
   // something the ledger of record does not support.
   | { ok: false; status: 402 | 409 | 502 | 503; reason: string }
@@ -374,6 +374,8 @@ export async function acceptPayment(input: {
   facilitator: PaymentFacilitator
   replayGuard: ReplayGuard
   confirmOnChain?: SettlementConfirmer
+  /** A saved payment must be confirmed on its original chain, not the retry's. */
+  confirmRecoveryOnChain?: (network: string) => SettlementConfirmer | undefined
   /** Optional. Offers that create a job supply one; stateless offers do not. */
   admissionGuard?: PreSettlementGuard
 }): Promise<AcceptPaymentResult> {
@@ -402,9 +404,15 @@ export async function acceptPayment(input: {
   // Recovery. Returns the original transaction and never reaches `settle`, so
   // no second payment can be taken for a request that already has one.
   if (admission.kind === 'already_paid') {
+    if (!admission.network && new Set(input.requirements.map(term => term.network)).size > 1) {
+      return { ok: false, status: 409, reason: 'original_settlement_network_unknown_recover_purchase' }
+    }
+    const network = admission.network ?? requirement.network
+    const original = input.requirements.find(term => term.network === network)
+    if (!original) return { ok: false, status: 409, reason: 'original_settlement_network_not_enabled_recover_purchase' }
     // The recorded transaction, not a new authorization, must satisfy the
     // same chain check as a first purchase. Never settle in this branch.
-    const confirmation = await safelyConfirm(input.confirmOnChain, { transaction: admission.transaction, payer: verified.payer })
+    const confirmation = await safelyConfirm(input.confirmRecoveryOnChain ? input.confirmRecoveryOnChain(network) : network === requirement.network ? input.confirmOnChain : undefined, { transaction: admission.transaction, payer: verified.payer })
     if (confirmation?.status === 'contradicted') {
       if (admission.paymentId && admission.network) await input.admissionGuard?.reconcile?.({
         payer: verified.payer, paymentId: admission.paymentId, network: admission.network,
@@ -412,7 +420,7 @@ export async function acceptPayment(input: {
       })
       return { ok: false, status: 502, reason: 'settlement_contradicted:recovery' }
     }
-    return { ok: true, payer: verified.payer, transaction: admission.transaction, amountPaid: requirement.amount, replayed: true }
+    return { ok: true, payer: verified.payer, transaction: admission.transaction, amountPaid: original.amount, ...(input.confirmRecoveryOnChain ? { network } : {}), replayed: true }
   }
   if (admission.kind === 'contradicted') return { ok: false, status: 502, reason: 'settlement_contradicted:recorded' }
   if (admission.kind === 'conflict') return { ok: false, status: 409, reason: 'idempotency_key_reused_with_different_request' }
@@ -484,7 +492,7 @@ export async function acceptPayment(input: {
   const marked = await input.admissionGuard?.settled({ payer: verified.payer, transaction: settled.transaction })
   if (marked === false) await journal('marker_failed', settled.transaction)
 
-  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.amount }
+  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.amount, ...(input.confirmRecoveryOnChain ? { network: requirement.network } : {}) }
 }
 
 async function safelyConfirm(confirm: SettlementConfirmer | undefined, settlement: { transaction: string; payer: string }) {

@@ -15,6 +15,8 @@ import { auditInputHash } from '../lib/mps-audit-engine.ts'
 import { parseResearchIntakeInput, researchIntakeInputHash } from '../lib/research-intake-evidence-pack.ts'
 import type { X402Offer } from '../lib/x402/offers.ts'
 import { validate } from './helpers/json-schema.ts'
+import { isScienceProduct } from '../lib/x402/science/contracts.ts'
+import { createMicroPurchaseIdentity, microPurchaseHeaders } from '../lib/x402/micro-purchase.ts'
 
 test('lossy union compaction cannot reject valid payloads when branches overlap', () => {
   const full = {
@@ -90,7 +92,7 @@ const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
 
 /** A store that always grants the claim, for tests about other things. */
 const admissionLedger = (decision = 'proceed', transaction: string | null = null) => ({
-  rpc: async (name: string) => name === 'reserve_x402_admission'
+  rpc: async (name: string) => ['reserve_x402_admission', 'reserve_x402_micro_purchase'].includes(name)
     ? { data: [{ decision, payment_transaction: transaction }], error: null }
     : { data: null, error: null },
 })
@@ -133,6 +135,7 @@ function requestForOffer(offer: X402Offer): { body: string; headers: Record<stri
     : offer.discovery.input
   const clientRequestId = String(input.clientRequestId ?? IDEMPOTENT['x-maha-idempotency-key'])
   const headers: Record<string, string> = { 'content-type': 'application/json' }
+  if (isScienceProduct(offer.id)) return { body: JSON.stringify(input), headers: { ...headers, ...microPurchaseHeaders(offer.id, input, createMicroPurchaseIdentity()) } }
   if (offer.requiresIdempotency) {
     headers['x-maha-idempotency-key'] = clientRequestId
     headers['x-maha-input-hash'] = ebook ? ebookOrderHash(ebook, parseEbookOrder(ebook, input)) : offer.id === 'cabezon-buyer-brief-pack'

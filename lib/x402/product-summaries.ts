@@ -1,7 +1,13 @@
 import type { X402Offer } from './offers.ts'
+import { SCIENCE_PRODUCTS } from './science/contracts.ts'
 
 /** Plain-language catalogue copy; the payment contract remains in offer.description. */
 export const PRODUCT_SUMMARIES: Readonly<Record<string, string>> = Object.freeze({
+  ...Object.fromEntries(Object.entries(SCIENCE_PRODUCTS).map(([id, product]) => [id, product.description])),
+  'quantum-coherence-budget': 'Compares declared circuit duration with T1/T2 values under a relaxation/dephasing model, without claiming measured device fidelity.',
+  'quantum-stabilizer-consistency': 'Checks supplied stabilizer generators for commutation, independence and conflicting constraints, without assessing logical-error performance.',
+  'biology-assay-control-coverage': 'Compares a declared assay with a reviewed checklist and flags missing positive, negative, vehicle or technical controls, without predicting experimental success.',
+  'biology-research-dose-response-fit': 'Fits normalized assay responses with an explicit fixed-bottom/top Hill model and reports half-response, slope and residuals, without recommending doses.',
   'passage-hash-validation': 'Checks exact passage bytes against declared SHA-256 hashes and flags substitutions without judging source truth.',
   'claim-citation-coverage': 'Measures how many declared claims have matching evidence citations, keeping missing claims explicit.',
   'citation-locator-conversion': 'Converts exact text spans between UTF-8 byte and Unicode character offsets without splitting characters.',

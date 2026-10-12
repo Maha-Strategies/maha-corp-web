@@ -25,6 +25,8 @@
  */
 
 export type LedgerEntry = {
+  /** Absent in legacy Base snapshots; explicit in multichain views. */
+  caip2Network?: string
   /** Transfer log identity; absent only in older bundled snapshots. */
   logIndex?: number
   /** Full hash, for the explorer link. Addresses are truncated for display. */
@@ -124,6 +126,7 @@ export type LedgerSummary = {
 }
 
 export type SettlementLedger = {
+  caip2Network?: string
   schemaVersion: string
   /**
    * Digest of the settlements and the figures derived from them, excluding
@@ -208,6 +211,7 @@ export type OfferPrice = {
 }
 
 export function buildLedger(input: {
+  caip2Network?: string
   settlements: readonly { payer: string; amountBaseUnits: bigint; blockNumber: bigint; transactionHash: string; timestampUtc?: string | null; logIndex?: number }[]
   operatorWallets: readonly string[]
   offers: readonly OfferPrice[]
@@ -222,7 +226,9 @@ export function buildLedger(input: {
    */
   operatorReceipts?: readonly OperatorSettlementReceipt[]
 }): SettlementLedger {
-  const explorerBase = input.explorerBase ?? 'https://basescan.org/tx/'
+  const network = input.caip2Network ?? 'eip155:8453'
+  if (!['eip155:8453', 'eip155:42161'].includes(network)) throw new Error('unsupported_ledger_network')
+  const explorerBase = input.explorerBase ?? (network === 'eip155:42161' ? 'https://arbiscan.io/tx/' : 'https://basescan.org/tx/')
   const operators = new Set(input.operatorWallets.map((w) => w.toLowerCase()))
   /**
    * Price to product, and the prices that cannot identify one.
@@ -290,6 +296,7 @@ export function buildLedger(input: {
         }
       : undefined
     return {
+      ...(network === 'eip155:42161' ? { caip2Network: network } : {}),
       transactionHash: s.transactionHash,
       ...(s.logIndex === undefined ? {} : { logIndex: s.logIndex }),
       blockNumber: s.blockNumber.toString(),
@@ -384,10 +391,11 @@ export function buildLedger(input: {
     : undefined
 
   return {
+    ...(network === 'eip155:42161' ? { caip2Network: network } : {}),
     schemaVersion: receiptAware ? 'maha-x402-settlement-ledger/1.1' : 'maha-x402-settlement-ledger/1.0',
     contentDigest: receiptAware ? contentDigestOf(entries, summary, attribution) : contentDigestOf(entries, summary),
-    network: 'Base Mainnet',
-    protocol: 'HTTP 402 v2 · Base USDC',
+    network: network === 'eip155:42161' ? 'Arbitrum One' : 'Base Mainnet',
+    protocol: network === 'eip155:42161' ? 'HTTP 402 v2 · Arbitrum USDC' : 'HTTP 402 v2 · Base USDC',
     observedAt: input.observedAt,
     scannedFromBlock: input.fromBlock.toString(),
     scannedToBlock: input.toBlock.toString(),

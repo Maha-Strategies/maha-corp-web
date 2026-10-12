@@ -275,7 +275,7 @@ test('chain confirmation is on by default for Base, and its absence only degrade
   // off, and that degrades rather than fails: the payments are real, they are
   // just uncorroborated, and the report says what that costs.
   const unconfirmed = await getX402Readiness({
-    environment: { ...withoutRpc, X402_NETWORK: 'arbitrum' },
+    environment: { ...withoutRpc, X402_NETWORK: 'solana' },
     probe: everything,
   })
   const confirmation = check(unconfirmed, 'x402.settlement.confirmation')

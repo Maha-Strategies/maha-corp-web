@@ -28,6 +28,7 @@ export const PROXY_ASSERTED_REQUEST_HEADERS: readonly string[] = [
   'x-maha-payment-transaction',
   'x-maha-payment-payer',
   'x-maha-payment-amount',
+  'x-maha-payment-network',
   'x-maha-payment-replayed',
   SLOT_RESOURCE_HEADER,
   SLOT_TOKEN_HEADER,

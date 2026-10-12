@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { readFileSync } from 'node:fs'
-import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, SCAN_CHUNK, type SettlementReader, type Transfer } from '../lib/x402/settlement-refresh.ts'
+import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, MAX_TIMESTAMP_BLOCKS, SCAN_CHUNK, type SettlementReader, type Transfer } from '../lib/x402/settlement-refresh.ts'
 import { bundledLedger, readPublicSettlementLedger, refreshStoredSettlements, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from '../lib/x402/settlement-live-store.ts'
 import { buildLedger } from '../lib/x402/settlement-ledger.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from '../lib/x402/operator-settlement-receipts.ts'
@@ -12,6 +12,18 @@ const now = new Date('2026-09-09T03:00:00Z')
 const row = (block: bigint, index = 0): Transfer => ({ payer: `0x${'a'.repeat(40)}`, amountBaseUnits: BigInt(1000), blockNumber: block, transactionHash: `0x${'b'.repeat(64)}`, logIndex: index })
 const reader = (head: bigint, rows: Transfer[] = []): SettlementReader => ({ finalizedBlock: async () => head,
   transfers: async (from, to) => rows.filter(r => r.blockNumber >= from && r.blockNumber <= to), timestamp: async () => now.toISOString() })
+
+test('an approved fifty-transfer launch refreshes without losing operator rows; larger timestamp workloads fail closed', async () => {
+  const previous = ledgerFromRows([], BigInt(1), BigInt(100), now.toISOString())
+  const rows = Array.from({ length: MAX_TIMESTAMP_BLOCKS + 1 }, (_, i) => ({ ...row(BigInt(110 + i)),
+    payer: OPERATOR_WALLETS[0], transactionHash: '0x' + (i + 1).toString(16).padStart(64, '0') }))
+  const refreshed = await refreshSettlementLedger(previous, reader(BigInt(300), rows.slice(0, 50)), now)
+  assert.equal(refreshed.caughtUp, true)
+  assert.equal(refreshed.ledger.entries.length, 50)
+  assert.equal(refreshed.ledger.summary.canarySettlements, 50)
+  assert.equal(refreshed.ledger.summary.externalSettlements, 0)
+  await assert.rejects(refreshSettlementLedger(previous, reader(BigInt(300), rows), now), /scan_requires_offline_backfill/)
+})
 const empty = () => ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
 
 test('old catalogue snapshots validate and reproject without losing observed history', async () => {
@@ -55,7 +67,7 @@ test('deployment wires hourly authenticated production-only refresh and request-
   assert.equal(config.crons.filter((c: { path: string }) => c.path === '/api/cron/x402-settlements').length, 1)
   assert.equal(config.crons.find((c: { path: string }) => c.path === '/api/cron/x402-settlements').schedule, '17 * * * *')
   const route = readFileSync('app/api/cron/x402-settlements/route.ts', 'utf8')
-  assert.ok(route.indexOf('if (!authorizeObservatoryCron(request))') < route.indexOf('await refreshStoredSettlements'))
+  assert.ok(route.indexOf('if (!authorizeObservatoryCron(request))') < route.indexOf('await refreshAllStoredSettlements'))
   assert.match(route, /VERCEL_ENV !== 'production'/)
   const page = readFileSync('app/developers/settlement/page.tsx', 'utf8')
   assert.match(page, /await connection\(\)/)

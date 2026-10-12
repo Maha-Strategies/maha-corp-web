@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import { BASE_MAINNET_CAIP2, USDC_DECIMALS, X402_OFFERS, type OfferStatus, type X402Offer } from './offers.ts'
+import { DECLARED_PAYMENT_NETWORKS, USDC_NETWORKS } from './networks.ts'
 
 /**
  * A single machine-readable manifest an agent, registry or conformance tool can
@@ -50,6 +51,7 @@ export type PublicManifestOffer = {
     version: 2
     scheme: 'exact'
     network: string
+    networks?: { network: string; assetContract: string }[]
     asset: 'USDC'
     assetDecimals: number
     amountBaseUnits: string
@@ -102,6 +104,7 @@ function configurationDigestFor(offer: X402Offer): string {
     resource: `${ORIGIN}${offer.path}`,
     amount: offer.amount,
     network: BASE_MAINNET_CAIP2,
+    networks: DECLARED_PAYMENT_NETWORKS.map(network => ({ network, assetContract: USDC_NETWORKS[network].asset })),
     maxRequestBytes: offer.maxRequestBytes,
     requiresIdempotency: offer.requiresIdempotency,
     retention: {
@@ -146,6 +149,7 @@ export function buildPublicManifest(
           ? {
               protocol: 'x402', version: 2, scheme: 'exact',
               network: BASE_MAINNET_CAIP2, asset: 'USDC', assetDecimals: USDC_DECIMALS,
+              networks: DECLARED_PAYMENT_NETWORKS.map(network => ({ network, assetContract: USDC_NETWORKS[network].asset })),
               amountBaseUnits: offer.amount,
               displayAmount: `${(Number(offer.amount) / 10 ** USDC_DECIMALS).toFixed(USDC_DECIMALS)} USDC`,
             }

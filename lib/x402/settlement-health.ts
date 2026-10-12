@@ -11,5 +11,10 @@ export function settlementHealth(view: Awaited<ReturnType<typeof readPublicSettl
     observedAt: view.ledger.observedAt,
     scannedFromBlock: view.ledger.scannedFromBlock,
     scannedToBlock: view.ledger.scannedToBlock,
+    ...('networks' in view ? { networks: view.networks.map(network => ({
+      network: network.ledger.caip2Network ?? 'eip155:8453', source: network.source,
+      stale: network.stale, caughtUp: network.caughtUp, observedAt: network.ledger.observedAt,
+      scannedFromBlock: network.ledger.scannedFromBlock, scannedToBlock: network.ledger.scannedToBlock,
+    })) } : {}),
   }
 }

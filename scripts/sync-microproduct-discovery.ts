@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { MICRO_OFFERS } from '../lib/x402/micro-offers.ts'
 import { isMicroProduct } from '../lib/x402/micro-contracts.ts'
+import { DECLARED_PAYMENT_NETWORKS } from '../lib/x402/networks.ts'
 
 if (process.argv.slice(2).some(x => !['--write', '--check'].includes(x))) throw new Error('Only local --write or --check is supported.')
 for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payment'], ['agent-offers', 'technicalCapabilities', 'machinePayment']] as const) {
@@ -11,7 +12,7 @@ for (const [name, field, paymentField] of [['agent-card', 'capabilities', 'payme
   body[field] = [...retained, ...MICRO_OFFERS.map(o => ({
     id: o.id, status: o.status, endpoint: `https://www.mahastrategies.com${o.path}`, method: o.method,
     description: o.description, payableNow: o.availability.payableInProduction, blockedBy: o.availability.blockedBy,
-    [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', amount: o.amount, assetSymbol: 'USDC', autonomous: o.availability.payableInProduction, payableNow: o.availability.payableInProduction },
+    [paymentField]: { protocol: 'x402', version: 2, network: 'eip155:8453', networks: DECLARED_PAYMENT_NETWORKS, amount: o.amount, assetSymbol: 'USDC', autonomous: o.availability.payableInProduction, payableNow: o.availability.payableInProduction },
   }))]
   if (name === 'agent-offers') {
     body.transactionPolicy.autonomousPaymentScope = [...body.transactionPolicy.autonomousPaymentScope.filter((id: string) => !isMicroProduct(id)), ...MICRO_OFFERS.filter(o => o.availability.payableInProduction).map(o => o.id)]

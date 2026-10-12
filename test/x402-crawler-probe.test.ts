@@ -8,7 +8,6 @@ import { buyerBriefHandlers } from '../lib/x402/buyer-brief-route.ts'
 import { briefHash, BUYER_BRIEF_VERSION } from '../lib/x402/buyer-brief-contract.ts'
 import { ebookHandlers } from '../lib/x402/ebook-route.ts'
 import { ebookIdForOffer } from '../lib/x402/ebook-contract.ts'
-import { loadEbook } from '../lib/x402/ebook-delivery.ts'
 import { licensedSectionHandlers } from '../lib/x402/licensed-book-section-route.ts'
 import { LICENSED_SECTION_BOOKS, licensedSectionId } from '../lib/x402/licensed-book-sections.ts'
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
@@ -45,7 +44,10 @@ const inert = { record: async () => {}, release: async () => {}, environment: 't
 
 function handlersFor(offer: X402Offer) {
   const ebook = ebookIdForOffer(offer.id)
-  if (ebook) { const h = ebookHandlers(ebook, { enabled: true, load: loadEbook, resolve: alwaysChallenge, ...inert }); return { POST: h.POST, GET: async (_request: Request) => h.GET() } }
+  // This is a handler-ordering test, not a private-storage/delivery test. As
+  // with the other families below, inject the dependency; never require paid
+  // files or live storage credentials in the crawler fixture.
+  if (ebook) { const h = ebookHandlers(ebook, { enabled: true, load: async () => [], resolve: alwaysChallenge, ...inert }); return { POST: h.POST, GET: async (_request: Request) => h.GET() } }
   const section = LICENSED_SECTION_BOOKS.find(book => licensedSectionId(book) === offer.id)
   if (section) return licensedSectionHandlers(section, { ...inert, resolve: alwaysChallenge })
   if(offer.id==='cabezon-buyer-brief-pack'){

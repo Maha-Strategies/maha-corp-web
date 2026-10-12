@@ -22,7 +22,8 @@ import { formatUnits } from 'viem'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
-import { baseSettlementReader } from '../lib/x402/settlement-refresh.ts'
+import { evmSettlementReader } from '../lib/x402/settlement-refresh.ts'
+import { usdcNetwork, type UsdcNetwork } from '../lib/x402/networks.ts'
 
 /**
  * The prices a customer can legitimately pay, taken from the offer catalog so a
@@ -30,9 +31,6 @@ import { baseSettlementReader } from '../lib/x402/settlement-refresh.ts'
  * remembers to widen a constant.
  */
 const PUBLISHED_PRICES = [...new Set(payableOffers().flatMap((offer) => [offer.amount, ...(offer.supersededAmounts ?? [])]).map(BigInt))].sort((a, b) => (a < b ? -1 : 1))
-
-/** Base produces a block roughly every two seconds. */
-const BLOCKS_PER_DAY = BigInt(43_200)
 
 function argument(flag: string, fallback: string): string {
   const index = process.argv.indexOf(flag)
@@ -42,9 +40,19 @@ function argument(flag: string, fallback: string): string {
 const days = Math.max(1, Math.min(90, Number(argument('--days', '2')) || 2))
 const reported = argument('--reported', '').split(',').map((value) => value.trim()).filter(Boolean)
 
-const reader = baseSettlementReader()
+const network = argument('--network', 'eip155:8453') as UsdcNetwork
+const definition = usdcNetwork(network)
+const reader = evmSettlementReader(network)
 const latest = await reader.finalizedBlock()
-const earliest = latest > BLOCKS_PER_DAY * BigInt(days) ? latest - BLOCKS_PER_DAY * BigInt(days) : BigInt(0)
+// Locate the time boundary, not a Base-specific block-rate guess on Arbitrum.
+const threshold = Date.parse(await reader.timestamp(latest)) - days * 86400000
+let low = BigInt(0), high = latest
+while (low < high) {
+  const mid = (low + high) / BigInt(2)
+  if (Date.parse(await reader.timestamp(mid)) < threshold) low = mid + BigInt(1)
+  else high = mid
+}
+const earliest = low
 
 const settlements: Settlement[] = await reader.transfers(earliest, latest)
 
@@ -95,7 +103,7 @@ if (process.env.X402_WATCH_OUTPUT_PATH?.trim()) {
   const { dirname } = await import('node:path')
   const path = process.env.X402_WATCH_OUTPUT_PATH.trim()
   await mkdir(dirname(path), { recursive: true })
-  await writeFile(path, `${JSON.stringify(report, null, 2)}\n`)
+  await writeFile(path, `${JSON.stringify({ ...report, network, networkName: definition.name }, null, 2)}\n`)
 }
 
 // A notable event is news, not a failure. Exit 0 either way and let the caller

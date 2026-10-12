@@ -12,6 +12,8 @@ import { buildPlanningProduct } from './micro-planning-products.ts'
 import { isEvidenceCheck } from './evidence-check-contracts.ts'
 import { buildEvidenceCheck } from './evidence-check-products.ts'
 import { isExpansionProduct, buildExpansionProduct } from './expansion-registry.ts'
+import { isScienceProduct, SCIENCE_BOUNDARIES } from './science/contracts.ts'
+import { buildScienceProduct } from './science/products.ts'
 
 type Row = Record<string, unknown>
 const compareText = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0
@@ -127,7 +129,7 @@ export async function buildMicroProduct(id: MicroProductId, supplied: unknown, c
   const input = parseMicroInput(id, supplied)
   let result: Row
   try {
-    const core = isExpansionProduct(id) ? buildExpansionProduct(id, input) : isEvidenceCheck(id) ? buildEvidenceCheck(id, input) : isPlanningProduct(id) ? buildPlanningProduct(id, input) : isCompatibilityProduct(id) ? buildCompatibilityProduct(id, input) : isNextProduct(id) ? await buildNextProduct(id, input) : coreResult(id, input)
+    const core = isScienceProduct(id) ? await buildScienceProduct(id, input) : isExpansionProduct(id) ? buildExpansionProduct(id, input) : isEvidenceCheck(id) ? buildEvidenceCheck(id, input) : isPlanningProduct(id) ? buildPlanningProduct(id, input) : isCompatibilityProduct(id) ? buildCompatibilityProduct(id, input) : isNextProduct(id) ? await buildNextProduct(id, input) : coreResult(id, input)
     if (core) result = core
     else {
       const provider = corpus ?? await import('./micro-corpus.ts')
@@ -135,7 +137,7 @@ export async function buildMicroProduct(id: MicroProductId, supplied: unknown, c
     }
   } catch { throw new MicroInputError() }
   const body = { version: MICRO_VERSION, offerId: id, amountBaseUnits: MICRO_PRODUCTS[id].amount,
-    inputDigest: microDigest(input), result, boundaries: [...MICRO_BOUNDARIES] }
+    inputDigest: microDigest(input), result, boundaries: [...MICRO_BOUNDARIES, ...(isScienceProduct(id) ? SCIENCE_BOUNDARIES : [])] }
   const response = { ...body, receiptDigest: microDigest(body) }
   if (Buffer.byteLength(canonicalMicro(response)) > MICRO_MAX_RESPONSE_BYTES || !schemaAccepts(microOutputSchema(id), response)) throw new MicroInputError()
   return response

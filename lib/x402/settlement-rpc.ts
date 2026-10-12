@@ -1,3 +1,4 @@
+import { usdcNetwork, type UsdcNetwork } from './networks.ts'
 /** Serialize and pace every RPC read, including block timestamps and head checks. */
 export function settlementRpcQueue(intervalMs = 350, clock: {
   now(): number
@@ -36,10 +37,11 @@ export function settlementRefreshFailure(error: unknown): string {
   return 'unavailable'
 }
 
-export function settlementRpcUrl(env: Record<string, string | undefined> = process.env): string {
-  const configured = env.BASE_RPC_URL?.trim()
+export function settlementRpcUrl(env: Record<string, string | undefined> = process.env, network: UsdcNetwork = 'eip155:8453'): string {
+  const definition = usdcNetwork(network)
+  const configured = env[definition.rpcEnvironment]?.trim()
   if (!configured && env.VERCEL_ENV === 'production') throw new Error('settlement_rpc_configuration_missing')
-  const value = configured || 'https://mainnet.base.org'
+  const value = configured || definition.rpcUrl
   try {
     const url = new URL(value)
     if (url.protocol !== 'https:' && !(env.VERCEL_ENV !== 'production' && url.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(url.hostname))) throw new Error()

@@ -83,7 +83,7 @@ export const API_CORS_HEADERS = {
   // Server-side agents do not exercise CORS, so omitting these can pass every
   // settlement test while making the same public endpoint unusable in a web
   // agent or zero-install playground.
-  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE, X-Maha-Idempotency-Key, X-Maha-Input-Hash',
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE, X-Maha-Idempotency-Key, X-Maha-Input-Hash, X-Maha-Recovery-Secret, X-Maha-Recovery-Mode, X-Maha-Recovery-Payer',
   'Access-Control-Expose-Headers': 'PAYMENT-REQUIRED, PAYMENT-RESPONSE, Retry-After, Server-Timing',
   'Access-Control-Max-Age': '86400',
 }

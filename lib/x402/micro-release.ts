@@ -11,6 +11,7 @@
 import { PLANNING_IDS } from './micro-planning-contracts.ts'
 import { EVIDENCE_CHECK_IDS } from './evidence-check-contracts.ts'
 import { EXPANSION_INDEXING_IDS } from './expansion-registry.ts'
+import { SCIENCE_IDS } from './science/contracts.ts'
 
 // Keep the prior production opt-in fixed; new products require a separate flag.
 export const EXISTING_RELEASED_MICRO_IDS = [
@@ -34,7 +35,7 @@ export const EXISTING_RELEASED_MICRO_IDS = [
   'evidence-frame-compatibility',
 ] as const
 
-export const RELEASED_MICRO_IDS = [...EXISTING_RELEASED_MICRO_IDS, ...PLANNING_IDS, ...EVIDENCE_CHECK_IDS, ...EXPANSION_INDEXING_IDS] as const
+export const RELEASED_MICRO_IDS = [...EXISTING_RELEASED_MICRO_IDS, ...PLANNING_IDS, ...EVIDENCE_CHECK_IDS, ...EXPANSION_INDEXING_IDS, ...SCIENCE_IDS] as const
 
 export function isReleasedMicro(id: string): boolean {
   return (RELEASED_MICRO_IDS as readonly string[]).includes(id)

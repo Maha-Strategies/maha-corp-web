@@ -212,10 +212,10 @@ export async function getX402Readiness(options: {
   if (usingCdpMainnet && !config.cdpCredentials) settlementProblems.push('the CDP mainnet facilitator has no credentials')
 
   checks.push(settlementProblems.length === 0
-    ? { id: 'x402.settlement.configuration', state: 'ok', summary: `Settlement is configured for ${config.caip2Network}.` }
+    ? { id: 'x402.settlement.configuration', state: 'ok', summary: `Settlement is configured for ${(config.paymentNetworks ?? [config]).map(option => option.network).join(', ')}.` }
     : { id: 'x402.settlement.configuration', state: 'fail', summary: 'Settlement configuration is incomplete.', detail: settlementProblems.join('; ') })
 
-  checks.push(config.chainRpcUrl
+  checks.push((config.paymentNetworks ?? [config]).every(option => option.chainRpcUrl)
     ? { id: 'x402.settlement.confirmation', state: 'ok', summary: 'Settlements are corroborated against the chain.' }
     : {
         id: 'x402.settlement.confirmation',
@@ -275,9 +275,10 @@ export async function getX402Readiness(options: {
     for (const offerId of enabledIds) {
       const baseRequired = REQUIRED_RELATIONS[offerId]
       const idempotent = catalog.find((offer) => offer.id === offerId)?.requiresIdempotency === true
+      const microRecovery = catalog.find((offer) => offer.id === offerId)?.tags.includes('science') === true
       const required = idempotent ? {
-        tables: [...new Set([...(baseRequired?.tables ?? []), 'x402_offer_admissions', 'x402_admission_recovery'])],
-        functions: [...new Set([...(baseRequired?.functions ?? []), 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'record_x402_admission_recovery', 'read_x402_admission_recovery', 'x402_admission_recovery_health'])],
+        tables: [...new Set([...(baseRequired?.tables ?? []), 'x402_offer_admissions', 'x402_admission_recovery', ...(microRecovery ? ['x402_micro_purchases'] : [])])],
+        functions: [...new Set([...(baseRequired?.functions ?? []), 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'record_x402_admission_recovery', 'read_x402_admission_recovery', 'x402_admission_recovery_health', ...(microRecovery ? ['reserve_x402_micro_purchase', 'read_x402_micro_purchase'] : [])])],
       } : baseRequired
       if (!required) continue
       const missing: string[] = []

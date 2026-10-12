@@ -7,6 +7,8 @@ import { buildMicroProduct, verifyMicroProduct } from '../lib/x402/micro-product
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import { x402Config } from '../lib/x402/config.ts'
 import type { OfferUsageInput } from '../lib/x402/offer-telemetry.ts'
+import { isScienceProduct } from '../lib/x402/science/contracts.ts'
+import { fixture as scienceFixture } from './helpers/micro-payment-fixture.ts'
 
 // Provider, ledger, telemetry and slot effects are injected. Accidental HTTP is a test failure.
 const originalFetch = globalThis.fetch
@@ -18,6 +20,7 @@ const config = x402Config({ X402_ENABLED: 'true', X402_FACILITATOR_URL: 'https:/
   X402_RESOURCES: JSON.stringify(MICRO_OFFERS.map(o => ({ method: 'POST', path: o.path }))) })!
 type Options = { rejected?: boolean; capacity?: boolean; noLedger?: boolean; chainFailed?: boolean; throwSettle?: boolean; telemetryFails?: boolean; releaseFails?: boolean; environment?: string }
 function fixture(offer = MICRO_OFFERS[0], options: Options = {}) {
+  if (isScienceProduct(offer.id)) return scienceFixture(offer, options)
   const calls = { verify: 0, settle: 0, resolve: 0, release: 0, order: [] as string[], rpc: [] as Record<string, unknown>[], usage: [] as OfferUsageInput[] }
   const claimed = new Set<string>()
   const handlers = microHandlers(offer.id as MicroProductId, {

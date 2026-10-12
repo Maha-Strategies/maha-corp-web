@@ -389,6 +389,6 @@ test('both ledger builders apply the committed receipts', () => {
   // The hourly cron and the manual generator must attribute identically, or
   // the public page changes depending on which one ran last.
   for (const file of ['lib/x402/settlement-refresh.ts', 'scripts/generate-x402-settlement-ledger.ts']) {
-    assert.match(readFileSync(file, 'utf8'), /operatorReceipts: OPERATOR_SETTLEMENT_RECEIPTS/, file)
+    assert.match(readFileSync(file, 'utf8'), /operatorReceipts: (?:network === 'eip155:8453' \? )?OPERATOR_SETTLEMENT_RECEIPTS/, file)
   }
 })
