@@ -4,11 +4,13 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { x402Config, requirementsFor } from '../lib/x402/config.ts'
 import { buildTypedData, encodePaymentSignature } from '../lib/x402/client.ts'
+import { rpcUrlFor } from '../lib/x402/chain.ts'
 import { acceptPayment, buildPaymentRequired, matchRequirement, matchesPaymentContext, parsePaymentHeader, type PaymentPayload, type PaymentRequirement } from '../lib/x402/protocol.ts'
 import { X402_OFFERS } from '../lib/x402/offers.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 import { PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declaration-compaction.ts'
 import { USDC_NETWORKS, settlementNetworks, type UsdcNetwork } from '../lib/x402/networks.ts'
+import { settlementRpcUrl } from '../lib/x402/settlement-rpc.ts'
 import { ledgerFromRows, type SettlementReader } from '../lib/x402/settlement-refresh.ts'
 import { bundledLedger, networkSeed, refreshStoredSettlements, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from '../lib/x402/settlement-live-store.ts'
 import { combineSettlementLedgers } from '../lib/x402/settlement-multichain.ts'
@@ -45,6 +47,12 @@ test('Polygon defaults off and preserves both existing native-USDC terms', () =>
   assert.deepEqual(settlementNetworks({ X402_ARBITRUM_ENABLED: 'true' }), [B, A])
   assert.deepEqual(settlementNetworks(env), [B, A, P])
   assert.equal(x402Config({ X402_POLYGON_ENABLED: 'true' }), null)
+})
+test('Polygon scanner and receipt RPC defaults stay consistent after the archive-query correction', () => {
+  assert.equal(USDC_NETWORKS[P].rpcUrl, 'https://polygon.drpc.org')
+  assert.equal(rpcUrlFor(P), USDC_NETWORKS[P].rpcUrl)
+  assert.equal(settlementRpcUrl({}, P), USDC_NETWORKS[P].rpcUrl)
+  assert.throws(() => settlementRpcUrl({ VERCEL_ENV: 'production' }, P), /configuration_missing/)
 })
 test('Polygon cannot advertise without its scan origin, schema acknowledgment and production RPC', () => {
   assert.throws(() => x402Config({ ...env, X402_POLYGON_FROM_BLOCK: undefined }), /FROM_BLOCK/)
