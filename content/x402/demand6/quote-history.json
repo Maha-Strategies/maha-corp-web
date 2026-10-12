@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "maha-quote-history/1.0",
+  "snapshotAt": "2026-10-12T08:43:18.524Z",
+  "observations": [
+    {
+      "resource": "https://www.mahastrategies.com/api/v1/compress",
+      "observedAt": "2026-10-12T08:43:18.113Z",
+      "responseStatus": 402,
+      "durationMs": 1131,
+      "challengeState": "observed",
+      "challengeDigest": "sha256:471a85f5ef5134c7e9f75a0f65bc50f7f007622966ea3931243865199a5c97aa",
+      "schemaDigest": "sha256:4f927d81164984be5e8e63f9f3e037ac821847dd37b68633204e6ba3c200c4d2",
+      "schemaState": "present_not_validated",
+      "networks": [
+        {
+          "network": "eip155:8453",
+          "state": "valid_quote",
+          "amountBaseUnits": "1000",
+          "reasons": []
+        },
+        {
+          "network": "eip155:42161",
+          "state": "valid_quote",
+          "amountBaseUnits": "1000",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "resource": "https://www.mahastrategies.com/api/v1/compress",
+      "observedAt": "2026-10-12T08:43:18.523Z",
+      "responseStatus": 402,
+      "durationMs": 394,
+      "challengeState": "observed",
+      "challengeDigest": "sha256:471a85f5ef5134c7e9f75a0f65bc50f7f007622966ea3931243865199a5c97aa",
+      "schemaDigest": "sha256:4f927d81164984be5e8e63f9f3e037ac821847dd37b68633204e6ba3c200c4d2",
+      "schemaState": "present_not_validated",
+      "networks": [
+        {
+          "network": "eip155:8453",
+          "state": "valid_quote",
+          "amountBaseUnits": "1000",
+          "reasons": []
+        },
+        {
+          "network": "eip155:42161",
+          "state": "valid_quote",
+          "amountBaseUnits": "1000",
+          "reasons": []
+        }
+      ]
+    }
+  ]
+}

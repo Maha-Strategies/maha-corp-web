@@ -8656,6 +8656,210 @@
         "No model inference, personalized advice or factual certification.",
         "Payment and delivery are separate; never repay automatically after an uncertain outcome."
       ]
+    },
+    {
+      "id": "csv-import-preflight",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/csv-import-preflight",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/csv-import-preflight#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/csv-import-preflight#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:02159ae52bc3268330ca0c80bff610cd7240c4c16bf48ac01c3ddd9f952bba96",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
+    },
+    {
+      "id": "live-x402-payment-preflight",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/live-x402-payment-preflight",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/live-x402-payment-preflight#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/live-x402-payment-preflight#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:170bcb2a1ac32d6abf14a676490d1eb4651c92908edf5cd10ce9082c523572bf",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
+    },
+    {
+      "id": "x402-quote-change-report",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/x402-quote-change-report",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/x402-quote-change-report#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/x402-quote-change-report#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:b62a488b4a223f1696156ac7caa906c2c815fa839e604c3ab461ce5d2fafe270",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
+    },
+    {
+      "id": "product-catalogue-preflight",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/product-catalogue-preflight",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/product-catalogue-preflight#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/product-catalogue-preflight#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:733e2655bb88d9833fdccb72f78dc0df9e8b15bb590543164c5019b7b57519fc",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
+    },
+    {
+      "id": "live-citation-recheck",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/live-citation-recheck",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/live-citation-recheck#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/live-citation-recheck#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:7d20567d9f64add93a92b7abbd819ab4d49381f2e14e63cf9b01ba8be31183db",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
+    },
+    {
+      "id": "source-bound-research-microbrief",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/demand/source-bound-research-microbrief",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/source-bound-research-microbrief#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/source-bound-research-microbrief#output"
+      },
+      "configurationDigest": {
+        "algorithm": "sha256",
+        "digest": "sha256:b3c823774c08238a361f5408f22964160a063d611d75ba5af32b8b533abc41a2",
+        "schemaVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "Prepared results are retained for at most 24 hours for input-bound same-authorization recovery. Source bodies, CSV cells, raw payment signatures and raw recovery secrets are not stored. Short source quotations may be retained in results. Hashes are not anonymization."
+      },
+      "capabilityBoundaries": [
+        "Approved public targets and reviewed source rights only. No private-input detection, credentials, redirects, IPv6 or browser/PDF execution.",
+        "Version 1 accepts native-USDC EOA authorizations on Base or Arbitrum only; smart-contract-wallet signatures are not supported.",
+        "Quote checks do not establish settlement or delivery. Stored samples are not continuous uptime or independent demand.",
+        "Extractive research only: no model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+        "Malformed, unsupported, unavailable or unretainable work is refused before settlement. A supported negative finding is a result, not approval.",
+        "Original synthetic discovery examples are not live observations. Do not put private data in this public/synthetic service."
+      ]
     }
   ],
   "evidence": {

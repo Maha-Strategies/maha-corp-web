@@ -88,6 +88,8 @@
     "observe:x402-products": "node --experimental-strip-types scripts/observe-x402-products.ts",
     "inspect:x402-signals": "node --experimental-strip-types scripts/inspect-x402-external-signals.ts",
     "test:x402-observability": "node --experimental-strip-types --test test/x402-observability-upgrade.test.ts test/x402-market-intelligence.test.ts test/x402-settlement-watch.test.ts test/x402-product-index.test.ts test/x402-discovery-monitor.test.ts test/x402-bazaar-canary.test.ts",
+    "test:x402-demand6": "node --experimental-strip-types --test test/x402-demand6.test.ts",
+    "generate:x402-demand6": "node --experimental-strip-types scripts/generate-demand6-examples.ts",
     "worker:carp-seller": "node --experimental-strip-types scripts/run-carp-seller-worker.ts",
     "handshake:carp": "node --experimental-strip-types scripts/run-carp-handshake.ts",
     "verify:carp-identity": "node --experimental-strip-types scripts/verify-carp-identity.ts",

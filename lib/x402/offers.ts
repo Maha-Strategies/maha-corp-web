@@ -35,6 +35,7 @@ import { bookSectionDiscovery } from './book-section-product.ts'
 import { bookEditionDiscovery } from './book-edition-product.ts'
 import { CELESTIAL_OFFERS } from './celestial-offers.ts'
 import { MICRO_OFFERS } from './micro-offers.ts'
+import { DEMAND6_OFFERS } from './demand6/offers.ts'
 import { BUYER_BRIEF_OFFER } from './buyer-brief-offer.ts'
 import { EBOOK_OFFERS } from './ebook-offers.ts'
 import { EBOOK_AMOUNT } from './ebook-contract.ts'
@@ -486,6 +487,7 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   BUYER_BRIEF_OFFER,
   ...EBOOK_OFFERS,
   ...LICENSED_SECTION_OFFERS,
+  ...DEMAND6_OFFERS,
 ].map(offer => {
   // Decorate once at catalog initialization, preserving exported offer identity.
   if (DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]) offer.description = DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]

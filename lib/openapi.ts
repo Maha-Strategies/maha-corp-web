@@ -13,6 +13,7 @@ import {
 } from './x402/offer-schemas.ts'
 import { CELESTIAL_OFFERS } from './x402/celestial-offers.ts'
 import { MICRO_OPENAPI_PATHS } from './x402/micro-openapi.ts'
+import { DEMAND6_OPENAPI_PATHS } from './x402/demand6/openapi.ts'
 import { BUYER_BRIEF_OPENAPI_PATHS } from './x402/buyer-brief-openapi.ts'
 import { EBOOK_OPENAPI_PATHS } from './x402/ebook-openapi.ts'
 import { LICENSED_SECTION_OPENAPI_PATHS } from './x402/licensed-book-section-openapi.ts'
@@ -113,6 +114,7 @@ export const openApiDocument = {
   },
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
+    { name: 'x402 Demand Products', description: 'Bounded CSV, catalogue, public quote and source checks; locally implemented and withheld from production payment.' },
     { name: 'x402 Microproducts', description: 'Bounded local implementations; all withheld from Preview and Production payment.' },
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },
@@ -176,6 +178,7 @@ export const openApiDocument = {
       },
     },
     ...MICRO_OPENAPI_PATHS,
+    ...DEMAND6_OPENAPI_PATHS,
     ...Object.fromEntries(CELESTIAL_OFFERS.map(offer => [offer.path, {
       get: { tags: ['Maha Celestial Evidence'], operationId: `describe-${offer.id}`, security: [], summary: 'Free calculation contract discovery',
         responses: { '200': { description: 'Status, limits, conventions and synthetic examples; no calculation performed.' }, '400': { description: 'Query parameters are not accepted.' } } },

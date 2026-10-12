@@ -1,5 +1,6 @@
 import { priceFor, requirementsFor, x402Config, type X402Config } from './config.ts'
 import { isMicroProduct } from './micro-contracts.ts'
+import { isDemand6 } from './demand6/contracts.ts'
 import { acquireSlot, releaseSlot, type SlotResult } from './concurrency.ts'
 import { createFacilitator } from './facilitator.ts'
 import {
@@ -200,7 +201,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // Keep the existing job-backed/legacy offer path unchanged.
   const acquire = dependencies.acquire ?? acquireSlot
   const release = dependencies.release ?? releaseSlot
-  const reserveFirst = isMicroProduct(resource.offerId) || resource.offerId.startsWith('book-epub-') || ['cabezon-buyer-brief-pack', 'celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
+  const reserveFirst = isMicroProduct(resource.offerId) || isDemand6(resource.offerId) || resource.offerId.startsWith('book-epub-') || ['cabezon-buyer-brief-pack', 'celestial-position-snapshot', 'celestial-chart-evidence', 'celestial-vimshottari-timing'].includes(resource.offerId)
   let reserved: SlotResult | undefined
   if (reserveFirst) {
     reserved = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)

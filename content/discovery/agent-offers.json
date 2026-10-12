@@ -177,7 +177,13 @@
     "bindingCommitment": "Only a matching live PAYMENT-REQUIRED challenge proves an endpoint is enabled. Prices, licences and limitations are product-specific. Book sections sell one pinned Markdown section; the two 10 USDC bundles deliver their pinned EPUB and PDF files. Neither permits redistribution, resale or model training. Payment, delivery, indexing and customer acceptance are distinct. Idempotent paid jobs and ebook bundles support their declared recovery contracts; never repay automatically after an uncertain outcome. Stripe purchases and custom engagements require human confirmation.",
     "describedNotPayable": [
       "release-bound-evidence-packet",
-      "tiruvaymoli-context-packet"
+      "tiruvaymoli-context-packet",
+      "csv-import-preflight",
+      "live-x402-payment-preflight",
+      "x402-quote-change-report",
+      "product-catalogue-preflight",
+      "live-citation-recheck",
+      "source-bound-research-microbrief"
     ]
   },
   "credentialPolicy": {
@@ -3723,6 +3729,150 @@
         "assetSymbol": "USDC",
         "autonomous": true,
         "payableNow": true
+      }
+    },
+    {
+      "id": "csv-import-preflight",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/csv-import-preflight",
+      "method": "POST",
+      "description": "Check up to 500 supplied CSV records for quoting, column counts, duplicate headers, spreadsheet-formula prefixes and caller-declared scalar types. Return bounded row/column findings and input integrity hashes. No cell execution, automatic repair, PII detection or import-success guarantee.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "13500",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "live-x402-payment-preflight",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/live-x402-payment-preflight",
+      "method": "POST",
+      "description": "Fetch one approved public endpoint without payment. Inspect Base and Arbitrum native-USDC quotes against caller-declared payee and spending caps, plus bounded discovery-schema observations and latency. No signing, settlement test, paid delivery, uptime guarantee or safety clearance.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "34900",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "x402-quote-change-report",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/x402-quote-change-report",
+      "method": "POST",
+      "description": "Compare stored, dated unpaid observations of one approved endpoint. Report quote, network, schema and reachability changes with sample counts, largest sampling gap and snapshot age. Sparse observations are not continuous uptime, customer calls, settlement or delivery evidence.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "62000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "product-catalogue-preflight",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/product-catalogue-preflight",
+      "method": "POST",
+      "description": "Check up to 250 supplied product records for duplicate SKUs, nonpositive or malformed decimal prices, currency-code shape, and optional GTIN check digits. Return bounded row-level findings. No registry lookup, identifier ownership check, automatic repair or marketplace approval guarantee.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "24500",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "live-citation-recheck",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/live-citation-recheck",
+      "method": "POST",
+      "description": "Revisit up to three approved, rights-reviewed public text sources. Check exact quoted passages in versioned extracted text, compare declared prior text hashes and return bounded locators, retrieval times and hashes. No paywall bypass, PDF/JavaScript execution, factual certification or completeness guarantee.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "88000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
+      }
+    },
+    {
+      "id": "source-bound-research-microbrief",
+      "status": "withheld",
+      "endpoint": "https://www.mahastrategies.com/api/v1/demand/source-bound-research-microbrief",
+      "method": "POST",
+      "description": "Retrieve up to three approved, rights-reviewed public text sources for one narrow question. Return a bounded extractive brief with exact short quotes, source links, locators, retrieval hashes and explicit unknowns. No model calls, invented answer, semantic contradiction detection, open-ended research or factual certification.",
+      "payableNow": false,
+      "blockedBy": [
+        "Implemented locally; release, enabled configuration and paid indexing require separate owner approval."
+      ],
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "networks": [
+          "eip155:8453",
+          "eip155:42161"
+        ],
+        "amount": "240000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "payableNow": false
       }
     }
   ],

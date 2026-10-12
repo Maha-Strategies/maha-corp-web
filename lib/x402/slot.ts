@@ -1,6 +1,7 @@
 import { releaseSlot } from './concurrency.ts'
 import { MICRO_IDS, microPath } from './micro-contracts.ts'
 import { EBOOK_IDS, ebookPath } from './ebook-contract.ts'
+import { DEMAND6_IDS, demand6Path } from './demand6/contracts.ts'
 
 // The capacity slot is acquired in proxy.ts, but proxy.ts cannot release it.
 //
@@ -76,6 +77,8 @@ export function withSlotRelease<Args extends unknown[]>(
  */
 export const SLOT_RELEASING_ROUTES = [
   ...EBOOK_IDS.map(id => `POST ${ebookPath(id)}`),
+  // Route-owned settlement releases the returned slot in its finally block.
+  ...DEMAND6_IDS.map(id => `POST ${demand6Path(id)}`),
   'POST /api/v1/cabezon/buyer-brief',
   ...MICRO_IDS.map(id => `POST ${microPath(id)}`),
   'POST /api/v1/compress',

@@ -1,0 +1,267 @@
+{
+  "csv-import-preflight": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "csv-import-preflight",
+    "inputHash": "sha256:efc229558cdc26382c35e0c4b6d00fe5bd61b776621a044d02bccb5e4fed903b",
+    "resultHash": "sha256:34eb9e2577f2a84abdea73c50cc43556c79de846fe5743e3256a774899e06085",
+    "receiptDigest": "sha256:886622115d2deac7bf476e4b429afcd1af80e0640eec910118b812f6cc04710c",
+    "result": {
+      "recordsChecked": 2,
+      "columnsObserved": 2,
+      "findings": [],
+      "findingsTruncated": false,
+      "readyUnderDeclaredSchema": true,
+      "cellsExecuted": false
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  },
+  "live-x402-payment-preflight": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "live-x402-payment-preflight",
+    "inputHash": "sha256:f7939781fcb75d5934b6b1e57fab7973742c70482e254ab338644bf423ac4e68",
+    "resultHash": "sha256:902d833fa3a16cd2b546ea2e30e34d0700d67905ad6d778d226a51fe98c5d35e",
+    "receiptDigest": "sha256:a4738c7dee75db2c9a17de1e65b969c624ec21adde68f445b1d97b3d55c6ace6",
+    "result": {
+      "observation": {
+        "resource": "https://www.mahastrategies.com/api/v1/compress",
+        "observedAt": "2026-10-12T12:00:00.000Z",
+        "responseStatus": 402,
+        "durationMs": 20,
+        "challengeState": "observed",
+        "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+        "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+        "schemaState": "present_not_validated",
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          }
+        ]
+      },
+      "allRequiredQuotesValid": true,
+      "paymentsMade": 0,
+      "deliveryTested": false
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  },
+  "x402-quote-change-report": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "x402-quote-change-report",
+    "inputHash": "sha256:113e14f2cce0f0cd560d6e147b6042e6918b55e91853378523f163a7fc8fc6e7",
+    "resultHash": "sha256:38aaa246331b3e63e088df53a789ef4d7acac7ccc3800f46098d4cfbf8d70489",
+    "receiptDigest": "sha256:4cf9aef36f0f438b3a79e4f2fe37e9b4568c2949e98b75c1b9a4957c4e95e514",
+    "result": {
+      "resource": "https://www.mahastrategies.com/api/v1/compress",
+      "snapshotAt": "2026-10-12T12:00:00.000Z",
+      "snapshotAgeSeconds": 0,
+      "sampleCount": 2,
+      "maximumGapSeconds": 86400,
+      "reachabilityChanges": 0,
+      "quoteChanges": 1,
+      "schemaChanges": 0,
+      "unknownComparisons": 0,
+      "continuousUptimeEstablished": false,
+      "first": {
+        "resource": "https://www.mahastrategies.com/api/v1/compress",
+        "observedAt": "2026-10-11T12:00:00.000Z",
+        "responseStatus": 402,
+        "durationMs": 20,
+        "challengeState": "observed",
+        "challengeDigest": "sha256:2e3c2e86639945575fa369af54f340405c259551bf3f2fc8e80280f0801cdc48",
+        "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+        "schemaState": "present_not_validated",
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "1000",
+            "reasons": []
+          }
+        ]
+      },
+      "last": {
+        "resource": "https://www.mahastrategies.com/api/v1/compress",
+        "observedAt": "2026-10-12T12:00:00.000Z",
+        "responseStatus": 402,
+        "durationMs": 20,
+        "challengeState": "observed",
+        "challengeDigest": "sha256:37519b3729b5f03af3846163611d66740c8aca0cb1e426dfe248c3986ee7c4e5",
+        "schemaDigest": "sha256:996dfe72b52d6610106b64cf47bc4d22123c1dc8370a91608cc3b699f91db570",
+        "schemaState": "present_not_validated",
+        "networks": [
+          {
+            "network": "eip155:8453",
+            "state": "valid_quote",
+            "amountBaseUnits": "2000",
+            "reasons": []
+          },
+          {
+            "network": "eip155:42161",
+            "state": "valid_quote",
+            "amountBaseUnits": "2000",
+            "reasons": []
+          }
+        ]
+      }
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  },
+  "product-catalogue-preflight": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "product-catalogue-preflight",
+    "inputHash": "sha256:1030e4dbc4be98c5a5dbf30dcd0506b653f69bef73af248e84928ea4f9cc7a44",
+    "resultHash": "sha256:614807e4c0d77ab7caf0fb8b646532953efae86d36e4c82e47d91f8d1c75070c",
+    "receiptDigest": "sha256:b23628948fd0657ebd6ab1bdf85fe297788e184b237a2d7ca0b174fa7555e83b",
+    "result": {
+      "recordsChecked": 1,
+      "findings": [],
+      "findingsTruncated": false,
+      "structurallyValid": true,
+      "marketplaceApprovalEstablished": false
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  },
+  "live-citation-recheck": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "live-citation-recheck",
+    "inputHash": "sha256:d8ee4777ba28bb8b294750750f687e838b14c726779d7939d60be32017ad2772",
+    "resultHash": "sha256:8210524cfa66abd9d5bea898b3220782f10f9d82f4d78018a3c219e32999d326",
+    "receiptDigest": "sha256:dc243956ff7f66380f287a51de7dbdec1565c2368c13ec8c5948b466caf91117",
+    "result": {
+      "sources": [
+        {
+          "sourceId": "context-review",
+          "url": "https://www.mahastrategies.com/tools/context-review",
+          "retrievedAt": "2026-10-12T12:00:00.000Z",
+          "rawBytesHash": "sha256:ac2a29423a50386be46cbe7389fe7ffe3eadbe25a867741d53b2e5c83f691912",
+          "extractedTextHash": "sha256:4b79d36cc1492e3a68cf345b428dbcadcc0569608e3d1e408870e4b3d88859b6",
+          "extraction": "maha-public-text/1.0",
+          "rightsBasis": "Maha-owned public text; short excerpt reuse authorized by the publisher."
+        }
+      ],
+      "checks": [
+        {
+          "sourceId": "context-review",
+          "state": "present_multiple",
+          "occurrenceCount": 2,
+          "locators": [
+            {
+              "sourceId": "context-review",
+              "quote": "Context Review",
+              "startCodePoint": 0,
+              "endCodePoint": 14,
+              "quoteHash": "sha256:70dec104ea7ea5bb2521af7f68d40a59f0710eb5b1bd7227cff34d2fff13c733"
+            },
+            {
+              "sourceId": "context-review",
+              "quote": "Context Review",
+              "startCodePoint": 15,
+              "endCodePoint": 29,
+              "quoteHash": "sha256:70dec104ea7ea5bb2521af7f68d40a59f0710eb5b1bd7227cff34d2fff13c733"
+            }
+          ],
+          "locatorsTruncated": false,
+          "changedFromDeclaredHash": null
+        }
+      ],
+      "factualSupportVerified": false
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  },
+  "source-bound-research-microbrief": {
+    "version": "maha-demand6/1.0.0",
+    "productId": "source-bound-research-microbrief",
+    "inputHash": "sha256:90af81c02a70e1cd052c3e68d0efb3789dfd4b3a2eb2a37243cbffb6b920f4f1",
+    "resultHash": "sha256:90dd016602ef1db8bd229fa5f3afa96d8b91f43489885e649f8a18c60768df81",
+    "receiptDigest": "sha256:c66537f9020628d50bc94c4fd447a7f26495aeb527352294630cc6c4fc8015db",
+    "result": {
+      "question": "What does Context Review do?",
+      "mode": "extractive",
+      "briefMarkdown": "## What does Context Review do?\n\n> Context Review checks supplied context packs and exact source-specific evidence retention under a bounded estimated token budget.\n\n[context-review](https://www.mahastrategies.com/tools/context-review) · code points 15–144\n\n### Unknowns\n\n- Extractive evidence only; the question may require facts absent from these sources.\n- No semantic contradiction detection or independent factual verification was performed.",
+      "sources": [
+        {
+          "sourceId": "context-review",
+          "url": "https://www.mahastrategies.com/tools/context-review",
+          "retrievedAt": "2026-10-12T12:00:00.000Z",
+          "rawBytesHash": "sha256:ac2a29423a50386be46cbe7389fe7ffe3eadbe25a867741d53b2e5c83f691912",
+          "extractedTextHash": "sha256:4b79d36cc1492e3a68cf345b428dbcadcc0569608e3d1e408870e4b3d88859b6",
+          "extraction": "maha-public-text/1.0",
+          "rightsBasis": "Maha-owned public text; short excerpt reuse authorized by the publisher."
+        }
+      ],
+      "citations": [
+        {
+          "sourceId": "context-review",
+          "quote": "Context Review checks supplied context packs and exact source-specific evidence retention under a bounded estimated token budget.",
+          "startCodePoint": 15,
+          "endCodePoint": 144,
+          "quoteHash": "sha256:35bce999441caf21117c9471b28a9f13800073fd0830da90b24449960ba2fbf0"
+        }
+      ],
+      "unknowns": [
+        "Extractive evidence only; the question may require facts absent from these sources.",
+        "No semantic contradiction detection or independent factual verification was performed."
+      ],
+      "modelCalls": 0,
+      "semanticContradictionDetectionPerformed": false,
+      "factualSupportVerified": false
+    },
+    "limitations": [
+      "Public or synthetic input only. Caller labels do not detect sensitive data.",
+      "No payment is made to an observed provider. A valid challenge is not settlement, execution, delivery or a security clearance.",
+      "Approved targets only; no credentials, redirects, IP-literal targets, private DNS or IPv6 connections. New sources require a reviewed reuse basis.",
+      "Static prose extraction excludes forms, code, navigation and scripts. No JavaScript, PDFs or browser visibility checks. Quotes use extracted-text code points, not raw HTML offsets.",
+      "No model calls, semantic contradiction detection, factual certification or completeness guarantee.",
+      "Prepared result retention is bounded to 24 hours; save the result and original authorization. Missing recovery or unknown payment outcomes need operator review, never automatic repayment."
+    ]
+  }
+}

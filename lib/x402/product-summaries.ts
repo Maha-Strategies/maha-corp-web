@@ -3,6 +3,12 @@ import { SCIENCE_PRODUCTS } from './science/contracts.ts'
 
 /** Plain-language catalogue copy; the payment contract remains in offer.description. */
 export const PRODUCT_SUMMARIES: Readonly<Record<string, string>> = Object.freeze({
+  'csv-import-preflight': 'Checks bounded CSV records for quoting, column, type and formula-prefix problems without executing cells or guaranteeing a successful import.',
+  'live-x402-payment-preflight': 'Fetches an approved endpoint and checks its Base and Arbitrum quotes against declared terms, without making a payment or proving delivery.',
+  'x402-quote-change-report': 'Compares stored quote and schema observations, showing changes, dates and sampling gaps without claiming continuous uptime.',
+  'product-catalogue-preflight': 'Flags duplicate SKUs, price and declared-currency problems and invalid GTIN checksums, without certifying identifier ownership or marketplace approval.',
+  'live-citation-recheck': 'Revisits approved public prose to locate exact quotations and check declared text hashes, without verifying factual support.',
+  'source-bound-research-microbrief': 'Retrieves approved public prose and returns short source-linked excerpts and explicit unknowns, with no model calls or invented answer.',
   ...Object.fromEntries(Object.entries(SCIENCE_PRODUCTS).map(([id, product]) => [id, product.description])),
   'quantum-coherence-budget': 'Compares declared circuit duration with T1/T2 values under a relaxation/dephasing model, without claiming measured device fidelity.',
   'quantum-stabilizer-consistency': 'Checks supplied stabilizer generators for commutation, independence and conflicting constraints, without assessing logical-error performance.',

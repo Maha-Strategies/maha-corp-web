@@ -17,6 +17,7 @@ import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.t
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import { X402_OFFERS, type X402Offer } from '../lib/x402/offers.ts'
 import { hasPreSettlementBodyContract, validatePreSettlementBody } from '../lib/x402/pre-settlement-body.ts'
+import { apiProxyGate } from '../lib/api-proxy-policy.ts'
 import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
 
 // A signed request whose body its route would reject used to be verified and
@@ -56,12 +57,11 @@ const REGISTERED = X402_OFFERS.filter((offer) => hasPreSettlementBodyContract(of
 const example = (offer: X402Offer) => offer.discovery!.input as Record<string, unknown>
 
 test('every proxy-priced offer without an admission claim has a pre-settlement body contract', () => {
-  // MPS audit and research intake bind the body in admission-body.ts; micro
-  // and celestial routes are self-managed and parse before they call the gateway.
+  // MPS audit and research intake bind the body in admission-body.ts. Exact
+  // self-managed routes (including demand6) validate before calling the gateway.
   const expected = X402_OFFERS
     .filter((offer) => !offer.requiresIdempotency)
-    .filter((offer) => !offer.path.startsWith('/api/v1/micro/') && !offer.path.startsWith('/api/v1/calculations/'))
-    .filter((offer) => !['book-section-the-maha-principle', 'book-section-the-orbital-mind'].includes(offer.id)) // Dedicated handlers validate the pinned edition before settlement.
+    .filter((offer) => apiProxyGate(offer.path, offer.method, true) !== 'self_managed')
     .map((offer) => offer.id)
     .sort()
   assert.deepEqual(REGISTERED.map((offer) => offer.id).sort(), expected)

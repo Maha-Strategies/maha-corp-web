@@ -1,4 +1,5 @@
 import { MICRO_IDS, microPath } from './x402/micro-contracts.ts'
+import { DEMAND6_IDS, demand6Path } from './x402/demand6/contracts.ts'
 import { EBOOK_IDS, ebookPath } from './x402/ebook-contract.ts'
 
 export const SELF_MANAGED_KEY_ROUTES = new Set([
@@ -17,6 +18,7 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
   '/api/v1/interpretations/jyotisha/basic',
   '/api/v1/interpretations/jyotisha',
   ...MICRO_IDS.map(microPath),
+  ...DEMAND6_IDS.map(demand6Path),
   '/api/v1/keys/generate',
   '/api/v1/keys/balance',
   '/api/v1/keys/checkout',
