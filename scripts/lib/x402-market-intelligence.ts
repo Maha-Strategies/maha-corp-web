@@ -1,3 +1,4 @@
+import { readMerchantResources } from '../../lib/x402/merchant-catalog.ts'
 export type MarketService = { u: string; n: string; d: string; t: string[]; p: number | null; w: string; c: number | null; y: number | null }
 export type MarketDataset = { generatedAt: string; count: number; services: MarketService[];
   receipt: { snapshotGeneratedAt: string; snapshotHash: string; notCarried: string[] } }
@@ -112,23 +113,5 @@ export function merchantSignals(rows: MerchantRow[], expectedResources: string[]
 }
 
 export async function fetchMerchantPages(url: string, fetcher: typeof fetch = fetch): Promise<MerchantRow[]> {
-  const rows: MerchantRow[] = []
-  let total: number | null = null
-  for (let offset = 0; offset < 1000; offset += 100) {
-    const pageUrl = new URL(url); pageUrl.searchParams.set('limit', '100'); pageUrl.searchParams.set('offset', String(offset))
-    const response = await fetcher(pageUrl, { redirect: 'error', signal: AbortSignal.timeout(30000), headers: { accept: 'application/json' } })
-    if (!response.ok) throw new Error(`Merchant observation unavailable: HTTP ${response.status}.`)
-    const body = await response.json() as { resources?: MerchantRow[]; pagination?: { total?: number; offset?: number } }
-    if (!Array.isArray(body.resources) || !finiteCount(body.pagination?.total) || body.pagination?.offset !== offset) throw new Error('Invalid merchant pagination.')
-    if (total !== null && total !== body.pagination.total) throw new Error('Merchant inventory changed during pagination; retry read-only observation.')
-    total = body.pagination.total
-    if (total > 1000 || body.resources.length > 100) throw new Error('Merchant inventory outside monitor bounds.')
-    rows.push(...body.resources)
-    if (rows.length >= total) {
-      if (rows.length !== total || new Set(rows.map(row => row.resource)).size !== rows.length) throw new Error('Incomplete or duplicate merchant page coverage.')
-      return rows
-    }
-    if (!body.resources.length) throw new Error('Prematurely empty merchant page.')
-  }
-  throw new Error('Merchant pagination safety limit exceeded.')
+  return readMerchantResources(url, { fetchImpl: fetcher, expectedPayTo: new URL(url).searchParams.get('payTo') ?? undefined })
 }

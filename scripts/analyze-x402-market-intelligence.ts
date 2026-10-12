@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { setDefaultResultOrder } from 'node:dns'
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { validateExpectedInventory } from '../lib/x402/merchant-catalog.ts'
 import { categoryProfile, fetchMerchantPages, merchantSignals, rankInFrozenCohort, sellerCohort,
   snapshotAge, validateDataset } from './lib/x402-market-intelligence.ts'
 
@@ -69,7 +70,7 @@ if (process.argv.includes('--live')) {
   // higher-price offers do not become misleading emergency refresh requests.
   const expected = manifest.offers.filter(o => o.status === 'active' && o.payment.protocol === 'x402'
     && (BigInt(o.payment.amountBaseUnits) <= BigInt(390000) || priorResources.has(o.canonicalResource))).map(o => o.canonicalResource)
-  if (expected.length > 128 || new Set(expected).size !== expected.length) throw new Error('Unexpected watch inventory.')
+  validateExpectedInventory(expected)
   const signals = merchantSignals(rows, expected, Date.now())
   const nameGaps = signals.observations.filter(s => s.nameMissing)
   summary.live = { checkedAt: new Date().toISOString(), ...signals,

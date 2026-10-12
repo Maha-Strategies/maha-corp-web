@@ -52,7 +52,7 @@ jobs:
 
       # Read-only: public merchant discovery, no credentials, no wallet key in
       # scope anywhere in this workflow.
-      - name: Read Bazaar activity for every payable offer
+      - name: Read complete Bazaar activity for every expected listing
         id: watch
         env:
           FAIL_ON_WARN: ${{ inputs.fail_on_warn || 'false' }}
@@ -88,7 +88,7 @@ jobs:
               ].join("\n"))
             ')
           else
-            DETAIL='The watch failed before producing a report; treat listing state as unknown.'
+            DETAIL='The watch failed before producing a complete report; treat listing state as unknown. A partial lookup does not establish missing listings.'
           fi
           BODY=$(printf '%s\n\nRun: %s\n\n**Do not settle automatically.** Refreshing a listing is a manually dispatched, reviewer-protected settlement with an exact ceiling — see docs/production-x402-canary.md. Deep Context Evaluation has no automatic coverage by design.\n\nA canary-covered offer reported as `automation_should_have_fired` means the scheduled canary did not run; fix the canary rather than paying by hand.\n' "$DETAIL" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
@@ -103,8 +103,12 @@ jobs:
         if: success()
         run: |
           set -euo pipefail
+          if ! node -e 'const r = JSON.parse(require("fs").readFileSync(process.env.REPORT, "utf8")); process.exit(r.catalogueComplete && r.level === "ok" ? 0 : 1)'; then
+            echo 'Observations remain outside the healthy margin; leave any existing issue open.'
+            exit 0
+          fi
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body "Every payable offer is inside its inactivity margin again."
+            gh issue comment "$EXISTING" --body "The complete catalogue observation puts every expected listing inside its inactivity margin again. Deliberately unindexed offers are reported separately."
             gh issue close "$EXISTING"
           fi

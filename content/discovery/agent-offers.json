@@ -734,7 +734,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/audit-export-normalizer",
       "method": "POST",
-      "description": "Prepare an audit-event export for deterministic comparison. Normalize up to 100 metadata events and reject duplicate IDs, malformed times or digests. Does not prove events occurred or establish provenance or completeness against an external system.",
+      "description": "Validate and normalize a JSON audit-event export before reconciliation. Check up to 100 supplied metadata events for duplicate IDs, malformed timestamps and invalid digests. Returns normalized events and an integrity receipt; no CSV parsing, live-system access or proof of event completeness.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {
@@ -1750,7 +1750,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/reproducibility-manifest-builder",
       "method": "POST",
-      "description": "Build a stable hashed manifest of bounded public/synthetic artifact contents, declared dependencies, algorithm version, seed, and parameters. Verify declared content hashes; reject duplicate/dangling dependencies and cycles. No artifact fetching, execution replay, signing, or authenticity guarantee.",
+      "description": "Prepare a reproducible research handoff from supplied public or synthetic artifact contents, dependencies, algorithm version, seed and parameters. Return a stable hashed manifest, declared-hash checks and dependency order; reject dangling dependencies and cycles. No artifact fetching, experiment execution, signing or provenance authenticity guarantee.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {
@@ -1860,7 +1860,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/x402-challenge-sanity",
       "method": "POST",
-      "description": "Inspect one supplied x402-v2 exact-payment challenge against an explicit expected HTTPS resource, EVM CAIP-2 network, asset, payee and maximum price. Checks both URL declarations, structure and payment-policy fields only; no live probe, payment, facilitator verification or server-authenticity claim.",
+      "description": "Validate an x402 payment declaration before signing. Check a caller-supplied challenge against expected resource, network, asset, payee and exact spending limits; return mismatches and an integrity receipt. Offline only: no endpoint probe, uptime history, settlement test, safety clearance or payment authorization.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {
@@ -1882,7 +1882,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/settlement-delivery-reconciliation",
       "method": "POST",
-      "description": "Match up to 64 settlements with 64 delivery receipts, including 128 distinct request IDs. Reports missing/contradictory records, duplicate IDs and reused transaction references. Exact settled total includes only unique settlement IDs/transactions, independent of delivery matches. No chain fetch, proof of buyer receipt or fulfilled-sales claim.",
+      "description": "Reconcile an agent session payment export. Match up to 64 supplied settlement rows and 64 delivery receipts, flag missing or contradictory records and reused transaction references, and total unique settlements exactly. Does not fetch the chain or prove the buyer received an API result.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {
@@ -1904,7 +1904,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/idempotency-trace-audit",
       "method": "POST",
-      "description": "Inspect up to 80 declared attempt records for nonce reuse across intents, changed inputs under one idempotency key, duplicate settlements and ambiguous outcomes. No raw payloads or credentials; no live state access, automatic retry or payment authorization.",
+      "description": "Debug uncertain x402 retries before paying again. Inspect up to 80 supplied attempt records for changed intent, nonce or request-key reuse, repeated settlements and ambiguous outcomes. Returns findings only; no live provider access, automatic retry, recovery execution or payment authorization.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {
@@ -2344,7 +2344,7 @@
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/micro/evidence-brief-export",
       "method": "POST",
-      "description": "Export caller-supplied public/synthetic plans and results as closed JSON and escaped plain-text Markdown with exact declared source references.",
+      "description": "Export a source-bound research evidence brief for an agent handoff. Turn supplied research records into deterministic JSON and escaped Markdown with source locators and integrity hashes. No web research, model inference, source verification or factual certification.",
       "payableNow": true,
       "blockedBy": [],
       "machinePayment": {

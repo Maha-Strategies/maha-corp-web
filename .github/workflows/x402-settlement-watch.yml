@@ -107,7 +107,8 @@ jobs:
         run: |
           set -o pipefail
           node --experimental-strip-types scripts/watch-x402-settlements.ts \
-            --network "${{ matrix.network }}" --days "${{ inputs.days || '2' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch-${{ matrix.name }}.log"
+            --network "${{ matrix.network }}" --days "${{ inputs.days || '2' }}" \
+            --classify-authorizations --receipt-limit 200 2>&1 | tee "$RUNNER_TEMP/settlement-watch-${{ matrix.name }}.log"
 
       # Production publishes cumulative snapshots through its hourly Redis
       # worker. This independent watch scans a recent window only; never replace

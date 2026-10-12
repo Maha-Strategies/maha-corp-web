@@ -7,6 +7,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 import { base } from 'viem/chains'
 
 import { applyManualMetadataRefresh, decideBazaarCanary, findContextCompiler } from '../lib/x402/bazaar-canary.ts'
+import { readMerchantResources } from '../lib/x402/merchant-catalog.ts'
 import { createPaidFetch, type TypedDataRequest } from '../lib/x402/client.ts'
 import { assertRecoverableSignature, failureEvidenceFor, type CanaryFailure } from '../lib/x402/canary-evidence.ts'
 import {
@@ -48,16 +49,7 @@ async function writeEvidence(evidence: CanaryEvidence): Promise<void> {
 async function fetchMerchantResources(): Promise<BazaarResource[]> {
   const url = new URL(BAZAAR_MERCHANT_URL)
   url.searchParams.set('payTo', MAHA_PAYEE)
-  url.searchParams.set('limit', '100')
-  url.searchParams.set('offset', '0')
-  const response = await fetch(url, {
-    headers: { accept: 'application/json', 'user-agent': 'maha-production-x402-canary/1.0' },
-  })
-  if (response.status === 404) return []
-  if (!response.ok) throw new Error(`Bazaar merchant discovery returned HTTP ${response.status}.`)
-  const body = await response.json() as { resources?: unknown }
-  if (!Array.isArray(body.resources)) throw new Error('Bazaar merchant discovery omitted its resources array.')
-  return body.resources as BazaarResource[]
+  return readMerchantResources(url.href, { expectedPayTo: MAHA_PAYEE })
 }
 
 function loadBuyer() {
@@ -102,7 +94,9 @@ async function run(): Promise<CanaryEvidence> {
     console.log('A reviewed manual dispatch requested one bounded metadata-refresh settlement.')
   }
   if (!decision.shouldPay) {
-    console.log('No payment needed; organic or prior canary activity is still inside the 21-day window.')
+    console.log(decision.reason === 'settlement_recent'
+      ? 'No payment needed; prior activity is still inside the 21-day window.'
+      : 'Listing or last-payment observation unavailable: investigate before authorizing a refresh. No wallet was loaded.')
     return { checkedAt, resource: MAHA_CONTEXT_RESOURCE, decision, outcome: 'skipped' }
   }
   if (!process.argv.includes('--pay-if-stale')) {

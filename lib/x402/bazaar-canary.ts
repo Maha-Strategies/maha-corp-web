@@ -44,16 +44,16 @@ export function decideBazaarCanary(
     throw new Error('The canary threshold must be an integer from 1 through 29 days.')
   }
   if (!resource) {
-    return { shouldPay: true, reason: 'listing_missing', lastCalledAt: null, ageDays: null }
+    return { shouldPay: false, reason: 'listing_missing', lastCalledAt: null, ageDays: null }
   }
 
   const rawLastCalledAt = resource.quality?.lastCalledAt
   if (!rawLastCalledAt) {
-    return { shouldPay: true, reason: 'last_call_missing', lastCalledAt: null, ageDays: null }
+    return { shouldPay: false, reason: 'last_call_missing', lastCalledAt: null, ageDays: null }
   }
   const lastCalledMs = Date.parse(rawLastCalledAt)
   if (!Number.isFinite(lastCalledMs)) {
-    return { shouldPay: true, reason: 'last_call_missing', lastCalledAt: null, ageDays: null }
+    return { shouldPay: false, reason: 'last_call_missing', lastCalledAt: null, ageDays: null }
   }
   if (lastCalledMs > nowMs + FUTURE_CLOCK_TOLERANCE_MS) {
     throw new Error('Bazaar reported a last-call timestamp in the future; refusing to make a payment.')

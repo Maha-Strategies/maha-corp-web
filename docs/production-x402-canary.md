@@ -6,6 +6,11 @@ It checks Coinbase merchant discovery twice a week and settles one $0.001 call
 only when the latest recorded settlement is at least 21 days old. Any real
 customer settlement resets the same clock and suppresses the canary.
 
+The catalogue lookup must complete every page. A missing listing, missing or
+invalid last-call timestamp, changed inventory, or failed page does not authorize
+a payment. Investigate the observation first; an explicitly approved manual
+metadata refresh remains available after the normal spending guards pass.
+
 ## One-time GitHub setup
 
 Create a GitHub environment named `production-x402-canary` and restrict it to
@@ -49,7 +54,7 @@ external demand or customer revenue.
 
 The canary protects one listing. `Production x402 Bazaar inactivity watch`
 (`npm run watch:x402-inactivity`) reads Bazaar's `lastCalledAt`,
-`l30DaysTotalCalls` and `l30DaysUniquePayers` for **every payable offer** daily
+`l30DaysTotalCalls` and `l30DaysUniquePayers` for **every expected listing** daily
 and reports how much margin each has left before the 30-day removal rule. It is
 read-only: no wallet key is in scope and it cannot settle anything.
 
@@ -60,8 +65,10 @@ read-only: no wallet key is in scope and it cannot settle anything.
 | `urgent` | 7 days or less | act now |
 | `unknown` | — | the listing is absent, or its timestamp is missing or in the future |
 
-Offers come from the catalog's payable set, so promoting an offer enrols it in
-the watch by that fact alone. Only Context Compression is canary-covered.
+Offers come from the catalog's payable set, except the owner's five deliberately
+unindexed offers, which are reported separately. Catalogue reads are paginated
+and bounded at 1,000 resources; partial observations fail rather than implying
+page-two offers are missing. Only Context Compression is canary-covered.
 **Deep Context Evaluation has no automatic settlement by design** — at $0.01 it
 is ten times the canary price, and an offer that buys its own listing back on a
 timer converts silence into a recurring charge nobody approved. Its refresh is a

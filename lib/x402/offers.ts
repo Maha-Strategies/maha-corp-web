@@ -19,6 +19,7 @@
 
 import type { OfferDiscoveryContract } from './offer-schemas.ts'
 import { BAZAAR_LAUNCH_COPY, BAZAAR_PREVIOUS_AMOUNTS } from './bazaar-launch.ts'
+import { DISCOVERY_PROBLEM_COPY } from './discovery-problem-copy.ts'
 import {
   CONTEXT_COMPRESSION_DISCOVERY,
   DEEP_CONTEXT_EVALUATION_DISCOVERY,
@@ -487,7 +488,7 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   ...LICENSED_SECTION_OFFERS,
 ].map(offer => {
   // Decorate once at catalog initialization, preserving exported offer identity.
-  if (BAZAAR_LAUNCH_COPY[offer.id]) offer.description = BAZAAR_LAUNCH_COPY[offer.id]
+  if (DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]) offer.description = DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]
   if (BAZAAR_PREVIOUS_AMOUNTS[offer.id]) offer.supersededAmounts = [
     ...(offer.supersededAmounts ?? []), ...BAZAAR_PREVIOUS_AMOUNTS[offer.id],
   ]

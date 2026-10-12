@@ -24,6 +24,7 @@ import { payableOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
 import { evmSettlementReader } from '../lib/x402/settlement-refresh.ts'
 import { usdcNetwork, type UsdcNetwork } from '../lib/x402/networks.ts'
+import { inspectTransferEvidence, settlementReceiptReader } from '../lib/x402/settlement-authorization.ts'
 
 /**
  * The prices a customer can legitimately pay, taken from the offer catalog so a
@@ -55,6 +56,9 @@ while (low < high) {
 const earliest = low
 
 const settlements: Settlement[] = await reader.transfers(earliest, latest)
+const paymentEvidence = await inspectTransferEvidence(settlements, network,
+  process.argv.includes('--classify-authorizations') ? settlementReceiptReader(network) : null,
+  Number(argument('--receipt-limit', '200')))
 
 const report = buildSettlementWatch({
   settlements,
@@ -97,13 +101,14 @@ if (report.notable.length > 0) {
 
 console.log(`\n  ${describeWatch(report)}`)
 console.log(`\n  ${report.interpretation}\n`)
+console.log(`  authorization evidence (external, assisted test excluded): ${JSON.stringify(paymentEvidence.external)}`)
 
 if (process.env.X402_WATCH_OUTPUT_PATH?.trim()) {
   const { writeFile, mkdir } = await import('node:fs/promises')
   const { dirname } = await import('node:path')
   const path = process.env.X402_WATCH_OUTPUT_PATH.trim()
   await mkdir(dirname(path), { recursive: true })
-  await writeFile(path, `${JSON.stringify({ ...report, network, networkName: definition.name }, null, 2)}\n`)
+  await writeFile(path, `${JSON.stringify({ ...report, network, networkName: definition.name, paymentEvidence }, null, 2)}\n`)
 }
 
 // A notable event is news, not a failure. Exit 0 either way and let the caller

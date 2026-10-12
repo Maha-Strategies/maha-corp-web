@@ -27,9 +27,17 @@ test('a settlement at the 21-day threshold permits exactly one caller-controlled
   assert.equal(decision.ageDays, 21)
 })
 
-test('a missing listing or last-call timestamp requests recovery settlement', () => {
-  assert.equal(decideBazaarCanary(null, now).reason, 'listing_missing')
-  assert.equal(decideBazaarCanary(resource(), now).reason, 'last_call_missing')
+test('a missing listing or last-call timestamp requests investigation, not payment', () => {
+  const absent = decideBazaarCanary(null, now)
+  assert.equal(absent.reason, 'listing_missing')
+  assert.equal(absent.shouldPay, false)
+  for (const row of [resource(), resource('malformed')]) {
+    const decision = decideBazaarCanary(row, now)
+    assert.equal(decision.reason, 'last_call_missing')
+    assert.equal(decision.shouldPay, false)
+  }
+  assert.equal(applyManualMetadataRefresh(absent, false).shouldPay, false)
+  assert.equal(applyManualMetadataRefresh(absent, true).shouldPay, true)
 })
 
 test('a future timestamp fails closed instead of paying', () => {
