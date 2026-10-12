@@ -1,9 +1,9 @@
 # Six demand inspired x402 products local readiness
 
-The owner approved publication and indexing on 12 October 2026. All six contracts
-are now declared released, with exact prices and the separate runtime flag
-`X402_DEMAND6_ENABLED=true`. Production build and paid indexing verification are
-pending at this source snapshot. The 155 existing active offers are preserved.
+All six products were published and independently observed in Bazaar on
+12 October 2026, following the owner's approval. Their exact prices and separate
+runtime flag `X402_DEMAND6_ENABLED=true` are active. The 155 existing active offers
+are preserved, making 161 released contracts and 156 observed Bazaar listings.
 Research briefs use exact source excerpts, not a language model.
 This implementation does not establish customer demand or measured profitability.
 
@@ -11,8 +11,44 @@ The work is in `/private/tmp/maha-base-arbitrum-science50`, on
 `codex/x402-observability-demand-20261012`, following local commit `05c55483`.
 The primary workspace and its unrelated changes are preserved. The approved
 release includes the preceding catalogue/monitoring repairs in commit `05c55483`.
-One focused build and one Base purchase per new product are planned; the total
-service-payment cap is 0.4629 USDC, with no automatic repayments or model spending.
+One focused build and one Base purchase per new product completed; total service
+payments were exactly 0.4629 USDC, with no repayments or model spending.
+
+## Published release verification
+
+Production deployment `dpl_4x3rjJdH1c76bsBC9WdJwTFV8RAu` serves commit
+`c00f2f77d7392a51ebb1b8211f1f542d88ac6853`. All six live GET contracts and all
+twelve Base/Arbitrum unpaid quotes passed. The categorized product page contains
+each released card and its contract link.
+
+The [one-time indexing run](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/38232185956)
+confirmed all six exact Base transfers and all six delivered, retained results.
+It authorized and confirmed 462,900 USDC base units. The workflow's initial
+`payments_complete_index_pending` result accurately reflected the then-stale
+listing response; a later complete merchant lookup at
+`2026-10-12T09:55:39.341Z` observed all six correctly named listings, with 156 total.
+Independent Bazaar search also returned all six. A subsequent complete lookup
+at `2026-10-12T10:03:01.226Z` found no missing new products.
+
+Each public product card records one successful response and one declared
+operator response. Bazaar's rolling call/payer counts are pending, not zero.
+These purchases are publisher-funded operator activity, not customer revenue
+or organic growth. No Arbitrum payment was made.
+
+Sanitized transaction/delivery evidence and authenticated encrypted original
+authorization capsules were downloaded to
+`/private/tmp/maha-demand6-launch.qEYUen/`. No plaintext signing key, recovery
+secret or payment signature was published. The original evidence file retains
+its initial pending-index observation; this independent verification records
+the later listing state without rewriting historical evidence.
+
+The optional immediate ledger refresh remains incomplete. The configured cron
+and RPC credentials are sensitive and not retrievable through the available
+Vercel API. A lock-protected Base refresh using the official public RPC was
+rate-limited before publication; the previous snapshot was retained. All six
+transfers remain confirmed in the indexing evidence, but their ledger-page
+display was not yet observed. No credential, schedule or RPC deployment setting
+was changed to force the refresh, and no extra build or payment was performed.
 
 ## Products and prices
 
