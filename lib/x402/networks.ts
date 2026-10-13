@@ -18,8 +18,9 @@ export const USDC_NETWORKS = {
     name: 'Polygon PoS', chainId: 137,
     // Circle-issued native USDC, not the bridged USDC.e contract.
     asset: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-    // The previous anonymous PublicNode endpoint denies historical log scans.
-    rpcUrl: 'https://polygon.drpc.org', rpcEnvironment: 'POLYGON_RPC_URL',
+    // Anonymous PublicNode and dRPC rejected bounded historical log queries.
+    // This public default is best-effort; production still requires an explicit RPC.
+    rpcUrl: 'https://tenderly.rpc.polygon.community', rpcEnvironment: 'POLYGON_RPC_URL',
     explorer: 'https://polygonscan.com/tx/', domain: { name: 'USD Coin', version: '2' },
   },
 } as const

@@ -49,7 +49,7 @@ test('Polygon defaults off and preserves both existing native-USDC terms', () =>
   assert.equal(x402Config({ X402_POLYGON_ENABLED: 'true' }), null)
 })
 test('Polygon scanner and receipt RPC defaults stay consistent after the archive-query correction', () => {
-  assert.equal(USDC_NETWORKS[P].rpcUrl, 'https://polygon.drpc.org')
+  assert.equal(USDC_NETWORKS[P].rpcUrl, 'https://tenderly.rpc.polygon.community')
   assert.equal(rpcUrlFor(P), USDC_NETWORKS[P].rpcUrl)
   assert.equal(settlementRpcUrl({}, P), USDC_NETWORKS[P].rpcUrl)
   assert.throws(() => settlementRpcUrl({ VERCEL_ENV: 'production' }, P), /configuration_missing/)
