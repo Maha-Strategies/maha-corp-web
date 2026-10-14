@@ -8,6 +8,7 @@ import { createEndpointRouter } from '../lib/api-v1/router.ts'
 import { memoryPaymentStore } from '../lib/api-v1/payment-store.ts'
 import { prepareModularPurchase, submitModularPurchase } from '../lib/x402/modular-buyer.ts'
 import { decodeChallenge } from '../lib/x402/client.ts'
+import { parsePaymentHeader } from '../lib/x402/protocol.ts'
 import { assertModularQuote, CAP } from '../scripts/run-modular-indexing.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
 import { searchEndpoints, describeById } from '../lib/api-v1/discovery.ts'
@@ -27,7 +28,12 @@ for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response
   let now = CLOCK, settlements = 0, recorded = 0
   const h = handlerFor(e.id, e.amount)!, example = releaseExample(e.id)!, input = h.input.parse(example.input)
   const router = createEndpointRouter({ environment: env, now: () => now, store: memoryPaymentStore(() => now, 1000),
-    facilitator: { verify: async () => ({ ok: true, payer: account.address }), settle: async () => { settlements++; return { ok: true, payer: account.address, transaction: TX } } },
+    facilitator: { verify: async payment => {
+      const auth = payment.payload.authorization as { validAfter: string; validBefore: string }
+      // A realistic lagging chain clock would reject the old one-second backdate.
+      assert.ok(BigInt(auth.validAfter) < BigInt(Math.floor(now / 1000) - 4))
+      return { ok: true, payer: account.address }
+    }, settle: async () => { settlements++; return { ok: true, payer: account.address, transaction: TX } } },
     confirm: async () => true, recordDelivery: async () => { recorded++ } })
   const transport: typeof fetch = async (url, options) => router(new Request(String(url), options))
   const quote = await router(new Request(ORIGIN + e.path, { method: 'POST' }))
@@ -40,6 +46,10 @@ for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response
   const capsule = await prepareModularPurchase(contract, { input, payer: account.address, maximumAmount: BigInt(e.amount), now,
     fetchImpl: transport, signTypedData: typed => account.signTypedData(typed as Parameters<typeof account.signTypedData>[0]), persist: async () => { saved = true } })
   assert.ok(saved); assert.ok(capsule.headers['PAYMENT-SIGNATURE'].length < 12000)
+  const payment = parsePaymentHeader(capsule.headers['PAYMENT-SIGNATURE']); assert.ok(payment.ok)
+  const auth = payment.payment.payload.authorization as { validAfter: string; validBefore: string }
+  assert.equal(auth.validAfter, String(Math.floor(CLOCK / 1000) - 600))
+  assert.equal(auth.validBefore, String(Math.floor(CLOCK / 1000) + 59))
   const lost: typeof fetch = async (url, options) => { const response = await transport(url, options); assert.equal(response.status, 200); await response.body?.cancel(); throw Error('lost_response') }
   assert.equal((await submitModularPurchase(contract, capsule, { fetchImpl: lost, now })).delivery, 'unresolved')
   now += 120000

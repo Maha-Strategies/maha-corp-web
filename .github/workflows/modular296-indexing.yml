@@ -3,11 +3,12 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC'
+        description: 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC_CONTROLLED_RETRY_38519203625'
         required: true
         type: string
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: production-x402-bazaar-canary
   cancel-in-progress: false
@@ -21,6 +22,7 @@ jobs:
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
       MODULAR_INDEXING_OUTPUT_PATH: ${{ github.workspace }}/modular296-indexing-evidence.json
       MODULAR_INDEXING_CONFIRMATION: ${{ inputs.confirmation }}
+      MODULAR_PREVIOUS_ATTEMPT_DIRECTORY: ${{ github.workspace }}/previous-refused-attempt
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -28,9 +30,16 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Download the exact refused attempt without decrypting it
+        uses: actions/download-artifact@v7
+        with:
+          name: modular296-indexing-38519203625
+          run-id: 38519203625
+          github-token: ${{ github.token }}
+          path: ${{ env.MODULAR_PREVIOUS_ATTEMPT_DIRECTORY }}
       - name: Check every unpaid quote without signer access
         run: node --experimental-strip-types scripts/run-modular-indexing.ts
-      - name: Approved single original purchase per product
+      - name: Verify expired unused original, retry first once, then original purchases
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
         run: node --experimental-strip-types scripts/run-modular-indexing.ts --pay

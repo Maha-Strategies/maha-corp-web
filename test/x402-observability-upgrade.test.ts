@@ -5,6 +5,7 @@ import { readMerchantResources, validateExpectedInventory, INTENTIONALLY_UNINDEX
 import { runInactivityWatch, shouldFailInactivityWatch } from '../scripts/run-bazaar-inactivity-watch.ts'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers, offerById } from '../lib/x402/offers.ts'
+import { PRODUCTION_ENDPOINTS } from '../lib/api-v1/production-release.ts'
 import { DISCOVERY_PROBLEM_COPY } from '../lib/x402/discovery-problem-copy.ts'
 import { MICRO_PRODUCTS } from '../lib/x402/micro-contracts.ts'
 import { compareCatalogueSnapshots, observeProduct } from '../lib/x402/product-observations.ts'
@@ -53,10 +54,10 @@ test('malformed activity metrics are unavailable, not negative calls or fresh ti
 test('inactivity covers every expected listing on page two and separates deliberately unindexed offers', async () => {
   const expected = payableOffers().filter(offer => !INTENTIONALLY_UNINDEXED_OFFERS.has(offer.id))
   assert.equal(expected.length, 156)
-  const rows = expected.map(offer => ({ resource: origin + offer.path, quality: { lastCalledAt: at, l30DaysTotalCalls: 1, l30DaysUniquePayers: 1 } }))
+  const rows = [...expected, ...PRODUCTION_ENDPOINTS].map(offer => ({ resource: origin + offer.path, quality: { lastCalledAt: at, l30DaysTotalCalls: 1, l30DaysUniquePayers: 1 } }))
   const report = await runInactivityWatch(now, pages(rows))
-  assert.equal(report.catalogueComplete, true); assert.equal(report.observedResources, 156)
-  assert.equal(report.level, 'ok'); assert.equal(report.reports.length, 156)
+  assert.equal(report.catalogueComplete, true); assert.equal(report.observedResources, expected.length + PRODUCTION_ENDPOINTS.length)
+  assert.equal(report.level, 'ok'); assert.equal(report.reports.length, expected.length + PRODUCTION_ENDPOINTS.length)
   assert.equal(report.notRequestedOfferIds.length, 5)
   await assert.rejects(runInactivityWatch(now, pages(rows, (b, offset) => { if (offset) b.resources = [] })))
 })

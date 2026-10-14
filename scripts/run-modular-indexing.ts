@@ -1,5 +1,5 @@
 import { createCipheriv, createHmac, randomBytes } from 'node:crypto'
-import { writeFile } from 'node:fs/promises'
+import { readFile, stat, writeFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import { createPublicClient, http, parseAbi } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
@@ -14,8 +14,9 @@ import { readProductIndex } from '../lib/x402/product-index.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
 import { validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
 import { usdcNetwork } from '../lib/x402/networks.ts'
+import { checkRefusedOriginal } from '../lib/x402/modular-retry.ts'
 
-export const CONFIRMATION = 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC'
+export const CONFIRMATION = 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC_CONTROLLED_RETRY_38519203625'
 export const CAP = 6098840n
 const ORIGIN = 'https://www.mahastrategies.com', SCOPE = MODULAR_RELEASE.version
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
@@ -61,10 +62,11 @@ export async function run() {
   const client = createPublicClient({ chain: base, transport: http(process.env.BASE_RPC_URL || 'https://mainnet.base.org', { retryCount: 0, timeout: 15000 }) })
   const abi = parseAbi(['function balanceOf(address) view returns(uint256)', 'function authorizationState(address,bytes32) view returns(bool)'])
   if (await client.getChainId() !== 8453 || await client.readContract({ address: asset, abi, functionName: 'balanceOf', args: [account.address] }) < CAP) throw Error('wrong_chain_or_insufficient_batch_funding')
-  type Step = { id: string; path: string; amountBaseUnits: string; state: string; transaction?: string; responseDigest?: string; chainConfirmed?: boolean; payloadVerified?: boolean }
+  type Step = { id: string; path: string; amountBaseUnits: string; state: string; transaction?: string; responseDigest?: string; chainConfirmed?: boolean; payloadVerified?: boolean; status?: number; errorCode?: string; settlement?: string; delivery?: string }
   const evidence = { version: SCOPE, classification: 'publisher-funded-operator-activity', customerRevenue: false, organicDemand: false, automaticRepayment: false,
     network: MODULAR_RELEASE.network, buyer: account.address, payee: MODULAR_RELEASE.payee, maximumBaseUnits: String(CAP), authorizedBaseUnits: '0', confirmedBaseUnits: '0',
-    startedAt: new Date().toISOString(), state: 'running', steps: [] as Step[], index: await observeModularIndex() }
+    startedAt: new Date().toISOString(), state: 'running', steps: [] as Step[], index: await observeModularIndex(),
+    controlledRetry: null as Awaited<ReturnType<typeof checkRefusedOriginal>> | null }
   const packets: unknown[] = []
   const encryptionKey = createHmac('sha256', key).update(SCOPE + ':private-outbox').digest()
   const save = async () => {
@@ -73,6 +75,22 @@ export async function run() {
   }
   await save()
   try {
+    const previousDirectory = process.env.MODULAR_PREVIOUS_ATTEMPT_DIRECTORY
+    if (!previousDirectory) throw Error('previous_attempt_evidence_required')
+    const load = async (suffix: string) => {
+      const file = previousDirectory + '/modular296-indexing-evidence.json' + suffix
+      if ((await stat(file)).size > 2097152) throw Error('previous_attempt_evidence_oversized')
+      return JSON.parse(await readFile(file, 'utf8'))
+    }
+    const first = PRODUCTION_ENDPOINTS[0], firstHandler = handlerFor(first.id, first.amount)!
+    const block = await client.getBlock({ blockTag: 'latest' })
+    evidence.controlledRetry = await checkRefusedOriginal({ key, payer: account.address, scope: SCOPE, payee: MODULAR_RELEASE.payee,
+      maximumBaseUnits: String(CAP), report: await load(''), outbox: await load('.recovery-encrypted.json'), now: Date.now(), chainTimestamp: block.timestamp,
+      contract: { id: first.id, path: first.path, amount: first.amount, recoverySeconds: 86400,
+        validateInput: x => firstHandler.input.parse(x), validateOutput: x => firstHandler.output.parse(x) },
+      authorizationUsed: (payer, nonce) => client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [payer as `0x${string}`, nonce as `0x${string}`] }) })
+    await save()
+    console.log(JSON.stringify({ state: 'controlled_retry_gate_passed', previousRunId: '38519203625', previousAuthorizationExpired: true, previousNonceUnused: true, maximumBaseUnits: String(CAP) }))
     for (const e of PRODUCTION_ENDPOINTS) {
       const h = handlerFor(e.id, e.amount)!, sample = releaseExample(e.id)!, input = h.input.parse(sample.input)
       // Stable, private nonce seed prevents a later workflow dispatch making a
@@ -100,6 +118,9 @@ export async function run() {
           evidence.authorizedBaseUnits = String(next); step.state = 'authorized_outcome_unknown'; await save()
         } })
       const result = await submitModularPurchase(contract, capsule, { fetchImpl: transport })
+      step.status = 'status' in result ? result.status : undefined
+      step.errorCode = 'errorCode' in result ? result.errorCode : undefined
+      step.settlement = result.settlement; step.delivery = result.delivery; await save()
       if (result.settlement !== 'provider_reported' || !result.transaction || result.delivery !== 'validated_response') throw Error('settlement_or_delivery_unknown_do_not_repay')
       step.transaction = result.transaction; step.responseDigest = demandDigest(result.data); step.payloadVerified = true; await save()
       const parsed = parsePaymentHeader(capsule.headers['PAYMENT-SIGNATURE'])
@@ -109,6 +130,8 @@ export async function run() {
       if (!receiptMatchesAuthorization(receipt, { transaction: result.transaction, payer: account.address.toLowerCase(), payee: MODULAR_RELEASE.payee, amount: e.amount, nonce: authorization.nonce })) throw Error('chain_authorization_not_confirmed_do_not_repay')
       step.chainConfirmed = true; step.state = 'confirmed_and_delivered'
       evidence.confirmedBaseUnits = String(BigInt(evidence.confirmedBaseUnits) + BigInt(e.amount)); await save()
+      if (evidence.steps.length === 1 || evidence.steps.length % 10 === 0) console.log(JSON.stringify({ state: 'operator_indexing_progress', confirmedAndDelivered: evidence.steps.length,
+        confirmedBaseUnits: evidence.confirmedBaseUnits, maximumBaseUnits: String(CAP), automaticRepayment: false }))
       await wait(2200) // Preserve the global wallet admission quota; no exemption.
     }
     evidence.index = await observeModularIndex()

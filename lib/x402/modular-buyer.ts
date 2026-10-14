@@ -37,8 +37,11 @@ export async function prepareModularPurchase(c: ModularBuyerContract, o: { input
     || requirement.amount !== c.amount || requirement.asset.toLowerCase() !== base.asset.toLowerCase() || requirement.payTo.toLowerCase() !== MAHA_PAYEE.toLowerCase()
     || requirement.extra?.name !== base.domain.name || requirement.extra?.version !== base.domain.version || requirement.maxTimeoutSeconds !== 60
     || info?.retentionSeconds !== c.recoverySeconds || info?.automaticRepayment !== false) throw Error('quote_terms_changed')
-  const typed = buildTypedData(requirement, o.payer)
-  typed.message = { from: o.payer, to: requirement.payTo, value: BigInt(c.amount), validAfter: BigInt(Math.floor(now / 1000) - 1), validBefore: BigInt(Math.floor(now / 1000) + 59), nonce: modularPaymentNonce(c.id, inputHash, secret) }
+  // Authorization time is checked against the chain's block timestamp, which
+  // can lag wall time. Keep the reference client's backdate, not a one-second
+  // window. The short expiry and input-bound nonce remain unchanged.
+  const typed = buildTypedData(requirement, o.payer, now)
+  typed.message = { ...typed.message, validAfter: BigInt(Math.max(0, Math.floor(now / 1000) - 600)), validBefore: BigInt(Math.floor(now / 1000) + 59), nonce: modularPaymentNonce(c.id, inputHash, secret) }
   const signature = await o.signTypedData(typed)
   const signer = await recoverTypedDataAddress({ ...typed, signature } as Parameters<typeof recoverTypedDataAddress>[0])
   if (signer.toLowerCase() !== o.payer.toLowerCase()) throw Error('signer_mismatch')
@@ -46,8 +49,8 @@ export async function prepareModularPurchase(c: ModularBuyerContract, o: { input
     headers: { 'Content-Type': 'application/json', 'X-Maha-Input-Hash': inputHash, 'X-Maha-Recovery-Secret': secret, 'PAYMENT-SIGNATURE': encodePaymentSignature(requirement, typed.message, signature, quote) } }
   await o.persist(structuredClone(capsule)); return capsule
 }
-export async function submitModularPurchase(c: ModularBuyerContract, capsule: ModularCapsule, o: { fetchImpl?: typeof fetch; now?: number; recovery?: 'retained-result' | 'complimentary-correction' } = {}) {
-  assertContract(c); const now = o.now ?? Date.now()
+export async function validateModularCapsule(c: ModularBuyerContract, capsule: ModularCapsule, now = Date.now()) {
+  assertContract(c)
   if (capsule.version !== 'maha-modular-buyer/1' || capsule.id !== c.id || capsule.path !== c.path || capsule.amount !== c.amount || capsule.recoverySeconds !== c.recoverySeconds
     || !Number.isSafeInteger(now) || !Number.isSafeInteger(capsule.createdAt) || capsule.createdAt < 0 || now < capsule.createdAt || now - capsule.createdAt >= c.recoverySeconds * 1000
     || demandDigest(c.validateInput(capsule.input)) !== capsule.headers['X-Maha-Input-Hash']) throw Error('invalid_or_expired_capsule_do_not_repay')
@@ -69,11 +72,29 @@ export async function submitModularPurchase(c: ModularBuyerContract, capsule: Mo
   typed.message = { from: capsule.payer, to: terms.payTo, value: BigInt(c.amount), validAfter: BigInt(String(authorization.validAfter)), validBefore: BigInt(String(authorization.validBefore)), nonce: String(authorization.nonce) }
   const signer = await recoverTypedDataAddress({ ...typed, signature: payment.payload.signature } as Parameters<typeof recoverTypedDataAddress>[0])
   if (signer.toLowerCase() !== capsule.payer) throw Error('capsule_signer_mismatch')
+  return { payment, authorization }
+}
+const SAFE_FAILURE_CODES = new Set([
+  'authorization_refused_no_payment', 'verification_unavailable_no_payment', 'authorization_not_current_no_payment',
+  'authorization_window_too_short_no_work_or_payment', 'invalid_input_or_authorization', 'payer_rate_limit',
+  'purchase_in_progress_retry_same_authorization', 'settlement_unknown_do_not_repay', 'settlement_confirmation_pending_do_not_repay',
+  'execution_failed_no_payment', 'retention_unavailable_no_payment', 'paid_result_not_established_do_not_repay',
+  'retained_evidence_invalid_or_unavailable_do_not_repay', 'content_recovery_expired_receipt_retained_do_not_repay',
+  'prepared_result_or_authorization_expired_no_payment', 'release_unavailable_no_payment', 'purchase_lock_expired_no_payment',
+  'idempotency_unavailable_no_payment', 'rate_limit_unavailable_no_payment',
+])
+export async function submitModularPurchase(c: ModularBuyerContract, capsule: ModularCapsule, o: { fetchImpl?: typeof fetch; now?: number; recovery?: 'retained-result' | 'complimentary-correction' } = {}) {
+  await validateModularCapsule(c, capsule, o.now ?? Date.now())
   const unresolved = { settlement: 'unknown' as const, delivery: 'unresolved' as const, automaticRepayment: false as const, data: null, transaction: null }
   try {
     const response = await (o.fetchImpl ?? fetch)(urlFor(c), { method: 'POST', body: JSON.stringify(capsule.input),
       headers: { ...capsule.headers, ...(o.recovery ? { 'X-Maha-Recovery-Mode': o.recovery } : {}) }, redirect: 'error', signal: AbortSignal.timeout(20000) })
-    if (!response.ok || response.url && response.url !== urlFor(c)) { await response.body?.cancel(); return { ...unresolved, status: response.status } }
+    if (response.url && response.url !== urlFor(c)) { await response.body?.cancel(); return { ...unresolved, status: response.status, errorCode: 'unexpected_response_origin' } }
+    if (!response.ok) {
+      let errorCode = 'unclassified_http_failure'
+      try { const failure = await json(response); if (SAFE_FAILURE_CODES.has(failure?.error?.code)) errorCode = failure.error.code } catch { /* Never copy a raw provider response into evidence. */ }
+      return { ...unresolved, status: response.status, errorCode }
+    }
     const h = response.headers.get('PAYMENT-RESPONSE'), receipt = h && h.length <= 8192 ? decodeReceipt(h) : null, result = await json(response)
     if (!receipt?.success || receipt.network !== 'eip155:8453' || receipt.payer?.toLowerCase() !== capsule.payer || !/^0x[a-f0-9]{64}$/i.test(receipt.transaction ?? '')
       || result.success !== true || Object.keys(result).sort().join(',') !== 'data,proof,success' || result.proof?.settlement_id !== receipt.transaction) throw Error('invalid_receipt_or_envelope')
