@@ -46,7 +46,8 @@ test('every route belongs to one declared visual system', () => {
     const ownsBoundary = source.includes('evidence-page')
     // The policy options library owns its boundary through PolicyReader.module.css,
     // the same way PolicyFrontDoor and PolicyDiscoveryPage already do.
-    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage|PolicyFrontDoor|PolicyExpansionEntrance|PolicyAnswerReader|PolicyMethodReader)\b|\b(?:PolicyDiscoveryPage|renderFederationPage)\b/.test(source)
+    const delegatesBoundary = /<(?:ResearchBriefServicePage|EvidenceGuide|ContextCompilerPlayground|EpistemicClearingGuidePage|PolicyFrontDoor|PolicyExpansionEntrance|PolicyAnswerReader|PolicyMethodReader|AstrologyApp)\b|\b(?:PolicyDiscoveryPage|renderFederationPage)\b/.test(source)
+      || (file === 'astrology/orbital-mind/page.tsx' && source.includes('s.app') && source.includes('../astrology.module.css'))
     if (!ownsBoundary && !delegatesBoundary) missingPaperBoundary.push(file)
   }
 
@@ -105,7 +106,7 @@ test('every route belongs to one declared visual system', () => {
   // policy reader, introducing no new visual system.
   // 79 -> 81: Computational Architecture hub and finite article template.
   // paper 133 -> 134: /about/technology owns the existing evidence-page boundary.
-  assert.deepEqual(groups, { paper: 135, apps: 5, books: 41, docs: 1, knowledge: 81, intelligence: 2, operator: 32, internal: 1 })
+  assert.deepEqual(groups, { paper: 148, apps: 14, books: 42, docs: 1, knowledge: 81, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {

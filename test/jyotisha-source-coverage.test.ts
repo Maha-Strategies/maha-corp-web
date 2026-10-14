@@ -26,7 +26,7 @@ test('the source-bound Jyotisha corpus stays within the declared 100–250-rule 
   const coverage = buildJyotishaSourceCoverage()
   assert.deepEqual(coverage.areas.map((area) => area.area), [...JYOTISHA_COVERAGE_AREAS])
   const total = coverage.areas.reduce((sum, area) => sum + area.rules.length, 0)
-  assert.equal(total, 101)
+  assert.equal(total, 100) // Modern corporate synthesis is deliberately not historical source coverage.
   assert.ok(total >= 100 && total <= 250)
   for (const area of coverage.areas) {
     assert.ok(area.rules.length > 0, area.area)
@@ -77,14 +77,13 @@ test('sensitive natal and avocation doctrine remains blocked independently of re
 
 test('mundane doctrine and the modern corporate synthesis are not collapsed', () => {
   const area = buildJyotishaSourceCoverage().areas.find((candidate) => candidate.area === 'mundane-corporate-charts')!
-  assert.equal(area.rules.length, 2)
+  assert.equal(area.rules.length, 1)
   const mundane = area.rules.find((rule) => rule.chartTypes.includes('mundane'))!
-  const corporate = area.rules.find((rule) => rule.chartTypes.includes('corporate'))!
   assert.equal(mundane.doctrineStatus, 'historical-doctrine')
-  assert.equal(corporate.doctrineStatus, 'maha-synthesis')
-  const corporateRule = ASTROLOGY_RULES.find((rule) => rule.id === corporate.ruleId)!
+  const corporateRule = ASTROLOGY_RULES.find((rule) => rule.id === 'maha-corp-dhruva-foundation')!
   assert.equal(corporateRule.provenance, 'maha-inference')
-  assert.match(corporateRule.disagreements.join(' '), /does not mention corporations/)
+  assert.equal(corporateRule.sourceBoundCoverage, undefined, 'modern synthesis is not added to the classical coverage count')
+  assert.match(corporateRule.disagreements.join(' '), /modern corporate.*synthesis|corporate.*organizational synthesis/i)
 })
 
 test('accepted passage and formalization reviews open only the matching frozen rule gate', () => {

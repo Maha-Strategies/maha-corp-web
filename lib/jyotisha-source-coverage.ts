@@ -96,7 +96,9 @@ export function assertJyotishaSourceCoverageIntegrity(): void {
     }
   }
   const entityCharts = new Set(coverage.areas.find((area) => area.area === 'mundane-corporate-charts')?.rules.flatMap((rule) => rule.chartTypes))
-  if (!entityCharts.has('mundane') || !entityCharts.has('corporate')) throw new Error('Mundane and corporate chart coverage must remain separately encoded.')
+  const corporateSynthesis = ASTROLOGY_RULES.filter(rule => rule.chartTypes.includes('corporate') && rule.provenance === 'maha-inference')
+  if (!entityCharts.has('mundane') || corporateSynthesis.length === 0) throw new Error('Mundane doctrine and corporate synthesis must remain separately encoded.')
+  if (corporateSynthesis.some(rule => rule.sourceBoundCoverage?.doctrineStatus === 'historical-doctrine')) throw new Error('Modern corporate synthesis must not be classified as historical doctrine.')
 }
 
 assertJyotishaSourceCoverageIntegrity()

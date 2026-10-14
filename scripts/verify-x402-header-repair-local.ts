@@ -22,7 +22,7 @@ const check = async (name: string, executable: string, args: string[], input?: s
   try { const result = await child; await writeFile(resolve(out, name + '.log'), result.stdout + result.stderr); return result.stdout }
   catch (error) { const e = error as { stdout?: string; stderr?: string }; await writeFile(resolve(out, name + '.log'), (e.stdout ?? '') + (e.stderr ?? '')); throw Error(name + '_failed_see_saved_log') }
 }
-const tests = ['x402-response-header-size', 'x402-lockfile-repair', 'x402-payment-header-size', 'x402-declaration-digest', 'x402-discovery', 'x402-context-product-family', 'x402-facilitator', 'x402-polygon', 'x402-integration-isolation', 'x402-bazaar-discovery-monitoring', 'api-v1-production-release', 'api-v1', 'modular-controlled-retry']
+const tests = ['x402-response-header-size', 'x402-lockfile-repair', 'x402-payment-header-size', 'x402-declaration-digest', 'x402-discovery', 'x402-gateway', 'x402-offer-selection', 'x402-context-product-family', 'x402-facilitator', 'x402-polygon', 'x402-integration-isolation', 'x402-bazaar-discovery-monitoring', 'api-v1-production-release', 'api-v1', 'modular-controlled-retry']
 const tap = await check('tests', process.execPath, ['--experimental-strip-types', '--test', '--test-concurrency=4', '--test-reporter=tap', ...tests.map(n => 'test/' + n + '.test.ts')])
 const count = (k: string) => Number(tap.match(new RegExp('^# ' + k + ' (\\d+)$', 'm'))?.[1] ?? NaN)
 assert.equal(count('fail'), 0); assert.equal(count('skipped'), 0); assert.equal(count('tests'), count('pass')); assert.ok(count('pass') > 300)

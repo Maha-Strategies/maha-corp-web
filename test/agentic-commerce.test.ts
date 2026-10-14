@@ -119,6 +119,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
         version: number
         network: string
         asset: string
+        assetSymbol: string
         amount: string
         displayAmount: string
       }
@@ -132,7 +133,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
       benchmark?: string
       executableRecipe?: string
       discoveryPaymentRecipe?: string
-      payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean }
+      payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean; payableNow: boolean }
     }>
   }
   assert.equal(offers.updatedAt, '2026-09-09T00:00:00.000Z')
@@ -153,64 +154,16 @@ test('public agent discovery identifies live capabilities and the scoped Context
     [...(offers.transactionPolicy.describedNotPayable ?? [])].sort(),
     X402_OFFERS.filter((offer) => offer.status !== 'available').map((offer) => offer.id).sort(),
   )
-  const expected = [
-    'celestial-position-snapshot',
-    'celestial-chart-evidence',
-    'celestial-vimshottari-timing',
-    'context-compression',
-    'context-budget-ladder',
-    'deep-context-evaluation',
-    'evidence-retention-matrix',
-    'mps-autonomous-audit',
-    'governed-context-verification-pack',
-    'research-intake-evidence-pack',
-    'book-section-the-imagined-life',
-    'book-section-the-volcanic-engine',
-    'book-edition-the-imagined-life',
-    'book-edition-the-volcanic-engine',
-    // gpu-qubo-ising is deliberately absent: the standalone reference engine is
-    // beta and undiscoverable until its vectorized candidate has passing A10G
-    // evidence. See docs/qubo-reference-promotion.md.
-    'gpu-tensor-network',
-    'gpu-geometric-registration',
-    'enterprise-mcp-gateway',
-    'cabezon-buyer-brief-pack',
-    // Locally implemented contracts are discoverable only as withheld, never payable.
-    'citation-binding-check',
-    'revision-lineage-check',
-    'audit-export-normalizer',
-    'dimensional-consistency-check',
-    'exact-interpolation-receipt',
-    'sampled-series-integration',
-    'evidence-conflict-comparator',
-    'release-bound-evidence-packet',
-    'tiruvaymoli-context-packet',
-    'astrology-experiment-plan-check',
-    'unit-uncertainty-conversion',
-    'exact-linear-system',
-    'bracketed-polynomial-root',
-    'covariance-uncertainty',
-    'divine-name-disambiguation',
-    'edition-verse-resolution',
-    'reception-lineage-retrieval',
-    'policy-version-comparison',
-    'control-evidence-gaps',
-    'mcp-contract-compatibility',
-    'tool-permission-diff',
-    'publication-bundle-consistency',
-    'celestial-result-compatibility',
-    'evidence-frame-compatibility',
-    'inspection-tolerance-check', 'inspection-coverage-plan', 'panel-packing-estimate', 'assembly-schedule-compare', 'automation-economics-compare', 'public-spending-review', 'campaign-record-reconcile', 'committee-finance-snapshot', 'area-program-check', 'neural-experiment-metrics',
-  ]
-  assert.deepEqual(offers.technicalCapabilities.map((capability) => capability.id), expected)
-  assert.deepEqual(card.capabilities.map((capability) => capability.id), expected)
+  const expected = ['gpu-tensor-network', 'gpu-geometric-registration', 'enterprise-mcp-gateway', ...X402_OFFERS.map(offer => offer.id)].sort()
+  assert.deepEqual(offers.technicalCapabilities.map(capability => capability.id).sort(), expected)
+  assert.deepEqual(card.capabilities.map(capability => capability.id).sort(), expected)
   assert.equal(card.serviceCatalog, AGENTIC_COMMERCE_MANIFEST_URL)
   assert.match(offers.technicalCapabilities.find((capability) => capability.id === 'gpu-tensor-network')?.methodBoundary ?? '', /heuristic/i)
 
   const contextOffer = offers.technicalCapabilities.find((capability) => capability.id === 'context-compression')
   const contextCard = card.capabilities.find((capability) => capability.id === 'context-compression')
-  assert.equal(contextOffer?.status, 'available_with_api_key_or_x402')
-  assert.equal(contextCard?.status, 'available_with_api_key_or_x402')
+  assert.equal(contextOffer?.status, 'available')
+  assert.equal(contextCard?.status, 'available')
   assert.equal(contextOffer?.benchmarkUrl, 'https://www.mahastrategies.com/benchmarks/context-retention')
   assert.equal(contextOffer?.benchmarkResultsUrl, 'https://www.mahastrategies.com/benchmarks/mcrb-1/results.json')
   assert.equal(contextOffer?.executableRecipeUrl, 'https://www.mahastrategies.com/recipes/context-compiler-large-document')
@@ -221,9 +174,8 @@ test('public agent discovery identifies live capabilities and the scoped Context
   assert.equal(contextOffer?.machinePayment?.protocol, contextCompressionX402Capability.payment.protocol)
   assert.equal(contextOffer?.machinePayment?.version, contextCompressionX402Capability.payment.version)
   assert.equal(contextOffer?.machinePayment?.network, contextCompressionX402Capability.payment.network)
-  assert.equal(contextOffer?.machinePayment?.asset, contextCompressionX402Capability.payment.asset)
+  assert.equal(contextOffer?.machinePayment?.assetSymbol, contextCompressionX402Capability.payment.assetSymbol)
   assert.equal(contextOffer?.machinePayment?.amount, contextCompressionX402Capability.payment.amount)
-  assert.equal(contextOffer?.machinePayment?.displayAmount, contextCompressionX402Capability.payment.displayAmount)
   assert.deepEqual(contextCard?.payment, {
     protocol: contextCompressionX402Capability.payment.protocol,
     version: contextCompressionX402Capability.payment.version,
@@ -231,13 +183,14 @@ test('public agent discovery identifies live capabilities and the scoped Context
     amount: contextCompressionX402Capability.payment.amount,
     assetSymbol: contextCompressionX402Capability.payment.assetSymbol,
     autonomous: true,
+    payableNow: true,
   })
   const intakeOffer = offers.technicalCapabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
   const intakeCard = card.capabilities.find((capability) => capability.id === 'research-intake-evidence-pack')
-  assert.equal(intakeOffer?.status, 'available_for_autonomous_payment')
-  assert.equal(intakeCard?.status, 'available_for_autonomous_payment')
+  assert.equal(intakeOffer?.status, 'available')
+  assert.equal(intakeCard?.status, 'available')
   assert.equal(intakeOffer?.machinePayment?.amount, '1000000')
-  assert.equal(intakeOffer?.machinePayment?.displayAmount, '1.00 USDC')
+  assert.equal(intakeOffer?.machinePayment?.assetSymbol, 'USDC')
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {

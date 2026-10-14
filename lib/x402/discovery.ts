@@ -251,6 +251,12 @@ export async function discoveryExtensionsFor(
       extensions.bazaar = bazaarFor(1, 1)
       await refreshIntegrity()
     }
+    if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) {
+      // Keep limitation constants and warning codes, but omit restatable
+      // output details when even the root example exceeds the inline budget.
+      extensions.bazaar = bazaarFor(0, 1)
+      await refreshIntegrity()
+    }
     if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) throw Error('discovery_response_header_budget_exceeded:' + offer.id)
   }
 

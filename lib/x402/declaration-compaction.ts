@@ -161,7 +161,18 @@ export function compactExample(value: unknown, depth = 0, schema?: Schema, maxim
     return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined, maximumObjectDepth))
   }
   if (isSchema(value)) {
-    if (depth >= maximumObjectDepth) return {}
+    if (depth >= maximumObjectDepth) {
+      // Retention and limitation constants remain meaningful even when the
+      // surrounding example is reduced. Preserve their authored values, not
+      // the schema's expected values, so invalid examples still fail validation.
+      const properties = isSchema(schema?.properties) ? schema.properties : {}
+      const retained = Object.fromEntries(Object.entries(value).filter(([key]) =>
+        isSchema(properties[key]) && 'const' in properties[key]))
+      if (Array.isArray(value.warningCodes) && value.warningCodes.every(code => typeof code === 'string' && code.length <= 64)) retained.warningCodes = [...value.warningCodes]
+      if (isSchema(value.retentionBoundaries)) retained.retentionBoundaries = compactExample(value.retentionBoundaries, depth + 1,
+        isSchema(properties.retentionBoundaries) ? properties.retentionBoundaries : undefined, maximumObjectDepth)
+      return retained
+    }
     const output: Record<string, unknown> = {}
     for (const [key, entry] of Object.entries(value)) {
       const properties = isSchema(schema?.properties) ? schema.properties : undefined

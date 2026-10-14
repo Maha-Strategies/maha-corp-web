@@ -12,6 +12,22 @@ const APP_DIR = join(import.meta.dirname, '..', 'app')
 // surfaces are private; nested preflight routes are covered by their product
 // page; the docs route documents itself by serving the spec.
 const PRIVATE_ROUTES = new Set([
+  // Operator controls and first-party application backends are not the public
+  // developer REST API. Exclusion is not an assertion that a route is secret:
+  // anonymous app tools retain their own input, privacy and rate-limit rules.
+  '/api/admin/civic-ai-safety', '/api/admin/civic-workbench', '/api/admin/corporate-reviews',
+  '/api/astrology/auth', '/api/astrology/chat', '/api/astrology/mobile',
+  '/api/astrology/mobile-billing-webhook', '/api/astrology/platform', '/api/astrology/webhook',
+  '/api/civic/ai-safety/case', '/api/civic/ai-safety', '/api/civic/audit',
+  '/api/civic/evaluations', '/api/civic/finance', '/api/civic/ledger',
+  '/api/civic/model-evidence', '/api/civic/participation', '/api/civic/simulate',
+  '/api/civic/townhall', '/api/civic/verify-chain',
+  '/api/context-review/events', '/api/context-review', '/api/mcp/context-review',
+  '/api/unfinished-species/companion', '/api/workflow-advisor',
+  // The modular router publishes per-tool JSON schemas through its two-stage
+  // discovery and domain MCP contracts, not a monolithic REST schema.
+  '/api/v1/[domain]/[category]/[action]', '/api/v1/discovery/describe',
+  '/api/v1/discovery/search', '/api/v1/mcp/[domain]',
   '/api/geocoding/places',
   // Compatibility prototype. Promote only after the controlled A2A + MCP E2E
   // passes against Preview and the contract is reviewed for public support.

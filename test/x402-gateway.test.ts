@@ -230,8 +230,8 @@ test('an unpaid request to a priced path is challenged', async () => {
   // The inline schema keeps the top-level contract and drops the prose and
   // patterns; the complete schema is one fetch away and the challenge says so.
   const outputSchema = decoded.extensions.bazaar.schema.properties.output.properties.example
-  assert.equal(outputSchema.properties.metrics.type, 'object')
-  assert.equal(outputSchema.properties.metrics.description, undefined, 'descriptions are dropped inline')
+  assert.equal(outputSchema.type, 'object')
+  assert.equal(outputSchema.properties, undefined, 'the oversized inline output schema points to the full declaration instead')
   assert.equal(decoded.extensions['maha-offer'].declarationInline, 'compact')
   assert.equal(decoded.extensions['maha-offer'].declarationUrl, 'https://www.mahastrategies.com/api/discovery/x402-offers/context-compression')
 

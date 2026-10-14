@@ -47,6 +47,9 @@ test('strict example compaction preserves consts without correcting an invalid a
   const d = 'sha256:' + 'a'.repeat(64)
   assert.equal(compactExample(d, 0, { const: d }, 1), d)
   assert.equal(compactExample('wrong', 0, { const: d }, 1), 'wrong')
+  assert.deepEqual(compactExample({ limits: { verified: false, note: 'restatable' } }, 0,
+    { properties: { limits: { properties: { verified: { const: false }, note: { type: 'string' } } } } }, 1),
+  { limits: { verified: false } })
   const v = { nested: { detail: 'long'.repeat(80) }, rows: [{ id: 'r1' }] }
   assert.deepEqual(compactExample(v, 0, undefined, 1), { nested: {}, rows: [{}] })
   assert.equal(v.nested.detail.length, 320)

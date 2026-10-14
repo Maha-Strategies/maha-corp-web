@@ -322,7 +322,7 @@ it differs from the artifact.
 | --- | --- |
 | Evidence artifact (published) | `78a822dd3c85821a98ca01262b02c12b5c42bc3c1433515909d3a0c5554aa3f1` |
 | Frozen corpus label freeze | `a6b95c81e981fcda20576046354105994bc8846e2b6da8a4e77c754a7085a8c9` |
-| Reproduction manifest | `dd2e40deedfe80d746322ac7d1686223b91aa7cf2804795b6c0d47285dd53aff` |
+| Reproduction manifest | `2ebb177ff5cf4ea35c439bfc25a80d570100a60b5c9786ca90127e9aedb8eee8` |
 | Failure-path evidence | `deb70a6fd203c5895269bec23e1e3fe3dfe8afb72c0d892f7f17ab35fab8ee2d` |
 | Source checkpoint (not published) | `sha256:40cb6956b0b732918c1bf6d63852d1076505c0348dd195a86384a5a935f4d0f3` |
 | Source adjudication (not published) | `sha256:a77a0e01f86fa1130159e29deb5a6a66eff8e2ea65c41f96404bb02c477dc68d` |
