@@ -139,7 +139,11 @@ export function compactSchema(schema: Schema, depth = 0): Schema {
  * 400 for a payload our own declaration handed it. Input examples are
  * therefore published verbatim and are small enough to afford that.
  */
-export function compactExample(value: unknown, depth = 0, schema?: Schema): unknown {
+export function compactExample(value: unknown, depth = 0, schema?: Schema, maximumObjectDepth = Infinity): unknown {
+  // The stricter response-header profile can omit nested example details only
+  // where compactSchema already publishes a bare object. Keep authored const
+  // values intact; full examples remain at the free declaration URL.
+  if (schema && 'const' in schema) return value
   if (typeof value === 'string') {
     // Cryptographic commitments are identity, not replaceable prose. Their
     // authored const values remain in compact schemas and must match exactly.
@@ -154,13 +158,14 @@ export function compactExample(value: unknown, depth = 0, schema?: Schema): unkn
     // contract that only exist in this list.
     const scalarList = value.every((item) => typeof item === 'string' && item.length <= 64)
     if (scalarList) return [...value]
-    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined))
+    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined, maximumObjectDepth))
   }
   if (isSchema(value)) {
+    if (depth >= maximumObjectDepth) return {}
     const output: Record<string, unknown> = {}
     for (const [key, entry] of Object.entries(value)) {
       const properties = isSchema(schema?.properties) ? schema.properties : undefined
-      output[key] = compactExample(entry, depth + 1, isSchema(properties?.[key]) ? properties[key] : undefined)
+      output[key] = compactExample(entry, depth + 1, isSchema(properties?.[key]) ? properties[key] : undefined, maximumObjectDepth)
     }
     return output
   }

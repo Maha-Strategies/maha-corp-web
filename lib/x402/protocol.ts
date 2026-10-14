@@ -19,6 +19,8 @@
 // one answers a request carrying no key at all. The discriminator is the
 // presence of an API key, so the two never contend for the same request.
 
+import { assertPaymentRequiredHeader } from './response-header-budget.ts'
+
 export type X402Network = `eip155:${number}` | `solana:${string}`
 
 export type ResourceInfo = {
@@ -507,7 +509,7 @@ async function safelyConfirm(confirm: SettlementConfirmer | undefined, settlemen
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */
 export function encodeChallengeHeader(body: PaymentRequiredBody): string {
-  return Buffer.from(JSON.stringify(body), 'utf8').toString('base64')
+  return assertPaymentRequiredHeader(Buffer.from(JSON.stringify(body), 'utf8').toString('base64'))
 }
 
 /**

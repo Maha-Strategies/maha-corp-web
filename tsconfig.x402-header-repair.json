@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true, "incremental": false },
+  "include": ["lib/x402/response-header-budget.ts", "lib/x402/declaration-compaction.ts", "lib/x402/discovery.ts", "lib/x402/protocol.ts", "lib/x402/gateway.ts", "lib/api-v1/with402Payment.ts", "test/x402-response-header-size.test.ts", "scripts/verify-x402-header-repair-local.ts"],
+  "exclude": ["node_modules"],
+  "files": []
+}
