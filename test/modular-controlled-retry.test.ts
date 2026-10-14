@@ -7,7 +7,7 @@ import { handlerFor } from '../lib/api-v1/handlers.ts'
 import { createEndpointRouter } from '../lib/api-v1/router.ts'
 import { memoryPaymentStore } from '../lib/api-v1/payment-store.ts'
 import { prepareModularPurchase, submitModularPurchase, type ModularCapsule } from '../lib/x402/modular-buyer.ts'
-import { checkRefusedOriginal } from '../lib/x402/modular-retry.ts'
+import { checkRefusedOriginal, checkPaidOriginal } from '../lib/x402/modular-retry.ts'
 import { CAP } from '../scripts/run-modular-indexing.ts'
 
 const key = ('0x' + '42'.repeat(32)) as `0x${string}`, account = privateKeyToAccount(key)
@@ -69,4 +69,36 @@ test('refused payment records sanitized status and does not retry or claim no se
 test('untrusted provider error text is never copied into evidence', async () => {
   const result = await submitModularPurchase(contract, original, { now: CLOCK, fetchImpl: async () => Response.json({ error: { code: 'private-provider-key' } }, { status: 500 }) })
   assert.ok('errorCode' in result); assert.equal(result.errorCode, 'unclassified_http_failure')
+})
+const paidOptions = () => ({ ...options(), transaction: '0x' + 'ab'.repeat(32),
+  report: { ...report, steps: [{ ...report.steps[0], status: 409, errorCode: 'settlement_unknown_do_not_repay' }] },
+  authorizationUsed: async () => true, confirm: async () => true })
+test('paid original gate retains the exact existing signed capsule and reports no replacement', async () => {
+  const result = await checkPaidOriginal(paidOptions())
+  assert.deepEqual(result.capsule, original); assert.equal(result.publicEvidence.noReplacementAuthorization, true)
+  assert.equal(JSON.stringify(result.publicEvidence).includes(original.headers['PAYMENT-SIGNATURE']), false)
+})
+test('a transfer without the original authorization and native receipt proof cannot unlock continuation', async () => {
+  await assert.rejects(checkPaidOriginal({ ...paidOptions(), authorizationUsed: async () => false }), /not_chain_confirmed/)
+  await assert.rejects(checkPaidOriginal({ ...paidOptions(), confirm: async () => false }), /not_chain_confirmed/)
+})
+test('changed paid-original amount, HTTP state or encrypted binding prevents continuation', async () => {
+  await assert.rejects(checkPaidOriginal({ ...paidOptions(), report: { ...report, authorizedBaseUnits: '16003' } }), /scope_mismatch/)
+  await assert.rejects(checkPaidOriginal({ ...paidOptions(), outbox: encrypt({ ...original, amount: '16003' }) }), /invalid_or_expired/)
+})
+test('chain-confirmation delay recovers by reading the same retained purchase, with exactly one settlement', async () => {
+  let now = CLOCK, settlements = 0, confirmed = false
+  const tx = '0x' + 'ab'.repeat(32)
+  const server = createEndpointRouter({ environment: { NODE_ENV: 'production', VERCEL: '1', BASE_PAYEE_ADDRESS: MODULAR_RELEASE.payee }, now: () => now,
+    store: memoryPaymentStore(() => now), recordDelivery: async () => {},
+    facilitator: { verify: async () => ({ ok: true, payer: account.address }), settle: async () => { settlements++; return { ok: true, payer: account.address, transaction: tx } } },
+    confirm: async () => { if (!confirmed) throw Error('receipt_not_mined_yet'); return true } })
+  const transport: typeof fetch = (url, init) => server(new Request(String(url), init))
+  const capsule = await prepareModularPurchase(contract, { input: releaseExample(first.id)!.input, payer: account.address, maximumAmount: BigInt(first.amount), now,
+    fetchImpl: transport, signTypedData: typed => account.signTypedData(typed as Parameters<typeof account.signTypedData>[0]), persist: async () => {} })
+  const initial = await submitModularPurchase(contract, capsule, { fetchImpl: transport, now })
+  assert.ok('status' in initial); assert.equal(initial.status, 409); assert.equal(settlements, 1)
+  now += 3500; confirmed = true
+  const recovered = await submitModularPurchase(contract, capsule, { fetchImpl: transport, now, recovery: 'retained-result' })
+  assert.equal(recovered.delivery, 'validated_response'); assert.equal(recovered.transaction, tx); assert.equal(settlements, 1)
 })

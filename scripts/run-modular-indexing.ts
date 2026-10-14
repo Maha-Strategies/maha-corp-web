@@ -14,9 +14,11 @@ import { readProductIndex } from '../lib/x402/product-index.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
 import { validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
 import { usdcNetwork } from '../lib/x402/networks.ts'
-import { checkRefusedOriginal } from '../lib/x402/modular-retry.ts'
+import { checkRefusedOriginal, checkPaidOriginal } from '../lib/x402/modular-retry.ts'
 
 export const CONFIRMATION = 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC_CONTROLLED_RETRY_38519203625'
+export const CONTINUATION_CONFIRMATION = 'RECOVER_PAID_16002_THEN_295_ONCE_TOTAL_MAX_6098840'
+export const ORIGINAL_TRANSACTION = '0xed449d231780c0f65592f367638ed5de6d1f39e8b7866981cfad4ef315d6cded'
 export const CAP = 6098840n
 const ORIGIN = 'https://www.mahastrategies.com', SCOPE = MODULAR_RELEASE.version
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
@@ -41,7 +43,8 @@ export async function observeModularIndex() {
 }
 export async function run() {
   const args = process.argv.slice(2)
-  if (args.length > 1 || args.some(a => !['--pay', '--observe', '--loopback'].includes(a))) throw Error('unsupported_mode')
+  if (args.length > 1 || args.some(a => !['--pay', '--continue', '--observe', '--loopback'].includes(a))) throw Error('unsupported_mode')
+  const continuation = args.includes('--continue')
   if (args.includes('--observe')) { console.log(JSON.stringify(await observeModularIndex())); return }
   // No signing credential is inspected until every unsigned quote passes.
   for (const e of PRODUCTION_ENDPOINTS) {
@@ -51,9 +54,10 @@ export async function run() {
     if (response.status !== 402 || !header || header.length > 12000) throw Error('unpaid_preflight_failed')
     assertModularQuote(decodeChallenge(header), e.id)
   }
-  if (!args.includes('--pay')) { console.log(JSON.stringify({ state: 'unpaid_preflight_passed', count: 296, maximumBaseUnits: String(CAP), index: await observeModularIndex() })); return }
+  if (!args.includes('--pay') && !continuation) { console.log(JSON.stringify({ state: 'unpaid_preflight_passed', count: 296, maximumBaseUnits: String(CAP), index: await observeModularIndex() })); return }
   const output = process.env.MODULAR_INDEXING_OUTPUT_PATH
-  if (!output || process.env.MODULAR_INDEXING_CONFIRMATION !== CONFIRMATION || process.env.GITHUB_RUN_ATTEMPT !== '1') throw Error('explicit_first_attempt_approval_required')
+  if (!output || process.env.MODULAR_INDEXING_CONFIRMATION !== (continuation ? CONTINUATION_CONFIRMATION : CONFIRMATION) || process.env.GITHUB_RUN_ATTEMPT !== '1'
+    || continuation && process.env.GITHUB_REF !== 'refs/heads/codex/modular296-recovery-20261014') throw Error('explicit_first_attempt_approval_required')
   const key = process.env.X402_BUYER_PRIVATE_KEY?.trim()
   if (!key || !/^0x[0-9a-f]{64}$/i.test(key)) throw Error('protected_signer_unavailable')
   const account = privateKeyToAccount(key as `0x${string}`)
@@ -61,12 +65,14 @@ export async function run() {
   const asset = usdcNetwork('eip155:8453').asset as `0x${string}`
   const client = createPublicClient({ chain: base, transport: http(process.env.BASE_RPC_URL || 'https://mainnet.base.org', { retryCount: 0, timeout: 15000 }) })
   const abi = parseAbi(['function balanceOf(address) view returns(uint256)', 'function authorizationState(address,bytes32) view returns(bool)'])
-  if (await client.getChainId() !== 8453 || await client.readContract({ address: asset, abi, functionName: 'balanceOf', args: [account.address] }) < CAP) throw Error('wrong_chain_or_insufficient_batch_funding')
+  const remainingCap = continuation ? CAP - BigInt(PRODUCTION_ENDPOINTS[0].amount) : CAP
+  if (await client.getChainId() !== 8453 || await client.readContract({ address: asset, abi, functionName: 'balanceOf', args: [account.address] }) < remainingCap) throw Error('wrong_chain_or_insufficient_batch_funding')
   type Step = { id: string; path: string; amountBaseUnits: string; state: string; transaction?: string; responseDigest?: string; chainConfirmed?: boolean; payloadVerified?: boolean; status?: number; errorCode?: string; settlement?: string; delivery?: string }
   const evidence = { version: SCOPE, classification: 'publisher-funded-operator-activity', customerRevenue: false, organicDemand: false, automaticRepayment: false,
     network: MODULAR_RELEASE.network, buyer: account.address, payee: MODULAR_RELEASE.payee, maximumBaseUnits: String(CAP), authorizedBaseUnits: '0', confirmedBaseUnits: '0',
     startedAt: new Date().toISOString(), state: 'running', steps: [] as Step[], index: await observeModularIndex(),
-    controlledRetry: null as Awaited<ReturnType<typeof checkRefusedOriginal>> | null }
+    controlledRetry: null as Awaited<ReturnType<typeof checkRefusedOriginal>> | null,
+    controlledRecovery: null as Awaited<ReturnType<typeof checkPaidOriginal>>['publicEvidence'] | null }
   const packets: unknown[] = []
   const encryptionKey = createHmac('sha256', key).update(SCOPE + ':private-outbox').digest()
   const save = async () => {
@@ -83,15 +89,39 @@ export async function run() {
       return JSON.parse(await readFile(file, 'utf8'))
     }
     const first = PRODUCTION_ENDPOINTS[0], firstHandler = handlerFor(first.id, first.amount)!
-    const block = await client.getBlock({ blockTag: 'latest' })
-    evidence.controlledRetry = await checkRefusedOriginal({ key, payer: account.address, scope: SCOPE, payee: MODULAR_RELEASE.payee,
-      maximumBaseUnits: String(CAP), report: await load(''), outbox: await load('.recovery-encrypted.json'), now: Date.now(), chainTimestamp: block.timestamp,
-      contract: { id: first.id, path: first.path, amount: first.amount, recoverySeconds: 86400,
-        validateInput: x => firstHandler.input.parse(x), validateOutput: x => firstHandler.output.parse(x) },
-      authorizationUsed: (payer, nonce) => client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [payer as `0x${string}`, nonce as `0x${string}`] }) })
-    await save()
-    console.log(JSON.stringify({ state: 'controlled_retry_gate_passed', previousRunId: '38519203625', previousAuthorizationExpired: true, previousNonceUnused: true, maximumBaseUnits: String(CAP) }))
-    for (const e of PRODUCTION_ENDPOINTS) {
+    const originalContract = { id: first.id, path: first.path, amount: first.amount, recoverySeconds: 86400,
+      validateInput: (x: unknown) => firstHandler.input.parse(x), validateOutput: (x: unknown) => {
+        const value = firstHandler.output.parse(x)
+        if (demandDigest(value) !== demandDigest(releaseExample(first.id)!.output)) throw Error('deterministic_delivery_mismatch')
+        return value
+      } }
+    const authorizationUsed = (payer: string, nonce: string) => client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [payer as `0x${string}`, nonce as `0x${string}`] })
+    if (continuation) {
+      const outbox = await load('.recovery-encrypted.json')
+      const recovered = await checkPaidOriginal({ key, payer: account.address, scope: SCOPE, payee: MODULAR_RELEASE.payee, maximumBaseUnits: String(CAP),
+        transaction: ORIGINAL_TRANSACTION, contract: originalContract, report: await load(''), outbox, now: Date.now(), authorizationUsed,
+        confirm: async expected => receiptMatchesAuthorization(await client.getTransactionReceipt({ hash: expected.transaction as `0x${string}` }), expected) })
+      evidence.controlledRecovery = recovered.publicEvidence
+      evidence.authorizedBaseUnits = first.amount; evidence.confirmedBaseUnits = first.amount
+      packets.push(outbox.packets[0]) // Preserve the already-issued capsule, never sign it again.
+      const firstStep: Step = { id: first.id, path: first.path, amountBaseUnits: first.amount, state: 'chain_paid_delivery_recovery_pending', transaction: ORIGINAL_TRANSACTION, chainConfirmed: true }
+      evidence.steps.push(firstStep); await save()
+      const result = await submitModularPurchase(originalContract, recovered.capsule, { fetchImpl: transport, recovery: 'retained-result' })
+      firstStep.status = 'status' in result ? result.status : undefined
+      firstStep.errorCode = 'errorCode' in result ? result.errorCode : undefined
+      firstStep.settlement = result.settlement; firstStep.delivery = result.delivery; await save()
+      if (result.delivery !== 'validated_response' || result.transaction !== ORIGINAL_TRANSACTION || !('replayed' in result) || !result.replayed) throw Error('paid_original_delivery_not_recovered')
+      firstStep.payloadVerified = true; firstStep.responseDigest = demandDigest(result.data); firstStep.state = 'paid_original_recovered_without_repayment'; await save()
+      console.log(JSON.stringify({ state: 'paid_original_recovered_without_repayment', originalTransaction: ORIGINAL_TRANSACTION, confirmedBaseUnits: first.amount, remainingPurchases: 295 }))
+    } else {
+      const block = await client.getBlock({ blockTag: 'latest' })
+      evidence.controlledRetry = await checkRefusedOriginal({ key, payer: account.address, scope: SCOPE, payee: MODULAR_RELEASE.payee,
+        maximumBaseUnits: String(CAP), report: await load(''), outbox: await load('.recovery-encrypted.json'), now: Date.now(), chainTimestamp: block.timestamp,
+        contract: originalContract, authorizationUsed })
+      await save()
+      console.log(JSON.stringify({ state: 'controlled_retry_gate_passed', previousRunId: '38519203625', previousAuthorizationExpired: true, previousNonceUnused: true, maximumBaseUnits: String(CAP) }))
+    }
+    for (const e of continuation ? PRODUCTION_ENDPOINTS.slice(1) : PRODUCTION_ENDPOINTS) {
       const h = handlerFor(e.id, e.amount)!, sample = releaseExample(e.id)!, input = h.input.parse(sample.input)
       // Stable, private nonce seed prevents a later workflow dispatch making a
       // replacement purchase. No reauthorization or automatic resume exists.
@@ -117,7 +147,13 @@ export async function run() {
           packets.push({ id: e.id, iv: iv.toString('hex'), ciphertext: ciphertext.toString('base64'), tag: cipher.getAuthTag().toString('hex') })
           evidence.authorizedBaseUnits = String(next); step.state = 'authorized_outcome_unknown'; await save()
         } })
-      const result = await submitModularPurchase(contract, capsule, { fetchImpl: transport })
+      let result = await submitModularPurchase(contract, capsule, { fetchImpl: transport })
+      // A block may arrive after the initial HTTP reply. Retained-result mode
+      // only reads/reconciles the SAME purchase; it cannot execute settle.
+      if (continuation && result.delivery === 'unresolved' && 'status' in result && result.status === 409) {
+        await wait(3500)
+        result = await submitModularPurchase(contract, capsule, { fetchImpl: transport, recovery: 'retained-result' })
+      }
       step.status = 'status' in result ? result.status : undefined
       step.errorCode = 'errorCode' in result ? result.errorCode : undefined
       step.settlement = result.settlement; step.delivery = result.delivery; await save()
@@ -126,7 +162,7 @@ export async function run() {
       const parsed = parsePaymentHeader(capsule.headers['PAYMENT-SIGNATURE'])
       if (!parsed.ok) throw Error('capsule_invalid')
       const authorization = parsed.payment.payload.authorization as { nonce: string }
-      const receipt = await client.getTransactionReceipt({ hash: result.transaction as `0x${string}` })
+      const receipt = await client.waitForTransactionReceipt({ hash: result.transaction as `0x${string}`, timeout: 12000, pollingInterval: 1500 })
       if (!receiptMatchesAuthorization(receipt, { transaction: result.transaction, payer: account.address.toLowerCase(), payee: MODULAR_RELEASE.payee, amount: e.amount, nonce: authorization.nonce })) throw Error('chain_authorization_not_confirmed_do_not_repay')
       step.chainConfirmed = true; step.state = 'confirmed_and_delivered'
       evidence.confirmedBaseUnits = String(BigInt(evidence.confirmedBaseUnits) + BigInt(e.amount)); await save()

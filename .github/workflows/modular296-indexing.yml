@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC_CONTROLLED_RETRY_38519203625'
+        description: 'RECOVER_PAID_16002_THEN_295_ONCE_TOTAL_MAX_6098840'
         required: true
         type: string
 permissions:
@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   index:
-    if: github.run_attempt == 1
+    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/modular296-recovery-20261014'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: production-x402-canary
@@ -33,16 +33,16 @@ jobs:
       - name: Download the exact refused attempt without decrypting it
         uses: actions/download-artifact@v7
         with:
-          name: modular296-indexing-38519203625
-          run-id: 38519203625
+          name: modular296-indexing-38522050122
+          run-id: 38522050122
           github-token: ${{ github.token }}
           path: ${{ env.MODULAR_PREVIOUS_ATTEMPT_DIRECTORY }}
       - name: Check every unpaid quote without signer access
         run: node --experimental-strip-types scripts/run-modular-indexing.ts
-      - name: Verify expired unused original, retry first once, then original purchases
+      - name: Recover the already-paid response, then 295 single original purchases
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: node --experimental-strip-types scripts/run-modular-indexing.ts --pay
+        run: node --experimental-strip-types scripts/run-modular-indexing.ts --continue
       - name: Preserve redacted evidence and encrypted private recovery outbox
         if: always()
         uses: actions/upload-artifact@v7
