@@ -1,0 +1,46 @@
+name: Approved 296 modular products operator indexing
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'PUBLISHER_FUNDED_296_ONCE_MAX_6_098840_USDC'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+jobs:
+  index:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      MODULAR_INDEXING_OUTPUT_PATH: ${{ github.workspace }}/modular296-indexing-evidence.json
+      MODULAR_INDEXING_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check every unpaid quote without signer access
+        run: node --experimental-strip-types scripts/run-modular-indexing.ts
+      - name: Approved single original purchase per product
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-modular-indexing.ts --pay
+      - name: Preserve redacted evidence and encrypted private recovery outbox
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: modular296-indexing-${{ github.run_id }}
+          path: |
+            ${{ env.MODULAR_INDEXING_OUTPUT_PATH }}
+            ${{ env.MODULAR_INDEXING_OUTPUT_PATH }}.recovery-encrypted.json
+          retention-days: 90
+          if-no-files-found: warn

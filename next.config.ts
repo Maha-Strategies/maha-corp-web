@@ -4,6 +4,7 @@ import { COLLECTION_HUB_PATHS, COLLECTION_INTERNAL_PATH } from './lib/collection
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { EBOOK_IDS, ebookArtifacts } from './lib/x402/ebook-contract.ts'
+import { MODULAR_RUNTIME_TRACES } from './lib/api-v1/runtime-assets.ts'
 
 // An enabled book release must never be built without its private assets.
 // CLI uploads include them only in server functions, never public/ or Git.
@@ -16,6 +17,7 @@ if (process.env.X402_CABEZON_EBOOKS_ENABLED === 'true' && process.env.X402_EBOOK
 const nextConfig: NextConfig = {
   serverExternalPackages: ['@rdkit/rdkit'],
   outputFileTracingIncludes: {
+    ...MODULAR_RUNTIME_TRACES,
     '/api/v1/micro/chemistry-*': ['./node_modules/@rdkit/rdkit/dist/RDKit_minimal.wasm'],
     // Shared microproduct contracts read pinned local book metadata; licensed
     // paid packs need the original Markdown in their private server bundle.

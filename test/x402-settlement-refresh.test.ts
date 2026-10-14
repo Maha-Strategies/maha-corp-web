@@ -6,6 +6,7 @@ import { bundledLedger, readPublicSettlementLedger, refreshStoredSettlements, va
 import { buildLedger } from '../lib/x402/settlement-ledger.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from '../lib/x402/operator-settlement-receipts.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
+import { modularLedgerPrices } from '../lib/api-v1/production-release.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 
 const now = new Date('2026-09-09T03:00:00Z')
@@ -46,7 +47,7 @@ test('old catalogue snapshots validate and reproject without losing observed his
 
 test('scheduled scanner includes every available product and declared historical price', () => {
   const ledger = ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
-  assert.deepEqual(ledger.summary.byProduct.map(o => o.id).sort(), payableOffers().map(o => o.id).sort())
+  assert.deepEqual(ledger.summary.byProduct.map(o => o.id).sort(), [...payableOffers().map(o => o.id), ...modularLedgerPrices().map(o => o.id)].sort())
   for (const offer of payableOffers()) for (const amount of offer.supersededAmounts ?? []) {
     const result = ledgerFromRows([{ ...row(BigInt(100)), amountBaseUnits: BigInt(amount) }], BigInt(1), BigInt(500), now.toISOString())
     assert.equal(result.entries[0].product?.id, offer.id)

@@ -1,7 +1,8 @@
 import { MICRO_MAX_REQUEST_BYTES } from './micro-contracts.ts'
 
 /** Bounded fatal-UTF8 read with a deadline; callers use a clone when needed. */
-export async function readMicroBody(request: Request): Promise<unknown> {
+export async function readMicroBody(request: Request, maximumBytes = MICRO_MAX_REQUEST_BYTES): Promise<unknown> {
+  if (!Number.isInteger(maximumBytes) || maximumBytes < 1 || maximumBytes > 262144) throw new Error('invalid_body_limit')
   const reader = request.body?.getReader()
   if (!reader) throw new Error('invalid_input')
   let length = 0
@@ -17,7 +18,7 @@ export async function readMicroBody(request: Request): Promise<unknown> {
       if (timedOut) throw new Error('body_timeout')
       if (done) break
       length += value.byteLength
-      if (length > MICRO_MAX_REQUEST_BYTES) { void reader.cancel().catch(() => {}); throw new Error('payload_too_large') }
+      if (length > maximumBytes) { void reader.cancel().catch(() => {}); throw new Error('payload_too_large') }
       chunks.push(value)
     }
     const bytes = new Uint8Array(length)

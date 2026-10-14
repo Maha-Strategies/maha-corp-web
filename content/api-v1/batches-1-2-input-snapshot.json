@@ -1,0 +1,602 @@
+[
+  {
+    "id": "book-section-the-imagined-life",
+    "path": "/api/v1/library/the-imagined-life/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-volcanic-engine",
+    "path": "/api/v1/library/the-volcanic-engine/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "citation-binding-check",
+    "path": "/api/v1/verify/evidence/citation-bindings",
+    "method": "POST",
+    "inputDigest": "sha256:9db000e260e44917701906ea5ca04206240c2e2eae66c8d7e3551590b657a15d"
+  },
+  {
+    "id": "revision-lineage-check",
+    "path": "/api/v1/verify/provenance/revision-lineage",
+    "method": "POST",
+    "inputDigest": "sha256:2787453e50abb989320e0270dde63dbf325034635a51a05f934e7d6d5644b335"
+  },
+  {
+    "id": "audit-export-normalizer",
+    "path": "/api/v1/verify/provenance/event-export",
+    "method": "POST",
+    "inputDigest": "sha256:539257297369a4cfee2b33b4ef447cfef307032bbb0e48f4ae1d29ab41db682c"
+  },
+  {
+    "id": "dimensional-consistency-check",
+    "path": "/api/v1/compute/numerics/dimensions",
+    "method": "POST",
+    "inputDigest": "sha256:1a0d54d51b381dca8a4b36239565df3a0d7ead2d52975908e61c27570c537810"
+  },
+  {
+    "id": "exact-interpolation-receipt",
+    "path": "/api/v1/compute/numerics/interpolation",
+    "method": "POST",
+    "inputDigest": "sha256:c2a684f8c1c9f55dbb9684bbbf6c7a07d5a908543edd0dc78a6a208e46c3fea6"
+  },
+  {
+    "id": "sampled-series-integration",
+    "path": "/api/v1/compute/numerics/integration",
+    "method": "POST",
+    "inputDigest": "sha256:f23c1dd594fa0e4fa8dea8d9d1e168d70c650b0febdeec23f849d0f846fd9e88"
+  },
+  {
+    "id": "evidence-conflict-comparator",
+    "path": "/api/v1/context/evidence/conflicts",
+    "method": "POST",
+    "inputDigest": "sha256:a018fbae65bc4daa884278fd0dd107426bf038cd76d9da159b7a94c0968909e6"
+  },
+  {
+    "id": "astrology-experiment-plan-check",
+    "path": "/api/v1/celestial/experiments/plan-check",
+    "method": "POST",
+    "inputDigest": "sha256:f9797ab2c40da56cdc7f8dda3cf366a499262471d5f2f12acac1200853ceac24"
+  },
+  {
+    "id": "unit-uncertainty-conversion",
+    "path": "/api/v1/compute/numerics/unit-uncertainty",
+    "method": "POST",
+    "inputDigest": "sha256:91d113de3764b20cf1903dde6942e7a314947f18050111afd77878cd9a41475d"
+  },
+  {
+    "id": "exact-linear-system",
+    "path": "/api/v1/compute/numerics/linear-system",
+    "method": "POST",
+    "inputDigest": "sha256:c8c649a544f1e6e2e7422c906624836345092094e782a5a60b451d0e91edf961"
+  },
+  {
+    "id": "bracketed-polynomial-root",
+    "path": "/api/v1/compute/numerics/polynomial-root",
+    "method": "POST",
+    "inputDigest": "sha256:a589b59f933b8cb5a4e9b65dfd5f8c4877615fa424579992c710409c3e7dd789"
+  },
+  {
+    "id": "covariance-uncertainty",
+    "path": "/api/v1/compute/numerics/covariance",
+    "method": "POST",
+    "inputDigest": "sha256:7cce8fcd702062ac21d7f102ab2b15dbd636244b155818d19bca34a6748a2e8c"
+  },
+  {
+    "id": "policy-version-comparison",
+    "path": "/api/v1/context/policies/version-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:91d1d70ee4cebdfc86402085ee203dfa1d6c066a0f4774626a37d4cabc05b74f"
+  },
+  {
+    "id": "control-evidence-gaps",
+    "path": "/api/v1/verify/evidence/control-gaps",
+    "method": "POST",
+    "inputDigest": "sha256:6d6c0f78b41bca98b69add164d4fc84d94fe637a295933b7119db046bab31f51"
+  },
+  {
+    "id": "mcp-contract-compatibility",
+    "path": "/api/v1/verify/tools/contract-compatibility",
+    "method": "POST",
+    "inputDigest": "sha256:08737af48742e4cd08d764007ae3691e964fa319d8c0f6848d93f6d581212acb"
+  },
+  {
+    "id": "tool-permission-diff",
+    "path": "/api/v1/verify/tools/permission-diff",
+    "method": "POST",
+    "inputDigest": "sha256:d957d82f98f49b8a9aec06c30b127af0d422f9cf9e0c8f80351c5b130037cccd"
+  },
+  {
+    "id": "publication-bundle-consistency",
+    "path": "/api/v1/verify/publications/bundle-consistency",
+    "method": "POST",
+    "inputDigest": "sha256:ebb047c993b6e35e78ef728769455812e5bcfa98c7a13c4b3d254cdbea2f079a"
+  },
+  {
+    "id": "celestial-result-compatibility",
+    "path": "/api/v1/celestial/results/compatibility",
+    "method": "POST",
+    "inputDigest": "sha256:a184c666caa5bd86d9aa6a8765beb37bb9ffc2470c5685f16652a83d964a1dbd"
+  },
+  {
+    "id": "evidence-frame-compatibility",
+    "path": "/api/v1/context/evidence/frame-compatibility",
+    "method": "POST",
+    "inputDigest": "sha256:5f4ceea02a8b733e269ac22bc210dd691336a663219a9b02c8f37bba91629f53"
+  },
+  {
+    "id": "evidence-scope-check",
+    "path": "/api/v1/context/evidence/scope",
+    "method": "POST",
+    "inputDigest": "sha256:15055b38a1da1baeb30d330569ccf8de9ec5e3a5504a17b69ab06875bbee7abf"
+  },
+  {
+    "id": "evidence-version-selection-check",
+    "path": "/api/v1/context/evidence/version-selection",
+    "method": "POST",
+    "inputDigest": "sha256:c2cc1a70bbfb0c92894d08b5ad1106478121c67b37681e333e133141ef53b24f"
+  },
+  {
+    "id": "context-manifest-check",
+    "path": "/api/v1/context/evidence/manifest",
+    "method": "POST",
+    "inputDigest": "sha256:479723607b5b5ddcc1407b228038a454453ee897305b78e1677748223d00a6d4"
+  },
+  {
+    "id": "biology-dna-rna-composition",
+    "path": "/api/v1/compute/biology/sequence-composition",
+    "method": "POST",
+    "inputDigest": "sha256:0d514a20c1e55f0d487263e01f2d5e5e6d2e862cd05a1f176e6b3c8f606b3b1b"
+  },
+  {
+    "id": "chemistry-dilution-calculator",
+    "path": "/api/v1/compute/chemistry/dilution",
+    "method": "POST",
+    "inputDigest": "sha256:3ce59ceade2e6e0d6b4a4848c1242497f1098cba393e2558ed1ae769075eae65"
+  },
+  {
+    "id": "materials-thermal-stack-resistance",
+    "path": "/api/v1/compute/materials/thermal-stack",
+    "method": "POST",
+    "inputDigest": "sha256:bd16c47302f5c85edfcc19f10feb2fa346af561de071bca160133af71ea37950"
+  },
+  {
+    "id": "book-section-the-maha-principle",
+    "path": "/api/v1/library/the-maha-principle/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-orbital-mind",
+    "path": "/api/v1/library/the-orbital-mind/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "catalogue-price-unit-audit",
+    "path": "/api/v1/verify/payments/price-units",
+    "method": "POST",
+    "inputDigest": "sha256:90594256c2848aa0142d04567e3cd7a9f9d333bc86ef308f4468e27cbf2d1053"
+  },
+  {
+    "id": "research-publication-update-snapshot",
+    "path": "/api/v1/intel/publications/updates",
+    "method": "POST",
+    "inputDigest": "sha256:3fa5f718cf0b11eedf26fc2316148e1017901157bd186119cead48ed2fe77b83"
+  },
+  {
+    "id": "research-data-software-links",
+    "path": "/api/v1/intel/publications/declared-relations",
+    "method": "POST",
+    "inputDigest": "sha256:3fa5f718cf0b11eedf26fc2316148e1017901157bd186119cead48ed2fe77b83"
+  },
+  {
+    "id": "research-funding-lineage",
+    "path": "/api/v1/intel/publications/declared-funding",
+    "method": "POST",
+    "inputDigest": "sha256:3fa5f718cf0b11eedf26fc2316148e1017901157bd186119cead48ed2fe77b83"
+  },
+  {
+    "id": "research-bibliography-resolution",
+    "path": "/api/v1/library/bibliography/resolve-dois",
+    "method": "POST",
+    "inputDigest": "sha256:272af52a491c6e627393b61d92afdecc6c9ae7d8341f99f77841acabe5e5b94b"
+  },
+  {
+    "id": "dataset-null-pattern-audit",
+    "path": "/api/v1/verify/datasets/null-patterns",
+    "method": "POST",
+    "inputDigest": "sha256:4fbdfddf55b176b435e81b7d1d3f5ceee89748a306b2cf19feec2a7ff5798f55"
+  },
+  {
+    "id": "dataset-key-integrity",
+    "path": "/api/v1/verify/datasets/key-integrity",
+    "method": "POST",
+    "inputDigest": "sha256:ae28667c9194b1882bc2d294a3830056392077cdb5693480fb0fffc1982975a8"
+  },
+  {
+    "id": "dataset-join-loss-preview",
+    "path": "/api/v1/compute/datasets/join-loss",
+    "method": "POST",
+    "inputDigest": "sha256:a14ab26286d824ee478dbb324a69a4cdd5cb754711963fe29384f350e26383c3"
+  },
+  {
+    "id": "dataset-schema-evolution-plan",
+    "path": "/api/v1/verify/datasets/schema-evolution",
+    "method": "POST",
+    "inputDigest": "sha256:1be641ce1531f205a8fd411e63440b120cd1a7e2cbd24b72f09b67fb15f123a0"
+  },
+  {
+    "id": "dataset-export-roundtrip-check",
+    "path": "/api/v1/verify/datasets/export-roundtrip",
+    "method": "POST",
+    "inputDigest": "sha256:0367a92170b50285024cf5bffadf15ffb3a12e45da8be5335be6e64bc05cd9ba"
+  },
+  {
+    "id": "research-trial-status-snapshot",
+    "path": "/api/v1/intel/trials/registry-status",
+    "method": "POST",
+    "inputDigest": "sha256:8202f37ab32454fd04d8ab6e4eec4dad5db8e5ab67890fb709e64751c73ffc48"
+  },
+  {
+    "id": "book-section-the-synthetic-self",
+    "path": "/api/v1/library/the-synthetic-self/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-unfinished-species",
+    "path": "/api/v1/library/the-unfinished-species/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-cosmic-recursion",
+    "path": "/api/v1/library/the-cosmic-recursion/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-borrowed-light",
+    "path": "/api/v1/library/the-borrowed-light/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "book-section-the-material-floor",
+    "path": "/api/v1/library/the-material-floor/section",
+    "method": "POST",
+    "inputDigest": "sha256:7bb08b1bab78b3c21a3cf9aac5d53db7dc4ea3f7defa114dbbbc5a56b3c0a2fd"
+  },
+  {
+    "id": "publication-pinned-brief",
+    "path": "/api/v1/library/publications/retrieve",
+    "method": "POST",
+    "inputDigest": "sha256:2d0f37a6314c5b02434b0f77645d8eca2d96c2e148eb6c96e04b56cc28537b91"
+  },
+  {
+    "id": "publication-release-comparison",
+    "path": "/api/v1/library/publications/compare",
+    "method": "POST",
+    "inputDigest": "sha256:03235d0d57afa0c228d0b3705525b8463fe03ebda0c31a226dc3973988c913fe"
+  },
+  {
+    "id": "publication-citation-coverage",
+    "path": "/api/v1/verify/publications/citation-coverage",
+    "method": "POST",
+    "inputDigest": "sha256:4a106c02db13fe6e5f5db091dc362606a672f2be2f2dc7749fc86e915b7c53b2"
+  },
+  {
+    "id": "publication-correction-impact",
+    "path": "/api/v1/intel/publications/correction-impact",
+    "method": "POST",
+    "inputDigest": "sha256:0f5b180849c0dffbf54e053e17d879b9e5d0faa18c4f41b431ef21cbcc9e6f0b"
+  },
+  {
+    "id": "publication-package-preflight",
+    "path": "/api/v1/verify/publications/preflight",
+    "method": "POST",
+    "inputDigest": "sha256:93a183690f66d2fcbe223d1e6ea3a1bc811a672e3b801a7934d903f0a660f753"
+  },
+  {
+    "id": "quantum-measurement-uncertainty",
+    "path": "/api/v1/compute/quantum/measurement-uncertainty",
+    "method": "POST",
+    "inputDigest": "sha256:dfcaf60e4220373ba212776aad6a0cdbc5b435698e1115e46b224112c220301e"
+  },
+  {
+    "id": "quantum-state-validity",
+    "path": "/api/v1/compute/quantum/state-validity",
+    "method": "POST",
+    "inputDigest": "sha256:ec677a1625be441b535ac0062553057bd04c8d922eedaad3feb8204f922693f8"
+  },
+  {
+    "id": "quantum-observable-expectations",
+    "path": "/api/v1/compute/quantum/observable-expectations",
+    "method": "POST",
+    "inputDigest": "sha256:ec677a1625be441b535ac0062553057bd04c8d922eedaad3feb8204f922693f8"
+  },
+  {
+    "id": "quantum-state-fidelity-purity",
+    "path": "/api/v1/compute/quantum/state-fidelity-purity",
+    "method": "POST",
+    "inputDigest": "sha256:42b75a82fb6ad422d86bd92999d1faa5a41d0627c4a88a32aeeed0b0b279465a"
+  },
+  {
+    "id": "quantum-coherence-budget",
+    "path": "/api/v1/compute/quantum/coherence-budget",
+    "method": "POST",
+    "inputDigest": "sha256:da889eca86e5fee885a61c0438ade00a31a3f9d5531db1bdd5eb2607bc942cac"
+  },
+  {
+    "id": "quantum-readout-calibration",
+    "path": "/api/v1/compute/quantum/readout-calibration",
+    "method": "POST",
+    "inputDigest": "sha256:efbdd53ef4f8105b095068951a98667872971d53fe36acc82f8e7fd8e6177176"
+  },
+  {
+    "id": "quantum-circuit-lint",
+    "path": "/api/v1/compute/quantum/circuit-lint",
+    "method": "POST",
+    "inputDigest": "sha256:70e9242e14b34edd012c62102d8284b95bb2fda684ae17721bf4668f469a8a70"
+  },
+  {
+    "id": "quantum-randomized-benchmarking-fit",
+    "path": "/api/v1/compute/quantum/randomized-benchmarking-fit",
+    "method": "POST",
+    "inputDigest": "sha256:e78b44add8b8c5b47ada0bb218fb67e646a0d03f4d4021902dcdcd8bff2ad7b0"
+  },
+  {
+    "id": "quantum-rabi-ramsey-analysis",
+    "path": "/api/v1/compute/quantum/rabi-ramsey-analysis",
+    "method": "POST",
+    "inputDigest": "sha256:104557dfa4c4a053db1bbdfc6cb81ce1da129f074a87d40d9695e9893d7c70ae"
+  },
+  {
+    "id": "quantum-stabilizer-consistency",
+    "path": "/api/v1/compute/quantum/stabilizer-consistency",
+    "method": "POST",
+    "inputDigest": "sha256:c5abbc550c0767cced43059cdbbe15eb0faefbed8483277b8764a679d292afc6"
+  },
+  {
+    "id": "quantum-surface-code-resource-scenario",
+    "path": "/api/v1/compute/quantum/surface-code-resource-scenario",
+    "method": "POST",
+    "inputDigest": "sha256:a46626688fdb6dcd17eabf1eec68a1fb2bec7b35fbfa5e8d7bd083f682bbc303"
+  },
+  {
+    "id": "quantum-benchmark-comparability",
+    "path": "/api/v1/compute/quantum/benchmark-comparability",
+    "method": "POST",
+    "inputDigest": "sha256:19a4ee3f23eccd4a0f6f93ec9bb1a6b2e43ce818032a5d84d8d1d9d5e53dbd85"
+  },
+  {
+    "id": "quantum-architecture-requirements",
+    "path": "/api/v1/compute/quantum/architecture-requirements",
+    "method": "POST",
+    "inputDigest": "sha256:af244b98329d00dc1c2c853797f97ceca021eab95202e8fdf1abe90ec6f99186"
+  },
+  {
+    "id": "biology-fasta-quality",
+    "path": "/api/v1/compute/biology/fasta-quality",
+    "method": "POST",
+    "inputDigest": "sha256:afd82c9a737f107ef90705741603ce3478753bc3f46363ca2842dc7b8d4e3495"
+  },
+  {
+    "id": "biology-protein-sequence-descriptors",
+    "path": "/api/v1/compute/biology/protein-sequence-descriptors",
+    "method": "POST",
+    "inputDigest": "sha256:e503df3fd57912c50eff5cde6e180e8e779f0f419bbd96b605d2866c53d2684e"
+  },
+  {
+    "id": "biology-pairwise-sequence-comparison",
+    "path": "/api/v1/compute/biology/pairwise-sequence-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:30aca0855012b1f8b8aca125de44ff479f488450fed2fadd2cb4b5217d4569ee"
+  },
+  {
+    "id": "biology-accession-version-check",
+    "path": "/api/v1/compute/biology/accession-version-check",
+    "method": "POST",
+    "inputDigest": "sha256:18fc74e42294c5a6df7897b91b31e94adba9cf408c5fc1982cd2d1255724267b"
+  },
+  {
+    "id": "biology-protein-confidence-audit",
+    "path": "/api/v1/compute/biology/protein-confidence-audit",
+    "method": "POST",
+    "inputDigest": "sha256:58e4f34c7da0efe939b8ec3c69466d307655d135e6268270bae627945994a30b"
+  },
+  {
+    "id": "biology-qpcr-run-quality",
+    "path": "/api/v1/compute/biology/qpcr-run-quality",
+    "method": "POST",
+    "inputDigest": "sha256:325686c9937aa45d0ea69d122128ad0c273708ad01749aed75360af89f33f435"
+  },
+  {
+    "id": "biology-qpcr-relative-expression",
+    "path": "/api/v1/compute/biology/qpcr-relative-expression",
+    "method": "POST",
+    "inputDigest": "sha256:d66a4ef0cce9b744e1fec3a9200d87f24b2b0b847d7e637370b497151b07af85"
+  },
+  {
+    "id": "biology-assay-control-coverage",
+    "path": "/api/v1/compute/biology/assay-control-coverage",
+    "method": "POST",
+    "inputDigest": "sha256:fa7e298c18296ecb589a7d82f0014487558f4e4f1d55ed6d8dd070a6950ac8d5"
+  },
+  {
+    "id": "biology-research-dose-response-fit",
+    "path": "/api/v1/compute/biology/research-dose-response-fit",
+    "method": "POST",
+    "inputDigest": "sha256:f8dff79025c938a440648b9acf547b8158f0d4bedf050ad9864149e83f395577"
+  },
+  {
+    "id": "biology-replicate-batch-confounding",
+    "path": "/api/v1/compute/biology/replicate-batch-confounding",
+    "method": "POST",
+    "inputDigest": "sha256:e887edab36d4ea15839b1e62411c8255ea0e37dde880f9684e39dca65dc2956b"
+  },
+  {
+    "id": "biology-translation-boundary-check",
+    "path": "/api/v1/compute/biology/translation-boundary-check",
+    "method": "POST",
+    "inputDigest": "sha256:cc4025dd8454e241517a54a34e0e8f75bc5824fa30f22a44e023b18b85b17d48"
+  },
+  {
+    "id": "biology-design-assay-evidence-brief",
+    "path": "/api/v1/compute/biology/design-assay-evidence-brief",
+    "method": "POST",
+    "inputDigest": "sha256:319a8e2f7171f36bf7b1cf3ff9f420ad6a43c055bbe9c47a6c879c120088e7f9"
+  },
+  {
+    "id": "chemistry-formula-mass-check",
+    "path": "/api/v1/compute/chemistry/formula-mass-check",
+    "method": "POST",
+    "inputDigest": "sha256:f7d23eade0df88e4741b0aa2c888a0ce23a4b3f4badcab324267a6bef6ed33a2"
+  },
+  {
+    "id": "chemistry-concentration-basis",
+    "path": "/api/v1/compute/chemistry/concentration-basis",
+    "method": "POST",
+    "inputDigest": "sha256:efecea0b860b28485201d962a6fd9f556e7ff2e1f6c34f11e2ea2274e4d3d72d"
+  },
+  {
+    "id": "chemistry-smiles-validation",
+    "path": "/api/v1/compute/chemistry/smiles-validation",
+    "method": "POST",
+    "inputDigest": "sha256:c47adf9e99e6c52cd5aed281fffa1bd3531ed136be08b4666c7a8fe6d15872a5"
+  },
+  {
+    "id": "chemistry-molecular-descriptor-pack",
+    "path": "/api/v1/compute/chemistry/molecular-descriptor-pack",
+    "method": "POST",
+    "inputDigest": "sha256:c47adf9e99e6c52cd5aed281fffa1bd3531ed136be08b4666c7a8fe6d15872a5"
+  },
+  {
+    "id": "chemistry-molecular-identity-comparison",
+    "path": "/api/v1/compute/chemistry/molecular-identity-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:e839d2e3af30f5ecbfc2683b6dfb7689ce82560abca67bbcfa80dabe828481a3"
+  },
+  {
+    "id": "chemistry-fingerprint-similarity",
+    "path": "/api/v1/compute/chemistry/fingerprint-similarity",
+    "method": "POST",
+    "inputDigest": "sha256:e839d2e3af30f5ecbfc2683b6dfb7689ce82560abca67bbcfa80dabe828481a3"
+  },
+  {
+    "id": "chemistry-reaction-conservation",
+    "path": "/api/v1/compute/chemistry/reaction-conservation",
+    "method": "POST",
+    "inputDigest": "sha256:cd92def7ebc273a2fc986b7d884d4c629ab4edb52628e0de96859c71fc5c1611"
+  },
+  {
+    "id": "chemistry-spectrum-peak-comparison",
+    "path": "/api/v1/compute/chemistry/spectrum-peak-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:5d9d20feb8f5cc7505dd3cd5f6bd13bcc8d7978a70ad5afbbd020126582de883"
+  },
+  {
+    "id": "chemistry-arrhenius-fit",
+    "path": "/api/v1/compute/chemistry/arrhenius-fit",
+    "method": "POST",
+    "inputDigest": "sha256:fff854190d208dcfd7ed7306dec7c6b77ece764682364ecd61f4aecdb0e29f1c"
+  },
+  {
+    "id": "chemistry-electrochemical-normalizer",
+    "path": "/api/v1/compute/chemistry/electrochemical-normalizer",
+    "method": "POST",
+    "inputDigest": "sha256:17b3afe6e17a63d655e4b2005ebd7d9381b99a0806d6c317fa2adf06361c0de5"
+  },
+  {
+    "id": "chemistry-enzyme-kinetics-fit",
+    "path": "/api/v1/compute/chemistry/enzyme-kinetics-fit",
+    "method": "POST",
+    "inputDigest": "sha256:da5ed4726183af06847d249f2520cbdf2cc81866907092cb090e4c0ba71f477c"
+  },
+  {
+    "id": "materials-property-record-check",
+    "path": "/api/v1/compute/materials/property-record-check",
+    "method": "POST",
+    "inputDigest": "sha256:14497cc7fd8dc01b017a1d8254ecabe1ddbf6e5a4089db11c18db45121c41a48"
+  },
+  {
+    "id": "materials-particle-size-summary",
+    "path": "/api/v1/compute/materials/particle-size-summary",
+    "method": "POST",
+    "inputDigest": "sha256:2eff83e739448855f7483345836f2996b955ab3182a9ccde37132fbab9b2a59f"
+  },
+  {
+    "id": "materials-sheet-resistance",
+    "path": "/api/v1/compute/materials/sheet-resistance",
+    "method": "POST",
+    "inputDigest": "sha256:76830f3786625d0f89a3468f83748a7fa3d5e150b4f6bb62ca0285d8a68d1753"
+  },
+  {
+    "id": "materials-thermal-expansion-mismatch",
+    "path": "/api/v1/compute/materials/thermal-expansion-mismatch",
+    "method": "POST",
+    "inputDigest": "sha256:21d0640c7eac6d87f0e01c395d60565ced7f12bd83d6353b9ad7a06c7f3a1a58"
+  },
+  {
+    "id": "materials-stress-strain-analysis",
+    "path": "/api/v1/compute/materials/stress-strain-analysis",
+    "method": "POST",
+    "inputDigest": "sha256:e682878aedae5fc3b895145cd861733be8b8375bb0d6e8182a9c723abed7fbde"
+  },
+  {
+    "id": "materials-xrd-peak-analysis",
+    "path": "/api/v1/compute/materials/xrd-peak-analysis",
+    "method": "POST",
+    "inputDigest": "sha256:1ad8591afe053c1f1017acd5a7b5bcdd56ca88796085fa00b701a02272d098c9"
+  },
+  {
+    "id": "materials-optical-bandgap-fit",
+    "path": "/api/v1/compute/materials/optical-bandgap-fit",
+    "method": "POST",
+    "inputDigest": "sha256:fab0894d827ca471e1dd35ff831fa0e47e8d259c10b7ff18ab702ce385665488"
+  },
+  {
+    "id": "materials-raman-reference-comparison",
+    "path": "/api/v1/compute/materials/raman-reference-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:c90a5e1ac15d5a80845db780b7d0af30cbe7aceb0ac6f1e4417cd57c7e28238d"
+  },
+  {
+    "id": "materials-candidate-comparison",
+    "path": "/api/v1/compute/materials/candidate-comparison",
+    "method": "POST",
+    "inputDigest": "sha256:aaf202b99f58645703ee6c6f94c3a463e182d1708dc91d2d4804163716bc71cb"
+  },
+  {
+    "id": "materials-deposition-compatibility",
+    "path": "/api/v1/compute/materials/deposition-compatibility",
+    "method": "POST",
+    "inputDigest": "sha256:7b850a9665cf8198b19974e68084ad6796df9f98dddd9497934d9cdb763c5168"
+  },
+  {
+    "id": "materials-qualification-evidence-brief",
+    "path": "/api/v1/compute/materials/qualification-evidence-brief",
+    "method": "POST",
+    "inputDigest": "sha256:ca5d48750985d187a47c47cdd9e371fe790393bbbef89928f1b79972c7f1ee71"
+  },
+  {
+    "id": "weighted-calibration-fit",
+    "path": "/api/v1/compute/calibration/weighted-fit",
+    "method": "POST",
+    "inputDigest": "sha256:92ff17fcc7d9caa633d67bcd829c6120523855205e8262858a0e51e4b8b6ac14"
+  },
+  {
+    "id": "sampling-aliasing-check",
+    "path": "/api/v1/compute/signals/aliasing-check",
+    "method": "POST",
+    "inputDigest": "sha256:0440769708b03539ae8ef79ad7ab905a875b469f2d6a1fa43037e3ed787f0ccd"
+  },
+  {
+    "id": "assembly-critical-path",
+    "path": "/api/v1/compute/manufacturing/critical-path",
+    "method": "POST",
+    "inputDigest": "sha256:5b237e7775f685b96b734f25c6e87fb8ba34d3a204c0c573c5bb20e33dfcc0d0"
+  }
+]

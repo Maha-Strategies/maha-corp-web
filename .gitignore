@@ -73,6 +73,8 @@ yarn-error.log*
 .vercel
 /content/buyer-brief/
 /content/paid-ebooks/
+/content/api-v1-books/*
+!/content/api-v1-books/metadata.json
 # Paid authoring material belongs in private storage, never this public repo.
 /examples/buyer-brief/BUYER-BRIEF.md
 /examples/buyer-brief/RUNBOOK.md

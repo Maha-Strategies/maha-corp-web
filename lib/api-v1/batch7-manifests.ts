@@ -1,0 +1,18 @@
+import { z } from 'zod'
+import { input, object, records, id, digest, utc, count, list, spec, hash, otherHash, time, later, finding as f, metric as m, unique, type AuditSpec } from './batch5-core.ts'
+import { network, parity, duplicates } from './batch7-core.ts'
+const source = object({ id, packId: id, revision: digest, contentDigest: digest, utf8Bytes: count, mediaType: z.enum(['text/plain', 'application/json', 'text/csv']), access: z.enum(['public', 'owner-authorized', 'restricted', 'unknown']) })
+const s = { id: 's1', packId: 'pack1', revision: hash, contentDigest: hash, utf8Bytes: 100, mediaType: 'text/plain', access: 'public' }
+const manifest = object({ id, revision: digest, paymentRef: id, network, inputDigest: digest, resultDigest: digest.nullable(), payloadExpiresAt: utc, receiptExpiresAt: utc })
+const r = { id: 'm1', revision: hash, paymentRef: 'payment1', network: 'eip155:8453', inputDigest: hash, resultDigest: hash, payloadExpiresAt: time, receiptExpiresAt: later }
+export const BATCH7_MANIFESTS: AuditSpec[] = [
+  spec('source-packs-export-semantic-parity', 'Compare parsed source-pack exports while preserving source identity, edition and content pins, byte counts, media and access labels. Order is ignored; content, licensing and source truth are not verified.',
+    input({ before: list(source, 0, 32), after: list(source, 0, 32) }), { before: [s], after: [s] }, { before: [s], after: [{ ...s, contentDigest: otherHash }] }, ['pack-export-projection-changed', 'pack-export-record-added'], ['pack-export-differences'], i => parity(i.before, i.after, 'pack')),
+  spec('recovery-manifests-required-field-coverage', 'Report missing payment, input, result and original expiry declarations in recovery-manifest metadata. No recovery secrets, signatures, payloads, journal access or deadline extension.',
+    input({ manifests: records({ paymentRef: id.nullable(), inputDigest: digest.nullable(), resultDigest: digest.nullable(), payloadExpiresAt: utc.nullable(), receiptExpiresAt: utc.nullable() }) }), { manifests: [{ id: 'm1', paymentRef: 'payment1', inputDigest: hash, resultDigest: hash, payloadExpiresAt: time, receiptExpiresAt: later }] }, { manifests: [{ id: 'm1', paymentRef: null, inputDigest: hash, resultDigest: hash, payloadExpiresAt: time, receiptExpiresAt: later }] },
+    ['recovery-payment-ref-missing', 'recovery-input-pin-missing', 'recovery-result-pin-missing', 'recovery-payload-deadline-missing', 'recovery-receipt-deadline-missing'], ['missing-recovery-fields'], i => {
+      unique(i.manifests.map(r => r.id)); const findings = i.manifests.flatMap(r => [...(r.paymentRef === null ? [f('recovery-payment-ref-missing', r.id)] : []), ...(r.inputDigest === null ? [f('recovery-input-pin-missing', r.id)] : []), ...(r.resultDigest === null ? [f('recovery-result-pin-missing', r.id)] : []), ...(r.payloadExpiresAt === null ? [f('recovery-payload-deadline-missing', r.id)] : []), ...(r.receiptExpiresAt === null ? [f('recovery-receipt-deadline-missing', r.id)] : [])]); return { findings, metrics: [m('missing-recovery-fields', 'recovery', findings.length)] }
+    }),
+  spec('recovery-manifests-duplicate-record-identities', 'Group recovery manifest IDs within payment, network and revision frames; distinguish exact duplicates from conflicting result/deadline projections. No recovery replay, automatic retry or repayment.',
+    input({ manifests: list(manifest, 1, 32) }), { manifests: [r] }, { manifests: [r, r] }, ['recovery-identical-duplicate', 'recovery-conflicting-projection'], ['recovery-identity-groups'], i => duplicates(i.manifests, row => [row.id, row.paymentRef, row.network, row.revision], 'recovery')),
+]

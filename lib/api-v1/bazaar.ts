@@ -1,0 +1,27 @@
+import { bazaarResourceServerExtension, declareDiscoveryExtension, validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
+import { compactExample, compactSchema } from '../x402/declaration-compaction.ts'
+import { releaseExample } from './production-release.ts'
+import type { Endpoint } from './types.ts'
+const cache = new Map<string, Record<string, unknown>>()
+export function modularDescription(e: Endpoint) {
+  if (Buffer.byteLength(e.description) <= 480) return e.description
+  const sentence = e.description.split(/(?<=\.)\s+/)[0]
+  const short = Buffer.from(sentence).subarray(0, 370).toString('utf8').replace(/\uFFFD$/, '').replace(/\s+\S*$/, '')
+  return short + ' Supplied-record analysis, not independent certification. Full contract at the free describe URL.'
+}
+export function modularBazaar(e: Endpoint): Record<string, unknown> {
+  const t = releaseExample(e.id)
+  if (!t) return {}
+  const cached = cache.get(e.id); if (cached) return cached
+  const output = { success: true, data: t.output, proof: { settlement_id: '0x' + '0'.repeat(64) } }
+  const declared = declareDiscoveryExtension({ bodyType: 'json', input: t.input as Record<string, unknown>,
+    inputSchema: compactSchema(e.schema.input), output: { example: compactExample(output, 0, e.schema.output), schema: compactSchema(e.schema.output) } })
+  const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
+    method: e.method, path: e.path, adapter: { getPath: () => e.path },
+  } as Parameters<NonNullable<typeof bazaarResourceServerExtension.enrichDeclaration>>[1]) as Record<string, unknown>
+  if (!validateDiscoveryExtensionSpec(enriched).valid || !validateDiscoveryExtension(enriched as unknown as Parameters<typeof validateDiscoveryExtension>[0]).valid) throw Error('invalid_modular_bazaar:' + e.id)
+  const extensions = { bazaar: enriched, 'maha-modular-contract': { info: { id: e.id, contractHash: t.contractHash,
+    declarationUrl: 'https://www.mahastrategies.com/api/v1/discovery/describe?id=' + encodeURIComponent(e.id),
+    requiresBuyerRecoveryAdapter: true }, schema: { type: 'object' } } }
+  cache.set(e.id, extensions); return extensions
+}

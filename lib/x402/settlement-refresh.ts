@@ -2,6 +2,7 @@ import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base, arbitrum, polygon } from 'viem/chains'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
 import { payableOffers } from './offers.ts'
+import { modularLedgerPrices } from '../api-v1/production-release.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
 import { RPC_LOG_MAX_BLOCKS, scanRpcLogs } from './rpc-log-scan.ts'
@@ -83,14 +84,14 @@ export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settleme
     // amounts come too -- which would silently drop them from the published
     // totals. scripts/generate-x402-settlement-ledger.ts already passes these;
     // this path did not, and the two disagreed the moment a price moved.
-    offers: payableOffers().map((offer) => ({
+    offers: [...payableOffers().map((offer) => ({
       id: offer.id,
       title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '),
       amountBaseUnits: BigInt(offer.amount),
       ...(offer.supersededAmounts?.length
         ? { supersededAmountsBaseUnits: offer.supersededAmounts.map((amount) => BigInt(amount)) }
         : {}),
-    })),
+    })), ...modularLedgerPrices()],
   })
 }
 

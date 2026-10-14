@@ -1,6 +1,7 @@
 import { MICRO_IDS, microPath } from './x402/micro-contracts.ts'
 import { DEMAND6_IDS, demand6Path } from './x402/demand6/contracts.ts'
 import { EBOOK_IDS, ebookPath } from './x402/ebook-contract.ts'
+import { ownsModularApiPath } from './api-v1/route-ownership.ts'
 
 export const SELF_MANAGED_KEY_ROUTES = new Set([
   '/api/astrology/chat',
@@ -85,7 +86,7 @@ export const API_CORS_HEADERS = {
   // Server-side agents do not exercise CORS, so omitting these can pass every
   // settlement test while making the same public endpoint unusable in a web
   // agent or zero-install playground.
-  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE, X-Maha-Idempotency-Key, X-Maha-Input-Hash, X-Maha-Recovery-Secret, X-Maha-Recovery-Mode, X-Maha-Recovery-Payer, X-Maha-Discovery-Source',
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE, X-PAYMENT-SIGNATURE, X-Maha-Idempotency-Key, X-Maha-Input-Hash, X-Maha-Recovery-Secret, X-Maha-Recovery-Mode, X-Maha-Recovery-Payer, X-Maha-Discovery-Source, MCP-Protocol-Version, Mcp-Method, Mcp-Name',
   'Access-Control-Expose-Headers': 'PAYMENT-REQUIRED, PAYMENT-RESPONSE, Retry-After, Server-Timing',
   'Access-Control-Max-Age': '86400',
 }
@@ -95,6 +96,7 @@ export type ApiAccessOutcome = 'unavailable' | 'missing_key' | 'invalid_key' | '
 
 export function apiProxyGate(pathname: string, method: string, configured: boolean): ApiProxyGate {
   if (method === 'OPTIONS') return 'preflight'
+  if (ownsModularApiPath(pathname)) return 'self_managed'
   if (SELF_MANAGED_KEY_ROUTES.has(pathname)) return 'self_managed'
   // A trailing-slash prefix, so /api/v1/mps/audit itself (the priced POST) is
   // never matched here and keeps its 402.

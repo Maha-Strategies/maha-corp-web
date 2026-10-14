@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "target": "ES2022", "noEmit": true, "incremental": false },
+  "include": ["lib/api-v1/**/*.ts", "lib/x402/workflow/**/*.ts", "lib/x402/modular-buyer.ts", "app/api/v1/[domain]/[category]/[action]/route.ts", "app/api/v1/discovery/**/*.ts", "app/api/v1/mcp/[domain]/route.ts", "app/developers/x402-products/page.tsx", "app/developers/x402-privacy/page.tsx", "lib/x402/settlement-refresh.ts", "scripts/run-modular-indexing.ts", "scripts/generate-x402-settlement-ledger.ts", "scripts/run-bazaar-inactivity-watch.ts", "test/api-v1-production-release.test.ts"],
+  "exclude": ["node_modules"]
+}

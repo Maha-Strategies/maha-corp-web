@@ -18,6 +18,7 @@ const SUPPORTED = new Set([
   'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'minimum',
   'maximum', 'pattern', 'description', 'default', 'title',
   'oneOf', 'anyOf', 'allOf',
+  '$schema',
 ])
 
 type Schema = Record<string, unknown> | boolean
@@ -40,6 +41,9 @@ function matchesType(value: unknown, expected: string): boolean {
 export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   if (typeof schema === 'boolean') return schema ? [] : [`${path}: false schema rejects this value`]
   const problems: string[] = []
+  if ('$schema' in schema && schema.$schema !== 'https://json-schema.org/draft/2020-12/schema') {
+    problems.push(`${path}: unsupported JSON Schema dialect`)
+  }
 
   for (const keyword of Object.keys(schema)) {
     if (!SUPPORTED.has(keyword)) problems.push(`${path}: schema uses unsupported keyword "${keyword}"`)

@@ -17,6 +17,7 @@ import {
   type BazaarResource,
 } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers } from '../lib/x402/offers.ts'
+import { PRODUCTION_ENDPOINTS } from '../lib/api-v1/production-release.ts'
 import { readMerchantResources, INTENTIONALLY_UNINDEXED_OFFERS } from '../lib/x402/merchant-catalog.ts'
 
 const SITE_ORIGIN = 'https://www.mahastrategies.com'
@@ -34,7 +35,7 @@ const SITE_ORIGIN = 'https://www.mahastrategies.com'
  */
 
 function watchList(): Array<{ offerId: string; resource: string; coveredByCanary: boolean }> {
-  return payableOffers().filter(offer => !INTENTIONALLY_UNINDEXED_OFFERS.has(offer.id)).map((offer) => {
+  return [...payableOffers().filter(offer => !INTENTIONALLY_UNINDEXED_OFFERS.has(offer.id)).map((offer) => {
     const resource = `${SITE_ORIGIN}${offer.path}`
     return {
       offerId: offer.id,
@@ -43,7 +44,7 @@ function watchList(): Array<{ offerId: string; resource: string; coveredByCanary
       // covered by a human or not at all, and must be reported as such.
       coveredByCanary: resource === MAHA_CONTEXT_RESOURCE,
     }
-  })
+  }), ...PRODUCTION_ENDPOINTS.map(e => ({ offerId: 'modular-' + e.id, resource: SITE_ORIGIN + e.path, coveredByCanary: false }))]
 }
 
 async function fetchMerchantResources(fetchImpl: typeof fetch): Promise<BazaarResource[]> {

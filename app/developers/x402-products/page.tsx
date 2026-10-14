@@ -9,6 +9,8 @@ import { bazaarServiceNameForOffer } from '@/lib/x402/bazaar-service-name'
 import { readProductIndex, productIndexLabel } from '@/lib/x402/product-index'
 import { readPublicSettlementLedger } from '@/lib/x402/settlement-live-store'
 import { SettlementAutoRefresh } from '../settlement/auto-refresh'
+import { PRODUCTION_ENDPOINTS } from '@/lib/api-v1/production-release'
+import { readModularDeliveryMeter } from '@/lib/api-v1/delivery-meter'
 
 export const metadata: Metadata = {
   title: 'x402 Products and Prices | Maha Strategies',
@@ -18,8 +20,9 @@ export const metadata: Metadata = {
 
 export default async function X402ProductsPage() {
   await connection()
-  const [usage, snapshot, index] = await Promise.all([
+  const [usage, snapshot, index, modularUsage] = await Promise.all([
     readProductUsage(X402_OFFERS.map(o => o.id)), readPublicSettlementLedger(), readProductIndex(),
+    readModularDeliveryMeter(),
   ])
   const settled = new Map(snapshot.ledger.summary.byProduct.map(p => [p.id, p]))
   const categories = categorizedProducts()
@@ -41,7 +44,31 @@ export default async function X402ProductsPage() {
       <p className="evidence-copy mt-3">{index.available ? `${qualityKnown} observed listings have 30-day call metrics; ${indexed - qualityKnown} have metrics pending or unavailable. ${namesPending} observed listings have a name not yet recorded by Bazaar.` : 'Bazaar activity metrics unavailable.'} Pending metrics are not zero activity. Bazaar metrics can include publisher-funded tests and update on a six-hour schedule. Corrected discovery names and task-specific tags are served now; cached listing metadata may require a later successful payment to update.</p>
       <div className="mt-6 flex flex-wrap gap-4"><Link className="evidence-link" href="/developers/settlement">Live settlement ledger ↗</Link><Link className="evidence-link" href="/api/docs/openapi">API schemas ↗</Link><Link className="evidence-link" href="/developers/x402-buyer">Buyer and recovery guide ↗</Link><Link className="evidence-link" href="/developers/x402-privacy">Data handling and retention ↗</Link><Link className="evidence-link" href="/developers">Developer hub ↗</Link></div>
     </header>
-    <nav aria-label="Product categories" className="my-8 flex flex-wrap gap-3">{categories.filter(c => c.offers.length).map(c => <a key={c.id} href={`#${c.id}`} className="evidence-link">{c.title} ({c.offers.length})</a>)}</nav>
+    <nav aria-label="Product categories" className="my-8 flex flex-wrap gap-3"><a className="evidence-link" href="#modular">Modular services ({PRODUCTION_ENDPOINTS.length})</a>{categories.filter(c => c.offers.length).map(c => <a key={c.id} href={`#${c.id}`} className="evidence-link">{c.title} ({c.offers.length})</a>)}</nav>
+    <section id="modular" className="evidence-section scroll-mt-8">
+      <h2 className="evidence-section-title">296 released modular services</h2>
+      <p className="evidence-copy mt-3">Base USDC; exact input-bound buyer/recovery adapter required. These new modular URLs include some adaptations of existing algorithms. Publisher-funded indexing is operator activity, not customer revenue. Costs and margins remain unmeasured; no external model spending is enabled.</p>
+      <p className="evidence-copy mt-3">Result content: 24 hours. Minimal purchase metadata: 90 days from creation; recovery does not extend deadlines. Non-identifying Redis response aggregates expire after 90 days of inactivity. Counters reflect validated server responses, not proof the buyer received or benefited from them. No Supabase writes are added by these services.</p>
+      <Link className="evidence-link mt-3 inline-block" href="/api/v1/discovery/search">Free two-stage discovery ↗</Link>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">{PRODUCTION_ENDPOINTS.map(e => {
+        const listing = index.listings?.['https://www.mahastrategies.com' + e.path], s = settled.get('modular-' + e.id)
+        const recorded = modularUsage?.[e.id + ':new']
+        return <article key={e.id} id={'modular-' + e.id} className="evidence-card">
+          <div className="flex flex-wrap items-baseline justify-between gap-3"><h3 className="evidence-card-title">{e.name}</h3><span className="font-mono">{e.amount.padStart(7, '0').slice(0, -6)}.{e.amount.padStart(7, '0').slice(-6)} USDC</span></div>
+          <p className="evidence-kicker mt-3">{e.domain} · {e.category} · Tier {e.pricing?.tier}</p>
+          <p className="evidence-card-copy mt-3">{e.description}</p><p className="mt-3 break-all font-mono text-xs">{e.method} {e.path}</p>
+          <p className="evidence-card-copy mt-3 text-xs">{productIndexLabel(index, e.path)}</p>
+          <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+            <div><dt>New paid responses recorded</dt><dd>{recorded ?? 'Not recorded'}</dd></div>
+            <div><dt>Operator responses</dt><dd>{recorded === undefined ? 'Not recorded' : modularUsage?.[e.id + ':operator'] ?? 0}</dd></div>
+            <div><dt>Recovered responses</dt><dd>{modularUsage?.[e.id + ':recovery'] ?? 'Not recorded'}</dd></div>
+            <div><dt>Bazaar calls (30 days)</dt><dd>{listing?.calls30d ?? (listing ? 'Pending' : 'Unknown')}</dd></div>
+          </dl>
+          <p className="evidence-card-copy mt-3 text-xs">{s && !s.attributionAmbiguous ? `${s.settlements} price-attributed transfers (${s.externalSettlements} external, ${s.settlements - s.externalSettlements} operator).` : 'Price-attributed transfers unknown.'} Amount attribution is not delivery proof.</p>
+          <a className="evidence-link mt-4 inline-block" href={'/api/v1/discovery/describe?id=' + encodeURIComponent(e.id)}>Exact schemas, examples and recovery contract ↗</a>
+        </article>
+      })}</div>
+    </section>
     {categories.filter(c => c.offers.length).map(c => <section key={c.id} id={c.id} aria-labelledby={`${c.id}-title`} className="evidence-section scroll-mt-8">
       <h2 id={`${c.id}-title`} className="evidence-section-title">{c.title}</h2>
       <div className="mt-6 grid gap-4 md:grid-cols-2">{c.offers.map(o => {
