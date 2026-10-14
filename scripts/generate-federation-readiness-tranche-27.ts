@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import { digest } from '../lib/federation/readiness-tranche-22.ts'
 
 const F = 'content/federation'
@@ -85,8 +86,8 @@ const cohortBody = {
   candidates: selected.map((row, index) => ({ selectionOrder: index + 1, candidateId: row.candidateId, candidateDigest: digest(row), conceptId: row.conceptId, routeRole: row.routeRole, path: row.path })),
   execution: { publicRoutesGenerated: 0, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-27-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
-writeFileSync(`${F}/federation-readiness-tranche-27-source-inspections-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-sources/1.0', inspectedOn: '2026-09-07', counts: { works: 1, entryInspections: sources.length }, inspections: sources, privacyBoundary: 'Bibliographic, locator, rights, scope, and boundary metadata only; no scanned pages or source passages are stored.' }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-27-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-27-source-inspections-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-sources/1.0', inspectedOn: '2026-09-07', counts: { works: 1, entryInspections: sources.length }, inspections: sources, privacyBoundary: 'Bibliographic, locator, rights, scope, and boundary metadata only; no scanned pages or source passages are stored.' }), null, 2)}\n`)
 
 const semanticById = new Map([...semantic11.entries, ...semantic12.entries].map((row) => [row.candidateId, row]))
 const dependencyById = new Map([...dependencies11.entries, ...dependencies12.entries].map((row) => [row.candidateId, row]))
@@ -118,7 +119,7 @@ const decisions = selected.map((candidate) => {
 })
 const counts = { candidates: decisions.length, evidenceReady: decisions.filter((row) => row.decision === 'evidence-ready').length, revise: decisions.filter((row) => row.decision === 'revise').length, blocked: 0 }
 if (counts.evidenceReady + counts.revise !== 36) throw new Error('t27-decision-partition')
-writeFileSync(`${F}/federation-readiness-tranche-27-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-27-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
 
 const sourceById = new Map(sources.map((row) => [row.sourceId, row]))
 const specifications = decisions.filter((row) => row.decision === 'evidence-ready').map((decision) => {
@@ -140,7 +141,7 @@ const specifications = decisions.filter((row) => row.decision === 'evidence-read
     publicRouteCreated: false,
   }
 })
-writeFileSync(`${F}/federation-readiness-tranche-27-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-27-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-27-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
 
 const deltaBody = {
   schemaVersion: 'maha-federation-readiness-ledger-delta/27.0',
@@ -151,7 +152,7 @@ const deltaBody = {
   readyCandidateIds: decisions.filter((row) => row.decision === 'evidence-ready').map((row) => row.candidateId).sort(),
   execution: { unifiedLedgerApplied: false, publicRoutesGenerated: 0, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-27-ledger-delta-v1.json`, `${JSON.stringify(signed(deltaBody), null, 2)}\n`)
-writeFileSync('docs/operations/federation-readiness-tranche-27-v1.md', `# Federation readiness Tranche 27 — Greek/Roman historical-source closure\n\n- Candidates reviewed: ${counts.candidates}\n- Concepts: 12\n- Evidence-ready specifications: ${counts.evidenceReady}\n- Remaining in tranche: ${counts.revise}\n- Projected unified readiness: ${deltaBody.counts.projectedImplementationReady} / 1,628\n- Projected unresolved: ${deltaBody.counts.projectedUnresolved}\n\nThe source is William Smith’s public-domain 1873 dictionary, inspected at twelve complete entries with exact printed and scan-page locators. It licenses only attributed historical-reference answers. It does not become a primary ancient source, modern scholarly consensus, proof of Greek/Roman identity, common origin, or theological authority.\n\nNo route was generated, no build ran, no release changed, and nothing was deployed.\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-27-ledger-delta-v1.json`, `${JSON.stringify(signed(deltaBody), null, 2)}\n`)
+writeGeneratedFile('docs/operations/federation-readiness-tranche-27-v1.md', `# Federation readiness Tranche 27 — Greek/Roman historical-source closure\n\n- Candidates reviewed: ${counts.candidates}\n- Concepts: 12\n- Evidence-ready specifications: ${counts.evidenceReady}\n- Remaining in tranche: ${counts.revise}\n- Projected unified readiness: ${deltaBody.counts.projectedImplementationReady} / 1,628\n- Projected unresolved: ${deltaBody.counts.projectedUnresolved}\n\nThe source is William Smith’s public-domain 1873 dictionary, inspected at twelve complete entries with exact printed and scan-page locators. It licenses only attributed historical-reference answers. It does not become a primary ancient source, modern scholarly consensus, proof of Greek/Roman identity, common origin, or theological authority.\n\nNo route was generated, no build ran, no release changed, and nothing was deployed.\n`)
 
 console.log(JSON.stringify({ cohort: cohortBody.counts, decisions: counts, specifications: specifications.length, delta: deltaBody.counts }))
