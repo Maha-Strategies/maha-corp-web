@@ -17,6 +17,7 @@ import {
   declarationDigest as computeDeclarationDigest,
   readDeclarationDigestExtension,
 } from './declaration-digest.ts'
+import { readMerchantResources } from './merchant-catalog.ts'
 
 export const EXTENSION_RESPONSES_HEADER = 'EXTENSION-RESPONSES'
 export const DEFAULT_BAZAAR_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery'
@@ -91,6 +92,8 @@ export type DoctorReport = {
   }
   bazaar?: {
     found: boolean
+    catalogueComplete?: boolean
+    observedResources?: number
     resource?: string
     declarationDigest?: string
     digestSource?: 'catalog' | 'reconstructed'
@@ -360,12 +363,6 @@ async function fetchWithTimeout(fetchImpl: typeof fetch, url: string, request: D
   try { return await fetchImpl(url, requestInit(request, controller.signal)) } finally { clearTimeout(timer) }
 }
 
-function bazaarResources(value: unknown): JsonRecord[] {
-  const body = record(value)
-  const candidates = Array.isArray(body?.resources) ? body.resources : Array.isArray(body?.items) ? body.items : []
-  return candidates.map(record).filter((item): item is JsonRecord => item !== null)
-}
-
 function bazaarResourceUrl(value: JsonRecord): string | null {
   if (typeof value.resource === 'string') return value.resource
   const resource = record(value.resource)
@@ -475,61 +472,62 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
       const bazaarBase = (options.bazaarUrl ?? DEFAULT_BAZAAR_URL).replace(/\/+$/, '')
       const merchant = new URL(`${bazaarBase}/merchant`)
       merchant.searchParams.set('payTo', payTo)
-      merchant.searchParams.set('limit', '100')
       try {
-        const response = await fetchWithTimeout(fetchImpl, merchant.toString(), { method: 'GET' }, timeoutMs)
-        if (!response.ok) {
-          add(findings, 'x402.bazaar.lookup', 'warning', `Bazaar merchant lookup returned HTTP ${response.status}.`)
+        // Absence is only meaningful after every page has been validated.
+        // The shared reader bounds time, bytes and inventory, and rejects
+        // truncated, duplicate, wrong-merchant or changing snapshots.
+        const resources = await readMerchantResources(merchant.href, {
+          fetchImpl, expectedPayTo: payTo, timeoutMs, includeDeclarations: true,
+        })
+        const current = resources.find((resource) => {
+          const url = bazaarResourceUrl(resource)
+          if (!url) return false
+          try { return normalizedUrl(url) === endpoint } catch { return false }
+        })
+        if (!current) {
+          report.bazaar = { found: false, catalogueComplete: true, observedResources: resources.length }
+          add(findings, 'x402.bazaar.not_found', 'warning', 'The live endpoint is not present in the current Bazaar merchant record.')
         } else {
-          const resources = bazaarResources(await response.json())
-          const current = resources.find((resource) => {
-            const url = bazaarResourceUrl(resource)
-            if (!url) return false
-            try { return normalizedUrl(url) === endpoint } catch { return false }
-          })
-          if (!current) {
-            report.bazaar = { found: false }
-            add(findings, 'x402.bazaar.not_found', 'warning', 'The live endpoint is not present in the current Bazaar merchant record.')
-          } else {
-            const rawIndexedIntegrity = current.declarationIntegrity
-              ?? record(current.extensions)?.[DECLARATION_DIGEST_EXTENSION]
-            const indexedIntegrity = readDeclarationDigestExtension(rawIndexedIntegrity)
-            if (rawIndexedIntegrity !== undefined && !indexedIntegrity) {
-              add(findings, 'x402.declaration_integrity.catalog_malformed', 'warning', 'The catalog exposes a malformed declaration-integrity value.')
-            }
-            const indexedDeclaration = declaration(current)
-            // Reconstructed comparisons only consider fields the catalog
-            // actually returned. See comparableDeclarations.
-            const comparable = comparableDeclarations(indexedDeclaration, liveDeclaration)
-            const reconstructedDigest = await sha256(comparable.indexed)
-            const comparableLiveDigest = await sha256(comparable.live)
-            const indexedDigest = indexedIntegrity?.declarationDigest ?? reconstructedDigest
-            const matchesLive = indexedIntegrity
-              ? indexedDigest === report.live.integrityDigest
-              : reconstructedDigest === comparableLiveDigest
-            report.bazaar = {
-              found: true,
-              resource: bazaarResourceUrl(current) ?? undefined,
-              declarationDigest: indexedDigest,
-              digestSource: indexedIntegrity ? 'catalog' : 'reconstructed',
-              matchesLive,
-              ...(indexedIntegrity ? { metadataVersion: indexedIntegrity.metadataVersion } : {}),
-              ...(typeof current.lastUpdated === 'string' ? { lastUpdated: current.lastUpdated } : {}),
-            }
-            if (indexedIntegrity && indexedIntegrity.canonicalResource !== canonicalResourceUrl(endpoint)) {
-              add(findings, 'x402.declaration_integrity.catalog_resource', 'warning', 'The catalog digest belongs to a different canonical resource.', indexedIntegrity.canonicalResource)
-            }
-            if (!matchesLive) {
-              const liveDigest = indexedIntegrity ? report.live.integrityDigest : comparableLiveDigest
-              const scope = indexedIntegrity ? '' : `; compared=${Object.keys(comparable.indexed).join(',') || 'none'}`
-              const skipped = comparable.uncompared.length > 0 && !indexedIntegrity ? `; uncompared=${comparable.uncompared.join(',')}` : ''
-              add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}${scope}${skipped}`)
-            } else if (!indexedIntegrity && comparable.uncompared.length > 0) {
-              // Stated rather than silent: the listing matches on everything
-              // comparable, and a reader should know the match is partial and
-              // why, instead of reading a clean pass as a complete one.
-              add(findings, 'x402.bazaar.partial_comparison', 'note', 'The catalog does not return every declared field, so the match is partial.', `uncompared=${comparable.uncompared.join(',')}`)
-            }
+          const rawIndexedIntegrity = current.declarationIntegrity
+            ?? record(current.extensions)?.[DECLARATION_DIGEST_EXTENSION]
+          const indexedIntegrity = readDeclarationDigestExtension(rawIndexedIntegrity)
+          if (rawIndexedIntegrity !== undefined && !indexedIntegrity) {
+            add(findings, 'x402.declaration_integrity.catalog_malformed', 'warning', 'The catalog exposes a malformed declaration-integrity value.')
+          }
+          const indexedDeclaration = declaration(current)
+          // Reconstructed comparisons only consider fields the catalog
+          // actually returned. See comparableDeclarations.
+          const comparable = comparableDeclarations(indexedDeclaration, liveDeclaration)
+          const reconstructedDigest = await sha256(comparable.indexed)
+          const comparableLiveDigest = await sha256(comparable.live)
+          const indexedDigest = indexedIntegrity?.declarationDigest ?? reconstructedDigest
+          const matchesLive = indexedIntegrity
+            ? indexedDigest === report.live.integrityDigest
+            : reconstructedDigest === comparableLiveDigest
+          report.bazaar = {
+            found: true,
+            catalogueComplete: true,
+            observedResources: resources.length,
+            resource: bazaarResourceUrl(current) ?? undefined,
+            declarationDigest: indexedDigest,
+            digestSource: indexedIntegrity ? 'catalog' : 'reconstructed',
+            matchesLive,
+            ...(indexedIntegrity ? { metadataVersion: indexedIntegrity.metadataVersion } : {}),
+            ...(typeof current.lastUpdated === 'string' ? { lastUpdated: current.lastUpdated } : {}),
+          }
+          if (indexedIntegrity && indexedIntegrity.canonicalResource !== canonicalResourceUrl(endpoint)) {
+            add(findings, 'x402.declaration_integrity.catalog_resource', 'warning', 'The catalog digest belongs to a different canonical resource.', indexedIntegrity.canonicalResource)
+          }
+          if (!matchesLive) {
+            const liveDigest = indexedIntegrity ? report.live.integrityDigest : comparableLiveDigest
+            const scope = indexedIntegrity ? '' : `; compared=${Object.keys(comparable.indexed).join(',') || 'none'}`
+            const skipped = comparable.uncompared.length > 0 && !indexedIntegrity ? `; uncompared=${comparable.uncompared.join(',')}` : ''
+            add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}${scope}${skipped}`)
+          } else if (!indexedIntegrity && comparable.uncompared.length > 0) {
+            // Stated rather than silent: the listing matches on everything
+            // comparable, and a reader should know the match is partial and
+            // why, instead of reading a clean pass as a complete one.
+            add(findings, 'x402.bazaar.partial_comparison', 'note', 'The catalog does not return every declared field, so the match is partial.', `uncompared=${comparable.uncompared.join(',')}`)
           }
         }
       } catch (error) {
