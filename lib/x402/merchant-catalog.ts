@@ -1,5 +1,5 @@
 /** Read-only bounds shared by catalogue monitors. Partial inventories cannot establish absence. */
-export const MAX_MERCHANT_RESOURCES = 1000
+export const MAX_MERCHANT_RESOURCES = 2000
 export type MerchantResource = {
   resource: string; serviceName?: string
   quality?: { l30DaysTotalCalls?: number; l30DaysUniquePayers?: number; lastCalledAt?: string }
@@ -12,12 +12,13 @@ export async function readMerchantResources(url: string, options: {
   fetchImpl?: typeof fetch; expectedPayTo?: string; timeoutMs?: number; includeDeclarations?: boolean
 } = {}): Promise<MerchantResource[]> {
   if (options.timeoutMs !== undefined && (!Number.isInteger(options.timeoutMs) || options.timeoutMs < 1000 || options.timeoutMs > 60000)) throw new Error('invalid_merchant_timeout')
-  const fetcher = options.fetchImpl ?? fetch, signal = AbortSignal.timeout(options.timeoutMs ?? 30000)
+  const fetcher = options.fetchImpl ?? fetch, signal = AbortSignal.timeout(options.timeoutMs ?? 30000), snapshot = new Date().toISOString()
   const rows: MerchantResource[] = [], seen = new Set<string>()
   let total: number | undefined
   for (let offset = 0; offset < MAX_MERCHANT_RESOURCES; offset += 100) {
     const pageUrl = new URL(url)
     pageUrl.searchParams.set('limit', '100'); pageUrl.searchParams.set('offset', String(offset))
+    pageUrl.searchParams.set('_maha_snapshot', snapshot)
     const response = await fetcher(pageUrl, { redirect: 'error', cache: 'no-store', signal,
       headers: { accept: 'application/json', 'user-agent': 'maha-read-only-catalogue/1.0' } })
     if (!response.ok) throw new Error('merchant_lookup_unavailable')

@@ -77,7 +77,7 @@ test('batch18 is the next 50 unimplemented recipes, without recounting earlier c
     const result = searchEndpoints({ q: e.id, domain: e.domain, limit: 10 }, { local: true })
     assert.ok(result.matches.some(m => m.id === e.id && !m.paymentEnabled))
   }
-  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 826)
+  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 958)
 })
 for (const spec of EIGHTEENTH_BATCH_AUDITS) {
   const e = EIGHTEENTH_BATCH.find(e => e.id === spec.id)!

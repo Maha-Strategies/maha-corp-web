@@ -5,7 +5,8 @@ import { handlerFor } from './handlers.ts'
 import type { Endpoint } from './types.ts'
 const cache = new Map<string, Record<string, unknown>>()
 const SINGLE_EPOCH_EXAMPLES = new Set(['orbital-records-timestamp-order-audit', 'ephemeris-snapshots-timestamp-order-audit', 'planetary-measurements-timestamp-order-audit'])
-const BOUNDED_OUTPUT_EXAMPLES = new Set(['ephemeris-snapshots-condition-coverage-map', 'planetary-measurements-condition-coverage-map'])
+const BOUNDED_OUTPUT_EXAMPLES = new Set(['ephemeris-snapshots-condition-coverage-map', 'planetary-measurements-condition-coverage-map',
+  'evidence-retention-matrix', 'retrieval-recovery-regression', 'deep-context-evaluation', 'celestial-chart-evidence'])
 export function modularServiceMetadata(e: Endpoint) {
   return { serviceName: e.name.replace(/[^\x20-\x7e]/g, '-').slice(0, 32),
     tags: [...new Set(e.tags.filter(tag => /^[\x20-\x7e]{1,32}$/.test(tag)))].slice(0, 5) }
