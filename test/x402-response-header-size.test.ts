@@ -106,9 +106,20 @@ test('all 826 released modular products use the guarded encoder without changing
   }
 })
 test('an oversized future modular declaration refuses before any payment operation', async () => {
-  const e = { ...PRODUCTION_ENDPOINTS[0], name: 'N'.repeat(10000) }
+  // Names are now bounded metadata, so use an unbounded resource URL as the
+  // negative control. This must still exercise the independent header guard.
+  const e = { ...PRODUCTION_ENDPOINTS[0], path: PRODUCTION_ENDPOINTS[0].path + 'n'.repeat(10000) }
   const route = with402Payment(e, undefined, { environment: { NODE_ENV: 'test', BASE_PAYEE_ADDRESS: MAHA_PAYEE }, facilitator, store: memoryPaymentStore() })
   const response = await route(new Request(origin + e.path, { method: e.method }))
   assert.equal(response.status, 503); assert.equal(response.headers.get('PAYMENT-REQUIRED'), null)
   assert.equal((await response.json()).error.code, 'payment_challenge_unavailable_no_payment')
+})
+test('oversized optional service names are bounded before encoding without changing the price', async () => {
+  const e = { ...PRODUCTION_ENDPOINTS[0], name: 'N'.repeat(10000) }
+  const route = with402Payment(e, undefined, { environment: { NODE_ENV: 'test', BASE_PAYEE_ADDRESS: MAHA_PAYEE }, facilitator, store: memoryPaymentStore() })
+  const response = await route(new Request(origin + e.path, { method: e.method }))
+  assert.equal(response.status, 402)
+  const body = await response.json()
+  assert.equal(body.resource.serviceName, 'N'.repeat(32)); assert.equal(body.price, e.price_usdc)
+  assert.ok(paymentRequiredHeaderBytes(response.headers.get('PAYMENT-REQUIRED')!) <= PAYMENT_REQUIRED_HEADER_LIMIT)
 })
