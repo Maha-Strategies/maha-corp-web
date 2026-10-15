@@ -15,6 +15,7 @@ import { readProductIndex } from '../lib/x402/product-index.ts'
 import { parsePaymentHeader } from '../lib/x402/protocol.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
+import { assertFrozenDelivery } from '../lib/api-v1/frozen-delivery.ts'
 
 export const ADDITION_CAP = 2534496n
 export const ADDITION_CONFIRMATION = 'PUBLISHER_FUNDED_204_ONCE_MAX_2534496'
@@ -90,7 +91,7 @@ export async function runAdditions() {
       if (await client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [account.address, nonce] })) throw Error('authorization_already_used_do_not_repay')
       const step: Step = { id: e.id, amountBaseUnits: e.amount, state: 'preparing' }; evidence.steps.push(step)
       const contract = { id: e.id, path: e.path, amount: e.amount, recoverySeconds: 86400, validateInput: (x: unknown) => handler.input.parse(x),
-        validateOutput: (x: unknown) => { const value = handler.output.parse(x); if (demandDigest(value) !== demandDigest(sample.output)) throw Error('deterministic_delivery_mismatch'); return value } }
+        validateOutput: (x: unknown) => { const value = handler.output.parse(x); assertFrozenDelivery(e.id, value, sample.output); return value } }
       const capsule = await prepareModularPurchase(contract, { input, payer: account.address, maximumAmount: BigInt(e.amount), secret, fetchImpl: transport,
         signTypedData: typed => account.signTypedData(typed as Parameters<typeof account.signTypedData>[0]), persist: async capsule => {
           const next = BigInt(evidence.authorizedBaseUnits) + BigInt(e.amount); if (next > ADDITION_CAP) throw Error('approved_payment_cap_exceeded')

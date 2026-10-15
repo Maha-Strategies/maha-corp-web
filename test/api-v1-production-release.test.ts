@@ -11,9 +11,9 @@ import { decodeChallenge } from '../lib/x402/client.ts'
 import { parsePaymentHeader } from '../lib/x402/protocol.ts'
 import { assertModularQuote, CAP } from '../scripts/run-modular-indexing.ts'
 import { assertAdditionQuote } from '../scripts/run-modular204-indexing.ts'
-import { demandDigest } from '../lib/x402/demand6/digest.ts'
 import { searchEndpoints, describeById } from '../lib/api-v1/discovery.ts'
 import { validate } from './helpers/json-schema.ts'
+import { assertFrozenDelivery } from '../lib/api-v1/frozen-delivery.ts'
 const account = privateKeyToAccount(('0x' + '42'.repeat(32)) as `0x${string}`)
 const ORIGIN = 'https://www.mahastrategies.com', TX = '0x' + 'ab'.repeat(32), CLOCK = Date.parse('2026-10-14T06:00:00Z')
 const env = { NODE_ENV: 'production', VERCEL: '1', BASE_PAYEE_ADDRESS: MODULAR_RELEASE.payee }
@@ -31,9 +31,7 @@ test('500-product release preserves the original 296 and adds only the approved 
 for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response loss and no-repayment recovery: ' + e.id, async () => {
   let now = CLOCK, settlements = 0, recorded = 0
   const h = handlerFor(e.id, e.amount)!, example = releaseExample(e.id)!, input = h.input.parse(example.input)
-  // Report the actual cross-runtime difference before the buyer intentionally
-  // hides validation details behind its safe unresolved response.
-  assert.deepEqual(await h.execute(input), example.output, 'frozen output differs: ' + e.id)
+  assertFrozenDelivery(e.id, await h.execute(input), example.output)
   const router = createEndpointRouter({ environment: env, now: () => now, store: memoryPaymentStore(() => now, 1000),
     facilitator: { verify: async payment => {
       const auth = payment.payload.authorization as { validAfter: string; validBefore: string }
@@ -49,7 +47,7 @@ for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response
   else assertAdditionQuote(decodeChallenge(quote.headers.get('PAYMENT-REQUIRED')!), e.id)
   let saved = false
   const contract = { id: e.id, path: e.path, amount: e.amount, recoverySeconds: 86400, validateInput: (x: unknown) => h.input.parse(x), validateOutput: (x: unknown) => {
-    const value = h.output.parse(x); assert.equal(demandDigest(value), demandDigest(example.output));
+    const value = h.output.parse(x); assertFrozenDelivery(e.id, value, example.output);
     assert.deepEqual(validate({ success: true, data: value, proof: { settlement_id: TX } }, e.schema.output), []); return value
   } }
   const capsule = await prepareModularPurchase(contract, { input, payer: account.address, maximumAmount: BigInt(e.amount), now,
