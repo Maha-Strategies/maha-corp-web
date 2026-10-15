@@ -8,6 +8,8 @@ import { contextPackSchema, DEEP_CONTEXT_EVALUATION_DISCOVERY } from '../x402/of
 import { CONTEXT_BUDGET_LADDER_DISCOVERY, EVIDENCE_RETENTION_MATRIX_DISCOVERY } from '../x402/context-product-offer-schemas.ts'
 import { buildCelestialProduct, SYNTHETIC_CALCULATION_INPUTS, type CelestialProductId } from '../x402/celestial-products.ts'
 import { CELESTIAL_OFFERS } from '../x402/celestial-offers.ts'
+import { BAZAAR_LAUNCH_COPY } from '../x402/bazaar-launch.ts'
+import { DISCOVERY_PROBLEM_COPY } from '../x402/discovery-problem-copy.ts'
 import { DEMAND6_IDS, DEMAND6_INPUTS, DEMAND6_RESULTS, DEMAND6_SAMPLES, type Demand6Id } from '../x402/demand6/contracts.ts'
 import { buildDemandProduct, type DemandDependencies } from '../x402/demand6/products.ts'
 import { DEMAND6_SOURCE_REGISTRY } from '../x402/demand6/sources.ts'
@@ -59,7 +61,11 @@ for (const productId of Object.keys(SYNTHETIC_CALCULATION_INPUTS) as CelestialPr
     : productId === 'celestial-chart-evidence' ? z.object({ ...shape, latitudeDegrees: z.number().finite().min(-89.9).max(89.9), longitudeDegrees: z.number().finite().min(-180).max(180) }).strict()
       : z.object({ ...shape, latitudeDegrees: z.number().finite().min(-89.9).max(89.9), longitudeDegrees: z.number().finite().min(-180).max(180), referenceInstantUtc: utc }).strict()
   const offer = CELESTIAL_OFFERS.find(e => e.id === productId)!
-  core.push(port(productId, offer.description.replace('Bodies and receipt digests are not stored.', '') + ' Modular result content is retained 24 hours; minimal receipt metadata 90 days, replacing legacy stateless delivery.', request, offer.discovery.outputSchema,
+  // The legacy offer registry mutates its marketing copy during import. Pin
+  // the same approved copy directly so contract hashes do not depend on which
+  // module (handler, registry or discovery) was loaded first.
+  const description = DISCOVERY_PROBLEM_COPY[productId] ?? BAZAAR_LAUNCH_COPY[productId] ?? offer.description
+  core.push(port(productId, description.replace('Bodies and receipt digests are not stored.', '') + ' Modular result content is retained 24 hours; minimal receipt metadata 90 days, replacing legacy stateless delivery.', request, offer.discovery.outputSchema,
     SYNTHETIC_CALCULATION_INPUTS[productId] as unknown as Record<string, unknown>, async r => buildCelestialProduct(productId, r)))
 }
 const targets = [{ url: 'https://www.mahastrategies.com/api/v1/compress', method: 'POST' as const, body: '{}' }]

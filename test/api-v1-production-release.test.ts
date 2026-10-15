@@ -31,6 +31,9 @@ test('500-product release preserves the original 296 and adds only the approved 
 for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response loss and no-repayment recovery: ' + e.id, async () => {
   let now = CLOCK, settlements = 0, recorded = 0
   const h = handlerFor(e.id, e.amount)!, example = releaseExample(e.id)!, input = h.input.parse(example.input)
+  // Report the actual cross-runtime difference before the buyer intentionally
+  // hides validation details behind its safe unresolved response.
+  assert.deepEqual(await h.execute(input), example.output, 'frozen output differs: ' + e.id)
   const router = createEndpointRouter({ environment: env, now: () => now, store: memoryPaymentStore(() => now, 1000),
     facilitator: { verify: async payment => {
       const auth = payment.payload.authorization as { validAfter: string; validBefore: string }
