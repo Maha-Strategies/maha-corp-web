@@ -2,6 +2,7 @@ import { BAZAAR_MERCHANT_URL, MAHA_PAYEE } from './discovery-payment-recipe.ts'
 
 export type ProductListing = { serviceName: string | null; calls30d: number | null; payers30d: number | null; lastCalledAt: string | null }
 export type IndexSnapshot = { available: boolean; complete: boolean; checkedAt: string; resources: string[]; listings?: Record<string, ProductListing> }
+export const MAX_MERCHANT_INDEX_RESOURCES = 2000
 export function parseProductIndex(value: unknown, checkedAt: string, offset = 0): IndexSnapshot {
   const v = value as { payTo?: unknown; resources?: unknown; pagination?: { total?: unknown; offset?: unknown } }
   if (!v || typeof v.payTo !== 'string' || v.payTo.toLowerCase() !== MAHA_PAYEE || !Array.isArray(v.resources)
@@ -36,11 +37,13 @@ export async function readProductIndex(options: { timeoutMs?: number } = {}): Pr
   const listings: Record<string, ProductListing> = {}
   let total: number | undefined
   try {
-    // One shared deadline and at most ten pages: no unbounded catalogue crawl.
+    // 1,000 modular products plus legacy URLs need more than ten pages.
+    // Keep one deadline and at most twenty pages; partial results stay unknown.
     const signal = AbortSignal.timeout(timeoutMs)
-    for (let offset = 0; offset < 1000; offset += 100) {
+    for (let offset = 0; offset < MAX_MERCHANT_INDEX_RESOURCES; offset += 100) {
       const url = new URL(BAZAAR_MERCHANT_URL)
       url.searchParams.set('payTo', MAHA_PAYEE); url.searchParams.set('limit', '100'); url.searchParams.set('offset', String(offset))
+      url.searchParams.set('_maha_snapshot', checkedAt)
       const response = await fetch(url, { cache: 'no-store', signal })
       if (!response.ok) throw new Error('index_unavailable')
       const value = await response.json()

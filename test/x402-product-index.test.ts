@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { parseProductIndex, productIndexLabel, readProductIndex } from '../lib/x402/product-index.ts'
+import { parseProductIndex, productIndexLabel, readProductIndex, MAX_MERCHANT_INDEX_RESOURCES } from '../lib/x402/product-index.ts'
 import { MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 const at = '2026-10-09T00:00:00Z'
 const url = 'https://www.mahastrategies.com/api/v1/example'
@@ -48,6 +48,29 @@ test('Bazaar paid-call counts and missing quality metrics remain distinct', () =
   assert.equal(snapshot.listings?.[url].calls30d, 4)
   assert.equal(snapshot.listings?.[url + '-pending'].calls30d, null)
   assert.equal(snapshot.listings?.[url + '-pending'].serviceName, null)
+})
+test('one thousand modular products plus legacy listings are fully read, with a bounded shared snapshot', async () => {
+  const original = globalThis.fetch, rows = Array.from({ length: 1156 }, (_, i) => ({ resource: url + '-' + i }))
+  const offsets: number[] = [], snapshots = new Set<string>()
+  try {
+    globalThis.fetch = async input => {
+      const u = new URL(String(input)), offset = Number(u.searchParams.get('offset'))
+      offsets.push(offset); snapshots.add(u.searchParams.get('_maha_snapshot')!)
+      return Response.json({ payTo: MAHA_PAYEE, resources: rows.slice(offset, offset + 100), pagination: { total: rows.length, offset } })
+    }
+    const result = await readProductIndex()
+    assert.equal(result.complete, true); assert.equal(result.resources.length, 1156)
+    assert.equal(offsets.length, 12); assert.equal(offsets.at(-1), 1100); assert.equal(snapshots.size, 1)
+    assert.ok(snapshots.has(result.checkedAt))
+    globalThis.fetch = async input => {
+      const offset = Number(new URL(String(input)).searchParams.get('offset'))
+      const page = Array.from({ length: 100 }, (_, i) => ({ resource: url + '-' + (offset + i) }))
+      return Response.json({ payTo: MAHA_PAYEE, resources: page, pagination: { total: 100000, offset } })
+    }
+    const capped = await readProductIndex()
+    assert.equal(capped.complete, false); assert.equal(capped.resources.length, MAX_MERCHANT_INDEX_RESOURCES)
+    assert.match(productIndexLabel(capped, '/missing'), /unknown/)
+  } finally { globalThis.fetch = original }
 })
 test('invalid quality metrics and future timestamps never become valid activity', () => {
   const snapshot = parseProductIndex({ payTo: MAHA_PAYEE, resources: [{ resource: url,
