@@ -18,15 +18,15 @@ import { usdcNetwork } from '../lib/x402/networks.ts'
 export const CONTINUATION_BRANCH = 'refs/heads/codex/modular132-recovery-20261015'
 export const CONTINUATION_CONFIRMATION = 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
 export const ORIGINAL_ID = 'reading-plans-scope-boundary-audit'
-export const ORIGINAL_EVIDENCE_HASH = '309c960b83e02f42f79122984521a596c5a8726193b3a52cf8e75e185ef857fe'
-export const ORIGINAL_OUTBOX_HASH = '8b36734276111c4e7649e7736becb09f003dcf90d5d6e1a42321b9dae8aa3eba'
-const ORIGINAL_SCOPE = MODULAR_132_ADDITIONS.version
-const SCOPE = ORIGINAL_SCOPE + ':approved-billing-recovery/1'
+export const ORIGINAL_EVIDENCE_HASH = '79bf1edf18c42b7fa93eec55ad9ac4971791ccd71260ce38e1ca864f3d807c8c'
+export const ORIGINAL_OUTBOX_HASH = 'ab0c94684d9aade2e54956d29535130a7988229684f0538a4bd2130faacd71b8'
+const ORIGINAL_SCOPE = MODULAR_132_ADDITIONS.version + ':approved-billing-recovery/1'
+const SCOPE = ORIGINAL_SCOPE + ':paid-response-recovery/1'
 const ORIGIN = 'https://www.mahastrategies.com'
 type Step = { id: string; amountBaseUnits: string; state: string; transaction?: string; responseDigest?: string; status?: number; errorCode?: string }
 
 function assertContinuationScope(env: Record<string, string | undefined>, wallet: string) {
-  if (env.GITHUB_ACTIONS !== 'true' || env.GITHUB_REF !== CONTINUATION_BRANCH || env.GITHUB_RUN_ATTEMPT !== '1' || env.GITHUB_RUN_NUMBER !== '2'
+  if (env.GITHUB_ACTIONS !== 'true' || env.GITHUB_REF !== CONTINUATION_BRANCH || env.GITHUB_RUN_ATTEMPT !== '1' || env.GITHUB_RUN_NUMBER !== '3'
     || env.MODULAR132_CONTINUATION_CONFIRMATION !== CONTINUATION_CONFIRMATION || !env.MODULAR132_ORIGINAL_DIRECTORY || !env.MODULAR132_CONTINUATION_OUTPUT
     || wallet.toLowerCase() !== MODULAR_132_ADDITIONS.operatorWallet)
     throw Error('exact_second_run_approval_wallet_and_reserved_balance_required')
@@ -46,8 +46,24 @@ export function originalDisposition(proof: { finalizedUsed: boolean; latestUsed:
   if (proof.finalizedTimestamp <= proof.validBefore) throw Error('original_not_finalized_expired_do_not_repay')
   return 'controlled_replacement_permitted' as const
 }
-export function continuationSecret(key: string, id: string, replacement: boolean) {
-  return createHmac('sha256', key).update((replacement ? SCOPE : ORIGINAL_SCOPE) + ':' + id + ':original-once').digest('hex')
+export function continuationSecret(key: string, id: string) {
+  if (id === ORIGINAL_ID) throw Error('paid_original_cannot_be_prepared_again')
+  return createHmac('sha256', key).update(MODULAR_132_ADDITIONS.version + ':' + id + ':original-once').digest('hex')
+}
+export async function recoverConfirmedOriginal(contract: ModularBuyerContract, capsule: ModularCapsule, transaction: string, dependencies: {
+  submit?: typeof submitModularPurchase; delay?: (ms: number) => Promise<void>; observe?: (status?: number, code?: string) => Promise<void>
+} = {}) {
+  const send = dependencies.submit ?? submitModularPurchase, delay = dependencies.delay ?? (ms => new Promise(resolve => setTimeout(resolve, ms)))
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const result = await send(contract, capsule, { fetchImpl: transport, recovery: 'retained-result' })
+    await dependencies.observe?.('status' in result ? result.status : undefined, 'errorCode' in result ? String(result.errorCode) : undefined)
+    if (result.delivery === 'validated_response') {
+      if (result.transaction !== transaction) throw Error('retained_transaction_binding_mismatch')
+      return result
+    }
+    if (attempt < 9) await delay(10000)
+  }
+  throw Error('confirmed_payment_retained_response_unavailable_do_not_repay')
 }
 function contractFor(id: string): ModularBuyerContract {
   const e = BATCH132_PRODUCTION_ENDPOINTS.find(e => e.id === id)!, sample = releaseExample(id)!, h = handlerFor(id, e.amount)!
@@ -64,9 +80,9 @@ export async function continueModular132() {
   if (process.argv.slice(2).join(' ') !== '--continue') throw Error('explicit_continuation_mode_required')
   const directory = process.env.MODULAR132_ORIGINAL_DIRECTORY!, output = process.env.MODULAR132_CONTINUATION_OUTPUT!
   // Hash pinning happens before signer access. The original artifact remains immutable.
-  const original = pinnedOriginal(await readFile(join(directory, 'modular132-indexing-evidence.json')), ORIGINAL_EVIDENCE_HASH)
-  const outbox = pinnedOriginal(await readFile(join(directory, 'modular132-indexing-evidence.json.recovery-encrypted.json')), ORIGINAL_OUTBOX_HASH)
-  if (original.version !== ORIGINAL_SCOPE || outbox.scope !== ORIGINAL_SCOPE || original.steps.length !== 1 || outbox.packets.length !== 1
+  const original = pinnedOriginal(await readFile(join(directory, 'modular132-continuation-evidence.json')), ORIGINAL_EVIDENCE_HASH)
+  const outbox = pinnedOriginal(await readFile(join(directory, 'modular132-continuation-evidence.json.recovery-encrypted.json')), ORIGINAL_OUTBOX_HASH)
+  if (original.scope !== ORIGINAL_SCOPE || outbox.scope !== ORIGINAL_SCOPE || original.steps.length !== 1 || outbox.packets.length !== 1
     || original.steps[0].id !== ORIGINAL_ID || original.steps[0].amountBaseUnits !== '38340' || original.steps[0].state !== 'authorized_outcome_unknown'
     || original.authorizedBaseUnits !== '38340' || original.confirmedBaseUnits !== '0' || original.maximumBaseUnits !== String(BATCH132_CAP)
     || original.wallet.toLowerCase() !== MODULAR_132_ADDITIONS.operatorWallet || outbox.packets[0].id !== ORIGINAL_ID) throw Error('exact_original_scope_required')
@@ -90,7 +106,8 @@ export async function continueModular132() {
     client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [account.address, nonce] }),
   ])
   const disposition = originalDisposition({ finalizedUsed, latestUsed, finalizedTimestamp: finalized.timestamp, validBefore: BigInt(String(authorization.validBefore)) })
-  const evidence = { scope: SCOPE, originalRun: 38739743218, checkedAt: new Date().toISOString(), classification: 'publisher-funded-operator-activity',
+  if (disposition !== 'recover_paid_only') throw Error('expected_paid_original_nonce_not_confirmed_no_replacement_allowed')
+  const evidence = { scope: SCOPE, originalRun: 38747177414, checkedAt: new Date().toISOString(), classification: 'publisher-funded-operator-activity',
     customerRevenue: false, organicDemand: false, automaticRepayment: false, wallet: account.address, payee: MODULAR_132_ADDITIONS.payee,
     maximumBaseUnits: String(BATCH132_CAP), protectedReserveBaseUnits: String(ORIGINAL_ATTEMPT_RESERVE), initialBalanceBaseUnits: String(balance),
     original: { finalizedBlock: String(finalized.number), finalizedTimestamp: String(finalized.timestamp), finalizedUsed, latestUsed, validBefore: String(authorization.validBefore), disposition,
@@ -104,7 +121,8 @@ export async function continueModular132() {
   await save()
   try {
     if (disposition === 'recover_paid_only') {
-      const latest = await client.getBlock(), start = latest.number > 50000n ? latest.number - 50000n : 0n
+      const latest = await client.getBlock(), estimated = (latest.timestamp - BigInt(String(authorization.validAfter))) / 2n + 1000n
+      const window = estimated < 50000n ? estimated : 50000n, start = latest.number > window ? latest.number - window : 0n
       if ((await client.getBlock({ blockNumber: start })).timestamp > BigInt(String(authorization.validAfter))) throw Error('original_log_window_incomplete_do_not_repay')
       const event = parseAbiItem('event AuthorizationUsed(address indexed authorizer, bytes32 indexed nonce)'), matches: `0x${string}`[] = []
       for (let from = start; from <= latest.number; from += 2000n) {
@@ -118,7 +136,9 @@ export async function continueModular132() {
       evidence.original.receiptVerified = true; evidence.original.transaction = transaction
     }
     // This request cannot settle: it explicitly asks only for an already-retained result.
-    const retained = await submitModularPurchase(originalContract, capsule, { fetchImpl: transport, recovery: 'retained-result' })
+    const retained = await recoverConfirmedOriginal(originalContract, capsule, evidence.original.transaction, { observe: async (status, code) => {
+      evidence.original.retainedStatus = status ?? 0; evidence.original.retainedError = code ?? ''; await save()
+    } })
     evidence.original.retainedStatus = 'status' in retained ? retained.status ?? 0 : 0
     evidence.original.retainedError = 'errorCode' in retained ? String(retained.errorCode) : ''
     await save()
@@ -136,10 +156,9 @@ export async function continueModular132() {
       if (e.id === ORIGINAL_ID && disposition === 'recover_paid_only') continue
       if (index.indexed.includes(e.id)) { evidence.steps.push({ id: e.id, amountBaseUnits: '0', state: 'already_indexed_no_payment' }); await save(); continue }
       const contract = contractFor(e.id), input = contract.validateInput(releaseExample(e.id)!.input)
-      const replacement = e.id === ORIGINAL_ID, secret = continuationSecret(key, e.id, replacement), freshNonce = modularPaymentNonce(e.id, demandDigest(input), secret) as `0x${string}`
-      if (replacement && (freshNonce === nonce || await client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [account.address, nonce] }))) throw Error('original_now_used_do_not_repay')
+      const secret = continuationSecret(key, e.id), freshNonce = modularPaymentNonce(e.id, demandDigest(input), secret) as `0x${string}`
       if (await client.readContract({ address: asset, abi, functionName: 'authorizationState', args: [account.address, freshNonce] })) throw Error('continuation_nonce_already_used_do_not_repay')
-      const step: Step = { id: e.id, amountBaseUnits: e.amount, state: replacement ? 'approved_controlled_replacement_preparing' : 'preparing_first_authorization' }; evidence.steps.push(step)
+      const step: Step = { id: e.id, amountBaseUnits: e.amount, state: 'preparing_first_authorization' }; evidence.steps.push(step)
       const fresh = await prepareModularPurchase(contract, { input, payer: account.address, maximumAmount: BigInt(e.amount), secret, fetchImpl: transport,
         signTypedData: typed => account.signTypedData(typed as Parameters<typeof account.signTypedData>[0]), persist: async saved => {
           budget.reserve(e.id, e.amount)
