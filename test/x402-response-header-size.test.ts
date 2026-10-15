@@ -95,8 +95,8 @@ test('every legacy gateway unsigned path stops before verification or settlement
     if (outcome.kind === 'challenge') assert.ok(paymentRequiredHeaderBytes(outcome.header) <= PAYMENT_REQUIRED_HEADER_LIMIT, p.offerId)
   }
 })
-test('all 500 released modular products use the guarded encoder without changing prices', async () => {
-  assert.equal(PRODUCTION_ENDPOINTS.length, 500)
+test('all 625 released modular products use the guarded encoder without changing prices', async () => {
+  assert.equal(PRODUCTION_ENDPOINTS.length, 625)
   for (const e of PRODUCTION_ENDPOINTS) {
     const route = with402Payment(e, undefined, { environment: { NODE_ENV: 'test', BASE_PAYEE_ADDRESS: MAHA_PAYEE }, facilitator, store: memoryPaymentStore() })
     const response = await route(new Request(origin + e.path, { method: e.method }))
