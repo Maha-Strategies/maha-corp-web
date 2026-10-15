@@ -58,6 +58,10 @@ function bazaarRecord(overrides: Record<string, unknown> = {}) {
   }
 }
 
+function merchantResponse(resources: Record<string, unknown>[], total = resources.length, offset = 0, payTo = requirement.payTo) {
+  return Response.json({ payTo, resources, pagination: { total, offset } })
+}
+
 function fetchSequence(responses: Response[]): typeof fetch {
   return (async () => {
     const response = responses.shift()
@@ -94,7 +98,7 @@ test('validates the live challenge, crawler request, and current Bazaar record',
     fetchImpl: fetchSequence([
       challengeResponse(),
       challengeResponse(),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
     ]),
   })
 
@@ -103,7 +107,101 @@ test('validates the live challenge, crawler request, and current Bazaar record',
   assert.equal(report.live?.routeExistence?.verdict, 'confirmed')
   assert.equal(report.bazaar?.found, true)
   assert.equal(report.bazaar?.matchesLive, true)
+  assert.equal(report.bazaar?.catalogueComplete, true)
+  assert.equal(report.bazaar?.observedResources, 1)
   assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.extensions.responses'), true)
+})
+
+function paginatedDoctorFetch(rows: Record<string, unknown>[], mutate?: (body: Record<string, unknown>, offset: number) => unknown) {
+  const offsets: number[] = []
+  const fetchImpl = (async (url, init) => {
+    const parsed = new URL(String(url))
+    if (parsed.pathname.endsWith('/merchant')) {
+      assert.equal(parsed.searchParams.get('payTo'), requirement.payTo)
+      assert.equal(parsed.searchParams.get('limit'), '100')
+      assert.equal(init?.redirect, 'error')
+      assert.ok(init?.signal)
+      const offset = Number(parsed.searchParams.get('offset'))
+      offsets.push(offset)
+      const body = { payTo: requirement.payTo, resources: rows.slice(offset, offset + 100), pagination: { total: rows.length, offset } }
+      return Response.json(mutate ? mutate(body, offset) : body)
+    }
+    assert.equal(new Headers(init?.headers).has('PAYMENT-SIGNATURE'), false)
+    if (parsed.pathname.startsWith('/.well-known/x402-doctor-route-control-')) return new Response(null, { status: 404 })
+    return challengeResponse()
+  }) as typeof fetch
+  return { fetchImpl, offsets }
+}
+
+function otherRecords(count: number) {
+  return Array.from({ length: count }, (_, i) => bazaarRecord({ resource: `https://seller.example/api/other-${i}` }))
+}
+
+for (const count of [101, 452, 1000]) {
+  test(`finds the target on the last page of a complete ${count}-listing merchant catalogue`, async () => {
+    const { fetchImpl, offsets } = paginatedDoctorFetch([...otherRecords(count - 1), bazaarRecord()])
+    const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
+    assert.equal(report.ok, true)
+    assert.equal(report.bazaar?.found, true)
+    assert.equal(report.bazaar?.matchesLive, true)
+    assert.equal(report.bazaar?.catalogueComplete, true)
+    assert.equal(report.bazaar?.observedResources, count)
+    assert.deepEqual(offsets, Array.from({ length: Math.ceil(count / 100) }, (_, i) => i * 100))
+    assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), false)
+  })
+}
+
+test('detects stale metadata on a later page rather than claiming the listing is missing', async () => {
+  const { fetchImpl } = paginatedDoctorFetch([...otherRecords(429), bazaarRecord({ description: 'Old description.' }), ...otherRecords(22).map((r, i) => ({ ...r, resource: `https://seller.example/api/tail-${i}` }))])
+  const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
+  assert.equal(report.bazaar?.found, true)
+  assert.equal(report.bazaar?.matchesLive, false)
+  assert.equal(report.bazaar?.observedResources, 452)
+  assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.stale_metadata'), true)
+  assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), false)
+})
+
+for (const count of [0, 100, 201]) {
+  test(`only establishes absence after reading the complete ${count}-listing catalogue`, async () => {
+    const { fetchImpl, offsets } = paginatedDoctorFetch(otherRecords(count))
+    const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
+    assert.equal(report.bazaar?.found, false)
+    assert.equal(report.bazaar?.catalogueComplete, true)
+    assert.equal(report.bazaar?.observedResources, count)
+    assert.equal(offsets.length, Math.max(1, Math.ceil(count / 100)))
+    assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), true)
+  })
+}
+
+const incompleteCatalogues: Array<[string, (body: Record<string, unknown>, offset: number) => unknown]> = [
+  ['truncated page', (body, offset) => offset ? { ...body, resources: [] } : body],
+  ['changed total', (body, offset) => offset ? { ...body, pagination: { total: 202, offset } } : body],
+  ['duplicate resources', (body, offset) => offset ? { ...body, resources: [otherRecords(1)[0]] } : body],
+  ['wrong merchant', (body, offset) => offset ? { ...body, payTo: `0x${'1'.repeat(40)}` } : body],
+  ['wrong offset', (body, offset) => offset ? { ...body, pagination: { total: 201, offset: 0 } } : body],
+  ['unbounded total', body => ({ ...body, pagination: { total: 1001, offset: 0 } })],
+  ['missing pagination', body => ({ resources: body.resources, payTo: body.payTo })],
+  ['malformed response', () => null],
+]
+for (const [name, mutate] of incompleteCatalogues) {
+  test(`reports an unknown lookup, not absence, for ${name}`, async () => {
+    const { fetchImpl } = paginatedDoctorFetch(otherRecords(201), mutate)
+    const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
+    assert.equal(report.bazaar, undefined)
+    assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.lookup'), true)
+    assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), false)
+  })
+}
+
+test('a later page failure cannot establish absence even when the target was already seen', async () => {
+  const rows = [bazaarRecord(), ...otherRecords(100)]
+  const { fetchImpl: pages } = paginatedDoctorFetch(rows)
+  const fetchImpl = (async (url, init) => String(url).includes('offset=100')
+    ? new Response(null, { status: 503 }) : pages(url, init)) as typeof fetch
+  const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
+  assert.equal(report.bazaar, undefined)
+  assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.lookup'), true)
+  assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), false)
 })
 
 test('marks route existence uninformative when the payment gate fires before routing', async () => {
@@ -112,7 +210,7 @@ test('marks route existence uninformative when the payment gate fires before rou
     fetchImpl: fetchSequence([
       challengeResponse(),
       challengeResponse(),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
       challengeResponse(),
     ]),
   })
@@ -128,7 +226,7 @@ test('reports a same-host soft-200 independently from payment-gate behavior', as
     fetchImpl: fetchSequence([
       challengeResponse(),
       challengeResponse(),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
       new Response('<title>Not found</title>', { status: 200, headers: { 'content-type': 'text/html' } }),
     ]),
   })
@@ -171,7 +269,7 @@ test('detects the accidental crawler 400 and stale Bazaar metadata', async () =>
     fetchImpl: fetchSequence([
       challengeResponse(),
       challengeResponse(400),
-      Response.json({ resources: [bazaarRecord({ description: 'Old description.' })] }),
+      merchantResponse([bazaarRecord({ description: 'Old description.' })]),
     ]),
   })
 
@@ -198,7 +296,7 @@ test('uses a catalog-computed declaration digest instead of reconstructing catal
     fetchImpl: fetchSequence([
       challengeResponse(402, liveChallenge),
       challengeResponse(402, liveChallenge),
-      Response.json({ resources: [bazaarRecord({ description: 'Catalogs may flatten this differently.', declarationIntegrity: integrity })] }),
+      merchantResponse([bazaarRecord({ description: 'Catalogs may flatten this differently.', declarationIntegrity: integrity })]),
     ]),
   })
 
@@ -227,7 +325,7 @@ test('rejects a seller digest that does not describe its own live declaration', 
     fetchImpl: fetchSequence([
       challengeResponse(402, liveChallenge),
       challengeResponse(402, liveChallenge),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
     ]),
   })
 
@@ -243,7 +341,7 @@ test('flags deprecated v1 response headers alongside the canonical v2 challenge'
     fetchImpl: fetchSequence([
       first,
       challengeResponse(),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
     ]),
   })
 
@@ -259,7 +357,7 @@ test('records an explicitly injected bounded settlement and extension response',
     fetchImpl: fetchSequence([
       challengeResponse(),
       challengeResponse(),
-      Response.json({ resources: [bazaarRecord()] }),
+      merchantResponse([bazaarRecord()]),
     ]),
     paidProbe: async () => {
       paid = true

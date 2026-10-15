@@ -34,6 +34,14 @@ The doctor also implements the draft [`declaration-integrity` proposal](./x402-d
 
 ## Read-only inspection
 
+Merchant discovery reads every page before reporting presence or absence,
+using the shared bounded catalogue reader. It supports up to 1,000 resources
+in 100-row pages, with an 8 MiB per-page body limit and one lookup deadline
+(`--timeout-ms`, default 15 seconds). A malformed, truncated, duplicate,
+wrong-merchant or changing snapshot is a lookup warning, not proof that a
+listing is missing. Complete results include `bazaar.catalogueComplete`
+and `bazaar.observedResources`; incomplete lookups leave `bazaar` unavailable.
+
 ```bash
 npm run x402:doctor -- \
   https://www.mahastrategies.com/api/v1/compress \
@@ -76,5 +84,16 @@ npm run x402:doctor -- https://seller.example/resource \
 - `2`: invalid CLI configuration or an unrecoverable invocation error.
 
 ## Stale metadata and a future protocol improvement
+
+As checked on 15 October 2026, CDP's [seller discovery guide](https://docs.cdp.coinbase.com/x402/seller/get-discovered)
+documents indexing after a successful settled payment and says there is no
+separate registration API. Its free `/x402/validate` endpoint checks discovery
+readiness; it is not documented as a catalogue metadata update mechanism.
+No supported self-service unpaid metadata refresh was found in that guide or
+the discovery API reference. This does not rule out a manual correction by
+the catalogue operator. Prefer an ordinary customer settlement or ask CDP
+whether an operator-side metadata refresh is possible; a stale digest alone
+does not authorize an operator-funded purchase. Do not change the live digest
+back to the old value: it must describe the actual live declaration.
 
 The doctor currently canonicalizes `{ resource, description, mimeType, accepts, extensions }` and compares SHA-256 digests across the live challenge and Bazaar record. A future x402 extension could standardize this as a declaration digest plus metadata version. Catalogs could then reject or refresh stale seller metadata without requiring an unrelated paid call solely to trigger re-indexing.
