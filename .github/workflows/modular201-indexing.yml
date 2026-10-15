@@ -1,9 +1,9 @@
-name: Investigate original modular201 final attempt without payment
+name: Controlled final modular201 purchase after expired-unused proof
 on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'INVESTIGATE_201_FINAL_RETAINED_ONLY_NO_PAYMENT'
+        description: 'RETRY_ONCE_AFTER_UNUSED_EXPIRED_MAX_38339'
         required: true
         type: string
 permissions:
@@ -14,12 +14,13 @@ concurrency:
   cancel-in-progress: false
 jobs:
   investigate:
-    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/modular201-recovery-20261015' && inputs.confirmation == 'INVESTIGATE_201_FINAL_RETAINED_ONLY_NO_PAYMENT'
+    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/modular201-recovery-20261015' && inputs.confirmation == 'RETRY_ONCE_AFTER_UNUSED_EXPIRED_MAX_38339'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: production-x402-canary
     env:
-      MODULAR201_RECOVERY_CONFIRMATION: ${{ inputs.confirmation }}
+      MODULAR201_RECOVERY_CONFIRMATION: 'INVESTIGATE_201_FINAL_RETAINED_ONLY_NO_PAYMENT'
+      MODULAR201_CONTROLLED_RETRY_CONFIRMATION: ${{ inputs.confirmation }}
       MODULAR201_ORIGINAL_DIRECTORY: ${{ github.workspace }}/.modular201-original
       MODULAR201_RECOVERY_OUTPUT: ${{ github.workspace }}/modular201-investigation.json
     steps:
@@ -37,16 +38,19 @@ jobs:
           run-id: '38722500745'
           github-token: ${{ github.token }}
           path: ${{ env.MODULAR201_ORIGINAL_DIRECTORY }}
-      - name: Check original authorization and request retained response only
+      - name: Recheck original, then one fresh purchase within reserved cap
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: node --experimental-strip-types scripts/investigate-modular201.ts --investigate
+        run: node --experimental-strip-types scripts/retry-modular201-final.ts --investigate
       - name: Preserve redacted investigation evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: modular201-investigation-${{ github.run_id }}
-          path: ${{ env.MODULAR201_RECOVERY_OUTPUT }}
+          name: modular201-controlled-retry-${{ github.run_id }}
+          path: |
+            ${{ env.MODULAR201_RECOVERY_OUTPUT }}
+            ${{ env.MODULAR201_RECOVERY_OUTPUT }}.controlled-retry.json
+            ${{ env.MODULAR201_RECOVERY_OUTPUT }}.controlled-retry.json.recovery-encrypted.json
           retention-days: 90
           if-no-files-found: warn

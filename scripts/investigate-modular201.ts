@@ -100,6 +100,7 @@ export async function investigateModular201() {
   } else evidence.state = evidence.originalExpiredUnused ? 'original_expired_unused_no_retry_performed' : 'paid_or_unknown_retained_recovery_requires_journal_review'
   await writePrivateEvidenceAtomically(output, evidence)
   console.log(JSON.stringify(evidence))
+  return { evidence, capsule, contract, account, client, asset, abi }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) investigateModular201().catch(() => {
   console.error('modular201_investigation_stopped_no_payment_no_secret_output'); process.exitCode = 1
