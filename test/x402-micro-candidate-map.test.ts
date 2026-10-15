@@ -11,8 +11,8 @@ import { EXPANSION_IDS, EXPANSION_UTILITY_IDS } from '../lib/x402/expansion-regi
 
 const root = resolve(import.meta.dirname, '..'), read = (path: string) => readFileSync(resolve(root, path), 'utf8')
 const freeze = JSON.parse(read('content/discovery/micro-candidate-freeze-v1.json'))
-const selection = JSON.parse(read('content/discovery/micro60-selection-v6.json'))
-const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v11.json'))
+const selection = JSON.parse(read('content/discovery/micro60-selection-v7.json'))
+const costs = JSON.parse(read('content/discovery/micro-next12-cost-observation-v12.json'))
 const unsigned = (o: object) => Object.fromEntries(Object.entries(o).filter(([k]) => k !== 'digest'))
 // Owner approval permits exactly these formerly withheld status/price changes;
 // it does not authorize rewriting the original 24-offer frozen snapshot.
@@ -82,8 +82,8 @@ test('freeze enumerates sixty original candidates and refuses to overwrite the o
   for (const prior of freeze.existingOffers) {
     const current = X402_OFFERS.find(o => o.id === prior.id)!
     assert.equal(current.path, prior.path, `${prior.id}:path`)
-    if (BAZAAR_LAUNCH_COPY[prior.id]) {
-      assert.equal(current.description, BAZAAR_LAUNCH_COPY[prior.id], `${prior.id}: owner-approved launch copy`)
+    if (DISCOVERY_PROBLEM_COPY[prior.id] ?? BAZAAR_LAUNCH_COPY[prior.id]) {
+      assert.equal(current.description, DISCOVERY_PROBLEM_COPY[prior.id] ?? BAZAAR_LAUNCH_COPY[prior.id], `${prior.id}: approved problem-oriented discovery copy, falling back to historical launch copy`)
     } else if (prior.id === 'context-budget-ladder') {
       // The one permitted description change. This offer used to publish its
       // price as a strict derivation -- five $0.001 compilations -- and is no
@@ -143,9 +143,9 @@ test('sixty semantic decisions partition honestly; merged entries name a retaine
 
 test('selected scores require actual bounded local observations, not zero-cost guesses for unmeasured products', () => {
   assert.equal(costs.digest, microDigest(unsigned(costs)))
-  assert.equal(costs.version, 'micro-next12-cost-observation/11')
-  assert.equal(costs.supersedes, 'micro-next12-cost-observation-v10.json')
-  assert.equal(selection.version, 'micro60-selection/6'); assert.equal(selection.supersedes, 'micro60-selection-v5.json')
+  assert.equal(costs.version, 'micro-next12-cost-observation/12')
+  assert.equal(costs.supersedes, 'micro-next12-cost-observation-v11.json')
+  assert.equal(selection.version, 'micro60-selection/7'); assert.equal(selection.supersedes, 'micro60-selection-v6.json')
   assert.equal(costs.workloadsDigest, JSON.parse(read('content/discovery/micro-next12-cost-observation-v9.json')).workloadsDigest)
   assert.equal(costs.cloudBillingMeasured, false); assert.equal(costs.exhaustiveWorstCaseProof, false)
   assert.equal(costs.remoteCalls, 0); assert.equal(costs.deploymentBuilds, 0); assert.equal(costs.paymentAttempts, 0); assert.equal(costs.indexingPurchases, 0)
@@ -170,14 +170,14 @@ test('selected scores require actual bounded local observations, not zero-cost g
 })
 
 test('map and examples regenerate deterministically; profiled implementation remains bound', () => {
-  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro60-selection-v6.json', 'content/discovery/microproduct-examples.json']
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-next12-cost-observation-v12.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro-planning-build-list-v8.json', 'content/discovery/micro60-selection-v6.json', 'content/discovery/micro60-selection-v7.json', 'content/discovery/microproduct-examples.json']
   const before = files.map(read)
   for (let i = 0; i < 2; i++) for (const script of ['freeze-micro-candidates', 'profile-next12', 'review-micro-candidates', 'generate-microproduct-examples', 'sync-microproduct-discovery']) execFileSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, '--check'], { cwd: root })
   assert.deepEqual(files.map(read), before)
 })
 
 test('fresh versioned records cannot be recaptured or overwritten; every historical artifact stays byte-identical', () => {
-  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro60-selection-v6.json']
+  const files = [...Object.keys(HISTORICAL_ARTIFACT_SHA256), 'content/discovery/micro-next12-cost-observation-v11.json', 'content/discovery/micro-next12-cost-observation-v12.json', 'content/discovery/micro-planning-build-list-v7.json', 'content/discovery/micro-planning-build-list-v8.json', 'content/discovery/micro60-selection-v6.json', 'content/discovery/micro60-selection-v7.json']
   const before = files.map(read)
   for (const [script, arg] of [['profile-next12', '--capture'], ['profile-planning-ten', '--capture'], ['review-micro-candidates', '--write']]) {
     const attempt = spawnSync(process.execPath, ['--experimental-strip-types', `scripts/${script}.ts`, arg], { cwd: root })
@@ -205,3 +205,4 @@ test('entrypoint import order cannot resurrect the earlier schema/catalog initia
   for (const path of ['micro-contracts', 'micro-next-contracts', 'micro-next-products', 'micro-products']) execFileSync(process.execPath, ['--experimental-strip-types', '-e', `await import('./lib/x402/${path}.ts')`], { cwd: root })
 })
 import { BAZAAR_LAUNCH_COPY } from '../lib/x402/bazaar-launch.ts'
+import { DISCOVERY_PROBLEM_COPY } from '../lib/x402/discovery-problem-copy.ts'

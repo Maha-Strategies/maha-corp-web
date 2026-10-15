@@ -108,12 +108,12 @@ test('the direct CARP allowlist binds Thrivbe to its verified DID key and callba
 test('enquiry returns the canonical offering array for compatible needs', () => {
   const matched = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-1',
-    params: { query: 'measure evidence retention in RAG context', tags: ['provenance'], imgtxt: null },
+    params: { query: 'digital machine-payable catalogue', tags: ['x402'], imgtxt: null },
   })
   assert.ok('result' in matched)
   assert.deepEqual(
     (matched as { result: Array<{ offeringRef: string }> }).result.map((offer) => offer.offeringRef),
-    MAHA_CARP_DIGITAL_OFFERS.filter((offer) => !offer.directSettlement.resource.includes('/calculations/') && !['book-epub-the-maha-principle', 'book-epub-the-orbital-mind', 'book-section-the-maha-principle', 'book-section-the-orbital-mind'].includes(offer.offerId)).map((offer) => offer.offeringRef),
+    MAHA_CARP_DIGITAL_OFFERS.map((offer) => offer.offeringRef),
   )
 
   const unrelated = handleCarpSellerRequest({

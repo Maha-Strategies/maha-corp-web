@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import { AUTHORITY_DECISIONS, AUTHORITY_SOURCES } from '../lib/federation/external-authority-recovery.ts'
 import { FIRST_PARTY_DEFINITIONS } from '../lib/federation/first-party-definitions.ts'
 import { HELD_CONCEPTS, LOCAL_APPLICATION_SOURCES, digest, type Tranche19State } from '../lib/federation/readiness-tranche-19.ts'
@@ -34,7 +35,7 @@ const cohortBody = {
   candidates: selected.map((row) => ({ selectionOrder: row.selectionOrder, priorityScore: row.priorityScore, candidateId: row.candidate.candidateId, candidateDigest: row.candidateDigest, conceptId: row.candidate.conceptId, siteId: row.candidate.siteId, routeRole: row.candidate.routeRole, path: row.candidate.path })),
   execution: { routeGenerated: false, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-19-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-19-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
 
 const externalByConcept = new Map(AUTHORITY_DECISIONS.map((decision) => [decision.conceptId, decision.sourceIds.map((id) => AUTHORITY_SOURCES.find((source) => source.sourceId === id)!).filter(Boolean)]))
 const firstPartyByConcept = new Map(FIRST_PARTY_DEFINITIONS.map((definition) => [definition.conceptId, definition]))
@@ -66,7 +67,7 @@ const sourceBody = {
   carriedExternalInspections: carriedExternalRows,
   privacyBoundary: 'Reference metadata, exact locators, scope, and boundaries only. No customer data, credentials, source passages, or reviewer identities.',
 }
-writeFileSync(`${F}/federation-readiness-tranche-19-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-19-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
 
 function inspectedBasis(conceptId: string, role: string) {
   const allLocal = LOCAL_APPLICATION_SOURCES[conceptId] ?? []
@@ -126,7 +127,7 @@ const decisions = selected.map((row) => {
 
 const counts = { candidates: decisions.length, evidenceReady: decisions.filter((row) => row.decision === 'evidence-ready').length, revise: decisions.filter((row) => row.decision === 'revise').length, blocked: decisions.filter((row) => row.decision === 'blocked').length }
 const decisionBody = { schemaVersion: 'maha-federation-readiness-tranche-19-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }
-writeFileSync(`${F}/federation-readiness-tranche-19-decisions-v1.json`, `${JSON.stringify(signed(decisionBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-19-decisions-v1.json`, `${JSON.stringify(signed(decisionBody), null, 2)}\n`)
 
 const readyIds = new Set(decisions.filter((row) => row.decision === 'evidence-ready').map((row) => row.candidateId))
 const specifications = selected.filter((row) => readyIds.has(row.candidate.candidateId)).map((row) => {
@@ -142,7 +143,7 @@ const specifications = selected.filter((row) => readyIds.has(row.candidate.candi
   }
 }).sort((a, b) => a.candidateId.localeCompare(b.candidateId))
 const specsBody = { schemaVersion: 'maha-federation-readiness-tranche-19-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }
-writeFileSync(`${F}/federation-readiness-tranche-19-page-specifications-v1.json`, `${JSON.stringify(signed(specsBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-19-page-specifications-v1.json`, `${JSON.stringify(signed(specsBody), null, 2)}\n`)
 
 const decisionById = new Map(decisions.map((row) => [row.candidateId, row]))
 const ledgerEntries = ledger.entries.map((entry) => {
@@ -153,9 +154,9 @@ const ledgerEntries = ledger.entries.map((entry) => {
 const ledgerCounts = { routeCandidates: ledgerEntries.length, implementationReady: ledgerEntries.filter((entry) => entry.implementationState === 'implementation-ready').length, unresolved: ledgerEntries.filter((entry) => entry.implementationState === 'unresolved').length, newlyReadyThisTranche: counts.evidenceReady }
 const ledgerBody = { schemaVersion: 'maha-federation-unified-readiness-ledger/2.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries: ledgerEntries }
 if (ledgerCounts.routeCandidates !== 1628 || ledgerCounts.implementationReady + ledgerCounts.unresolved !== 1628) throw new Error('tranche-19-ledger-partition')
-writeFileSync(`${F}/federation-unified-readiness-ledger-v2.json`, `${JSON.stringify(signed(ledgerBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-unified-readiness-ledger-v2.json`, `${JSON.stringify(signed(ledgerBody), null, 2)}\n`)
 
 const report = `# Federation readiness Tranche 19 — local report\n\n## Frozen cohort\n\nThe first 100 unresolved candidates from the v1 priority ledger were frozen before inspection. They cover ${cohortBody.counts.distinctConcepts} concepts.\n\n## Decisions\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- New substantial-page specifications: ${specifications.length}\n\nDefinitions and adjacent implementations were not inherited as application evidence. Local implementation sources were inspected at exact symbols; external authority was carried only from prior inspected-source artifacts.\n\n## Unified readiness\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Route candidates: ${ledgerCounts.routeCandidates}\n\n## Boundary\n\nNo public route was generated. No build, sitemap, llms, release, deployment, or Production mutation occurred.\n`
-writeFileSync('docs/operations/federation-readiness-tranche-19-v1.md', report)
+writeGeneratedFile('docs/operations/federation-readiness-tranche-19-v1.md', report)
 
 console.log(JSON.stringify({ cohort: cohortBody.counts, decisions: counts, specifications: specifications.length, ledger: ledgerCounts }))

@@ -136,7 +136,7 @@ test('bounded batch, strict input and receipt integrity', async () => {
 })
 
 test('approved offers have distinct prices and invalid signed inputs cannot settle', async () => {
-  assert.equal(payableOffers().length, 155) // Original 49, expansion 56 and science 50; five higher-priced offers are deliberately not indexed.
+  assert.equal(payableOffers().length, 161) // Includes the six released demand products; listing status is separate from payability.
   for (const id of COMPATIBILITY_IDS) {
     const offer = MICRO_OFFERS.find(o => o.id === id)!
     assert.equal(offer.status, 'available')

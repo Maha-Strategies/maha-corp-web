@@ -13,6 +13,8 @@ import { LICENSED_SECTION_BOOKS, licensedSectionId } from '../lib/x402/licensed-
 import { payableOffers, type X402Offer } from '../lib/x402/offers.ts'
 import type { CelestialProductId } from '../lib/x402/celestial-products.ts'
 import type { MicroProductId } from '../lib/x402/micro-contracts.ts'
+import { isDemand6 } from '../lib/x402/demand6/contracts.ts'
+import { demand6Handlers } from '../lib/x402/demand6/route.ts'
 
 /**
  * A Bazaar crawler discovers an offer by probing it and reading the 402.
@@ -43,6 +45,7 @@ const alwaysChallenge = (async () => ({
 const inert = { record: async () => {}, release: async () => {}, environment: 'test' }
 
 function handlersFor(offer: X402Offer) {
+  if (isDemand6(offer.id)) return demand6Handlers(offer.id, { ...inert, enabled: true, resolve: alwaysChallenge })
   const ebook = ebookIdForOffer(offer.id)
   // This is a handler-ordering test, not a private-storage/delivery test. As
   // with the other families below, inject the dependency; never require paid
@@ -112,7 +115,7 @@ test('every payable offer answers an unpaid crawler probe with a payment challen
 test('every self-managed payable offer belongs to a handler family this check drives', () => {
   for (const offer of payableOffers()) {
     if (apiProxyGate(offer.path, 'POST', true) !== 'self_managed') continue
-    assert.ok(ebookIdForOffer(offer.id) || LICENSED_SECTION_BOOKS.some(book => licensedSectionId(book) === offer.id) || offer.id==='cabezon-buyer-brief-pack' || offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
+    assert.ok(isDemand6(offer.id) || ebookIdForOffer(offer.id) || LICENSED_SECTION_BOOKS.some(book => licensedSectionId(book) === offer.id) || offer.id==='cabezon-buyer-brief-pack' || offer.id.startsWith('celestial-') || offer.path.startsWith('/api/v1/micro/'),
       `${offer.id}: no handler family is mapped, so its probe behaviour is untested`)
   }
 })

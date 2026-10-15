@@ -416,20 +416,18 @@ test('the rewrite that gives the guide its canonical URL exists', async () => {
 // --- The payable declarations must not move --------------------------------
 
 /**
- * Pinned before this change, from the same builder the live challenge uses.
- *
- * The point is not that these numbers are meaningful but that they are
- * *unchanged*: adding a documentation link to a payable declaration would
- * re-digest it, which invalidates the Bazaar listing and forces a settlement to
- * refresh. This change is documentation, and documentation must not cost
- * $0.001 to publish.
+ * Re-pinned for the intentional seller-response header compaction repair on
+ * 2026-10-14. The guide remains free, but oversized inline declarations must
+ * change to fit default buyer parsers. Later accidental changes still fail.
+ * A stale Bazaar digest is observation only: this test authorizes no refresh
+ * purchase. The full uncompacted contract remains available without payment.
  */
 const PINNED_DIGESTS: Record<string, string> = {
-  [COMPRESSION]: 'sha256:3ad1b8bc5580c06a96f11438129a3e8425b1ad76607e9fd81e49d265ae32e359',
-  [DEEP]: 'sha256:300c3e7541695b50233f6b5623c977a607acaabafd33e6959ed07078c5361fae',
+  [COMPRESSION]: 'sha256:d0f175cbab74556aa5de66fa8658c45a140e87c6081f7baa5146ff1e7467ebf7',
+  [DEEP]: 'sha256:1bfd307633b0b2edd7bd32f6c50185c9e92c9a44be84fe66bbc5d8237d4f762b',
 }
 
-test('no payable declaration digest changed as a side effect of publishing the guide', async () => {
+test('payable declaration digests remain pinned after the intentional header repair', async () => {
   const requirement = (amount: string): PaymentRequirement => ({
     scheme: 'exact',
     network: BASE_MAINNET_CAIP2,

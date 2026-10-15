@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 
 import { alignmentFor } from '../lib/frontier-source-alignment.ts'
 import { pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
@@ -119,7 +120,7 @@ const payload = {
   totals: { batch2: batch2Totals, batch1: batch1Totals },
   pages: SUBSTANTIAL_BATCH_2_PAGES,
 }
-writeFileSync('content/substantial-pages/publication-batch-2.json', `${JSON.stringify(payload, null, 2)}\n`)
+writeGeneratedFile('content/substantial-pages/publication-batch-2.json', `${JSON.stringify(payload, null, 2)}\n`)
 
 const row = (cells: readonly string[]) => `| ${cells.join(' | ')} |`
 const blockerTotals: Record<string, number> = {}
@@ -272,7 +273,7 @@ lines.push(
   '',
 )
 
-writeFileSync('docs/substantial-pages/publication-batch-2.md', `${lines.join('\n')}\n`)
+writeGeneratedFile('docs/substantial-pages/publication-batch-2.md', `${lines.join('\n')}\n`)
 
 console.log(
   JSON.stringify(

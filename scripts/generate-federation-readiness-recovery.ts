@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import { AUTHORITY_DECISIONS, AUTHORITY_SOURCES } from '../lib/federation/external-authority-recovery.ts'
 import { REPLACEMENTS, REVIEW_AXES, WORKED_EXAMPLE_READY, digest, replacementId } from '../lib/federation/readiness-recovery.ts'
 
@@ -162,7 +163,7 @@ const v5Body = {
   candidates: v5Candidates,
   activeRanks: v5ActiveRanks,
 }
-writeFileSync(`${F}/federation-route-candidates-v5.json`, `${JSON.stringify(signed(v5Body), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-route-candidates-v5.json`, `${JSON.stringify(signed(v5Body), null, 2)}\n`)
 
 const lineageBody = {
   schemaVersion: 'maha-federation-candidate-lineage/5.0', frozenOn: '2026-09-07',
@@ -172,7 +173,7 @@ const lineageBody = {
   replacements: replacementRows.map((row) => ({ predecessorCandidateId: row.predecessor.candidateId, predecessorDigest: row.predecessor.candidateDigest, replacementCandidateId: row.candidate.candidateId, replacementDigest: row.candidateDigest, property: row.candidate.siteId, rank: row.candidate.rank, activeRank: v5ActiveRanks.find((rank) => rank.candidateId === row.candidate.candidateId)?.activeRank })),
   boundary: 'A route-budget substitution only. It creates no route, review inheritance, release, or crawlability.',
 }
-writeFileSync(`${F}/federation-candidate-lineage-v5.json`, `${JSON.stringify(signed(lineageBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-candidate-lineage-v5.json`, `${JSON.stringify(signed(lineageBody), null, 2)}\n`)
 
 const sourceBody = {
   schemaVersion: 'maha-federation-readiness-recovery-sources/1.0', frozenOn: '2026-09-07',
@@ -180,7 +181,7 @@ const sourceBody = {
   replacementSources,
   boundary: 'No source passage or full document is stored. External sources are reference-only; replacement sources establish only this repository’s implementation behavior.',
 }
-writeFileSync(`${F}/federation-readiness-recovery-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-recovery-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
 
 const reviewBody = {
   schemaVersion: 'maha-federation-authority-definition-reviews/1.0', frozenOn: '2026-09-07', appendOnly: true,
@@ -188,14 +189,14 @@ const reviewBody = {
   counts: { reviewed: 12, accepted: definitionReviews.filter((review) => review.finalDecision === 'accept').length, revise: definitionReviews.filter((review) => review.finalDecision === 'revise').length, human: 0, expert: 0 },
   reviews: definitionReviews,
 }
-writeFileSync(`${F}/federation-authority-definition-reviews-v1.json`, `${JSON.stringify(signed(reviewBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-authority-definition-reviews-v1.json`, `${JSON.stringify(signed(reviewBody), null, 2)}\n`)
 
 const reassessmentBody = {
   schemaVersion: 'maha-federation-authority-application-reassessment/1.0', frozenOn: '2026-09-07', appendOnly: true,
   counts: { candidates: 48, evidenceReady: authorityReassessment.filter((row) => row.finalState === 'evidence-ready').length, revise: authorityReassessment.filter((row) => row.finalState === 'revise').length },
   reassessments: authorityReassessment,
 }
-writeFileSync(`${F}/federation-authority-application-reassessment-v1.json`, `${JSON.stringify(signed(reassessmentBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-authority-application-reassessment-v1.json`, `${JSON.stringify(signed(reassessmentBody), null, 2)}\n`)
 
 const oldBacklog = v4.candidates.filter((candidate) => prior.get(candidate.candidateId)?.disposition !== 'evidence-ready')
 if (oldBacklog.length !== 514) throw new Error(`recovery-backlog-count:${oldBacklog.length}`)
@@ -213,7 +214,7 @@ const priorityRows = oldBacklog.map((candidate) => {
     nextAction: replacement ? `Adopt replacement ${replacement.candidate.candidateId} after exact-revision review.` : authority ? authority.roleFinding : 'Inspect the highest-priority missing source or implementation locator without inheriting adjacent evidence.' }
 }).sort((a, b) => b.priorityScore - a.priorityScore || a.candidateId.localeCompare(b.candidateId))
 const priorityBody = { schemaVersion: 'maha-federation-readiness-recovery-priority/1.0', frozenOn: '2026-09-07', scoring: { dependencyFanout: 0.35, machineUtility: 0.35, commercialProximity: 0.30, demand: 'unknown unless already observed; not invented here' }, counts: { backlog: priorityRows.length, reviewedThisPass: priorityRows.filter((row) => row.recoveryOutcome !== 'not-reviewed-in-this-recovery-pass').length, deferredToLaterPass: priorityRows.filter((row) => row.recoveryOutcome === 'not-reviewed-in-this-recovery-pass').length }, priorities: priorityRows }
-writeFileSync(`${F}/federation-readiness-recovery-priority-v1.json`, `${JSON.stringify(signed(priorityBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-recovery-priority-v1.json`, `${JSON.stringify(signed(priorityBody), null, 2)}\n`)
 
 const readyAuthorityIds = new Set(authorityReassessment.filter((row) => row.finalState === 'evidence-ready').map((row) => row.candidateId))
 const sourceForCandidate = (candidate: Candidate) => proposalByConcept.get(candidate.conceptId)!.sourceIds.map((sourceId) => sourceById.get(sourceId)!)
@@ -238,7 +239,7 @@ const replacementSpecs = replacementRows.map((row) => {
 })
 const newSpecs = [...authoritySpecs, ...replacementSpecs].sort((a, b) => a.candidateId.localeCompare(b.candidateId))
 const specsBody = { schemaVersion: 'maha-federation-readiness-recovery-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: newSpecs.length, boundedQuestions: newSpecs.length * 5, authorityApplications: authoritySpecs.length, replacements: replacementSpecs.length }, specifications: newSpecs }
-writeFileSync(`${F}/federation-readiness-recovery-page-specifications-v1.json`, `${JSON.stringify(signed(specsBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-recovery-page-specifications-v1.json`, `${JSON.stringify(signed(specsBody), null, 2)}\n`)
 
 const effective = new Map<string, { state: string; origin: string; specification: boolean }>()
 for (const candidate of v4.candidates) {
@@ -250,9 +251,9 @@ for (const row of replacementRows) { effective.delete(row.predecessor.candidateI
 const ledgerEntries = v5Candidates.map((candidate) => ({ candidateId: candidate.candidateId, candidateDigest: digest(candidate), siteId: candidate.siteId, path: candidate.path, conceptId: candidate.conceptId, routeRole: candidate.routeRole, ...effective.get(candidate.candidateId)!, implementationState: effective.get(candidate.candidateId)!.state === 'evidence-ready' ? 'implementation-ready' : 'unresolved', publicRouteCreated: false }))
 const ledgerBody = { schemaVersion: 'maha-federation-unified-readiness-ledger/1.0', frozenOn: '2026-09-07', candidateMap: { schemaVersion: v5Body.schemaVersion, digest: digest(v5Body) }, counts: { routeCandidates: ledgerEntries.length, implementationReady: ledgerEntries.filter((row) => row.implementationState === 'implementation-ready').length, unresolved: ledgerEntries.filter((row) => row.implementationState === 'unresolved').length, duplicateSlotsRemaining: ledgerEntries.filter((row) => /duplicative/.test(row.state)).length, newlyReadyThisPass: newSpecs.length }, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries: ledgerEntries }
 if (ledgerBody.counts.routeCandidates !== 1628 || ledgerBody.counts.implementationReady + ledgerBody.counts.unresolved !== 1628) throw new Error('ledger-partition-invalid')
-writeFileSync(`${F}/federation-unified-readiness-ledger-v1.json`, `${JSON.stringify(signed(ledgerBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-unified-readiness-ledger-v1.json`, `${JSON.stringify(signed(ledgerBody), null, 2)}\n`)
 
 const report = `# Federation readiness recovery — local report\n\n## Outcome\n\n- Authority definitions reviewed: 12 — 11 accepted, 1 revise. Review is automated internal editorial, not human, expert, or peer review.\n- Authority-linked applications reassessed independently: 48 — ${reassessmentBody.counts.evidenceReady} evidence-ready, ${reassessmentBody.counts.revise} revise.\n- Duplicative route-budget slots replaced: 4 — four distinct first-party operational candidates, zero allocation change.\n- New substantial-page specifications: ${newSpecs.length}.\n- Unified v5 readiness: ${ledgerBody.counts.implementationReady} implementation-ready, ${ledgerBody.counts.unresolved} unresolved, total 1,628.\n\n## Priority backlog\n\nThe original 514-route non-ready backlog is ranked by dependency fan-out (35%), machine utility (35%), and commercial proximity (30%). Demand remains unknown where no observed route-specific data exists. This pass directly reviewed ${priorityBody.counts.reviewedThisPass}; ${priorityBody.counts.deferredToLaterPass} remain queued for later source inspection.\n\n## Boundary\n\nNo public route was generated. No build, sitemap, llms, review inheritance, release, deployment, or Production mutation occurred. A definition binding resolves meaning only; each application still requires its own evidence.\n`
-writeFileSync('docs/operations/federation-readiness-recovery-v1.md', report)
+writeGeneratedFile('docs/operations/federation-readiness-recovery-v1.md', report)
 
 console.log(JSON.stringify({ definitions: reviewBody.counts, applications: reassessmentBody.counts, replacements: replacementRows.length, specifications: newSpecs.length, ledger: ledgerBody.counts }))

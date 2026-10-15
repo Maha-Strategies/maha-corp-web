@@ -67,7 +67,8 @@ test('publishing the library does not remove the existing doctrine page', () => 
   // published doctrine and five attributed proposals from a live URL, so the
   // library got its own entrance instead and /policy links to it.
   const doctrine = read('app/policy/page.tsx')
-  assert.doesNotMatch(doctrine, /PolicyExpansionEntrance/, '/policy must keep rendering its own doctrine')
+  assert.match(doctrine, /if \(policyDraftsAvailable\(process.env.NODE_ENV\)\) return <PolicyExpansionEntrance/, 'the alternate entrance remains gated to local draft environments')
+  assert.match(doctrine, /<h1 className="evidence-title">Policy &amp; Statecraft<\/h1>/, 'the production doctrine remains present')
   assert.match(doctrine, /\/policy\/questions/, '/policy must link to the options library')
   const entrance = read('app/policy/questions/page.tsx')
   assert.match(entrance, /PolicyExpansionEntrance/)

@@ -139,7 +139,11 @@ export function compactSchema(schema: Schema, depth = 0): Schema {
  * 400 for a payload our own declaration handed it. Input examples are
  * therefore published verbatim and are small enough to afford that.
  */
-export function compactExample(value: unknown, depth = 0, schema?: Schema): unknown {
+export function compactExample(value: unknown, depth = 0, schema?: Schema, maximumObjectDepth = Infinity): unknown {
+  // The stricter response-header profile can omit nested example details only
+  // where compactSchema already publishes a bare object. Keep authored const
+  // values intact; full examples remain at the free declaration URL.
+  if (schema && 'const' in schema) return value
   if (typeof value === 'string') {
     // Cryptographic commitments are identity, not replaceable prose. Their
     // authored const values remain in compact schemas and must match exactly.
@@ -154,13 +158,25 @@ export function compactExample(value: unknown, depth = 0, schema?: Schema): unkn
     // contract that only exist in this list.
     const scalarList = value.every((item) => typeof item === 'string' && item.length <= 64)
     if (scalarList) return [...value]
-    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined))
+    return value.slice(0, MAX_EXAMPLE_ITEMS).map((item) => compactExample(item, depth + 1, isSchema(schema?.items) ? schema.items : undefined, maximumObjectDepth))
   }
   if (isSchema(value)) {
+    if (depth >= maximumObjectDepth) {
+      // Retention and limitation constants remain meaningful even when the
+      // surrounding example is reduced. Preserve their authored values, not
+      // the schema's expected values, so invalid examples still fail validation.
+      const properties = isSchema(schema?.properties) ? schema.properties : {}
+      const retained = Object.fromEntries(Object.entries(value).filter(([key]) =>
+        isSchema(properties[key]) && 'const' in properties[key]))
+      if (Array.isArray(value.warningCodes) && value.warningCodes.every(code => typeof code === 'string' && code.length <= 64)) retained.warningCodes = [...value.warningCodes]
+      if (isSchema(value.retentionBoundaries)) retained.retentionBoundaries = compactExample(value.retentionBoundaries, depth + 1,
+        isSchema(properties.retentionBoundaries) ? properties.retentionBoundaries : undefined, maximumObjectDepth)
+      return retained
+    }
     const output: Record<string, unknown> = {}
     for (const [key, entry] of Object.entries(value)) {
       const properties = isSchema(schema?.properties) ? schema.properties : undefined
-      output[key] = compactExample(entry, depth + 1, isSchema(properties?.[key]) ? properties[key] : undefined)
+      output[key] = compactExample(entry, depth + 1, isSchema(properties?.[key]) ? properties[key] : undefined, maximumObjectDepth)
     }
     return output
   }

@@ -1,4 +1,5 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync } from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 
 import {
   SUBSTANTIAL_PUBLICATION_PAGES,
@@ -27,7 +28,7 @@ const summary = {
   pages: SUBSTANTIAL_PUBLICATION_PAGES,
 }
 
-writeFileSync('content/substantial-pages/publication-batch-1.json', `${JSON.stringify(summary, null, 2)}\n`)
+writeGeneratedFile('content/substantial-pages/publication-batch-1.json', `${JSON.stringify(summary, null, 2)}\n`)
 
 const lines = [
   '# Substantial-page Publication Batch 1',
@@ -48,6 +49,6 @@ const lines = [
   '- Word or character count cannot make a page eligible.',
   '- Comparison and calculation are included only when the canonical record supplies the required supported sides or reproducible inputs.',
 ]
-writeFileSync('docs/substantial-pages/publication-batch-1.md', `${lines.join('\n')}\n`)
+writeGeneratedFile('docs/substantial-pages/publication-batch-1.md', `${lines.join('\n')}\n`)
 
 console.log(JSON.stringify({ records: summary.records, eligible: summary.eligible, blocked: summary.blocked, before: summary.before, after: summary.after }, null, 2))

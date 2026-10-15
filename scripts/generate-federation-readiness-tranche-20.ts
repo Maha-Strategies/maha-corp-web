@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import { GAP_CLOSURE_SOURCES, POLICY_SOURCES, PRODUCT_CONTRACT_FINDING, digest, type Tranche20Source, type Tranche20State } from '../lib/federation/readiness-tranche-20.ts'
 
 const F = 'content/federation'
@@ -33,7 +34,7 @@ const cohortBody = {
   candidates: selected.map((row) => ({ selectionOrder: row.selectionOrder, selectionBasis: row.selectionBasis, priorityScore: row.priorityScore, candidateId: row.candidate.candidateId, candidateDigest: row.candidateDigest, conceptId: row.candidate.conceptId, siteId: row.candidate.siteId, routeRole: row.candidate.routeRole, path: row.candidate.path })),
   execution: { publicRoutesGenerated: 0, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-20-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-20-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
 
 const sourceRecoveryGraph = graph.graphObjects.find((row) => row.conceptId === 'urn:maha:concept:evidence:source-recovery')
 if (!sourceRecoveryGraph) throw new Error('source-recovery-graph-object-missing')
@@ -57,7 +58,7 @@ const fixtureBody = {
   ],
   boundary: 'Fixtures close only the named local application role. They contain synthetic inputs and cannot confer readiness on sibling roles.',
 }
-writeFileSync(`${F}/federation-readiness-tranche-20-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixtureBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-20-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixtureBody), null, 2)}\n`)
 
 const allSources = [...Object.entries(GAP_CLOSURE_SOURCES), ...Object.entries(POLICY_SOURCES)].flatMap(([conceptId, rows]) => rows.map((row) => ({ ...row, conceptId, inspectionDepth: row.kind === 'local-implementation' ? 'symbol-and-surrounding-implementation' : 'section-level-public-authority', passageStored: false })))
 const sourceBody = {
@@ -67,7 +68,7 @@ const sourceBody = {
   inspections: allSources,
   privacyBoundary: 'No source passage, customer material, credential, reviewer identity, or private corpus content is stored.',
 }
-writeFileSync(`${F}/federation-readiness-tranche-20-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-20-source-inspections-v1.json`, `${JSON.stringify(signed(sourceBody), null, 2)}\n`)
 
 const graphByConcept = new Map(graph.graphObjects.map((row) => [row.conceptId, row]))
 const commercialRole = (role: string) => role === 'commercial-use' || role === 'commercialization'
@@ -103,7 +104,7 @@ const decisions = selected.map((row) => {
   }
 })
 const counts = { candidates: decisions.length, evidenceReady: decisions.filter((row) => row.decision === 'evidence-ready').length, revise: decisions.filter((row) => row.decision === 'revise').length, blocked: decisions.filter((row) => row.decision === 'blocked').length }
-writeFileSync(`${F}/federation-readiness-tranche-20-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-20-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-20-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-20-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
 
 const ready = new Set(decisions.filter((row) => row.decision === 'evidence-ready').map((row) => row.candidateId))
 const specifications = selected.filter((row) => ready.has(row.candidate.candidateId)).map((row) => {
@@ -118,7 +119,7 @@ const specifications = selected.filter((row) => ready.has(row.candidate.candidat
     decisionDigest: digest(decision), implementationState: 'specification-only', publicRouteCreated: false,
   }
 }).sort((a, b) => a.candidateId.localeCompare(b.candidateId))
-writeFileSync(`${F}/federation-readiness-tranche-20-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-20-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-20-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-20-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
 
 const decisionById = new Map(decisions.map((row) => [row.candidateId, row]))
 const entries = ledger.entries.map((entry) => {
@@ -128,12 +129,12 @@ const entries = ledger.entries.map((entry) => {
 })
 const ledgerCounts = { routeCandidates: entries.length, implementationReady: entries.filter((row) => row.implementationState === 'implementation-ready').length, unresolved: entries.filter((row) => row.implementationState === 'unresolved').length, newlyReadyThisTranche: decisions.filter((row) => row.decision === 'evidence-ready' && ledgerById.get(row.candidateId)?.implementationState !== 'implementation-ready').length }
 if (ledgerCounts.routeCandidates !== 1628 || ledgerCounts.implementationReady + ledgerCounts.unresolved !== 1628) throw new Error('tranche-20-ledger-partition')
-writeFileSync(`${F}/federation-unified-readiness-ledger-v3.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/3.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-unified-readiness-ledger-v3.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/3.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
 
 const byBasis = {
   priorRevisionRequirements: decisions.filter((row) => row.selectionBasis === 'tranche-19-revision-requirement' && row.decision === 'evidence-ready').length,
   newUnreviewed: decisions.filter((row) => row.selectionBasis === 'next-unreviewed-unresolved-priority' && row.decision === 'evidence-ready').length,
 }
-writeFileSync('docs/operations/federation-readiness-tranche-20-v1.md', `# Federation readiness Tranche 20 — local report\n\n## Frozen cohort\n\n- Prior Tranche 19 revision requirements: 49\n- Next untouched unresolved candidates: 51\n- Total: 100\n\n## Review\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Prior revision requirements closed: ${byBasis.priorRevisionRequirements}\n- New candidates made ready: ${byBasis.newUnreviewed}\n- Substantial-page specifications: ${specifications.length}\n\nFive bounded fixture families were inspected. Commercial candidates remain revise because the repository's $250 and $5,000 dossier declarations are not one coherent offer contract. Policy candidates use only role-specific official authority; no authority is inherited into a machine rule.\n\n## Unified ledger v3\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Total: ${ledgerCounts.routeCandidates}\n\n## Boundary\n\nNo public route was generated. No build, sitemap, llms, release, deployment, or Production mutation occurred.\n`)
+writeGeneratedFile('docs/operations/federation-readiness-tranche-20-v1.md', `# Federation readiness Tranche 20 — local report\n\n## Frozen cohort\n\n- Prior Tranche 19 revision requirements: 49\n- Next untouched unresolved candidates: 51\n- Total: 100\n\n## Review\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Prior revision requirements closed: ${byBasis.priorRevisionRequirements}\n- New candidates made ready: ${byBasis.newUnreviewed}\n- Substantial-page specifications: ${specifications.length}\n\nFive bounded fixture families were inspected. Commercial candidates remain revise because the repository's $250 and $5,000 dossier declarations are not one coherent offer contract. Policy candidates use only role-specific official authority; no authority is inherited into a machine rule.\n\n## Unified ledger v3\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Total: ${ledgerCounts.routeCandidates}\n\n## Boundary\n\nNo public route was generated. No build, sitemap, llms, release, deployment, or Production mutation occurred.\n`)
 
 console.log(JSON.stringify({ cohort: cohortBody.counts, decisions: counts, byBasis, specifications: specifications.length, ledger: ledgerCounts }))

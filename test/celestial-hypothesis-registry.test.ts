@@ -18,6 +18,7 @@ import {
 } from '../lib/celestial-hypotheses/types.ts'
 import { buildLocalFactBundle } from '../lib/local-fact-bundle.ts'
 import { ASTROLOGY_VERSION } from '../lib/astrology-version.ts'
+import { COMPILER_VERSION } from '../lib/interpretation-compiler.ts'
 
 const NOW = () => new Date('2026-09-01T00:00:00Z')
 
@@ -45,7 +46,7 @@ function validDraft(overrides: Partial<ExperimentDraft> = {}): ExperimentDraft {
     factBundle,
     factBundleId: factBundle.bundleId,
     factBundleSha256: digestOf(factBundle),
-    compilerVersion: 'interpretation-compiler/0.1',
+    compilerVersion: COMPILER_VERSION,
     ruleRegistryVersion: ASTROLOGY_VERSION,
     metric: {
       metricId: 'rollback_free_release',
@@ -136,7 +137,7 @@ test('changing any locked field changes the digest', () => {
     { actionWindowStartUtc: '2026-09-02T05:00:00Z' },
     { sampleSizeTarget: 21 },
     { factBundleSha256: `sha256:${'b'.repeat(64)}` },
-    { compilerVersion: 'interpretation-compiler/0.2' },
+    { compilerVersion: 'interpretation-compiler/0.999' },
     { inclusionCriteria: ['Something else entirely.'] },
     { metric: { ...validDraft().metric, horizonHours: 96 } },
     { comparator: { ...validDraft().comparator, draws: 9 } },
@@ -520,7 +521,7 @@ test('the provenance bundle carries every required hash and the source chain', (
   assert.equal(bundle.registrationSha256, registration.registrationSha256)
   assert.equal(bundle.registeredAtUtc, registration.registeredAtUtc)
   assert.equal(bundle.factBundleSha256, registration.draft.factBundleSha256)
-  assert.equal(bundle.compilerVersion, 'interpretation-compiler/0.1')
+  assert.equal(bundle.compilerVersion, COMPILER_VERSION)
   assert.equal(bundle.ruleRegistryVersion, ASTROLOGY_VERSION)
   assert.deepEqual(bundle.ruleIds, ['bs-muhurta-bava-favourable'])
   assert.ok(bundle.passageIds.length > 0, 'the rule must resolve to a transcribed passage')

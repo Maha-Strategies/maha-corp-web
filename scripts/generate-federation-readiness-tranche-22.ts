@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import {
   CARRIED_APPLICATION_SOURCES, POLICY_SOURCES, PRODUCT_MAPPING_SOURCES,
   PUBLISH_APPLICATION_SOURCES, RESEARCH_APPLICATION_SOURCES,
@@ -43,7 +44,7 @@ const cohortBody = {
   candidates: selected.map((row) => ({ selectionOrder: row.selectionOrder, selectionBasis: row.selectionBasis, priorityScore: row.priorityScore, candidateId: row.candidate.candidateId, candidateDigest: row.candidateDigest, conceptId: row.candidate.conceptId, siteId: row.candidate.siteId, routeRole: row.candidate.routeRole, path: row.candidate.path })),
   execution: { publicRoutesGenerated: 0, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-22-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-22-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
 
 const fixtureExecutions = [
   { fixtureId: 'checked-integer-arithmetic', result: checkedIntegerArithmetic('multiply', 7n, 6n, 100n), expected: { result: 42n, exact: true }, refusalCases: ['invalid-limit', 'input-out-of-range', 'result-out-of-range'] },
@@ -61,7 +62,7 @@ if (canonical(fixtureExecutions[4].result) !== canonical(fixtureExecutions[4].ex
 const exportResult = fixtureExecutions[5].result as { entries: { eventId: string }[]; containsSubmittedContent: false }
 if (canonical({ eventIds: exportResult.entries.map((row) => row.eventId), containsSubmittedContent: exportResult.containsSubmittedContent }) !== canonical(fixtureExecutions[5].expected)) throw new Error('audit-fixture-failed')
 const fixturesBody = { schemaVersion: 'maha-federation-gap-closure-fixtures/3.0', frozenOn: '2026-09-07', syntheticOnly: true, executions: fixtureExecutions, boundary: 'Fixtures prove only exact bounded mechanics. They do not create empirical authority, transfer review, or establish a machine rule outside their executable input contract.' }
-writeFileSync(`${F}/federation-readiness-tranche-22-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixturesBody), (_key, value) => typeof value === 'bigint' ? value.toString() : value, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-22-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixturesBody), (_key, value) => typeof value === 'bigint' ? value.toString() : value, 2)}\n`)
 
 const policyFoundationBody = {
   schemaVersion: 'maha-scientific-evidence-policy-foundation/1.0', inspectedOn: '2026-09-07',
@@ -69,14 +70,14 @@ const policyFoundationBody = {
   established: ['Evidence-building is a governed lifecycle rather than one undifferentiated evidence score.', 'Reproducibility and replicability are distinct and neither automatically adjudicates policy relevance.', 'Legal duties, scientific method, evaluation practice, data access, and confidentiality must remain separate frames.'],
   machineRule: { state: 'blocked', reason: 'No inspected authority supplies a universal executable rule that can decide arbitrary scientific claims or policy choices.' },
 }
-writeFileSync(`${F}/federation-scientific-evidence-policy-foundation-v1.json`, `${JSON.stringify(signed(policyFoundationBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-scientific-evidence-policy-foundation-v1.json`, `${JSON.stringify(signed(policyFoundationBody), null, 2)}\n`)
 
 const productRows = ['agent-memory-governance', 'context-budgeting', 'durable-task-state', 'cross-agent-delegation', 'failure-recovery'].map((suffix) => {
   const conceptId = `urn:maha:concept:authority:${suffix}`
   const sources = PRODUCT_MAPPING_SOURCES[conceptId] ?? []
   return { conceptId, role: 'commercialization', mapping: sources.length ? 'real-product-capability' : 'no-current-product-mapping', sourceIds: sources.map((row) => row.sourceId), offerManufactured: false, boundary: sources[0]?.boundary ?? 'No exact current product, endpoint, acquisition state, and bounded delivery contract jointly establish this commercialization role.' }
 })
-writeFileSync(`${F}/federation-agent-governance-product-mapping-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-agent-governance-product-mapping/1.0', inspectedOn: '2026-09-07', counts: { roles: 5, mapped: productRows.filter((row) => row.mapping === 'real-product-capability').length, unsupported: productRows.filter((row) => row.mapping !== 'real-product-capability').length }, mappings: productRows }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-agent-governance-product-mapping-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-agent-governance-product-mapping/1.0', inspectedOn: '2026-09-07', counts: { roles: 5, mapped: productRows.filter((row) => row.mapping === 'real-product-capability').length, unsupported: productRows.filter((row) => row.mapping !== 'real-product-capability').length }, mappings: productRows }), null, 2)}\n`)
 
 const acceptedAuthority = new Map(authorityReviews.reviews.filter((row) => row.finalDecision === 'accept' && row.bindingState === 'definition-proposal-bound-to-graph-object').map((row) => [row.conceptId, row]))
 const inspectionById = new Map(authorityInspections.sources.map((row) => [row.sourceId, row]))
@@ -126,20 +127,20 @@ const decisions = selected.map((row) => {
 })
 const counts = { candidates: 100, evidenceReady: decisions.filter((row) => row.decision === 'evidence-ready').length, revise: decisions.filter((row) => row.decision === 'revise').length, blocked: decisions.filter((row) => row.decision === 'blocked').length }
 if (counts.evidenceReady + counts.revise + counts.blocked !== 100) throw new Error('t22-decision-partition')
-writeFileSync(`${F}/federation-readiness-tranche-22-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-22-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
 
 const sourceRows = new Map<string, Tranche22Source>()
 for (const row of selected) for (const source of [...applications(row.candidate), ...prerequisite(row.candidate.conceptId)]) sourceRows.set(source.sourceId, source)
 for (const source of SCIENTIFIC_EVIDENCE_POLICY_SOURCES) sourceRows.set(source.sourceId, source)
 const inspections = [...sourceRows.values()].sort((a, b) => a.sourceId.localeCompare(b.sourceId)).map((row) => ({ ...row, passageStored: false }))
-writeFileSync(`${F}/federation-readiness-tranche-22-source-inspections-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-sources/1.0', inspectedOn: '2026-09-07', counts: { inspections: inspections.length }, inspections, privacyBoundary: 'Only identity, locator, rights, scope, and boundary metadata are retained; no passages, submissions, credentials, or reviewer identities.' }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-22-source-inspections-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-sources/1.0', inspectedOn: '2026-09-07', counts: { inspections: inspections.length }, inspections, privacyBoundary: 'Only identity, locator, rights, scope, and boundary metadata are retained; no passages, submissions, credentials, or reviewer identities.' }), null, 2)}\n`)
 
 const decisionById = new Map(decisions.map((row) => [row.candidateId, row]))
 const specifications = selected.filter((row) => decisionById.get(row.candidate.candidateId)?.decision === 'evidence-ready').map((row) => {
   const decision = decisionById.get(row.candidate.candidateId)!
   return { candidateId: row.candidate.candidateId, candidateDigest: row.candidateDigest, canonicalUrl: row.candidate.url, title: row.candidate.title, conceptId: row.candidate.conceptId, routeRole: row.candidate.routeRole, requiredSections: ['Direct answer', 'Authority or implementation', 'Method or mechanism', 'Verification and uncertainty', 'What this does not establish', 'Dependencies'], boundedQuestions: ['What is established?', 'What exact source or implementation establishes it?', 'What dependency remains separate?', 'What uncertainty remains?', 'What must not be inferred?'], sourceBindings: [...applications(row.candidate), ...prerequisite(row.candidate.conceptId)].map((source) => ({ sourceId: source.sourceId, locator: source.locator, rightsBasis: source.rightsBasis, scope: source.scope, boundary: source.boundary })), decisionDigest: digest(decision), implementationState: 'specification-only', publicRouteCreated: false }
 }).sort((a, b) => a.candidateId.localeCompare(b.candidateId))
-writeFileSync(`${F}/federation-readiness-tranche-22-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-22-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-22-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
 
 const entries = ledger.entries.map((entry) => {
   const decision = decisionById.get(entry.candidateId)
@@ -148,9 +149,9 @@ const entries = ledger.entries.map((entry) => {
 })
 const ledgerCounts = { routeCandidates: entries.length, implementationReady: entries.filter((row) => row.implementationState === 'implementation-ready').length, unresolved: entries.filter((row) => row.implementationState === 'unresolved').length, newlyReadyThisTranche: decisions.filter((row) => row.decision === 'evidence-ready').length }
 if (ledgerCounts.routeCandidates !== 1628 || ledgerCounts.implementationReady + ledgerCounts.unresolved !== 1628 || ledgerCounts.unresolved !== 348 - ledgerCounts.newlyReadyThisTranche) throw new Error('t22-ledger-partition')
-writeFileSync(`${F}/federation-unified-readiness-ledger-v5.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/5.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-unified-readiness-ledger-v5.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/5.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
 
 const carriedClosed = decisions.filter((row) => row.selectionBasis === 'tranche-21-revision-requirement' && row.decision === 'evidence-ready').length
 const newReady = counts.evidenceReady - carriedClosed
-writeFileSync('docs/operations/federation-readiness-tranche-22-v1.md', `# Federation readiness Tranche 22 — local report\n\n## Frozen cohort\n\n- Carried Tranche 21 revisions: 27\n- Next untouched unresolved candidates: 73\n- Total independently reviewed: 100\n\n## Decisions\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Carried revisions closed: ${carriedClosed}\n- Newly selected candidates ready: ${newReady}\n- Substantial-page specifications: ${specifications.length}\n\nScientific-evidence policy now has GAO, statutory, and National Academies foundations, but its machine rule remains blocked. Of five unsupported agent-governance commercialization roles, ${productRows.filter((row) => row.mapping === 'real-product-capability').length} maps to an exact current product capability; no offer was manufactured for the others.\n\n## Ledger v5\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Gap closed from prior 348: ${ledgerCounts.newlyReadyThisTranche}\n\n## Boundary\n\nEverything remains local and specification-only. No public route, Next or Vercel build, sitemap, llms, release, checkout mutation, deployment, or Production mutation occurred.\n`)
+writeGeneratedFile('docs/operations/federation-readiness-tranche-22-v1.md', `# Federation readiness Tranche 22 — local report\n\n## Frozen cohort\n\n- Carried Tranche 21 revisions: 27\n- Next untouched unresolved candidates: 73\n- Total independently reviewed: 100\n\n## Decisions\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Carried revisions closed: ${carriedClosed}\n- Newly selected candidates ready: ${newReady}\n- Substantial-page specifications: ${specifications.length}\n\nScientific-evidence policy now has GAO, statutory, and National Academies foundations, but its machine rule remains blocked. Of five unsupported agent-governance commercialization roles, ${productRows.filter((row) => row.mapping === 'real-product-capability').length} maps to an exact current product capability; no offer was manufactured for the others.\n\n## Ledger v5\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Gap closed from prior 348: ${ledgerCounts.newlyReadyThisTranche}\n\n## Boundary\n\nEverything remains local and specification-only. No public route, Next or Vercel build, sitemap, llms, release, checkout mutation, deployment, or Production mutation occurred.\n`)
 console.log(JSON.stringify({ cohort: cohortBody.counts, decisions: counts, carriedClosed, newReady, specifications: specifications.length, products: { mapped: productRows.filter((row) => row.mapping === 'real-product-capability').length }, ledger: ledgerCounts }))

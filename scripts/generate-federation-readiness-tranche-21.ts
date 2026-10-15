@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync} from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 import {
   ADDITIONAL_DEFINITION_SOURCES, APPLICATION_SOURCES, OFFER_BOUNDARY, OFFER_LAYERS, POLICY_SOURCES,
   cancellationFixture, canonical, classifyLiterature, combineDimensions, commercialSources,
@@ -40,7 +41,7 @@ const cohortBody = {
   candidates: selected.map((row) => ({ selectionOrder: row.selectionOrder, selectionBasis: row.selectionBasis, priorityScore: row.priorityScore, candidateId: row.candidate.candidateId, candidateDigest: row.candidateDigest, conceptId: row.candidate.conceptId, siteId: row.candidate.siteId, routeRole: row.candidate.routeRole, path: row.candidate.path })),
   execution: { publicRoutesGenerated: 0, buildRun: false, deployed: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-21-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-cohort-v1.json`, `${JSON.stringify(signed(cohortBody), null, 2)}\n`)
 
 const fixtureExecutions = [
   { fixtureId: 'linear-interpolation-exact-rational', result: linearInterpolate(BigInt(0), BigInt(10), BigInt(4), BigInt(18), BigInt(1)), expected: { numerator: BigInt(12), denominator: BigInt(1) }, refusals: ['nodes-not-distinct', 'extrapolation-refused'] },
@@ -64,7 +65,7 @@ const fixturesBody = {
   executions: fixtureExecutions,
   boundary: 'Every fixture is an exact bounded application of an accepted authority definition or a local protocol. It establishes only the named application roles and never transfers authority from a definition to an implementation.',
 }
-writeFileSync(`${F}/federation-readiness-tranche-21-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixturesBody), (_key, value) => typeof value === 'bigint' ? value.toString() : value, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-gap-closure-fixtures-v1.json`, `${JSON.stringify(signed(fixturesBody), (_key, value) => typeof value === 'bigint' ? value.toString() : value, 2)}\n`)
 
 const offerBody = {
   schemaVersion: 'maha-commercial-offer-role-reconciliation/1.0', frozenOn: '2026-09-07',
@@ -72,7 +73,7 @@ const offerBody = {
   finding: 'The declarations are compatible only when treated as four distinct scopes and acquisition states. The $250 offer remains disabled; the $5,000 package remains a separately contracted pilot.',
   mutation: { checkoutChanged: false, availabilityChanged: false, priceChanged: false, refundTermsChanged: false, privacyTermsChanged: false, deliveryTermsChanged: false },
 }
-writeFileSync(`${F}/federation-readiness-tranche-21-offer-reconciliation-v1.json`, `${JSON.stringify(signed(offerBody), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-offer-reconciliation-v1.json`, `${JSON.stringify(signed(offerBody), null, 2)}\n`)
 
 const acceptedAuthority = new Map(authorityReviews.reviews.filter((row) => row.finalDecision === 'accept' && row.bindingState === 'definition-proposal-bound-to-graph-object').map((row) => [row.conceptId, row]))
 const inspectionById = new Map(authorityInspections.sources.map((row) => [row.sourceId, row]))
@@ -120,7 +121,7 @@ const decisions = selected.map((row) => {
   }
 })
 const counts = { candidates: decisions.length, evidenceReady: decisions.filter((row) => row.decision === 'evidence-ready').length, revise: decisions.filter((row) => row.decision === 'revise').length, blocked: decisions.filter((row) => row.decision === 'blocked').length }
-writeFileSync(`${F}/federation-readiness-tranche-21-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-21-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-decisions-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-21-decisions/1.0', frozenOn: '2026-09-07', appendOnly: true, counts, decisions }), null, 2)}\n`)
 
 const sourceRows = new Map<string, Tranche21Source>()
 for (const row of decisions.filter((item) => item.decision === 'evidence-ready')) {
@@ -132,7 +133,7 @@ const sourceBody = {
   inspections: [...sourceRows.values()].sort((a, b) => a.sourceId.localeCompare(b.sourceId)).map((row) => ({ ...row, passageStored: false })),
   privacyBoundary: 'Only source identities, exact locators, rights bases, scopes, and boundaries are retained. No passages, submissions, credentials, or reviewer identities are stored.',
 }
-writeFileSync(`${F}/federation-readiness-tranche-21-source-inspections-v1.json`, `${JSON.stringify(signed({ ...sourceBody, counts: { inspections: sourceBody.inspections.length } }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-source-inspections-v1.json`, `${JSON.stringify(signed({ ...sourceBody, counts: { inspections: sourceBody.inspections.length } }), null, 2)}\n`)
 
 const ready = new Set(decisions.filter((row) => row.decision === 'evidence-ready').map((row) => row.candidateId))
 const specifications = selected.filter((row) => ready.has(row.candidate.candidateId)).map((row) => {
@@ -147,7 +148,7 @@ const specifications = selected.filter((row) => ready.has(row.candidate.candidat
     decisionDigest: digest(decision), implementationState: 'specification-only', publicRouteCreated: false,
   }
 }).sort((a, b) => a.candidateId.localeCompare(b.candidateId))
-writeFileSync(`${F}/federation-readiness-tranche-21-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-21-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-readiness-tranche-21-page-specifications-v1.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-readiness-tranche-21-page-specifications/1.0', frozenOn: '2026-09-07', counts: { specifications: specifications.length, boundedQuestions: specifications.length * 5 }, specifications }), null, 2)}\n`)
 
 const decisionById = new Map(decisions.map((row) => [row.candidateId, row]))
 const entries = ledger.entries.map((entry) => {
@@ -157,12 +158,12 @@ const entries = ledger.entries.map((entry) => {
 })
 const ledgerCounts = { routeCandidates: entries.length, implementationReady: entries.filter((row) => row.implementationState === 'implementation-ready').length, unresolved: entries.filter((row) => row.implementationState === 'unresolved').length, newlyReadyThisTranche: decisions.filter((row) => row.decision === 'evidence-ready' && ledgerById.get(row.candidateId)?.implementationState !== 'implementation-ready').length }
 if (ledgerCounts.routeCandidates !== 1628 || ledgerCounts.implementationReady + ledgerCounts.unresolved !== 1628) throw new Error('tranche-21-ledger-partition')
-writeFileSync(`${F}/federation-unified-readiness-ledger-v4.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/4.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
+writeGeneratedFile(`${F}/federation-unified-readiness-ledger-v4.json`, `${JSON.stringify(signed({ schemaVersion: 'maha-federation-unified-readiness-ledger/4.0', frozenOn: '2026-09-07', previousLedger: { provenanceDigest: ledger.provenanceDigest }, candidateMap: { provenanceDigest: map.provenanceDigest }, counts: ledgerCounts, execution: { publicRoutesGenerated: 0, buildRun: false, sitemapChanged: false, llmsChanged: false, released: 0, deployed: false }, entries }), null, 2)}\n`)
 
 const byBasis = {
   priorRevisionRequirements: decisions.filter((row) => row.selectionBasis === 'tranche-20-revision-requirement' && row.decision === 'evidence-ready').length,
   newUnreviewed: decisions.filter((row) => row.selectionBasis === 'next-untouched-unresolved-priority' && row.decision === 'evidence-ready').length,
 }
-writeFileSync('docs/operations/federation-readiness-tranche-21-v1.md', `# Federation readiness Tranche 21 — local report\n\n## Frozen cohort\n\n- Carried Tranche 20 revisions: 71\n- Next untouched unresolved candidates: 29\n- Total: 100\n\n## Review\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Carried revisions closed: ${byBasis.priorRevisionRequirements}\n- New candidates ready: ${byBasis.newUnreviewed}\n- Substantial-page specifications: ${specifications.length}\n\nCommercial declarations are reconciled as four distinct offer scopes; no purchase state changed. Synthetic application fixtures remain separate from accepted external definitions. Policy authority is role-specific and cannot create a machine rule.\n\n## Unified ledger v4\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Total: ${ledgerCounts.routeCandidates}\n\n## Boundary\n\nNo public route was generated. No Next or Vercel build, sitemap, llms, release, deployment, checkout mutation, or Production mutation occurred.\n`)
+writeGeneratedFile('docs/operations/federation-readiness-tranche-21-v1.md', `# Federation readiness Tranche 21 — local report\n\n## Frozen cohort\n\n- Carried Tranche 20 revisions: 71\n- Next untouched unresolved candidates: 29\n- Total: 100\n\n## Review\n\n- Evidence-ready: ${counts.evidenceReady}\n- Revise: ${counts.revise}\n- Blocked: ${counts.blocked}\n- Carried revisions closed: ${byBasis.priorRevisionRequirements}\n- New candidates ready: ${byBasis.newUnreviewed}\n- Substantial-page specifications: ${specifications.length}\n\nCommercial declarations are reconciled as four distinct offer scopes; no purchase state changed. Synthetic application fixtures remain separate from accepted external definitions. Policy authority is role-specific and cannot create a machine rule.\n\n## Unified ledger v4\n\n- Implementation-ready: ${ledgerCounts.implementationReady}\n- Unresolved: ${ledgerCounts.unresolved}\n- Total: ${ledgerCounts.routeCandidates}\n\n## Boundary\n\nNo public route was generated. No Next or Vercel build, sitemap, llms, release, deployment, checkout mutation, or Production mutation occurred.\n`)
 
 console.log(JSON.stringify({ cohort: cohortBody.counts, decisions: counts, byBasis, specifications: specifications.length, ledger: ledgerCounts }))

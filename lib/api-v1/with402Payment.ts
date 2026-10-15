@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { buildTypedData } from '../x402/client.ts'
 import { assertRecoverableSignature } from '../x402/canary-evidence.ts'
-import { buildPaymentRequired, parsePaymentHeader, encodePaymentResponse, type PaymentFacilitator, type PaymentRequirement } from '../x402/protocol.ts'
+import { buildPaymentRequired, parsePaymentHeader, encodeChallengeHeader, encodePaymentResponse, type PaymentFacilitator, type PaymentRequirement } from '../x402/protocol.ts'
 import { createFacilitator } from '../x402/facilitator.ts'
 import { usdcNetwork } from '../x402/networks.ts'
 import { demandDigest } from '../x402/demand6/digest.ts'
@@ -100,8 +100,10 @@ export function with402Payment(e: Endpoint, handler: HandlerContract | undefined
         'maha-input-bound-recovery': { info: { version: '1', retentionSeconds: retainSeconds, receiptRetentionSeconds: RECEIPT_RETENTION_SECONDS, automaticRepayment: false,
           complimentaryCorrection: Boolean(handler.recoverCorrection), withdrawal: 'stops-new-purchases; retained-paid-result-remains-recoverable',
           inputHashHeader: 'X-Maha-Input-Hash', secretHeader: 'X-Maha-Recovery-Secret', binding: modularRecoveryContract(e.id) }, schema: { type: 'object' } } })
-      return apiJson({ ...challenge, error: 'Payment Required', protocol: 'HTTP 402 v2', network: 'base-mainnet', asset: 'USDC',
-        price: e.price_usdc, payee, auth_standard: 'EIP-3009' }, 402, { 'PAYMENT-REQUIRED': Buffer.from(JSON.stringify(challenge)).toString('base64') })
+      try {
+        return apiJson({ ...challenge, error: 'Payment Required', protocol: 'HTTP 402 v2', network: 'base-mainnet', asset: 'USDC',
+          price: e.price_usdc, payee, auth_standard: 'EIP-3009' }, 402, { 'PAYMENT-REQUIRED': encodeChallengeHeader(challenge) })
+      } catch { return apiFailure('payment_challenge_unavailable_no_payment', 503) }
     }
     if (local && !deps.facilitator) return apiFailure('explicit_local_simulator_required_no_payment', 503)
     if (e.method === 'POST' && (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') ?? '')

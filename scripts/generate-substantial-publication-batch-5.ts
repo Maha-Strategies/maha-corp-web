@@ -1,4 +1,5 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync } from 'node:fs'
+import { writeGeneratedFile } from './lib/write-generated-file.ts'
 
 import {
   SUBSTANTIAL_BATCH_5_PAGES,
@@ -71,8 +72,8 @@ const publicationPayload = {
 
 mkdirSync('content/substantial-pages', { recursive: true })
 mkdirSync('docs/substantial-pages', { recursive: true })
-writeFileSync('content/substantial-pages/publication-batch-5-queue.json', `${JSON.stringify(queuePayload, null, 2)}\n`)
-writeFileSync('content/substantial-pages/publication-batch-5.json', `${JSON.stringify(publicationPayload, null, 2)}\n`)
+writeGeneratedFile('content/substantial-pages/publication-batch-5-queue.json', `${JSON.stringify(queuePayload, null, 2)}\n`)
+writeGeneratedFile('content/substantial-pages/publication-batch-5.json', `${JSON.stringify(publicationPayload, null, 2)}\n`)
 
 const row = (cells: readonly string[]) => `| ${cells.join(' | ')} |`
 const blockedEntries = SUBSTANTIAL_PUBLICATION_QUEUE.filter((entry) => !entry.eligibleForBatch5)
@@ -134,4 +135,4 @@ const lines = [
   '',
   'Canonical release and internal review establish controlled publication lineage. They do not establish truth, independent replication, safety, predictive validity, or commercial fitness. Metadata-only, stale, unreleased, path-mismatched, and source-misaligned records remain outside this explanatory projection.',
 ]
-writeFileSync('docs/substantial-pages/publication-batch-5.md', `${lines.join('\n')}\n`)
+writeGeneratedFile('docs/substantial-pages/publication-batch-5.md', `${lines.join('\n')}\n`)

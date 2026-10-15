@@ -6,10 +6,11 @@ import {
 } from '@x402/extensions/bazaar'
 
 import type { PricedResource } from './config.ts'
-import { X402_VERSION, type PaymentRequirement, type ResourceInfo } from './protocol.ts'
+import { X402_VERSION, buildPaymentRequired, type PaymentRequirement, type ResourceInfo } from './protocol.ts'
 import { BASE_MAINNET_CAIP2, CONTEXT_COMPRESSION_OFFER, USDC_DECIMALS, offerById } from './offers.ts'
 import { DECLARATION_DIGEST_EXTENSION, createDeclarationDigestExtension } from './declaration-digest.ts'
 import { compactExample, compactSchema } from './declaration-compaction.ts'
+import { PAYMENT_REQUIRED_HEADER_BUDGET, paymentRequiredHeaderBytes } from './response-header-budget.ts'
 import { bazaarServiceNameForOffer, bazaarTagsForOffer } from './bazaar-service-name.ts'
 
 /** Extension namespace for Maha's own commerce metadata. */
@@ -153,29 +154,32 @@ export async function discoveryExtensionsFor(
   // 16 KB PAYMENT-SIGNATURE ceiling. The input example is published verbatim
   // because a crawler replays it; only the schemas and the response example
   // are reduced, and the complete forms are served at `declarationUrl`.
-  const declared = declareDiscoveryExtension({
-    bodyType: 'json',
-    input: offer.discovery.input,
-    inputSchema: compactSchema(offer.discovery.inputSchema),
-    output: {
-      example: compactExample(offer.discovery.output, 0, offer.discovery.outputSchema) as Record<string, unknown>,
-      schema: compactSchema(offer.discovery.outputSchema),
-    },
-  })
+  const bazaarFor = (maximumObjectDepth = Infinity, outputSchemaDepth = 0) => {
+    const declared = declareDiscoveryExtension({
+      bodyType: 'json',
+      input: offer.discovery.input,
+      inputSchema: compactSchema(offer.discovery.inputSchema),
+      output: {
+        example: compactExample(offer.discovery.output, 0, offer.discovery.outputSchema, maximumObjectDepth) as Record<string, unknown>,
+        schema: compactSchema(offer.discovery.outputSchema, outputSchemaDepth),
+      },
+    })
 
-  const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
-    method: offer.method,
-    path: offer.path,
-    adapter: { getPath: () => offer.path },
-  }) as Record<string, unknown>
+    const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
+      method: offer.method,
+      path: offer.path,
+      adapter: { getPath: () => offer.path },
+    }) as Record<string, unknown>
 
-  const validation = validateDiscoveryExtensionSpec(enriched)
-  if (!validation.valid) {
-    throw new Error(`Invalid Bazaar discovery declaration for ${offer.id}: ${validation.errors?.join('; ') ?? 'unknown error'}`)
-  }
-  const dataValidation = validateDiscoveryExtension(enriched as unknown as Parameters<typeof validateDiscoveryExtension>[0])
-  if (!dataValidation.valid) {
-    throw new Error(`Bazaar discovery example for ${offer.id} does not satisfy its schema: ${dataValidation.errors?.join('; ') ?? 'unknown error'}`)
+    const validation = validateDiscoveryExtensionSpec(enriched)
+    if (!validation.valid) {
+      throw new Error(`Invalid Bazaar discovery declaration for ${offer.id}: ${validation.errors?.join('; ') ?? 'unknown error'}`)
+    }
+    const dataValidation = validateDiscoveryExtension(enriched as unknown as Parameters<typeof validateDiscoveryExtension>[0])
+    if (!dataValidation.valid) {
+      throw new Error(`Bazaar discovery example for ${offer.id} does not satisfy its schema: ${dataValidation.errors?.join('; ') ?? 'unknown error'}`)
+    }
+    return enriched
   }
 
   // The commercial facts a buyer needs that the Bazaar schema has no field
@@ -207,7 +211,7 @@ export async function discoveryExtensionsFor(
     declarationInline: 'compact',
   }
 
-  const extensions: Record<string, unknown> = { bazaar: enriched, [OFFER_EXTENSION]: offerExtension }
+  const extensions: Record<string, unknown> = { bazaar: bazaarFor(), [OFFER_EXTENSION]: offerExtension }
 
   // The digest must describe the declaration this server actually publishes,
   // which means it is taken over the real resource *and the real accepts* --
@@ -215,7 +219,8 @@ export async function discoveryExtensionsFor(
   // against itself and fails against the live challenge, which is exactly the
   // self-mismatch x402-doctor exists to catch. So the requirement is passed in
   // rather than invented here.
-  if (requirement) {
+  const refreshIntegrity = async () => {
+    if (!requirement) return
     const integrity = await createDeclarationDigestExtension(
       {
         x402Version: X402_VERSION,
@@ -226,6 +231,33 @@ export async function discoveryExtensionsFor(
       OFFER_METADATA_VERSION,
     )
     extensions[DECLARATION_DIGEST_EXTENSION] = integrity
+  }
+  await refreshIntegrity()
+
+  if (requirement) {
+    const bytes = () => paymentRequiredHeaderBytes(Buffer.from(JSON.stringify(buildPaymentRequired(requirements,
+      resourceInfoFor(resource, resourceUrl), 'Payment required.', extensions)), 'utf8').toString('base64'))
+    // Only large declarations change. Never shorten a request example: evidence
+    // spans and fixed-cardinality budgets must remain callable. Full schemas
+    // and full outputs stay available at declarationUrl without payment.
+    if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) {
+      extensions.bazaar = bazaarFor(1)
+      await refreshIntegrity()
+    }
+    if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) {
+      // Some rich output schemas alone use most of the response budget.
+      // Publish a bare output type with a top-level example, never a fake
+      // complete schema. The authoritative contract remains at declarationUrl.
+      extensions.bazaar = bazaarFor(1, 1)
+      await refreshIntegrity()
+    }
+    if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) {
+      // Keep limitation constants and warning codes, but omit restatable
+      // output details when even the root example exceeds the inline budget.
+      extensions.bazaar = bazaarFor(0, 1)
+      await refreshIntegrity()
+    }
+    if (bytes() > PAYMENT_REQUIRED_HEADER_BUDGET) throw Error('discovery_response_header_budget_exceeded:' + offer.id)
   }
 
   const frozen = Object.freeze(extensions)

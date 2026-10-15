@@ -121,7 +121,9 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // The requirement is passed through so the declaration digest covers the
   // accepts array this challenge actually carries. Awaited once per request,
   // served from a per-offer cache after the first.
-  const extensions = await discoveryExtensionsFor(resource, resourceUrl, requirements)
+  let extensions: Record<string, unknown> | undefined
+  try { extensions = await discoveryExtensionsFor(resource, resourceUrl, requirements) }
+  catch { return { kind: 'refused', status: 503, code: 'payment_challenge_unavailable', message: 'Payment terms cannot be advertised safely. No new payment was requested.' } }
 
   const signature = readPaymentSignature(request.headers)
   if (!signature) return challenge(requirements, resourceInfo, extensions, 'Payment is required for this resource.')
@@ -300,7 +302,8 @@ function challenge(
   error: string,
 ): X402Outcome {
   const body = buildPaymentRequired(requirements, resource, error, extensions)
-  return { kind: 'challenge', status: 402, header: encodeChallengeHeader(body), body }
+  try { return { kind: 'challenge', status: 402, header: encodeChallengeHeader(body), body } }
+  catch { return { kind: 'refused', status: 503, code: 'payment_challenge_unavailable', message: 'Payment terms cannot be advertised safely. No new payment was requested.' } }
 }
 
 export const X402_HEADERS = {
