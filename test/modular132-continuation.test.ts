@@ -2,24 +2,24 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createHash, createHmac } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { CONTINUATION_BRANCH, CONTINUATION_CONFIRMATION, ORIGINAL_ID, assertContinuationAdmission, originalDisposition, continuationSecret, pinnedOriginal, recoverConfirmedOriginal } from '../scripts/continue-modular132-indexing.ts'
+import { CONTINUATION_BRANCH, CONTINUATION_CONFIRMATION, ORIGINAL_ID, PRIOR_ID, PREPAID_BASE_UNITS, assertContinuationAdmission, originalDisposition, continuationSecret, pinnedOriginal, recoverConfirmedOriginal } from '../scripts/continue-modular132-indexing.ts'
 import type { ModularBuyerContract, ModularCapsule } from '../lib/x402/modular-buyer.ts'
 import { BATCH132_PRODUCTION_ENDPOINTS, MODULAR_132_ADDITIONS, releaseExample } from '../lib/api-v1/production-release.ts'
 import { BATCH132_CAP, ORIGINAL_ATTEMPT_RESERVE } from '../scripts/run-modular132-indexing.ts'
 import { modularPaymentNonce } from '../lib/x402/input-bound-payment.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
 
-const env = { GITHUB_ACTIONS: 'true', GITHUB_REF: CONTINUATION_BRANCH, GITHUB_RUN_ATTEMPT: '1', GITHUB_RUN_NUMBER: '3',
+const env = { GITHUB_ACTIONS: 'true', GITHUB_REF: CONTINUATION_BRANCH, GITHUB_RUN_ATTEMPT: '1', GITHUB_RUN_NUMBER: '4',
   MODULAR132_CONTINUATION_CONFIRMATION: CONTINUATION_CONFIRMATION, MODULAR132_ORIGINAL_DIRECTORY: '/tmp/original-test', MODULAR132_CONTINUATION_OUTPUT: '/tmp/output-test' }
-test('only the exact reviewed third workflow run can access continuation spending', () => {
+test('only the exact reviewed fourth workflow run can access continuation spending', () => {
   assert.doesNotThrow(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, 7071050n))
   for (const name of Object.keys(env)) assert.throws(() => assertContinuationAdmission({ ...env, [name]: '' }, MODULAR_132_ADDITIONS.operatorWallet, 7071050n))
-  for (const patch of [{ GITHUB_REF: 'refs/heads/main' }, { GITHUB_RUN_ATTEMPT: '2' }, { GITHUB_RUN_NUMBER: '4' }])
+  for (const patch of [{ GITHUB_REF: 'refs/heads/main' }, { GITHUB_RUN_ATTEMPT: '2' }, { GITHUB_RUN_NUMBER: '5' }])
     assert.throws(() => assertContinuationAdmission({ ...env, ...patch }, MODULAR_132_ADDITIONS.operatorWallet, 7071050n))
   assert.throws(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.payee, 7071050n))
   assert.throws(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - 1n))
-  assert.doesNotThrow(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - 38340n, 38340n))
-  assert.throws(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - 38341n, 38340n))
+  assert.doesNotThrow(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - PREPAID_BASE_UNITS, PREPAID_BASE_UNITS))
+  assert.throws(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - PREPAID_BASE_UNITS - 1n, PREPAID_BASE_UNITS))
   assert.throws(() => assertContinuationAdmission(env, MODULAR_132_ADDITIONS.operatorWallet, 7071050n, 38339n))
 })
 test('a used original authorization permits only recovery, never a replacement purchase', () => {
@@ -32,9 +32,9 @@ test('controlled replacement requires finalized expiry and unused nonce on both 
 })
 test('the paid product cannot get another nonce; untouched products preserve original duplicate protection', () => {
   const key = 'synthetic-test-key', first = BATCH132_PRODUCTION_ENDPOINTS[0]
-  assert.equal(first.id, ORIGINAL_ID)
+  assert.equal(first.id, PRIOR_ID)
   for (const e of BATCH132_PRODUCTION_ENDPOINTS) {
-    if (e.id === ORIGINAL_ID) { assert.throws(() => continuationSecret(key, e.id), /cannot_be_prepared_again/); continue }
+    if ([ORIGINAL_ID, PRIOR_ID].includes(e.id)) { assert.throws(() => continuationSecret(key, e.id), /cannot_be_prepared_again/); continue }
     const inputHash = demandDigest(releaseExample(e.id)!.input), old = createHmac('sha256', key).update(MODULAR_132_ADDITIONS.version + ':' + e.id + ':original-once').digest('hex'), fresh = continuationSecret(key, e.id)
     const oldNonce = modularPaymentNonce(e.id, inputHash, old), freshNonce = modularPaymentNonce(e.id, inputHash, fresh)
     assert.equal(oldNonce, freshNonce)
@@ -47,8 +47,8 @@ test('immutable artifact contents must match pinned SHA-256 before parsing', () 
 })
 test('protected manual continuation cannot rerun, deploy, replace previous artifacts, or expand the cap', () => {
   const workflow = readFileSync('.github/workflows/modular132-indexing.yml', 'utf8'), source = readFileSync('scripts/continue-modular132-indexing.ts', 'utf8')
-  assert.match(workflow, /github.run_number == 3/); assert.match(workflow, /github.run_attempt == 1/)
-  assert.match(workflow, /environment: production-x402-canary/); assert.match(workflow, /11978523560/); assert.match(workflow, /38747177414/)
+  assert.match(workflow, /github.run_number == 4/); assert.match(workflow, /github.run_attempt == 1/)
+  assert.match(workflow, /environment: production-x402-canary/); assert.match(workflow, /11979223148/); assert.match(workflow, /38748470657/)
   assert.doesNotMatch(workflow, /schedule:|pull_request:|push:|vercel|--pay/)
   assert.match(source, /retryCount: 0/); assert.match(source, /recovery: 'retained-result'/)
   assert.match(source, /receiptMatchesAuthorization/); assert.match(source, /paid_original_cannot_be_prepared_again/)

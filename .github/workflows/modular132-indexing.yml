@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   index:
-    if: github.run_attempt == 1 && github.run_number == 3 && github.ref == 'refs/heads/codex/modular132-recovery-20261015' && inputs.confirmation == 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
+    if: github.run_attempt == 1 && github.run_number == 4 && github.ref == 'refs/heads/codex/modular132-recovery-20261015' && inputs.confirmation == 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: production-x402-canary
@@ -37,8 +37,8 @@ jobs:
       - name: Download immutable original encrypted artifact
         uses: actions/download-artifact@v7
         with:
-          artifact-ids: '11978523560'
-          run-id: '38747177414'
+          artifact-ids: '11979223148'
+          run-id: '38748470657'
           github-token: ${{ github.token }}
           path: ${{ env.MODULAR132_ORIGINAL_DIRECTORY }}
       - name: Recover confirmed paid response without repaying, then untouched first purchases

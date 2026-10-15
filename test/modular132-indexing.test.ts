@@ -112,7 +112,24 @@ test('retained-only reads are bounded and never request a replacement signature 
     calls++; assert.equal(options?.recovery, 'retained-result')
     return { settlement: 'unknown', delivery: 'unresolved', automaticRepayment: false, status: 409, errorCode: 'settlement_confirmation_pending_do_not_repay', data: null, transaction: null }
   }, delay: async () => {} }), /unresolved_stop_without_repayment/)
-  assert.equal(calls, 3)
+  assert.equal(calls, 10)
+})
+test('transient receipt-reader exceptions recover through retained reads without another signature or settlement', async () => {
+  const e = BATCH132_PRODUCTION_ENDPOINTS[0], h = handlerFor(e.id, e.amount)!, sample = releaseExample(e.id)!
+  const account = privateKeyToAccount(('0x' + '42'.repeat(32)) as `0x${string}`), start = Date.parse('2026-10-15T08:00:00Z')
+  let now = start, checks = 0, signatures = 0, settlements = 0
+  const contract = { id: e.id, path: e.path, amount: e.amount, recoverySeconds: 86400, validateInput: (x: unknown) => h.input.parse(x), validateOutput: (x: unknown) => h.output.parse(x) }
+  const route = createEndpointRouter({ environment: { NODE_ENV: 'production', VERCEL: '1', BASE_PAYEE_ADDRESS: MODULAR_132_ADDITIONS.payee }, now: () => now,
+    store: memoryPaymentStore(() => now), facilitator: { verify: async () => ({ ok: true, payer: account.address }),
+      settle: async () => { settlements++; return { ok: true, payer: account.address, transaction: '0x' + 'ab'.repeat(32) } } },
+    confirm: async () => { checks++; if (checks < 4) throw Error('simulated_receipt_reader_unavailable'); return true }, recordDelivery: async () => {} })
+  const transport: typeof fetch = (url, init) => route(new Request(String(url), init))
+  const capsule = await prepareModularPurchase(contract, { input: sample.input, payer: account.address, maximumAmount: BigInt(e.amount), now,
+    fetchImpl: transport, signTypedData: typed => { signatures++; return account.signTypedData(typed as Parameters<typeof account.signTypedData>[0]) }, persist: async () => {} })
+  assert.equal((await submitModularPurchase(contract, capsule, { fetchImpl: transport, now })).delivery, 'unresolved')
+  now += 120000
+  const result = await recoverBatch132RetainedOnly(contract, capsule, { submit: (c, saved, options) => submitModularPurchase(c, saved, { ...options, now }), fetchImpl: transport, delay: async () => {} })
+  assert.equal(result.delivery, 'validated_response'); assert.equal(signatures, 1); assert.equal(settlements, 1); assert.equal(checks, 4)
 })
 test('manual protected workflow has a single original submission site, no schedule and encrypted outbox before submitting', () => {
   const workflow = readFileSync('.github/workflows/modular132-indexing.yml', 'utf8'), source = readFileSync('scripts/run-modular132-indexing.ts', 'utf8')

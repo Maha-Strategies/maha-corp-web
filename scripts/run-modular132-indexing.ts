@@ -87,14 +87,14 @@ export async function recoverBatch132RetainedOnly(contract: ModularBuyerContract
   const send = dependencies.submit ?? submitModularPurchase, delay = dependencies.delay ?? (ms => new Promise(resolve => setTimeout(resolve, ms)))
   // Recovery is an explicit retained-result read. It cannot prepare, sign or
   // repeat an original settlement-capable request, even after auth expiry.
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 10; attempt++) {
     const result = await send(contract, capsule, { fetchImpl: dependencies.fetchImpl, recovery: 'retained-result' })
     await dependencies.observe?.({ attempt: attempt + 1, status: 'status' in result ? result.status : undefined,
       errorCode: 'errorCode' in result ? String(result.errorCode) : undefined })
     if (result.delivery === 'validated_response' && result.settlement === 'provider_reported' && result.transaction) return result
-    const pending = 'errorCode' in result && ['settlement_confirmation_pending_do_not_repay', 'settlement_unknown_do_not_repay'].includes(String(result.errorCode))
-    if (!pending || attempt === 2) throw Error('retained_recovery_unresolved_stop_without_repayment')
-    await delay(attempt === 0 ? 5000 : 15000)
+    const pending = 'errorCode' in result && ['settlement_confirmation_pending_do_not_repay', 'settlement_unknown_do_not_repay', 'retained_evidence_invalid_or_unavailable_do_not_repay'].includes(String(result.errorCode))
+    if (!pending || attempt === 9) throw Error('retained_recovery_unresolved_stop_without_repayment')
+    await delay(5000)
   }
   throw Error('retained_recovery_unresolved_stop_without_repayment')
 }

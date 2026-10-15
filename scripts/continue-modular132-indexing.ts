@@ -17,23 +17,26 @@ import { usdcNetwork } from '../lib/x402/networks.ts'
 
 export const CONTINUATION_BRANCH = 'refs/heads/codex/modular132-recovery-20261015'
 export const CONTINUATION_CONFIRMATION = 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
-export const ORIGINAL_ID = 'reading-plans-scope-boundary-audit'
-export const ORIGINAL_EVIDENCE_HASH = '79bf1edf18c42b7fa93eec55ad9ac4971791ccd71260ce38e1ca864f3d807c8c'
-export const ORIGINAL_OUTBOX_HASH = 'ab0c94684d9aade2e54956d29535130a7988229684f0538a4bd2130faacd71b8'
-const ORIGINAL_SCOPE = MODULAR_132_ADDITIONS.version + ':approved-billing-recovery/1'
-const SCOPE = ORIGINAL_SCOPE + ':paid-response-recovery/1'
+export const PRIOR_ID = 'reading-plans-scope-boundary-audit'
+export const ORIGINAL_ID = 'edition-records-scope-boundary-audit'
+export const PREPAID_BASE_UNITS = 76681n
+export const ORIGINAL_EVIDENCE_HASH = 'dd43fc8009ba4fdf1351709580f1a4a67e63c9692298e1acad2025f5104d5b8f'
+export const ORIGINAL_OUTBOX_HASH = '865c9f7ee202014808ee70867210f2e443e341fd78adcf9215dfd660d7211742'
+const FIRST_REPLACEMENT_SCOPE = MODULAR_132_ADDITIONS.version + ':approved-billing-recovery/1'
+const ORIGINAL_SCOPE = FIRST_REPLACEMENT_SCOPE + ':paid-response-recovery/1'
+const SCOPE = ORIGINAL_SCOPE + ':resume-paid-second/1'
 const ORIGIN = 'https://www.mahastrategies.com'
 type Step = { id: string; amountBaseUnits: string; state: string; transaction?: string; responseDigest?: string; status?: number; errorCode?: string }
 
 function assertContinuationScope(env: Record<string, string | undefined>, wallet: string) {
-  if (env.GITHUB_ACTIONS !== 'true' || env.GITHUB_REF !== CONTINUATION_BRANCH || env.GITHUB_RUN_ATTEMPT !== '1' || env.GITHUB_RUN_NUMBER !== '3'
+  if (env.GITHUB_ACTIONS !== 'true' || env.GITHUB_REF !== CONTINUATION_BRANCH || env.GITHUB_RUN_ATTEMPT !== '1' || env.GITHUB_RUN_NUMBER !== '4'
     || env.MODULAR132_CONTINUATION_CONFIRMATION !== CONTINUATION_CONFIRMATION || !env.MODULAR132_ORIGINAL_DIRECTORY || !env.MODULAR132_CONTINUATION_OUTPUT
     || wallet.toLowerCase() !== MODULAR_132_ADDITIONS.operatorWallet)
     throw Error('exact_second_run_approval_wallet_and_reserved_balance_required')
 }
 export function assertContinuationAdmission(env: Record<string, string | undefined>, wallet: string, balance: bigint, originalConfirmedBaseUnits = 0n) {
   assertContinuationScope(env, wallet)
-  if (![0n, 38340n].includes(originalConfirmedBaseUnits) || balance < BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - originalConfirmedBaseUnits)
+  if (![0n, PREPAID_BASE_UNITS].includes(originalConfirmedBaseUnits) || balance < BATCH132_CAP + ORIGINAL_ATTEMPT_RESERVE - originalConfirmedBaseUnits)
     throw Error('exact_second_run_approval_wallet_and_reserved_balance_required')
 }
 export function pinnedOriginal(bytes: Buffer, digest: string) {
@@ -47,7 +50,7 @@ export function originalDisposition(proof: { finalizedUsed: boolean; latestUsed:
   return 'controlled_replacement_permitted' as const
 }
 export function continuationSecret(key: string, id: string) {
-  if (id === ORIGINAL_ID) throw Error('paid_original_cannot_be_prepared_again')
+  if ([ORIGINAL_ID, PRIOR_ID].includes(id)) throw Error('paid_original_cannot_be_prepared_again')
   return createHmac('sha256', key).update(MODULAR_132_ADDITIONS.version + ':' + id + ':original-once').digest('hex')
 }
 export async function recoverConfirmedOriginal(contract: ModularBuyerContract, capsule: ModularCapsule, transaction: string, dependencies: {
@@ -82,9 +85,10 @@ export async function continueModular132() {
   // Hash pinning happens before signer access. The original artifact remains immutable.
   const original = pinnedOriginal(await readFile(join(directory, 'modular132-continuation-evidence.json')), ORIGINAL_EVIDENCE_HASH)
   const outbox = pinnedOriginal(await readFile(join(directory, 'modular132-continuation-evidence.json.recovery-encrypted.json')), ORIGINAL_OUTBOX_HASH)
-  if (original.scope !== ORIGINAL_SCOPE || outbox.scope !== ORIGINAL_SCOPE || original.steps.length !== 1 || outbox.packets.length !== 1
-    || original.steps[0].id !== ORIGINAL_ID || original.steps[0].amountBaseUnits !== '38340' || original.steps[0].state !== 'authorized_outcome_unknown'
-    || original.authorizedBaseUnits !== '38340' || original.confirmedBaseUnits !== '0' || original.maximumBaseUnits !== String(BATCH132_CAP)
+  if (original.scope !== ORIGINAL_SCOPE || outbox.scope !== ORIGINAL_SCOPE || original.steps.length !== 2 || outbox.packets.length !== 1
+    || original.steps[0].id !== PRIOR_ID || original.steps[0].amountBaseUnits !== '38340' || original.steps[0].state !== 'original_confirmed_and_recovered_without_repayment'
+    || original.steps[1].id !== ORIGINAL_ID || original.steps[1].amountBaseUnits !== '38341' || original.steps[1].state !== 'authorized_outcome_unknown'
+    || original.authorizedBaseUnits !== '76681' || original.confirmedBaseUnits !== '38340' || original.maximumBaseUnits !== String(BATCH132_CAP)
     || original.wallet.toLowerCase() !== MODULAR_132_ADDITIONS.operatorWallet || outbox.packets[0].id !== ORIGINAL_ID) throw Error('exact_original_scope_required')
   const index = await preflightBatch132()
   if (!index.complete || !index.available) throw Error('complete_catalogue_required_before_signer_access')
@@ -107,7 +111,7 @@ export async function continueModular132() {
   ])
   const disposition = originalDisposition({ finalizedUsed, latestUsed, finalizedTimestamp: finalized.timestamp, validBefore: BigInt(String(authorization.validBefore)) })
   if (disposition !== 'recover_paid_only') throw Error('expected_paid_original_nonce_not_confirmed_no_replacement_allowed')
-  const evidence = { scope: SCOPE, originalRun: 38747177414, checkedAt: new Date().toISOString(), classification: 'publisher-funded-operator-activity',
+  const evidence = { scope: SCOPE, originalRun: 38748470657, checkedAt: new Date().toISOString(), classification: 'publisher-funded-operator-activity',
     customerRevenue: false, organicDemand: false, automaticRepayment: false, wallet: account.address, payee: MODULAR_132_ADDITIONS.payee,
     maximumBaseUnits: String(BATCH132_CAP), protectedReserveBaseUnits: String(ORIGINAL_ATTEMPT_RESERVE), initialBalanceBaseUnits: String(balance),
     original: { finalizedBlock: String(finalized.number), finalizedTimestamp: String(finalized.timestamp), finalizedUsed, latestUsed, validBefore: String(authorization.validBefore), disposition,
@@ -120,6 +124,13 @@ export async function continueModular132() {
   }
   await save()
   try {
+    const prior: Step = original.steps[0], priorEndpoint = BATCH132_PRODUCTION_ENDPOINTS.find(e => e.id === PRIOR_ID)!
+    const priorSecret = createHmac('sha256', key).update(FIRST_REPLACEMENT_SCOPE + ':' + PRIOR_ID + ':original-once').digest('hex')
+    const priorNonce = modularPaymentNonce(PRIOR_ID, demandDigest(releaseExample(PRIOR_ID)!.input), priorSecret)
+    if (!prior.transaction || !receiptMatchesAuthorization(await client.getTransactionReceipt({ hash: prior.transaction as `0x${string}` }), {
+      transaction: prior.transaction, payer: capsule.payer, payee: MODULAR_132_ADDITIONS.payee, amount: priorEndpoint.amount, nonce: priorNonce })) throw Error('prior_confirmed_receipt_mismatch_do_not_repay')
+    budget.reserve(PRIOR_ID, priorEndpoint.amount); evidence.steps.push(prior)
+    evidence.authorizedBaseUnits = String(budget.authorized); evidence.confirmedBaseUnits = priorEndpoint.amount; await save()
     if (disposition === 'recover_paid_only') {
       const latest = await client.getBlock(), estimated = (latest.timestamp - BigInt(String(authorization.validAfter))) / 2n + 1000n
       const window = estimated < 50000n ? estimated : 50000n, start = latest.number > window ? latest.number - window : 0n
@@ -144,16 +155,16 @@ export async function continueModular132() {
     await save()
     if (disposition === 'recover_paid_only') {
       if (retained.delivery !== 'validated_response' || retained.transaction !== evidence.original.transaction) throw Error('paid_original_not_recovered_do_not_repay')
-      assertContinuationAdmission(process.env, account.address, balance, BigInt(originalContract.amount))
+      assertContinuationAdmission(process.env, account.address, balance, PREPAID_BASE_UNITS)
       budget.reserve(ORIGINAL_ID, originalContract.amount)
       evidence.steps.push({ id: ORIGINAL_ID, amountBaseUnits: originalContract.amount, state: 'original_confirmed_and_recovered_without_repayment', transaction: retained.transaction, responseDigest: demandDigest(retained.data) })
-      evidence.authorizedBaseUnits = String(budget.authorized); evidence.confirmedBaseUnits = originalContract.amount; await save()
+      evidence.authorizedBaseUnits = String(budget.authorized); evidence.confirmedBaseUnits = String(PREPAID_BASE_UNITS); await save()
     } else {
       if (retained.delivery === 'validated_response') throw Error('retained_receipt_contradicts_unused_nonce_do_not_repay')
       assertContinuationAdmission(process.env, account.address, balance)
     }
     for (const e of BATCH132_PRODUCTION_ENDPOINTS) {
-      if (e.id === ORIGINAL_ID && disposition === 'recover_paid_only') continue
+      if (evidence.steps.some(s => s.id === e.id && s.transaction)) continue
       if (index.indexed.includes(e.id)) { evidence.steps.push({ id: e.id, amountBaseUnits: '0', state: 'already_indexed_no_payment' }); await save(); continue }
       const contract = contractFor(e.id), input = contract.validateInput(releaseExample(e.id)!.input)
       const secret = continuationSecret(key, e.id), freshNonce = modularPaymentNonce(e.id, demandDigest(input), secret) as `0x${string}`
@@ -170,7 +181,7 @@ export async function continueModular132() {
       let result = await submitModularPurchase(contract, fresh, { fetchImpl: transport })
       step.status = 'status' in result ? result.status : undefined; step.errorCode = 'errorCode' in result ? String(result.errorCode) : undefined; await save()
       if (result.delivery !== 'validated_response') {
-        const pending = 'errorCode' in result && ['settlement_confirmation_pending_do_not_repay', 'settlement_unknown_do_not_repay'].includes(String(result.errorCode))
+        const pending = 'errorCode' in result && ['settlement_confirmation_pending_do_not_repay', 'settlement_unknown_do_not_repay', 'retained_evidence_invalid_or_unavailable_do_not_repay'].includes(String(result.errorCode))
         if (!pending) throw Error('continuation_first_submission_uncertain_stop')
         result = await recoverBatch132RetainedOnly(contract, fresh, { fetchImpl: transport, observe: async value => { step.status = value.status; step.errorCode = value.errorCode; await save() } })
       }
