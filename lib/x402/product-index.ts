@@ -1,8 +1,9 @@
 import { BAZAAR_MERCHANT_URL, MAHA_PAYEE } from './discovery-payment-recipe.ts'
+import { MAX_MERCHANT_RESOURCES } from './merchant-catalog.ts'
 
 export type ProductListing = { serviceName: string | null; calls30d: number | null; payers30d: number | null; lastCalledAt: string | null }
 export type IndexSnapshot = { available: boolean; complete: boolean; checkedAt: string; resources: string[]; listings?: Record<string, ProductListing> }
-export const MAX_MERCHANT_INDEX_RESOURCES = 2000
+export const MAX_MERCHANT_INDEX_RESOURCES = MAX_MERCHANT_RESOURCES
 export function parseProductIndex(value: unknown, checkedAt: string, offset = 0): IndexSnapshot {
   const v = value as { payTo?: unknown; resources?: unknown; pagination?: { total?: unknown; offset?: unknown } }
   if (!v || typeof v.payTo !== 'string' || v.payTo.toLowerCase() !== MAHA_PAYEE || !Array.isArray(v.resources)

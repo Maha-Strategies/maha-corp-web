@@ -161,7 +161,7 @@ test('detects stale metadata on a later page rather than claiming the listing is
   assert.equal(report.findings.some(f => f.ruleId === 'x402.bazaar.not_found'), false)
 })
 
-for (const count of [0, 100, 201]) {
+for (const count of [0, 100, 201, 1156]) {
   test(`only establishes absence after reading the complete ${count}-listing catalogue`, async () => {
     const { fetchImpl, offsets } = paginatedDoctorFetch(otherRecords(count))
     const report = await diagnoseX402Endpoint({ endpoint, fetchImpl })
@@ -179,7 +179,7 @@ const incompleteCatalogues: Array<[string, (body: Record<string, unknown>, offse
   ['duplicate resources', (body, offset) => offset ? { ...body, resources: [otherRecords(1)[0]] } : body],
   ['wrong merchant', (body, offset) => offset ? { ...body, payTo: `0x${'1'.repeat(40)}` } : body],
   ['wrong offset', (body, offset) => offset ? { ...body, pagination: { total: 201, offset: 0 } } : body],
-  ['unbounded total', body => ({ ...body, pagination: { total: 1001, offset: 0 } })],
+  ['unbounded total', body => ({ ...body, pagination: { total: 2001, offset: 0 } })],
   ['missing pagination', body => ({ resources: body.resources, payTo: body.payTo })],
   ['malformed response', () => null],
 ]

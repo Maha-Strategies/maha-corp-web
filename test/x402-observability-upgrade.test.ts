@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { encodeAbiParameters, encodeEventTopics } from 'viem'
-import { readMerchantResources, validateExpectedInventory, INTENTIONALLY_UNINDEXED_OFFERS } from '../lib/x402/merchant-catalog.ts'
+import { readMerchantResources, validateExpectedInventory, INTENTIONALLY_UNINDEXED_OFFERS, MAX_MERCHANT_RESOURCES } from '../lib/x402/merchant-catalog.ts'
 import { runInactivityWatch, shouldFailInactivityWatch } from '../scripts/run-bazaar-inactivity-watch.ts'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
 import { payableOffers, offerById } from '../lib/x402/offers.ts'
@@ -26,8 +26,8 @@ function pages(rows: unknown[], mutate?: (body: Record<string, unknown>, offset:
     return Response.json(body)
   }) as typeof fetch
 }
-test('150, 250 and 1000-row inventories are completely paginated, including object URLs', async () => {
-  for (const count of [150, 250, 1000]) {
+test('150, 250, 1000 and 1156-row inventories are completely paginated, including object URLs', async () => {
+  for (const count of [150, 250, 1000, 1156]) {
     const rows = Array.from({ length: count }, (_, i) => ({ resource: i % 2 ? { url: `${origin}/api/v1/${i}` } : `${origin}/api/v1/${i}` }))
     assert.equal((await readMerchantResources('https://discovery.test/merchant', { fetchImpl: pages(rows), expectedPayTo: MAHA_PAYEE })).length, count)
   }
@@ -41,9 +41,10 @@ test('truncated, duplicate, changing and wrong-merchant observations fail closed
     (b: Record<string, unknown>) => { b.payTo = '0xwrong' },
   ]) await assert.rejects(readMerchantResources('https://discovery.test/merchant', { fetchImpl: pages(rows, mutate), expectedPayTo: MAHA_PAYEE }))
 })
-test('inventory ceiling allows 150 but rejects duplicates, empty and unbounded inventories', () => {
+test('inventory ceiling allows the full modular plus legacy catalogue but rejects duplicates, empty and unbounded inventories', () => {
   validateExpectedInventory(Array.from({ length: 150 }, (_, i) => `${origin}/${i}`))
-  for (const rows of [[], ['same', 'same'], Array.from({ length: 1001 }, (_, i) => `${origin}/${i}`)]) assert.throws(() => validateExpectedInventory(rows))
+  validateExpectedInventory(Array.from({ length: 1156 }, (_, i) => `${origin}/${i}`))
+  for (const rows of [[], ['same', 'same'], Array.from({ length: MAX_MERCHANT_RESOURCES + 1 }, (_, i) => `${origin}/${i}`)]) assert.throws(() => validateExpectedInventory(rows))
 })
 test('malformed activity metrics are unavailable, not negative calls or fresh timestamps', async () => {
   const rows = await readMerchantResources('https://discovery.test/merchant', { fetchImpl: pages([
