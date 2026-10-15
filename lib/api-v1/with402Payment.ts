@@ -13,7 +13,7 @@ import { baseProofReader, type BaseProofInput } from './base-proof.ts'
 import { assertEndpoint, executionEnvelope, recoverySeconds, RECEIPT_RETENTION_SECONDS, type Endpoint, type HandlerContract } from './types.ts'
 import { handlerFor } from './handlers.ts'
 import { executionCostReleaseBlock } from './cost-policy.ts'
-import { modularBazaar, modularDescription } from './bazaar.ts'
+import { modularBazaar, modularDescription, modularServiceMetadata } from './bazaar.ts'
 import { boundDescription } from '../x402/discovery.ts'
 import { recordModularDelivery } from './delivery-meter.ts'
 
@@ -92,7 +92,7 @@ export function with402Payment(e: Endpoint, handler: HandlerContract | undefined
     try { payee = configuredPayee(env); expected = terms(e, payee); facilitator = deps.facilitator ?? provider(env) } catch { return apiFailure('payment_configuration_unavailable', 503) }
     const signed = request.headers.has('PAYMENT-SIGNATURE') || request.headers.has('X-PAYMENT-SIGNATURE')
     const authoritativeResource = { url: ORIGIN + e.path, description: boundDescription(modularDescription(e)), mimeType: 'application/json',
-      serviceName: e.name, tags: e.tags.slice(0, 10), iconUrl: ORIGIN + '/icon.png' }
+      ...modularServiceMetadata(e), iconUrl: ORIGIN + '/icon.png' }
     if (!signed) {
       if (request.headers.has('X-Maha-Recovery-Mode')) return apiFailure('original_authorization_required', 400)
       const challenge = buildPaymentRequired([expected], authoritativeResource, 'Payment Required', {
