@@ -61,6 +61,9 @@ test('all 201 Bazaar challenges fit default-client header limits with callable e
     const header = response.headers.get('PAYMENT-REQUIRED')!
     assert.ok(paymentRequiredHeaderBytes(header) <= PAYMENT_REQUIRED_HEADER_LIMIT, e.id)
     const quote = decodeChallenge(header); assertBatch201Quote(quote, e.id)
+    assert.match(quote.resource.serviceName!, /^[\x20-\x7e]{1,32}$/)
+    assert.ok(quote.resource.tags!.length <= 5)
+    for (const tag of quote.resource.tags!) assert.match(tag, /^[\x20-\x7e]{1,32}$/)
     const declaration = quote.extensions?.bazaar as { info: { input: { body: unknown } } }
     const h = handlerFor(e.id, e.amount)!, input = h.input.parse(declaration.info.input.body)
     const schema = { ...e.schema.input }; delete schema['x-max-request-bytes']; delete schema['x-semantic-rules']

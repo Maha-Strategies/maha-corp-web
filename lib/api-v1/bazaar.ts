@@ -6,6 +6,10 @@ import type { Endpoint } from './types.ts'
 const cache = new Map<string, Record<string, unknown>>()
 const SINGLE_EPOCH_EXAMPLES = new Set(['orbital-records-timestamp-order-audit', 'ephemeris-snapshots-timestamp-order-audit', 'planetary-measurements-timestamp-order-audit'])
 const BOUNDED_OUTPUT_EXAMPLES = new Set(['ephemeris-snapshots-condition-coverage-map', 'planetary-measurements-condition-coverage-map'])
+export function modularServiceMetadata(e: Endpoint) {
+  return { serviceName: e.name.replace(/[^\x20-\x7e]/g, '-').slice(0, 32),
+    tags: [...new Set(e.tags.filter(tag => /^[\x20-\x7e]{1,32}$/.test(tag)))].slice(0, 5) }
+}
 export function modularDescription(e: Endpoint) {
   if (Buffer.byteLength(e.description) <= 480) return e.description
   const sentence = e.description.split(/(?<=\.)\s+/)[0]
