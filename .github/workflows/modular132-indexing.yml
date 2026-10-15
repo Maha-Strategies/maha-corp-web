@@ -1,25 +1,27 @@
-name: Approved 132 additions to 958 modular products
+name: Controlled recovery and continuation of approved 132 products
 on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'PUBLISHER_FUNDED_132_ONCE_MAX_6996054'
+        description: 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
         required: true
         type: string
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: production-x402-bazaar-canary
   cancel-in-progress: false
 jobs:
   index:
-    if: github.run_attempt == 1 && github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISHER_FUNDED_132_ONCE_MAX_6996054'
+    if: github.run_attempt == 1 && github.run_number == 2 && github.ref == 'refs/heads/codex/modular132-recovery-20261015' && inputs.confirmation == 'RECOVER_THEN_CONTINUE_132_MAX_6996054_ONCE'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: production-x402-canary
     env:
-      MODULAR132_CONFIRMATION: ${{ inputs.confirmation }}
-      MODULAR132_OUTPUT_PATH: ${{ github.workspace }}/modular132-indexing-evidence.json
+      MODULAR132_CONTINUATION_CONFIRMATION: ${{ inputs.confirmation }}
+      MODULAR132_ORIGINAL_DIRECTORY: ${{ github.workspace }}/.modular132-original
+      MODULAR132_CONTINUATION_OUTPUT: ${{ github.workspace }}/modular132-continuation-evidence.json
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -28,20 +30,29 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.17.0
       - run: npm ci
+      - name: Test continuation safeguards without protected credentials
+        run: node --experimental-strip-types --test test/modular132-continuation.test.ts test/modular132-indexing.test.ts
       - name: Check all quotes before signer access
         run: node --experimental-strip-types scripts/run-modular132-indexing.ts --preflight
-      - name: At most one first purchase per new endpoint, capped at 6.996054 USDC
+      - name: Download immutable original encrypted artifact
+        uses: actions/download-artifact@v7
+        with:
+          artifact-ids: '11975181639'
+          run-id: '38739743218'
+          github-token: ${{ github.token }}
+          path: ${{ env.MODULAR132_ORIGINAL_DIRECTORY }}
+      - name: Reconcile original before one controlled replacement and untouched first purchases
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: node --experimental-strip-types scripts/run-modular132-indexing.ts --pay
+        run: node --experimental-strip-types scripts/continue-modular132-indexing.ts --continue
       - name: Preserve redacted evidence and encrypted recovery packets
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: modular132-indexing-${{ github.run_id }}
+          name: modular132-continuation-${{ github.run_id }}
           path: |
-            ${{ env.MODULAR132_OUTPUT_PATH }}
-            ${{ env.MODULAR132_OUTPUT_PATH }}.recovery-encrypted.json
+            ${{ env.MODULAR132_CONTINUATION_OUTPUT }}
+            ${{ env.MODULAR132_CONTINUATION_OUTPUT }}.recovery-encrypted.json
           retention-days: 90
           if-no-files-found: warn
