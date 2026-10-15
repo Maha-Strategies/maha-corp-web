@@ -21,7 +21,7 @@ jobs:
     env:
       MODULAR204_RECOVERY_CONFIRMATION: ${{ inputs.confirmation }}
       MODULAR204_ORIGINAL_RUN: '38697859110'
-      MODULAR204_ORIGINAL_DIRECTORY: ${{ runner.temp }}/modular204-original
+      MODULAR204_ORIGINAL_DIRECTORY: ${{ github.workspace }}/.modular204-original
       MODULAR204_OUTPUT_PATH: ${{ github.workspace }}/modular204-continuation-evidence.json
     steps:
       - uses: actions/checkout@v7

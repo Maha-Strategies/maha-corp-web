@@ -92,6 +92,7 @@ test('workflow pins the original artifact and temporary branch; original request
   assert.match(workflow, /refs\/heads\/codex\/modular204-recovery-20261015/)
   assert.match(workflow, /artifact-ids: '11954678693'/); assert.match(workflow, /run-id: '38697859110'/)
   assert.match(workflow, /github.run_attempt == 1/); assert.match(workflow, /environment: production-x402-canary/)
+  assert.doesNotMatch(workflow.split('    steps:')[0], /\$\{\{ runner\./)
   assert.doesNotMatch(workflow, /schedule:|pull_request:|push:|vercel deploy|modular296/)
   assert.equal((source.match(/submitModularPurchase\(contract, fresh/g) ?? []).length, 1)
   assert.match(source, /retryCount: 0/)
