@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.api-v1-batch17.json",
+  "include": ["lib/api-v1/**/*.ts", "lib/x402/modular-buyer.ts", "test/api-v1*.test.ts", "scripts/lib/api-v1-local-only-environment.ts", "scripts/serve-api-v1-local.ts", "scripts/*batch18*.ts", "scripts/freeze-api-v1-contracts.ts"],
+  "exclude": ["node_modules"],
+  "files": []
+}

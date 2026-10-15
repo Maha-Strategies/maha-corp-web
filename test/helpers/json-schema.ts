@@ -19,6 +19,7 @@ const SUPPORTED = new Set([
   'maximum', 'pattern', 'description', 'default', 'title',
   'oneOf', 'anyOf', 'allOf',
   '$schema',
+  'uniqueItems', 'propertyNames', 'minProperties', 'maxProperties',
 ])
 
 type Schema = Record<string, unknown> | boolean
@@ -100,6 +101,7 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   if (Array.isArray(value)) {
     if (typeof schema.minItems === 'number' && value.length < schema.minItems) problems.push(`${path}: fewer than minItems ${schema.minItems}`)
     if (typeof schema.maxItems === 'number' && value.length > schema.maxItems) problems.push(`${path}: more than maxItems ${schema.maxItems}`)
+    if (schema.uniqueItems === true && new Set(value.map(stableJson)).size !== value.length) problems.push(`${path}: duplicate uniqueItems`)
     if (schema.items && typeof schema.items === 'object') {
       value.forEach((item, index) => problems.push(...validate(item, schema.items as Schema, `${path}[${index}]`)))
     }
@@ -108,6 +110,10 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
     const record = value as Record<string, unknown>
     const properties = (schema.properties ?? {}) as Record<string, Schema>
+    const keys = Object.keys(record)
+    if (typeof schema.minProperties === 'number' && keys.length < schema.minProperties) problems.push(`${path}: fewer than minProperties`)
+    if (typeof schema.maxProperties === 'number' && keys.length > schema.maxProperties) problems.push(`${path}: more than maxProperties`)
+    if (isSchema(schema.propertyNames)) for (const key of keys) problems.push(...validate(key, schema.propertyNames, `${path}:propertyName`))
 
     for (const key of (schema.required as string[] | undefined) ?? []) {
       if (!(key in record)) problems.push(`${path}: missing required property "${key}"`)
@@ -139,4 +145,9 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
 
 function isSchema(value: unknown): value is Schema {
   return typeof value === 'boolean' || (value !== null && typeof value === 'object' && !Array.isArray(value))
+}
+function stableJson(value: unknown): string {
+  if (Array.isArray(value)) return '[' + value.map(stableJson).join(',') + ']'
+  if (value !== null && typeof value === 'object') return '{' + Object.keys(value).sort().map(k => JSON.stringify(k) + ':' + stableJson((value as Record<string, unknown>)[k])).join(',') + '}'
+  return JSON.stringify(value)
 }

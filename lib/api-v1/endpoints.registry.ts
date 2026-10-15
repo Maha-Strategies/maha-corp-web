@@ -18,6 +18,19 @@ import { FIFTH_BATCH_AUDITS, batch5Audit } from './batch5-audits.ts'
 import { SIXTH_BATCH_AUDITS, batch6Audit } from './batch6-audits.ts'
 import { SEVENTH_BATCH_AUDITS, batch7Audit } from './batch7-audits.ts'
 import { EIGHTH_BATCH_AUDITS, batch8Audit } from './batch8-audits.ts'
+import { NINTH_BATCH_AUDITS, batch9Audit } from './batch9-audits.ts'
+import { TENTH_BATCH_AUDITS, batch10Audit } from './batch10-audits.ts'
+import { ELEVENTH_BATCH_AUDITS, batch11Audit } from './batch11-audits.ts'
+import { TWELFTH_BATCH_AUDITS, batch12Audit } from './batch12-audits.ts'
+import { THIRTEENTH_BATCH_AUDITS, batch13Audit } from './batch13-audits.ts'
+import { FOURTEENTH_BATCH_AUDITS, batch14Audit } from './batch14-audits.ts'
+import { FIFTEENTH_BATCH_AUDITS, batch15Audit } from './batch15-audits.ts'
+import { SIXTEENTH_BATCH_AUDITS, batch16Audit } from './batch16-audits.ts'
+import { SEVENTEENTH_BATCH_AUDITS, batch17Audit } from './batch17-audits.ts'
+import { EIGHTEENTH_BATCH_AUDITS, batch18Audit } from './batch18-audits.ts'
+import { NINETEENTH_BATCH_AUDITS, batch19Audit } from './batch19-audits.ts'
+import { TWENTIETH_BATCH_AUDITS, batch20Audit } from './batch20-audits.ts'
+import { BATCH20_PORTS, batch20PortSchemas, batch20PortSpec } from './batch20-ports.ts'
 
 // Premium and obsolete whole-book tests are NOT counted toward 1,000 microservices.
 // Their production routes, prices and historical attribution are unchanged here.
@@ -169,6 +182,118 @@ for (const spec of EIGHTH_BATCH_AUDITS) {
   e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
   const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
 }
+// Promote batch 9 locally; no hosted database or upstream API dependencies.
+for (const spec of NINTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch9_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Offline typed nonpersonal metadata only. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 10 remains CPU-only and local; no live scientific or vendor API calls.
+for (const spec of TENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch10_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 11 remains a bounded offline metadata cohort with no vendor services.
+for (const spec of ELEVENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch11_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 12 remains bounded, deterministic and local; no hosted services.
+for (const spec of TWELFTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch12_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 13 is bounded local material-data analysis, not a hosted integration.
+for (const spec of THIRTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch13_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 14 remains bounded local metadata/arithmetic, with no vendor services.
+for (const spec of FOURTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch14_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 15 is bounded local observation metadata/arithmetic only.
+for (const spec of FIFTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch15_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+// Batch 16 validates supplied celestial records locally, never live navigation data.
+for (const spec of SIXTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch16_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+for (const spec of SEVENTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch17_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+for (const spec of EIGHTEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch18_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+for (const spec of NINETEENTH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch19_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+for (const spec of TWENTIETH_BATCH_AUDITS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'proposal') throw Error('batch20_draft_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id; e.sourceReview = 'not-applicable'
+  e.description = spec.description + ' Input limit: 32 KiB. Result retention: 24 hours; minimal receipt metadata: 90 days.'
+  e.tags = [...new Set([...e.tags.filter(t => t !== 'planned-recipe'), 'typed-metadata', 'offline-audit', 'source-frame-check'])]
+  const schemas = auditSchemas(spec, e.amount); e.schema = { input: schemas.input, output: wrapped(schemas.output) }
+}
+for (const spec of BATCH20_PORTS) {
+  const e = entries.find(e => e.id === spec.id)
+  if (!e || e.status !== 'legacy-unported') throw Error('batch20_legacy_missing_or_recounted:' + spec.id)
+  e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id
+  e.sourceReview = ['live-x402-payment-preflight', 'live-citation-recheck', 'source-bound-research-microbrief'].includes(e.id) ? 'pending' : 'not-applicable'
+  e.description = spec.description + ' Public/synthetic nonpersonal input only; 32 KiB input, 65 KB output. Result retention: 24 hours; minimal receipt metadata: 90 days. Local validation only; deployment and model spending on hold.'
+  e.schema = { input: {}, output: {} } // Actual price-bound schemas rebuilt below.
+}
 // Reprice the LOCAL modular namespace only. The live offer registry and
 // legacy.amount are never mutated. Rebuild price-bound adapter schemas too.
 const allocated = new Set<string>(X402_OFFERS.flatMap(e => [e.amount, ...(e.supersededAmounts ?? [])]))
@@ -194,6 +319,31 @@ for (const e of entries) {
   if (seventh) e.schema.output = wrapped(auditSchemas(seventh, e.amount).output)
   const eighth = batch8Audit(e.id)
   if (eighth) e.schema.output = wrapped(auditSchemas(eighth, e.amount).output)
+  const ninth = batch9Audit(e.id)
+  if (ninth) e.schema.output = wrapped(auditSchemas(ninth, e.amount).output)
+  const tenth = batch10Audit(e.id)
+  if (tenth) e.schema.output = wrapped(auditSchemas(tenth, e.amount).output)
+  const eleventh = batch11Audit(e.id)
+  if (eleventh) e.schema.output = wrapped(auditSchemas(eleventh, e.amount).output)
+  const twelfth = batch12Audit(e.id)
+  if (twelfth) e.schema.output = wrapped(auditSchemas(twelfth, e.amount).output)
+  const thirteenth = batch13Audit(e.id)
+  if (thirteenth) e.schema.output = wrapped(auditSchemas(thirteenth, e.amount).output)
+  const fourteenth = batch14Audit(e.id)
+  if (fourteenth) e.schema.output = wrapped(auditSchemas(fourteenth, e.amount).output)
+  const fifteenth = batch15Audit(e.id)
+  if (fifteenth) e.schema.output = wrapped(auditSchemas(fifteenth, e.amount).output)
+  const sixteenth = batch16Audit(e.id)
+  if (sixteenth) e.schema.output = wrapped(auditSchemas(sixteenth, e.amount).output)
+  const seventeenth = batch17Audit(e.id)
+  if (seventeenth) e.schema.output = wrapped(auditSchemas(seventeenth, e.amount).output)
+  const eighteenth = batch18Audit(e.id)
+  if (eighteenth) e.schema.output = wrapped(auditSchemas(eighteenth, e.amount).output)
+  const nineteenth = batch19Audit(e.id)
+  if (nineteenth) e.schema.output = wrapped(auditSchemas(nineteenth, e.amount).output)
+  const twentieth = batch20Audit(e.id)
+  if (twentieth) e.schema.output = wrapped(auditSchemas(twentieth, e.amount).output)
+  if (batch20PortSpec(e.id)) { const schema = batch20PortSchemas(e.id, e.amount); e.schema = { input: schema.input, output: wrapped(schema.output) } }
   if (BOOK_PACK_IDS.some(id => id === e.id)) e.schema.output = z.toJSONSchema(executionEnvelope(bookPackHandler(e.id as BookPackId, e.amount).output))
 }
 assertRegistry(entries)

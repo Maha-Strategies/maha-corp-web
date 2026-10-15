@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true, "incremental": false },
+  "include": ["lib/api-v1/**/*.ts", "lib/x402/modular-buyer.ts", "test/api-v1*.test.ts", "scripts/lib/api-v1-local-only-environment.ts", "scripts/serve-api-v1-local.ts", "scripts/*batch9*.ts"],
+  "exclude": ["node_modules"],
+  "files": []
+}

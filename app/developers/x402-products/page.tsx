@@ -46,7 +46,7 @@ export default async function X402ProductsPage() {
     </header>
     <nav aria-label="Product categories" className="my-8 flex flex-wrap gap-3"><a className="evidence-link" href="#modular">Modular services ({PRODUCTION_ENDPOINTS.length})</a>{categories.filter(c => c.offers.length).map(c => <a key={c.id} href={`#${c.id}`} className="evidence-link">{c.title} ({c.offers.length})</a>)}</nav>
     <section id="modular" className="evidence-section scroll-mt-8">
-      <h2 className="evidence-section-title">296 released modular services</h2>
+      <h2 className="evidence-section-title">{PRODUCTION_ENDPOINTS.length} released modular services</h2>
       <p className="evidence-copy mt-3">Base USDC; exact input-bound buyer/recovery adapter required. These new modular URLs include some adaptations of existing algorithms. Publisher-funded indexing is operator activity, not customer revenue. Costs and margins remain unmeasured; no external model spending is enabled.</p>
       <p className="evidence-copy mt-3">Result content: 24 hours. Minimal purchase metadata: 90 days from creation; recovery does not extend deadlines. Non-identifying Redis response aggregates expire after 90 days of inactivity. Counters reflect validated server responses, not proof the buyer received or benefited from them. No Supabase writes are added by these services.</p>
       <Link className="evidence-link mt-3 inline-block" href="/api/v1/discovery/search">Free two-stage discovery ↗</Link>
