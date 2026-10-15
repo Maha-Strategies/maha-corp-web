@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   investigate:
-    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/modular201-recovery-20261015' && inputs.confirmation == 'RETRY_ONCE_AFTER_UNUSED_EXPIRED_MAX_38339'
+    if: github.run_attempt == 1 && github.run_number == 3 && github.ref == 'refs/heads/codex/modular201-recovery-20261015' && inputs.confirmation == 'RETRY_ONCE_AFTER_UNUSED_EXPIRED_MAX_38339'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: production-x402-canary
@@ -31,6 +31,8 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.17.0
       - run: npm ci
+      - name: Test one-time reserve and retained-only recovery safeguards
+        run: node --experimental-strip-types --test test/modular201-controlled-retry.test.ts test/modular201-investigation.test.ts test/modular201-indexing.test.ts
       - name: Download exact original encrypted artifact
         uses: actions/download-artifact@v7
         with:

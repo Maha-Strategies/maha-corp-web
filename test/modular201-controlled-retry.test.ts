@@ -16,5 +16,7 @@ test('controlled purchase has one preparation and one submission, preserves orig
   assert.match(source, /original_now_used_do_not_repay/); assert.match(source, /nonce === prior.nonce/)
   assert.match(source, /\.controlled-retry\.json/); assert.match(source, /maximumAmount: 38339n/)
   assert.match(source, /createCipheriv\('aes-256-gcm'/); assert.match(source, /automaticRepayment: false/)
+  assert.match(source, /GITHUB_RUN_NUMBER !== '3'/); assert.match(source, /recoverBatch201RetainedOnly\(contract, saved/)
+  assert.match(readFileSync('.github/workflows/modular201-indexing.yml', 'utf8'), /github.run_number == 3/)
   assert.doesNotMatch(source, /store\.put|\.settle\(|while\s*\(|for\s*\(/)
 })

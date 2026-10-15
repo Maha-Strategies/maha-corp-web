@@ -106,7 +106,7 @@ test('retained-only reads are bounded and never request a replacement signature 
     calls++; assert.equal(options?.recovery, 'retained-result')
     return { settlement: 'unknown', delivery: 'unresolved', automaticRepayment: false, status: 409, errorCode: 'settlement_confirmation_pending_do_not_repay', data: null, transaction: null }
   }, delay: async () => {} }), /unresolved_stop_without_repayment/)
-  assert.equal(calls, 3)
+  assert.equal(calls, 10)
 })
 test('manual protected workflow has a single original submission site, no schedule and encrypted outbox before submitting', () => {
   const workflow = readFileSync('.github/workflows/modular201-indexing.yml', 'utf8'), source = readFileSync('scripts/run-modular201-indexing.ts', 'utf8')

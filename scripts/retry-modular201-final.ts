@@ -6,7 +6,7 @@ import { prepareModularPurchase, submitModularPurchase, validateModularCapsule }
 import { modularPaymentNonce } from '../lib/x402/input-bound-payment.ts'
 import { demandDigest } from '../lib/x402/demand6/digest.ts'
 import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
-import { writePrivateEvidenceAtomically } from './run-modular201-indexing.ts'
+import { recoverBatch201RetainedOnly, writePrivateEvidenceAtomically } from './run-modular201-indexing.ts'
 
 export const RETRY_CONFIRMATION = 'RETRY_ONCE_AFTER_UNUSED_EXPIRED_MAX_38339'
 export function assertControlledRetry(evidence: Record<string, unknown>, confirmation: string | undefined, balance: bigint) {
@@ -14,7 +14,7 @@ export function assertControlledRetry(evidence: Record<string, unknown>, confirm
     || evidence.id !== RECOVERY_ID || evidence.newPaymentBaseUnits !== '0' || balance < 38339n) throw Error('controlled_retry_requires_expired_unused_proof_and_cap')
 }
 export async function retryFinalOnce() {
-  if (process.env.MODULAR201_CONTROLLED_RETRY_CONFIRMATION !== RETRY_CONFIRMATION) throw Error('explicit_retry_approval_required')
+  if (process.env.MODULAR201_CONTROLLED_RETRY_CONFIRMATION !== RETRY_CONFIRMATION || process.env.GITHUB_RUN_NUMBER !== '3') throw Error('explicit_single_third_run_retry_approval_required')
   const original = await investigateModular201(), { capsule, contract, account, client, asset, abi } = original
   const balance = await client.readContract({ address: asset, abi, functionName: 'balanceOf', args: [account.address] })
   assertControlledRetry(original.evidence, process.env.MODULAR201_CONTROLLED_RETRY_CONFIRMATION, balance)
@@ -38,9 +38,17 @@ export async function retryFinalOnce() {
         iv: iv.toString('hex'), ciphertext: bytes.toString('base64'), tag: cipher.getAuthTag().toString('hex') }] })
       evidence.authorizedBaseUnits = '38339'; evidence.state = 'controlled_authorization_outcome_unknown'; await writePrivateEvidenceAtomically(path, evidence)
     } })
-  const result = await submitModularPurchase(contract, saved)
+  let result = await submitModularPurchase(contract, saved)
   Object.assign(evidence, { status: 'status' in result ? result.status : null, errorCode: 'errorCode' in result ? result.errorCode : null })
   await writePrivateEvidenceAtomically(path, evidence)
+  if (result.delivery !== 'validated_response') {
+    const pending = 'errorCode' in result && ['settlement_confirmation_pending_do_not_repay', 'settlement_unknown_do_not_repay', 'retained_evidence_invalid_or_unavailable_do_not_repay'].includes(String(result.errorCode))
+    if (!pending) throw Error('controlled_retry_unresolved_stop_without_repayment')
+    // Read only the retained response; never repeat the settlement-capable submission.
+    result = await recoverBatch201RetainedOnly(contract, saved, { observe: async value => {
+      Object.assign(evidence, { status: value.status ?? null, errorCode: value.errorCode ?? null }); await writePrivateEvidenceAtomically(path, evidence)
+    } })
+  }
   if (result.delivery !== 'validated_response' || result.settlement !== 'provider_reported' || !result.transaction) throw Error('controlled_retry_unresolved_stop_without_repayment')
   const { authorization } = await validateModularCapsule(contract, saved)
   const receipt = await client.waitForTransactionReceipt({ hash: result.transaction as `0x${string}`, timeout: 30000, pollingInterval: 2000 })
