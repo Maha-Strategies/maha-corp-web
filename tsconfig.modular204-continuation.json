@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true, "incremental": false },
+  "include": ["scripts/run-modular204-continuation.ts", "test/modular204-continuation.test.ts"],
+  "exclude": ["node_modules"],
+  "files": []
+}
