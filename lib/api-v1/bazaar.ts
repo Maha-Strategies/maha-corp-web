@@ -1,8 +1,10 @@
 import { bazaarResourceServerExtension, declareDiscoveryExtension, validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
 import { compactExample, compactSchema } from '../x402/declaration-compaction.ts'
 import { releaseExample } from './production-release.ts'
+import { handlerFor } from './handlers.ts'
 import type { Endpoint } from './types.ts'
 const cache = new Map<string, Record<string, unknown>>()
+const SINGLE_EPOCH_EXAMPLES = new Set(['orbital-records-timestamp-order-audit', 'ephemeris-snapshots-timestamp-order-audit', 'planetary-measurements-timestamp-order-audit'])
 export function modularDescription(e: Endpoint) {
   if (Buffer.byteLength(e.description) <= 480) return e.description
   const sentence = e.description.split(/(?<=\.)\s+/)[0]
@@ -14,7 +16,15 @@ export function modularBazaar(e: Endpoint): Record<string, unknown> {
   if (!t) return {}
   const cached = cache.get(e.id); if (cached) return cached
   const output = { success: true, data: t.output, proof: { settlement_id: '0x' + '0'.repeat(64) } }
-  const declared = declareDiscoveryExtension({ bodyType: 'json', input: t.input as Record<string, unknown>,
+  let input = t.input as Record<string, unknown>
+  // These new source-frame examples repeat many required pins. A single epoch
+  // is a valid callable input; the paid indexing request still uses the full
+  // two-epoch fixture. Never truncate strings, hashes or required fields.
+  if (SINGLE_EPOCH_EXAMPLES.has(e.id) && Array.isArray(input.rows) && input.rows.length > 1) {
+    input = { ...input, rows: input.rows.slice(0, 1) }
+    handlerFor(e.id, e.amount)!.input.parse(input)
+  }
+  const declared = declareDiscoveryExtension({ bodyType: 'json', input,
     inputSchema: compactSchema(e.schema.input), output: { example: compactExample(output, 0, e.schema.output), schema: compactSchema(e.schema.output) } })
   const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
     method: e.method, path: e.path, adapter: { getPath: () => e.path },
