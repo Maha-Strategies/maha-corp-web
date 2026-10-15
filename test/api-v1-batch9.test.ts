@@ -77,7 +77,7 @@ test('batch9 is the next 50 unimplemented metadata recipes, excluding previously
     const result = searchEndpoints({ q: e.id, domain: e.domain, limit: 10 }, { local: true })
     assert.ok(result.matches.some(m => m.id === e.id && !m.paymentEnabled))
   }
-  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 625)
+  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 826)
 })
 for (const spec of NINTH_BATCH_AUDITS) {
   const e = NINTH_BATCH.find(e => e.id === spec.id)!
