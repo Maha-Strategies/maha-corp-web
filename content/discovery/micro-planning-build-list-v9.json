@@ -1,0 +1,416 @@
+{
+  "version": "micro-planning-build-list/9",
+  "supersedes": "micro-planning-build-list-v8.json",
+  "revisionReason": "Rebind the unchanged ten-product prices and workloads after the owner-approved compiler repricing changed shared catalogue declarations. Preserve v1-v8 as immutable history. This local measurement does not claim science profiling, production deployment or indexing.",
+  "observedAt": "2026-10-15T15:49:26.644Z",
+  "basis": "local process; one example and 31 capped-fixture repetitions per product, not an exhaustive worst-case proof, cloud billing, cloud costs or demand evidence. Wall-clock timings are sensitive to uncontrolled host load and scheduling; no causal attribution to contention or guaranteed latency.",
+  "nodeVersion": "v26.5.0",
+  "buildList": [
+    {
+      "position": 1,
+      "id": "inspection-tolerance-check",
+      "path": "/api/v1/micro/inspection-tolerance-check",
+      "method": "POST",
+      "amountBaseUnits": "29000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "5800",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 2,
+      "id": "inspection-coverage-plan",
+      "path": "/api/v1/micro/inspection-coverage-plan",
+      "method": "POST",
+      "amountBaseUnits": "119000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "23800",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 3,
+      "id": "panel-packing-estimate",
+      "path": "/api/v1/micro/panel-packing-estimate",
+      "method": "POST",
+      "amountBaseUnits": "59000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "11800",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 4,
+      "id": "assembly-schedule-compare",
+      "path": "/api/v1/micro/assembly-schedule-compare",
+      "method": "POST",
+      "amountBaseUnits": "150000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "30000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 5,
+      "id": "automation-economics-compare",
+      "path": "/api/v1/micro/automation-economics-compare",
+      "method": "POST",
+      "amountBaseUnits": "90000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "18000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 6,
+      "id": "public-spending-review",
+      "path": "/api/v1/micro/public-spending-review",
+      "method": "POST",
+      "amountBaseUnits": "180000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "36000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 7,
+      "id": "campaign-record-reconcile",
+      "path": "/api/v1/micro/campaign-record-reconcile",
+      "method": "POST",
+      "amountBaseUnits": "80000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "16000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "commercial data-use and privacy review; public/synthetic non-personal metadata only"
+    },
+    {
+      "position": 8,
+      "id": "committee-finance-snapshot",
+      "path": "/api/v1/micro/committee-finance-snapshot",
+      "method": "POST",
+      "amountBaseUnits": "70000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "14000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "commercial data-use and privacy review; public/synthetic non-personal metadata only"
+    },
+    {
+      "position": 9,
+      "id": "area-program-check",
+      "path": "/api/v1/micro/area-program-check",
+      "method": "POST",
+      "amountBaseUnits": "39000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "7800",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    },
+    {
+      "position": 10,
+      "id": "neural-experiment-metrics",
+      "path": "/api/v1/micro/neural-experiment-metrics",
+      "method": "POST",
+      "amountBaseUnits": "160000",
+      "currency": "USDC",
+      "priceStatus": "approved-fixed-batch",
+      "status": "release-approved-pending-deployment",
+      "payableInProduction": true,
+      "maximumAllInCostFor80PercentMarginBaseUnits": "32000",
+      "observedDemand": null,
+      "cloudCostUsd": null,
+      "extraGate": "product boundary review"
+    }
+  ],
+  "observations": [
+    {
+      "id": "inspection-tolerance-check",
+      "calls": 32,
+      "coldExampleMs": 2.615875000000017,
+      "cappedFixtureP95Ms": 6.010083000000009,
+      "cappedFixtureMaxMs": 6.304291000000035,
+      "cpuMicros": 163173,
+      "requestBytes": 7632,
+      "responseBytes": 17589,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "inspection-coverage-plan",
+      "calls": 32,
+      "coldExampleMs": 0.5738749999999868,
+      "cappedFixtureP95Ms": 7.145832999999982,
+      "cappedFixtureMaxMs": 9.683958000000018,
+      "cpuMicros": 222389,
+      "requestBytes": 5730,
+      "responseBytes": 21096,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "panel-packing-estimate",
+      "calls": 32,
+      "coldExampleMs": 0.44658400000002985,
+      "cappedFixtureP95Ms": 0.9829580000000533,
+      "cappedFixtureMaxMs": 1.4767920000000458,
+      "cpuMicros": 21038,
+      "requestBytes": 2889,
+      "responseBytes": 6461,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "assembly-schedule-compare",
+      "calls": 32,
+      "coldExampleMs": 0.16216700000006767,
+      "cappedFixtureP95Ms": 1.0645829999999705,
+      "cappedFixtureMaxMs": 1.4167919999999867,
+      "cpuMicros": 24078,
+      "requestBytes": 1389,
+      "responseBytes": 3603,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "automation-economics-compare",
+      "calls": 32,
+      "coldExampleMs": 0.45820900000001075,
+      "cappedFixtureP95Ms": 0.8452500000000782,
+      "cappedFixtureMaxMs": 0.9603329999999914,
+      "cpuMicros": 22621,
+      "requestBytes": 3046,
+      "responseBytes": 7222,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "public-spending-review",
+      "calls": 32,
+      "coldExampleMs": 0.5043749999999818,
+      "cappedFixtureP95Ms": 4.686749999999961,
+      "cappedFixtureMaxMs": 4.687875000000076,
+      "cpuMicros": 120561,
+      "requestBytes": 12229,
+      "responseBytes": 35422,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "campaign-record-reconcile",
+      "calls": 32,
+      "coldExampleMs": 0.3130419999999958,
+      "cappedFixtureP95Ms": 2.139083000000028,
+      "cappedFixtureMaxMs": 2.6439169999999876,
+      "cpuMicros": 45896,
+      "requestBytes": 7085,
+      "responseBytes": 14080,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "committee-finance-snapshot",
+      "calls": 32,
+      "coldExampleMs": 1.7220829999999978,
+      "cappedFixtureP95Ms": 1.0118750000000318,
+      "cappedFixtureMaxMs": 1.03550000000007,
+      "cpuMicros": 23353,
+      "requestBytes": 5357,
+      "responseBytes": 6745,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "area-program-check",
+      "calls": 32,
+      "coldExampleMs": 0.26116700000000037,
+      "cappedFixtureP95Ms": 2.414541999999983,
+      "cappedFixtureMaxMs": 2.8919159999999238,
+      "cpuMicros": 43912,
+      "requestBytes": 5082,
+      "responseBytes": 16496,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    },
+    {
+      "id": "neural-experiment-metrics",
+      "calls": 32,
+      "coldExampleMs": 0.41050000000007003,
+      "cappedFixtureP95Ms": 2.589166999999975,
+      "cappedFixtureMaxMs": 2.6621249999999463,
+      "cpuMicros": 45949,
+      "requestBytes": 10783,
+      "responseBytes": 8889,
+      "providerCalls": 0,
+      "cloudCostUsd": null
+    }
+  ],
+  "implementationFiles": [
+    "lib/x402/micro-planning-contracts.ts",
+    "lib/x402/micro-planning-products.ts",
+    "lib/x402/micro-planning-samples.ts",
+    "lib/x402/micro-contracts.ts",
+    "lib/x402/micro-products.ts",
+    "lib/x402/micro-output-schemas.ts",
+    "lib/x402/micro-schema.ts",
+    "lib/x402/micro-offers.ts",
+    "lib/x402/micro-route.ts",
+    "lib/x402/micro-release.ts",
+    "scripts/planning-ten-workloads.ts",
+    "scripts/profile-planning-ten.ts",
+    "lib/x402/micro-price-policy.ts",
+    "lib/x402/offers.ts",
+    "lib/x402/compiler-current-price.ts",
+    "lib/x402/operator-settlement-receipts.ts",
+    "lib/x402/expansion-registry.ts",
+    "lib/x402/expansion-evidence.ts",
+    "lib/x402/expansion-commerce.ts",
+    "lib/x402/expansion-physical-neural.ts",
+    "lib/x402/expansion-research-content.ts",
+    "lib/x402/expansion-book-pack.ts"
+  ],
+  "implementationFileDigests": [
+    {
+      "path": "lib/x402/micro-planning-contracts.ts",
+      "digest": "sha256:16371edc5e1e81da1ee5533ed5e5f7a124fa5020e2f3d209c1738d0f3f702389"
+    },
+    {
+      "path": "lib/x402/micro-planning-products.ts",
+      "digest": "sha256:370f0290dbcf817a5cd43206b54eb3681f010a0685fe6e0097c11611431a66f4"
+    },
+    {
+      "path": "lib/x402/micro-planning-samples.ts",
+      "digest": "sha256:4ba172bc3f1295047ab41409a66ccf155750c456545c2c0f084c017538799a3d"
+    },
+    {
+      "path": "lib/x402/micro-contracts.ts",
+      "digest": "sha256:f9c7f93849bd378899c1ac025dc4522aac7ebf24990df3b8a06b200efae248dc"
+    },
+    {
+      "path": "lib/x402/micro-products.ts",
+      "digest": "sha256:df71d927c0196686a0d5fef78eb7186ce0384e4fdc00d2e4e17792a37c7c9ab9"
+    },
+    {
+      "path": "lib/x402/micro-output-schemas.ts",
+      "digest": "sha256:2502b7411aadc83b251a51716a44d120721e615a155525313a83baaa36c7bbab"
+    },
+    {
+      "path": "lib/x402/micro-schema.ts",
+      "digest": "sha256:3e9e966138e688060bc7f9ecae36989c76a3a34591f2f676519e5fc8e6aeb5ce"
+    },
+    {
+      "path": "lib/x402/micro-offers.ts",
+      "digest": "sha256:4eac1d47d52b324378c9c5bd33753835448daef8ca92e4854565a33a91043baf"
+    },
+    {
+      "path": "lib/x402/micro-route.ts",
+      "digest": "sha256:33230c0827863dd2f834e3d7788ba59ee23d34822ac73209ac6cfb81725a2db9"
+    },
+    {
+      "path": "lib/x402/micro-release.ts",
+      "digest": "sha256:a3677b1e8b40f2505809f9797a6f66ee3cb8464df34d86234176fc5548b858cd"
+    },
+    {
+      "path": "scripts/planning-ten-workloads.ts",
+      "digest": "sha256:b836b4b9541d57bea30409477000bb483b991ee1b2b95cff91f3ebcba6befd80"
+    },
+    {
+      "path": "scripts/profile-planning-ten.ts",
+      "digest": "sha256:86c2d43d1df6407dd9894fc5d380dede5572fb34afe2bbc3b8a86dca7c566697"
+    },
+    {
+      "path": "lib/x402/micro-price-policy.ts",
+      "digest": "sha256:f77c82962ebd15e5986527412ebe15805a76823bd156787adbf51cf8c4ce194e"
+    },
+    {
+      "path": "lib/x402/offers.ts",
+      "digest": "sha256:70bede6babe012621566e5062e9a95272a1c0119f19990fb08e68f56b367b7c4"
+    },
+    {
+      "path": "lib/x402/compiler-current-price.ts",
+      "digest": "sha256:7b85ae6b295d361958c11b61517a0d6498a5c639c3080c8b2822fa783f85f271"
+    },
+    {
+      "path": "lib/x402/operator-settlement-receipts.ts",
+      "digest": "sha256:8e714cf68b8486690cf845e0a9def8c079ec6bf56b5a15b294e04977bd1b9ad1"
+    },
+    {
+      "path": "lib/x402/expansion-registry.ts",
+      "digest": "sha256:62a94101129b96584d51abbf4af6bce233670b8bbe0124a721611a526e2509d6"
+    },
+    {
+      "path": "lib/x402/expansion-evidence.ts",
+      "digest": "sha256:e0a89aef9b56f87717433b29b213a0f4a0a049573220f74e34136f11c87ffc1a"
+    },
+    {
+      "path": "lib/x402/expansion-commerce.ts",
+      "digest": "sha256:a8c59e72a026bd2ec67bb9b683bf60094b8ddbc71833252207a2247e9f4933ba"
+    },
+    {
+      "path": "lib/x402/expansion-physical-neural.ts",
+      "digest": "sha256:b1bd0450dc07114d51ae653a1233acc15edbd335112e9d00a3aaec8a5d6c0149"
+    },
+    {
+      "path": "lib/x402/expansion-research-content.ts",
+      "digest": "sha256:042a145b1071bc6c159548dd8569c5b721ca94cb265302d171c86cd49da935d5"
+    },
+    {
+      "path": "lib/x402/expansion-book-pack.ts",
+      "digest": "sha256:34248811c5680dd3dcfe561fdfdbc96825cd013a08fb654f9d0d46d6e98d76e6"
+    }
+  ],
+  "implementationDigest": "sha256:1f6b5adf5c918568a9feadc52a1735f79f8cbbf94c48a3d57a60aa2a204cd354",
+  "workloadsDigest": "sha256:7f3d88bcc4575baf46e7f44bf9d87cf72414c1674a44a55b232ce5ea57eec7bc",
+  "remoteCalls": 0,
+  "deploymentBuilds": 0,
+  "paymentAttempts": 0,
+  "indexingPurchases": 0,
+  "cloudBillingMeasured": false,
+  "exhaustiveWorstCaseProof": false,
+  "deploymentHeld": true,
+  "releaseGates": [
+    "Restore settlement backfill and freshness monitoring.",
+    "Review all intended local publication changes and passing release checks.",
+    "Approve final prices and exact release cohort.",
+    "Resolve campaign-data commercial-use and privacy review.",
+    "Explicitly approve a combined Vercel build; no automatic Git-triggered deployment.",
+    "Configure only the approved cohort and verify unpaid challenges before paid calls.",
+    "Explicitly approve a bounded publisher-funded indexing budget; record it as operator activity, not organic demand.",
+    "Confirm confirmed settlement, delivered receipt, public discovery and ongoing freshness."
+  ],
+  "digest": "sha256:92e1f446d01e4d8e34e4cafaf295d0f0c0b920924fbcb539309f87fa4ec1a24f"
+}

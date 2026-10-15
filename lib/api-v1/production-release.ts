@@ -4,6 +4,7 @@ import additions from '../../content/api-v1/production-additions-204.json' with 
 import nextAdditions from '../../content/api-v1/production-additions-125.json' with { type: 'json' }
 import batch201 from '../../content/api-v1/production-additions-201.json' with { type: 'json' }
 import batch132 from '../../content/api-v1/production-additions-132.json' with { type: 'json' }
+import final42 from '../../content/api-v1/production-additions-42.json' with { type: 'json' }
 import { ENDPOINTS } from './endpoints.registry.ts'
 import { assertEndpoint, type Endpoint } from './types.ts'
 import { demandDigest } from '../x402/demand6/digest.ts'
@@ -12,6 +13,7 @@ export const MODULAR_ADDITIONS = additions
 export const MODULAR_NEXT_ADDITIONS = nextAdditions
 export const MODULAR_201_ADDITIONS = batch201
 export const MODULAR_132_ADDITIONS = batch132
+export const MODULAR_42_ADDITIONS = final42
 const targets = new Map(release.targets.map(t => [t.id, { ...t, input: JSON.parse(t.inputJson) as unknown, output: JSON.parse(t.outputJson) as unknown }]))
 if (targets.size !== 296 || release.maximumBaseUnits !== '6098840' || release.targets.reduce((n, t) => n + BigInt(t.amount), 0n) !== 6098840n) throw Error('invalid_production_release')
 export const ORIGINAL_PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze(ENDPOINTS.filter(e => targets.has(e.id)).map(e => {
@@ -73,9 +75,25 @@ export const BATCH132_PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze(
     || 'sha256:' + createHash('sha256').update(JSON.stringify(e)).digest('hex') !== t.contractHash) throw Error('batch132_contract_drift:' + t.id)
   const promoted: Endpoint = { ...e, status: 'released', productionApproved: true }; assertEndpoint(promoted); return Object.freeze(promoted)
 }))
-export const PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze([...ORIGINAL_PRODUCTION_ENDPOINTS, ...PRODUCTION_ADDITION_ENDPOINTS, ...NEXT_PRODUCTION_ENDPOINTS, ...BATCH201_PRODUCTION_ENDPOINTS, ...BATCH132_PRODUCTION_ENDPOINTS])
-if (PRODUCTION_ENDPOINTS.length !== 958 || new Set(PRODUCTION_ENDPOINTS.map(e => e.id)).size !== 958) throw Error('production_958_incomplete')
+export const PREVIOUS_958_PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze([...ORIGINAL_PRODUCTION_ENDPOINTS, ...PRODUCTION_ADDITION_ENDPOINTS, ...NEXT_PRODUCTION_ENDPOINTS, ...BATCH201_PRODUCTION_ENDPOINTS, ...BATCH132_PRODUCTION_ENDPOINTS])
+if (PREVIOUS_958_PRODUCTION_ENDPOINTS.length !== 958) throw Error('production_958_incomplete')
+const final42Targets = new Map(final42.targets.map(t => [t.id, { ...t, input: JSON.parse(t.inputJson) as unknown, output: JSON.parse(t.outputJson) as unknown }]))
+if (final42Targets.size !== 42 || final42.maximumBaseUnits !== '2592940'
+  || final42.targets.reduce((n, t) => n + BigInt(t.amount), 0n) !== 2592940n || final42.targetsDigest !== demandDigest(final42.targets)
+  || final42.targets.some(t => PREVIOUS_958_PRODUCTION_ENDPOINTS.some(e => e.id === t.id))
+  || final42.operatorWallet !== release.operatorWallet || final42.payee !== release.payee || final42.network !== release.network
+  || final42.previousCount !== 958 || final42.targetReleasedCount !== 1000 || final42.customerRevenue !== false
+  || final42.organicDemand !== false || final42.automaticRepayment !== false) throw Error('invalid_approved_final42')
+export const FINAL42_PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze(final42.targets.map(t => {
+  const e = ENDPOINTS.find(e => e.id === t.id)
+  if (!e || e.path !== t.path || e.amount !== t.amount || e.method !== t.method || e.status !== 'local-implemented'
+    || e.schema_status !== 'validated-local' || e.sourceReview === 'pending' || !['local-cpu-wasm', 'external-source-read'].includes(e.execution_cost?.mode ?? '')
+    || e.execution_cost?.liveModelSpendApproved || 'sha256:' + createHash('sha256').update(JSON.stringify(e)).digest('hex') !== t.contractHash) throw Error('final42_contract_drift:' + t.id)
+  const promoted: Endpoint = { ...e, status: 'released', productionApproved: true }; assertEndpoint(promoted); return Object.freeze(promoted)
+}))
+export const PRODUCTION_ENDPOINTS: readonly Endpoint[] = Object.freeze([...PREVIOUS_958_PRODUCTION_ENDPOINTS, ...FINAL42_PRODUCTION_ENDPOINTS])
+if (PRODUCTION_ENDPOINTS.length !== 1000 || new Set(PRODUCTION_ENDPOINTS.map(e => e.id)).size !== 1000) throw Error('production_1000_incomplete')
 export const productionEndpointById = (id: string) => PRODUCTION_ENDPOINTS.find(e => e.id === id)
 export const productionEndpointByRoute = (method: string, path: string) => PRODUCTION_ENDPOINTS.find(e => e.method === method && e.path === path)
-export const releaseExample = (id: string) => targets.get(id) ?? addedTargets.get(id) ?? nextTargets.get(id) ?? batch201Targets.get(id) ?? batch132Targets.get(id)
+export const releaseExample = (id: string) => targets.get(id) ?? addedTargets.get(id) ?? nextTargets.get(id) ?? batch201Targets.get(id) ?? batch132Targets.get(id) ?? final42Targets.get(id)
 export const modularLedgerPrices = () => PRODUCTION_ENDPOINTS.map(e => ({ id: 'modular-' + e.id, title: e.name + ' (modular)', amountBaseUnits: BigInt(e.amount) }))

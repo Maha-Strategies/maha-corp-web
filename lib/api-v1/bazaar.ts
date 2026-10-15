@@ -6,7 +6,9 @@ import type { Endpoint } from './types.ts'
 const cache = new Map<string, Record<string, unknown>>()
 const SINGLE_EPOCH_EXAMPLES = new Set(['orbital-records-timestamp-order-audit', 'ephemeris-snapshots-timestamp-order-audit', 'planetary-measurements-timestamp-order-audit'])
 const BOUNDED_OUTPUT_EXAMPLES = new Set(['ephemeris-snapshots-condition-coverage-map', 'planetary-measurements-condition-coverage-map',
-  'evidence-retention-matrix', 'retrieval-recovery-regression', 'deep-context-evaluation', 'celestial-chart-evidence'])
+  'evidence-retention-matrix', 'retrieval-recovery-regression', 'deep-context-evaluation', 'celestial-chart-evidence',
+  'celestial-vimshottari-timing', 'paper-cluster-retrieval-comparison'])
+const HOSTED_OUTPUT_EXAMPLES = new Set(['publication-pinned-brief', 'publication-release-comparison'])
 export function modularServiceMetadata(e: Endpoint) {
   return { serviceName: e.name.replace(/[^\x20-\x7e]/g, '-').slice(0, 32),
     tags: [...new Set(e.tags.filter(tag => /^[\x20-\x7e]{1,32}$/.test(tag)))].slice(0, 5) }
@@ -21,8 +23,19 @@ export function modularBazaar(e: Endpoint): Record<string, unknown> {
   const t = releaseExample(e.id)
   if (!t) return {}
   const cached = cache.get(e.id); if (cached) return cached
-  const output = { success: true, data: t.output, proof: { settlement_id: '0x' + '0'.repeat(64) } }
+  let exampleOutput = t.output
   let input = t.input as Record<string, unknown>
+  if (e.id === 'publication-release-comparison') {
+    // A valid identity-comparison example avoids repeating the same large
+    // artifact in an 8-KB HTTP header. Normal buyers can send a full second
+    // artifact; the hosted contract and operator purchase retain that example.
+    input = { ...input, after: 'same-as-before' }
+    handlerFor(e.id, e.amount)!.input.parse(input)
+    const original = t.output as { before: unknown }
+    exampleOutput = { before: original.before, after: original.before, changedFields: [], addedFindingIds: [], removedFindingIds: [],
+      changedFindingIds: [], addedSourceIds: [], removedSourceIds: [], causalExplanationProvided: false }
+  }
+  const output = { success: true, data: exampleOutput, proof: { settlement_id: '0x' + '0'.repeat(64) } }
   // These new source-frame examples repeat many required pins. A single epoch
   // is a valid callable input; the paid indexing request still uses the full
   // two-epoch fixture. Never truncate strings, hashes or required fields.
@@ -34,8 +47,8 @@ export function modularBazaar(e: Endpoint): Record<string, unknown> {
   // to fit ordinary clients' 8 KB response-header limit. Inputs and full hosted
   // schemas/examples stay unchanged; only already-collapsed output detail is omitted.
   const declared = declareDiscoveryExtension({ bodyType: 'json', input,
-    inputSchema: compactSchema(e.schema.input), output: { example: compactExample(output, 0, e.schema.output,
-      BOUNDED_OUTPUT_EXAMPLES.has(e.id) ? 1 : Infinity), schema: compactSchema(e.schema.output) } })
+    inputSchema: compactSchema(e.schema.input), output: { ...(t.output === null || HOSTED_OUTPUT_EXAMPLES.has(e.id) ? {} : { example: compactExample(output, 0, e.schema.output,
+      BOUNDED_OUTPUT_EXAMPLES.has(e.id) ? 1 : Infinity) }), schema: compactSchema(e.schema.output) } })
   const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
     method: e.method, path: e.path, adapter: { getPath: () => e.path },
   } as Parameters<NonNullable<typeof bazaarResourceServerExtension.enrichDeclaration>>[1]) as Record<string, unknown>

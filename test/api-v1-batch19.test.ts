@@ -1,3 +1,4 @@
+import { assertEarlierLocalContract } from './helpers/historical-local-contract.ts'
 import assert from 'node:assert/strict'
 import { test, before, after } from 'node:test'
 import { mkdtempSync, rmSync, readFileSync } from 'node:fs'
@@ -57,7 +58,7 @@ function fixture(e: typeof NINETEENTH_BATCH[number], now: () => number) {
 }
 test('900 earlier contracts, 1000 unique prices and the production release artifact remain unchanged', () => {
   assert.equal(previous.implemented.length, 900); assert.equal(previous.prices.length, 1000)
-  for (const r of previous.implemented) { const e = ENDPOINTS.find(e => e.id === r.id)!; assert.equal(e.path, r.path); assert.equal(e.method, r.method); assert.equal(hash(e.schema.input), r.inputDigest); assert.equal(hash(e.schema.output), r.outputDigest); assert.equal(hash(e), r.contractDigest) }
+  for (const r of previous.implemented) assertEarlierLocalContract(ENDPOINTS.find(e => e.id === r.id)!, r)
   for (const r of previous.prices) { const e = ENDPOINTS.find(e => e.id === r.id)!; assert.equal(e.amount, r.amount); assert.equal(e.pricing?.tier, r.tier) }
   assert.equal(hash(JSON.parse(readFileSync('content/api-v1/production-release-296.json', 'utf8'))), previous.productionReleaseDigest)
   assert.equal(ORIGINAL_PRODUCTION_ENDPOINTS.length, 296)
@@ -77,7 +78,7 @@ test('batch19 is the next 50 unimplemented recipes, without recounting earlier c
     const result = searchEndpoints({ q: e.id, domain: e.domain, limit: 10 }, { local: true })
     assert.ok(result.matches.some(m => m.id === e.id && !m.paymentEnabled))
   }
-  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 958)
+  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, PRODUCTION_ENDPOINTS.length)
 })
 for (const spec of NINETEENTH_BATCH_AUDITS) {
   const e = NINETEENTH_BATCH.find(e => e.id === spec.id)!

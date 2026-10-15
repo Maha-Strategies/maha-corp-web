@@ -13,12 +13,13 @@ import {
   GOVERNED_CONTEXT_VERIFICATION_EXAMPLE_INPUT,
 } from '../lib/x402/context-product-offer-schemas.ts'
 
-test('the $0.005 ladder performs exactly five deterministic compilations', () => {
+test('the $0.012 ladder performs exactly five deterministic compilations at the current component price', () => {
   const first = buildContextBudgetLadder(CONTEXT_BUDGET_LADDER_EXAMPLE_INPUT)
   const second = buildContextBudgetLadder(CONTEXT_BUDGET_LADDER_EXAMPLE_INPUT)
   assert.deepEqual(second, first)
   assert.equal(first.runs.length, 5)
-  assert.equal(first.economicBasis.priceBaseUnits, '5000')
+  assert.equal(first.economicBasis.priceBaseUnits, '12000')
+  assert.equal(first.economicBasis.componentPriceBaseUnits, '5001')
   assert.match(first.receiptDigest, /^sha256:[a-f0-9]{64}$/)
 })
 

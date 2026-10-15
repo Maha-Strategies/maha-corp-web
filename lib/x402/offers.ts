@@ -1,3 +1,4 @@
+import { CONTEXT_COMPILER_AMOUNT, CONTEXT_COMPILER_PREVIOUS_AMOUNTS } from './compiler-current-price.ts'
 // The public catalog of autonomously-payable offers.
 //
 // Before this file the x402 surface had one offer, and its facts were written
@@ -160,13 +161,9 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
   id: 'context-compression',
   method: 'POST',
   path: '/api/v1/compress',
-  // Held at '1000' by the owner. The $0.001 facilitator fee would take this to
-  // a 0% gross margin, but that fee starts at 1,000 transactions and the whole
-  // catalogue has settled 26, so the step-up is roughly three years out at the
-  // current rate. It is also the only offer with sustained external demand and
-  // the only listing on the Bazaar that is already correct, so leaving it costs
-  // nothing to index. Step it up before the fee threshold, not now.
-  amount: '1000',
+  // Owner approved 0.005001 USDC on 2026-10-15; retain old attribution.
+  amount: CONTEXT_COMPILER_AMOUNT,
+  supersededAmounts: CONTEXT_COMPILER_PREVIOUS_AMOUNTS,
   description:
     'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
     + 'Returns original and compiled token counts, so the saving is verifiable. '

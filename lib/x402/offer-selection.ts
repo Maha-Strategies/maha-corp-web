@@ -552,7 +552,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
   note: string
 }> = Object.freeze([
   {
-    name: 'RAG agent, large multi-document payload, ceiling 5000 base units ($0.005)',
+    name: 'RAG agent, large multi-document payload, ceiling 5001 base units ($0.005001)',
     input: {
       objective: 'compile-context-pack',
       documentCount: 24,
@@ -560,12 +560,12 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       requiredTokenBudget: 4_000,
       needsDeduplication: true,
       needsCitationTraceability: true,
-      maximumPriceBaseUnits: '5000',
+      maximumPriceBaseUnits: '5001',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '1000' },
-    note: 'Compilation only. 1000 base units sits inside a 5000 ceiling.',
+    expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '5001' },
+    note: 'Compilation only. 5001 base units exactly fits the explicit 5001 ceiling.',
   },
   {
     name: 'Release pipeline checking required-fact retention, ceiling 20000 base units ($0.02)',
@@ -646,8 +646,8 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
-    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '11000' },
-    note: '1000 + 10000 = 11000 base units (displays as $0.011), inside a 20000 ceiling.',
+    expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '15001' },
+    note: '5001 + 10000 = 15001 base units ($0.015001), inside a 20000 ceiling.',
   },
 ])
 

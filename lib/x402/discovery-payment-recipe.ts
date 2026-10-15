@@ -1,4 +1,5 @@
 import type { PaymentRequirement } from './client.ts'
+import { CONTEXT_COMPILER_AMOUNT } from './compiler-current-price.ts'
 import {
   BUYER_POLICY_SCHEMA_VERSION,
   evaluatePaymentIntent,
@@ -27,14 +28,14 @@ export const CANARY_BUYER = OPERATOR_WALLETS[0]
  * failure this guard exists to prevent -- so this constant and the catalogue
  * must move together. A test asserts they agree.
  */
-export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
-export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
+export const EXPECTED_PRICE_BASE_UNITS = BigInt(CONTEXT_COMPILER_AMOUNT)
+export const SPEND_CEILING_BASE_UNITS = BigInt(CONTEXT_COMPILER_AMOUNT)
 
 export const BAZAAR_DISCOVERY_QUERY =
   'compress documents to an LLM token budget while preserving source-linked citations'
 /**
  * The recipe's own ceiling, which is a buyer policy rather than a site-wide
- * one: this recipe buys the $0.001 Context Compression offer and refuses
+ * one: this recipe buys the $0.005001 Context Compression offer and refuses
  * anything dearer.
  *
  * It therefore also filters out Deep Context Evaluation at $0.01. That is
@@ -42,7 +43,7 @@ export const BAZAAR_DISCOVERY_QUERY =
  * "is offer X discoverable" -- the offer is indexed and returned at rank 1 for
  * `evidence retention`, but only once the ceiling is raised above its price.
  */
-export const BAZAAR_MAX_USD_PRICE = '0.005'
+export const BAZAAR_MAX_USD_PRICE = '0.005001'
 
 /** Bazaar answers a larger `limit` with HTTP 400, not a truncated page. */
 export const BAZAAR_MAX_SEARCH_LIMIT = 20

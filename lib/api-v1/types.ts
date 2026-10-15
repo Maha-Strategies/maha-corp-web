@@ -16,7 +16,7 @@ export type Endpoint = {
   schema: { input: JsonSchema; output: JsonSchema }; estimated_compute_cost: number;
   cost_basis: 'unmeasured-planning-assumption'; status: 'proposal' | 'legacy-unported' | 'local-implemented' | 'released';
   schema_status: 'draft' | 'legacy' | 'validated-local'; legacy?: { path: string; amount: string; supersededAmounts: readonly string[] };
-  handlerId?: string; productionApproved: boolean; sourceReview: 'pending' | 'not-applicable';
+  handlerId?: string; productionApproved: boolean; sourceReview: 'pending' | 'not-applicable' | 'reviewed-local';
   recoverySeconds?: number;
   pricing?: ValuePricing; execution_cost?: ExecutionCost;
 }

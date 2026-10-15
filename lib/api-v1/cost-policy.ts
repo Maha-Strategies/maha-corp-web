@@ -19,8 +19,7 @@ export function assertExecutionCost(amount: string, c: ExecutionCost | undefined
   } else if (c.liveModelSpendApproved || c.maximum_external_cost_usdc !== null) throw Error('model_budget_on_non_model_handler')
 }
 export function executionCostFor(e: { id: string; status: string; estimated_compute_cost: number }): ExecutionCost {
-  const mode: ExecutionCost['mode'] = e.id === 'mps-autonomous-audit' ? 'external-model'
-    : ['live-x402-payment-preflight', 'live-citation-recheck', 'source-bound-research-microbrief'].includes(e.id) && e.status === 'local-implemented' ? 'external-source-read'
+  const mode: ExecutionCost['mode'] = ['live-x402-payment-preflight', 'live-citation-recheck', 'source-bound-research-microbrief'].includes(e.id) && e.status === 'local-implemented' ? 'external-source-read'
     : e.status !== 'local-implemented' ? 'unreviewed'
     : e.id.startsWith('research-') && ['research-publication-update-snapshot', 'research-data-software-links', 'research-funding-lineage',
       'research-bibliography-resolution', 'research-trial-status-snapshot'].includes(e.id) ? 'external-source-read' : 'local-cpu-wasm'

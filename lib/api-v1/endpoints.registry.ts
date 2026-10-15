@@ -31,6 +31,7 @@ import { EIGHTEENTH_BATCH_AUDITS, batch18Audit } from './batch18-audits.ts'
 import { NINETEENTH_BATCH_AUDITS, batch19Audit } from './batch19-audits.ts'
 import { TWENTIETH_BATCH_AUDITS, batch20Audit } from './batch20-audits.ts'
 import { BATCH20_PORTS, batch20PortSchemas, batch20PortSpec } from './batch20-ports.ts'
+import finalSourceReview from '../../content/api-v1/final42-source-review.json' with { type: 'json' }
 
 // Premium and obsolete whole-book tests are NOT counted toward 1,000 microservices.
 // Their production routes, prices and historical attribution are unchanged here.
@@ -290,6 +291,7 @@ for (const spec of BATCH20_PORTS) {
   const e = entries.find(e => e.id === spec.id)
   if (!e || e.status !== 'legacy-unported') throw Error('batch20_legacy_missing_or_recounted:' + spec.id)
   e.status = 'local-implemented'; e.schema_status = 'validated-local'; e.handlerId = e.id
+  if (e.id === 'mps-autonomous-audit') e.name = 'MPS Provenance-Contract Audit'
   e.sourceReview = ['live-x402-payment-preflight', 'live-citation-recheck', 'source-bound-research-microbrief'].includes(e.id) ? 'pending' : 'not-applicable'
   e.description = spec.description + ' Public/synthetic nonpersonal input only; 32 KiB input, 65 KB output. Result retention: 24 hours; minimal receipt metadata: 90 days. Local validation only; deployment and model spending on hold.'
   e.schema = { input: {}, output: {} } // Actual price-bound schemas rebuilt below.
@@ -345,6 +347,18 @@ for (const e of entries) {
   if (twentieth) e.schema.output = wrapped(auditSchemas(twentieth, e.amount).output)
   if (batch20PortSpec(e.id)) { const schema = batch20PortSchemas(e.id, e.amount); e.schema = { input: schema.input, output: wrapped(schema.output) } }
   if (BOOK_PACK_IDS.some(id => id === e.id)) e.schema.output = z.toJSONSchema(executionEnvelope(bookPackHandler(e.id as BookPackId, e.amount).output))
+}
+// Explicit release review for previously withheld products only. The 958
+// released contracts remain byte-for-byte frozen; this is not independent QA.
+const reviewedIds = new Set([finalSourceReview.books, finalSourceReview.religion, finalSourceReview.publisherSources,
+  finalSourceReview.researchMetadata, finalSourceReview.publishing].flatMap(group => group.ids))
+for (const e of entries) {
+  if (e.sourceReview === 'pending' && reviewedIds.has(e.id)) {
+    e.sourceReview = 'reviewed-local'
+    e.description = e.description.replace(' Source-selection release review pending.', ' Selected edition is pinned; publisher release review recorded.')
+  }
+  if (['context-compression', 'mps-autonomous-audit', 'celestial-vimshottari-timing', 'x402-quote-change-report',
+    ...finalSourceReview.publisherSources.ids].includes(e.id)) e.description = e.description.replace(' Local validation only; deployment and model spending on hold.', ' No model calls or factual certification.')
 }
 assertRegistry(entries)
 // Deep freeze prevents a caller turning a planning entry into a paid route.

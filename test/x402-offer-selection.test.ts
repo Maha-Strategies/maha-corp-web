@@ -140,11 +140,11 @@ test('published terms are the catalog terms, not a second hand-maintained copy',
   }
 })
 
-test('the two published prices are exactly 1000 and 10000 base units', () => {
+test('the two published prices are exactly 5001 and 10000 base units', () => {
   // Compression stepped 1000 -> 2000: at $0.001 the facilitator fee is the
   // whole price. Deep Context Evaluation is unchanged; it has external demand
   // at 10000 and moving it would forfeit the signal.
-  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '1000')
+  assert.equal(CONTEXT_COMPRESSION_OFFER.amount, '5001')
   assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.amount, '10000')
 })
 
@@ -154,7 +154,7 @@ test('compilation without measurement selects the cheaper offer', () => {
   const decision = selectMahaOffer(base({ needsDeduplication: true, needsCitationTraceability: true }))
   assert.equal(decision.decision, 'select')
   assert.deepEqual(decision.selectedOfferIds, [COMPRESSION])
-  assert.equal(decision.estimatedOfferCostBaseUnits, '1000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, '5001')
 })
 
 test('any measurement need selects Deep Context Evaluation', () => {
@@ -168,7 +168,7 @@ test('any measurement need selects Deep Context Evaluation', () => {
 // --- Boundaries ------------------------------------------------------------
 
 test('a ceiling exactly equal to the price authorizes it', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '1000' })).decision, 'select')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '5001' })).decision, 'select')
   assert.equal(
     selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '10000' })).decision,
     'select',
@@ -176,7 +176,7 @@ test('a ceiling exactly equal to the price authorizes it', () => {
 })
 
 test('one base unit under the price rejects', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '999' })).decision, 'reject')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '5000' })).decision, 'reject')
   assert.equal(
     selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '9999' })).decision,
     'reject',
@@ -194,11 +194,11 @@ test('a 5000 base-unit ceiling cannot authorize Deep Context Evaluation, and nev
   )
 })
 
-test('a 20000 base-unit ceiling authorizes the two-stage sequence at exactly 11000 base units', () => {
+test('a 20000 base-unit ceiling authorizes the two-stage sequence at exactly 15001 base units', () => {
   const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '20000' }))
   assert.equal(decision.decision, 'sequence')
   assert.deepEqual(decision.selectedOfferIds, [COMPRESSION, DEEP])
-  assert.equal(decision.estimatedOfferCostBaseUnits, '11000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, '15001')
 })
 
 test('the sequence is rejected when its total exceeds the ceiling, even though stage one fits', () => {
@@ -423,7 +423,7 @@ test('the rewrite that gives the guide its canonical URL exists', async () => {
  * purchase. The full uncompacted contract remains available without payment.
  */
 const PINNED_DIGESTS: Record<string, string> = {
-  [COMPRESSION]: 'sha256:d0f175cbab74556aa5de66fa8658c45a140e87c6081f7baa5146ff1e7467ebf7',
+  [COMPRESSION]: 'sha256:98171f182ea1f93097d8edcab96de2bb161bfe924056173a45f020a050e51083',
   [DEEP]: 'sha256:1bfd307633b0b2edd7bd32f6c50185c9e92c9a44be84fe66bbc5d8237d4f762b',
 }
 

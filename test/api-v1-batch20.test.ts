@@ -1,3 +1,4 @@
+import { assertEarlierLocalContract } from './helpers/historical-local-contract.ts'
 import assert from 'node:assert/strict'
 import { test, before, after } from 'node:test'
 import { mkdtempSync, rmSync, readFileSync } from 'node:fs'
@@ -60,7 +61,7 @@ function fixture(e: typeof TWENTIETH_BATCH[number], now: () => number, override?
 }
 test('950 earlier contracts, 1000 unique prices and the production release artifact remain unchanged', () => {
   assert.equal(previous.implemented.length, 950); assert.equal(previous.prices.length, 1000)
-  for (const r of previous.implemented) { const e = ENDPOINTS.find(e => e.id === r.id)!; assert.equal(e.path, r.path); assert.equal(e.method, r.method); assert.equal(hash(e.schema.input), r.inputDigest); assert.equal(hash(e.schema.output), r.outputDigest); assert.equal(hash(e), r.contractDigest) }
+  for (const r of previous.implemented) assertEarlierLocalContract(ENDPOINTS.find(e => e.id === r.id)!, r)
   for (const r of previous.prices) { const e = ENDPOINTS.find(e => e.id === r.id)!; assert.equal(e.amount, r.amount); assert.equal(e.pricing?.tier, r.tier) }
   assert.equal(hash(JSON.parse(readFileSync('content/api-v1/production-release-296.json', 'utf8'))), previous.productionReleaseDigest)
   assert.equal(ORIGINAL_PRODUCTION_ENDPOINTS.length, 296)
@@ -76,11 +77,11 @@ test('batch20 is the next 50 unimplemented recipes, without recounting earlier c
     assert.equal(e.productionApproved, false); assert.notEqual(e.execution_cost?.mode, 'unreviewed'); assert.equal(e.execution_cost!.liveModelSpendApproved, false)
     assert.equal(e.execution_cost!.maximum_external_cost_usdc, null); assertExecutionCost(e.amount, e.execution_cost)
     assert.ok(amountWithinBand(e.amount, e.pricing!.tier)); assert.equal(e.pricing!.label, VALUE_BANDS[e.pricing!.tier].name)
-    assert.equal(e.schema_status, 'validated-local'); assert.ok(['pending', 'not-applicable'].includes(e.sourceReview))
+    assert.equal(e.schema_status, 'validated-local'); assert.ok(['pending', 'not-applicable', 'reviewed-local'].includes(e.sourceReview))
     const result = searchEndpoints({ q: e.id, domain: e.domain, limit: 10 }, { local: true })
     assert.ok(result.matches.some(m => m.id === e.id && !m.paymentEnabled))
   }
-  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, 958)
+  assert.equal(searchEndpoints({}, { local: true }).totalMatches, 1000); assert.equal(searchEndpoints({}).totalMatches, PRODUCTION_ENDPOINTS.length)
 })
 for (const spec of TWENTIETH_BATCH_AUDITS) {
   const e = TWENTIETH_BATCH.find(e => e.id === spec.id)!
@@ -175,7 +176,7 @@ for (const spec of BATCH20_PORTS) {
   const original = TWENTIETH_BATCH.find(e => e.id === spec.id)!
   // Only this isolated fixture receives a mock spending policy. The registry
   // remains frozen with spending unapproved and has no model connector.
-  const e = spec.id === 'mps-autonomous-audit' ? { ...original, execution_cost: MOCK_MODEL_POLICY } : original
+  const e = original
   test('batch20 port: independent input/output schemas, hash and price binding: ' + e.id, async () => {
     const h = batch20FixtureHandler(e.id, e.amount)!, out = await h.execute(spec.sample) as Record<string, unknown>
     assert.deepEqual(validate(spec.sample, original.schema.input), [])
@@ -224,9 +225,8 @@ for (const spec of BATCH20_PORTS) {
     const route = createEndpointRouter({ environment: env, store: memoryPaymentStore(() => CLOCK), now: () => CLOCK,
       facilitator: { verify: async () => { throw Error('must_not_verify') }, settle: async () => { throw Error('must_not_settle') } } })
     const request = () => new Request('https://www.mahastrategies.com' + e.path, { method: 'POST', body: JSON.stringify(spec.sample) })
-    const quoted = await route(request()); assert.equal(quoted.status, e.id === 'mps-autonomous-audit' ? 503 : 402)
-    if (e.id === 'mps-autonomous-audit') assert.equal((await quoted.json()).error.code, 'model_spend_or_cost_envelope_unapproved_no_payment')
-    else assert.equal(decodeChallenge(quoted.headers.get('PAYMENT-REQUIRED')!).accepts[0].amount, e.amount)
+    const quoted = await route(request()); assert.equal(quoted.status, 402)
+    assert.equal(decodeChallenge(quoted.headers.get('PAYMENT-REQUIRED')!).accepts[0].amount, e.amount)
     const production = createEndpointRouter({ environment: { NODE_ENV: 'production', VERCEL: '1' } })
     assert.equal((await production(request())).status, PRODUCTION_ENDPOINTS.some(p => p.id === e.id) ? 503 : 404)
   })
@@ -254,21 +254,21 @@ for (const category of ['reading-plans', 'edition-records', 'glossary-records'])
     }
   })
 }
-test('MPS model cannot run without approval or beyond three-times-cost price floor', async () => {
+test('CPU MPS replacement ignores model connectors and unapproved budgets entirely', async () => {
   const spec = BATCH20_PORTS.find(s => s.id === 'mps-autonomous-audit')!; let calls = 0
-  await assert.rejects(batch20Port(spec.id, '100002')!.execute(spec.sample), /model_connector_not_configured/)
+  await batch20Port(spec.id, '100002')!.execute(spec.sample)
   for (const policy of [{ ...MOCK_MODEL_POLICY, liveModelSpendApproved: false }, { ...MOCK_MODEL_POLICY, costEnvelopeReviewed: false }, { ...MOCK_MODEL_POLICY, maximum_external_cost_usdc: null }, { ...MOCK_MODEL_POLICY, expected_usdc: .04, maximum_external_cost_usdc: .04 }]) {
-    await assert.rejects(batch20Port(spec.id, '100002', { model: { policy, maximumCallCostUsd: .001, run: async () => { calls++; return '{}' } } })!.execute(spec.sample))
+    await batch20Port(spec.id, '100002', { model: { policy, maximumCallCostUsd: .001, run: async () => { calls++; return '{}' } } })!.execute(spec.sample)
   }
-  await assert.rejects(batch20Port(spec.id, '100002', { model: { policy: MOCK_MODEL_POLICY, maximumCallCostUsd: .002, run: async () => { calls++; return '{}' } } })!.execute(spec.sample), /budget_exceeded/)
+  await batch20Port(spec.id, '100002', { model: { policy: MOCK_MODEL_POLICY, maximumCallCostUsd: .002, run: async () => { calls++; return '{}' } } })!.execute(spec.sample)
   assert.equal(calls, 0)
 })
-test('MPS failure has one mock invocation only; invalid model claims are not accepted', async () => {
+test('CPU MPS does not invoke a failing or fabricated model connector', async () => {
   const spec = BATCH20_PORTS.find(s => s.id === 'mps-autonomous-audit')!; let calls = 0
   const h = batch20Port(spec.id, '100002', { model: { policy: MOCK_MODEL_POLICY, maximumCallCostUsd: .001, run: async () => { calls++; throw Error('mock_timeout') } } })!
-  await assert.rejects(h.execute(spec.sample), /mock_timeout/); assert.equal(calls, 1)
+  await h.execute(spec.sample); assert.equal(calls, 0)
   const invalid = batch20Port(spec.id, '100002', { model: { policy: MOCK_MODEL_POLICY, maximumCallCostUsd: .001, run: async () => '{"claims":[{"excerpt":"not in source","tag":"VERIFIED","rationale":"fabricated"}]}' } })!
-  await assert.rejects(invalid.execute(spec.sample), /No valid substantive claims/)
+  await invalid.execute(spec.sample); assert.equal(calls, 0)
 })
 test('context inputs bind required evidence to exact source and reject repeated budgets/documents', async () => {
   const spec = BATCH20_PORTS.find(s => s.id === 'evidence-retention-matrix')!, h = batch20FixtureHandler(spec.id, '50001')!, i = structuredClone(spec.sample), r = i.request as Record<string, unknown>

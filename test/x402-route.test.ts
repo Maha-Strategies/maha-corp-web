@@ -94,10 +94,10 @@ afterEach(() => {
 const gateway = () => import('../lib/x402/gateway.ts')
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
-const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'One compression', concurrencyCap: 8 }
+const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '5001', description: 'One compression', concurrencyCap: 8 }
 const resourceUrl = 'https://www.mahastrategies.com/api/v1/compress'
 const accepted: PaymentRequirement = {
-  scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
+  scheme: 'exact', network: 'eip155:8453', amount: '5001', payTo: '0xSettlement',
   maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
 }
 const SIGNATURE = async () => encode({
@@ -142,7 +142,7 @@ test('an unpaid request is challenged with terms it can actually pay', async () 
   const challenge = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(challenge.x402Version, 2)
   const [requirement] = challenge.accepts
-  assert.equal(requirement.amount, '1000')
+  assert.equal(requirement.amount, '5001')
   assert.equal(requirement.payTo, '0xSettlement')
   assert.equal(requirement.asset, '0xUSDC')
   assert.equal(requirement.network, 'eip155:8453')
@@ -182,7 +182,7 @@ test('the handler is told it is serving a paid caller, and handed the slot to re
   assert.equal(headers['x-maha-access-mode'], 'x402')
   assert.equal(headers['x-maha-payment-transaction'], 'tx_e2e')
   assert.equal(headers['x-maha-payment-payer'], '0xAgent')
-  assert.equal(headers['x-maha-payment-amount'], '1000')
+  assert.equal(headers['x-maha-payment-amount'], '5001')
   assert.equal(headers['x-maha-slot-resource'], 'context-compression')
   assert.match(headers['x-maha-slot-token'], /^[0-9a-f-]{36}$/)
 })

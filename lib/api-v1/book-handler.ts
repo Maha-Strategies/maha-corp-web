@@ -14,8 +14,10 @@ export async function executeBookSection(id: string, supplied: unknown) {
     editionDigest: string; bookId: string; editionBasis: string; sections: z.infer<typeof BOOK_OUTPUT>['section'][] }
   if (data.editionDigest !== input.editionDigest || data.bookId !== m.bookId) throw Error('book_snapshot_identity_mismatch')
   const section = data.sections.find(s => s.id === input.sectionId)
+  const pinned = m.sections.find(s => s.id === input.sectionId)
   if (!section || section.contentSha256 !== 'sha256:' + createHash('sha256').update(section.content).digest('hex')
-    || Buffer.byteLength(section.content) !== section.utf8Bytes) throw Error('section_missing_or_integrity_mismatch')
+    || Buffer.byteLength(section.content) !== section.utf8Bytes || !pinned
+    || Object.entries(pinned).some(([key, value]) => section[key as keyof typeof section] !== value)) throw Error('section_missing_or_integrity_mismatch')
   return BOOK_OUTPUT.parse({ version: 'maha-book-reading-unit/1', bookId: m.bookId, title: m.title, editionDigest: m.editionDigest,
     editionBasis: data.editionBasis, inputHash: demandDigest(input), section, mediaType: 'text/plain; charset=utf-8',
     license: 'Personal reading or internal use only. No redistribution, resale, model-training rights or copyright transfer.', imagesOrLayoutIncluded: false, factualCertificationProvided: false })

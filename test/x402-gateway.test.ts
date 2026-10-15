@@ -87,7 +87,7 @@ test('a compiler price step-up rechallenges an old signature without verifying o
   const oldSignature = await signatureFor('/api/v1/compress')
   const raised = config()
   raised.resources = raised.resources.map((entry) => entry.path === '/api/v1/compress'
-    ? { ...entry, amount: '2000' } : entry)
+    ? { ...entry, amount: '6001' } : entry)
   const calls: string[] = []
   const forbidden: PaymentFacilitator = {
     verify: async () => { calls.push('verify'); throw new Error('must not verify stale terms') },
@@ -100,8 +100,8 @@ test('a compiler price step-up rechallenges an old signature without verifying o
   assert.deepEqual(calls, [])
   if (outcome.kind !== 'challenge') return
   const next = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
-  assert.equal(next.accepts[0].amount, '2000')
-  assert.equal(next.extensions['maha-offer'].amount, '2000')
+  assert.equal(next.accepts[0].amount, '6001')
+  assert.equal(next.extensions['maha-offer'].amount, '6001')
   // A buyer must explicitly sign the replacement challenge. No automatic
   // payment retry or signature reuse is performed by the server.
   const payment = encode({
@@ -114,10 +114,10 @@ test('a compiler price step-up rechallenges an old signature without verifying o
     confirmOnChain: async () => ({ status: 'confirmed' }),
   })
   assert.equal(paid.kind, 'paid')
-  if (paid.kind === 'paid') assert.equal(paid.amountPaid, '2000')
-  assert.deepEqual(seen, ['2000'])
+  if (paid.kind === 'paid') assert.equal(paid.amountPaid, '6001')
+  assert.deepEqual(seen, ['6001'])
   assert.equal(priceFor('POST', '/api/v1/compress/evaluate', raised)?.amount, '10000')
-  assert.equal(config().resources[0].amount, '1000', 'production catalog remains unchanged')
+  assert.equal(config().resources[0].amount, '5001', 'production catalog remains unchanged')
 })
 
 test('the flag alone decides whether any of this is live', () => {
@@ -213,7 +213,7 @@ test('an unpaid request to a priced path is challenged', async () => {
   assert.equal(outcome.status, 402)
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(decoded.x402Version, 2)
-  assert.equal(decoded.accepts[0].amount, '1000')
+  assert.equal(decoded.accepts[0].amount, '5001')
   assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
   assert.equal(decoded.resource.serviceName, 'Maha Context Compiler')
   assert.equal(decoded.extensions.bazaar.info.input.method, 'POST')
@@ -243,7 +243,7 @@ test('the price charged is an exact method and path match', () => {
   // Under the old longest-prefix rule it matched /api/v1/compress and would
   // have been sold for $0.001 -- and the 402 would have quoted that price, so
   // the payer would have done nothing wrong.
-  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
+  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '5001')
   assert.equal(priceFor('POST', '/api/v1/compress/evaluate', config())?.amount, '10000')
 
   // A sub-path of a priced route is not priced by inheritance.
@@ -310,7 +310,7 @@ test('each path is priced to the facilitator at its own rate', async () => {
   await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  assert.deepEqual(seen, ['10000', '1000'])
+  assert.deepEqual(seen, ['10000', '5001'])
 })
 
 test('a payment the facilitator rejects is challenged again rather than served', async () => {

@@ -5,7 +5,7 @@ const SITE_URL = 'https://www.mahastrategies.com'
 const PAGE_PATH = '/recipes/bazaar-discovery-to-payment'
 const SOURCE_URL = 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/scripts/run-bazaar-discovery-payment-recipe.ts'
 const title = 'Bazaar Discovery-to-Payment Agent Recipe | Maha Strategies'
-const description = 'Run an x402 v2 buyer that discovers Maha in Coinbase Bazaar, inspects JSON Schema, enforces a $0.005 ceiling, pays $0.001, verifies settlement, and consumes the Context Pack.'
+const description = 'Run an x402 v2 buyer that discovers Maha in Coinbase Bazaar, inspects JSON Schema, enforces a $0.005001 ceiling, pays $0.005001, verifies settlement, and consumes the Context Pack.'
 
 export const metadata: Metadata = {
   title,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 const flow = [
-  ['1', 'Search Bazaar', 'Use semantic search filtered on Base Mainnet, the exact USDC contract address 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, exact-payment, and maxUsdPrice=0.005. The asset filter takes a contract address: a bare symbol such as "usdc" matches nothing and returns an empty page rather than an error. If the asynchronous semantic index has not refreshed, use Bazaar merchant discovery as the exact indexed fallback.'],
+  ['1', 'Search Bazaar', 'Use semantic search filtered on Base Mainnet, the exact USDC contract address 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, exact-payment, and maxUsdPrice=0.005001. The asset filter takes a contract address: a bare symbol such as "usdc" matches nothing and returns an empty page rather than an error. If the asynchronous semantic index has not refreshed, use Bazaar merchant discovery as the exact indexed fallback.'],
   ['2', 'Inspect the contract', 'Read the discovered input example plus input and output JSON Schemas, and validate the exact body you will send against the complete schema at /api/discovery/x402-offers/context-compression, which is free. Refuse missing or malformed discovery metadata. To decide which offer to call in the first place, read the machine-readable Maha offer selection guide at /.well-known/maha/offer-selection.json.'],
   ['3', 'Apply policy before signing', 'Require Base Mainnet, native Base USDC, the published Maha payee, exactly 1,000 base units, and a hard ceiling of 5,000 base units.'],
   ['4', 'Pay once', 'Load either a plain Viem account or a named CDP Server Wallet only after discovery and policy checks pass. Re-check the live 402 terms before producing a signature.'],
@@ -63,7 +63,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
             <span>Executable x402 v2 buyer</span><span>Base Mainnet</span>
           </p>
           <h1 className="evidence-title evidence-title--product">Discover. Constrain. Pay. Verify. Use.</h1>
-          <p className="evidence-lede mt-7">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono">$0.005</span> or differ from the expected <span className="font-mono">$0.001</span> purchase.</p>
+          <p className="evidence-lede mt-7">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono">$0.005001</span> or differ from the expected <span className="font-mono">$0.005001</span> purchase.</p>
         </header>
 
         <section className="evidence-section" aria-label="Recipe gates">
@@ -113,7 +113,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
             <li><strong className="text-[var(--text-primary)]">Discovery fallback:</strong> semantic results can lag settlement metadata. Bazaar merchant discovery provides the deterministic indexed fallback.</li>
             <li><strong className="text-[var(--text-primary)]">Receipt verification:</strong> the recipe verifies the signed response metadata. The transaction link is printed for independent Base explorer inspection.</li>
             <li><strong className="text-[var(--text-primary)]">Rejected before payment:</strong> the request body is validated before the payment settles. A body that breaks the schema — a duplicate document id, a budget outside 64–16,000, more than eight documents — returns 400 with the field named, and nothing is charged. The recipe sends the discovered example with a fresh clientRequestId, which is valid.</li>
-            <li><strong className="text-[var(--text-primary)]">One offer:</strong> this recipe buys the Context Compiler only. Deep Context Evaluation costs $0.01, above the recipe’s $0.005 ceiling, and also requires a requiredEvidence array of exact spans; its contract is at /api/discovery/x402-offers/deep-context-evaluation.</li>
+            <li><strong className="text-[var(--text-primary)]">One offer:</strong> this recipe buys the Context Compiler only. Deep Context Evaluation costs $0.01, above the recipe’s $0.005001 ceiling, and also requires a requiredEvidence array of exact spans; its contract is at /api/discovery/x402-offers/deep-context-evaluation.</li>
             <li><strong className="text-[var(--text-primary)]">Context boundary:</strong> source coverage means sources represented in selected passages, not guaranteed fact retention or downstream answer correctness.</li>
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
