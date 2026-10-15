@@ -28,14 +28,16 @@ export function parseProductIndex(value: unknown, checkedAt: string, offset = 0)
   }
   return { available: true, complete: offset + v.resources.length === Number(v.pagination?.total), checkedAt, resources, listings }
 }
-export async function readProductIndex(): Promise<IndexSnapshot> {
+export async function readProductIndex(options: { timeoutMs?: number } = {}): Promise<IndexSnapshot> {
+  const timeoutMs = options.timeoutMs ?? 6000
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 30000) throw new Error('invalid_index_deadline')
   const checkedAt = new Date().toISOString()
   const resources = new Set<string>()
   const listings: Record<string, ProductListing> = {}
   let total: number | undefined
   try {
     // One shared deadline and at most ten pages: no unbounded catalogue crawl.
-    const signal = AbortSignal.timeout(6000)
+    const signal = AbortSignal.timeout(timeoutMs)
     for (let offset = 0; offset < 1000; offset += 100) {
       const url = new URL(BAZAAR_MERCHANT_URL)
       url.searchParams.set('payTo', MAHA_PAYEE); url.searchParams.set('limit', '100'); url.searchParams.set('offset', String(offset))

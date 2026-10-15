@@ -9,8 +9,12 @@ import { createEndpointRouter } from '../lib/api-v1/router.ts'
 import { decodeChallenge } from '../lib/x402/client.ts'
 import { paymentRequiredHeaderBytes, PAYMENT_REQUIRED_HEADER_LIMIT } from '../lib/x402/response-header-budget.ts'
 import { validate } from './helpers/json-schema.ts'
+import { readProductIndex } from '../lib/x402/product-index.ts'
 
 const admitted = { GITHUB_ACTIONS: 'true', GITHUB_REF: 'refs/heads/main', GITHUB_RUN_ATTEMPT: '1', MODULAR204_CONFIRMATION: ADDITION_CONFIRMATION, MODULAR204_OUTPUT_PATH: '/tmp/test-only-evidence.json' }
+test('operator index deadline is bounded before any network access', async () => {
+  for (const timeoutMs of [0, -1, 30001, 1.5, NaN]) await assert.rejects(readProductIndex({ timeoutMs }), /invalid_index_deadline/)
+})
 test('independent schema reader enforces unique items, property counts and property-name schemas', () => {
   assert.notDeepEqual(validate([{ a: 1, b: 2 }, { b: 2, a: 1 }], { type: 'array', uniqueItems: true }), [])
   assert.deepEqual(validate([{ a: 1 }, { a: 2 }], { type: 'array', uniqueItems: true }), [])

@@ -33,7 +33,9 @@ export function assertAdditionQuote(challenge: ReturnType<typeof decodeChallenge
   if (recovery?.info?.retentionSeconds !== 86400 || recovery.info.receiptRetentionSeconds !== 7776000 || recovery.info.automaticRepayment !== false) throw Error('addition_recovery_terms_changed')
 }
 export async function observeAdditions() {
-  const index = await readProductIndex()
+  // The offline operator check can wait for all seven pages; keep the public
+  // page's existing six-second latency budget unchanged.
+  const index = await readProductIndex({ timeoutMs: 30000 })
   return { checkedAt: index.checkedAt, complete: index.complete, available: index.available,
     indexed: PRODUCTION_ADDITION_ENDPOINTS.filter(e => index.resources.includes(ORIGIN + e.path)).map(e => e.id),
     totalMerchantResources: index.resources.length }
