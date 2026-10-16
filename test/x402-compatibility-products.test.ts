@@ -136,7 +136,7 @@ test('bounded batch, strict input and receipt integrity', async () => {
 })
 
 test('approved offers have distinct prices and invalid signed inputs cannot settle', async () => {
-  assert.equal(payableOffers().length, 161) // Includes the six released demand products; listing status is separate from payability.
+  assert.equal(payableOffers().length, 159) // Two whole-book pricing experiments retired; listing status is separate from payability.
   for (const id of COMPATIBILITY_IDS) {
     const offer = MICRO_OFFERS.find(o => o.id === id)!
     assert.equal(offer.status, 'available')

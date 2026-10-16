@@ -1,13 +1,15 @@
 import Link from 'next/link'
+import { PRODUCTION_ENDPOINTS } from '@/lib/api-v1/production-release'
+import { modularRetentionNotice } from '@/lib/api-v1/retention-notice'
 
 export const metadata = { title: 'x402 data handling and retention | Maha Strategies', alternates: { canonical: '/developers/x402-privacy' } }
 export default function Page() {
   return <main className="evidence-page"><div className="evidence-container"><section className="evidence-section evidence-copy">
     <Link href="/developers/x402-products">← x402 catalogue</Link>
     <h1 className="evidence-title mt-6">x402 data handling and retention</h1>
-    <p className="mt-6">Maha Strategies LLC operates these services. Updated 12 October 2026. This notice covers the six demand tools and their discovery measurement, not every Maha product. Other offers publish their own retention fields.</p>
-    <h2 className="evidence-section-title mt-8">Modular services — 14 October 2026</h2>
-    <p className="mt-4">The 296 released modular services use Redis, not Supabase, for recovery and response measurement. Prepared result content is retained for 24 hours from preparation; minimal receipt metadata (endpoint ID, input/result hashes, public payer, nonce, transaction, state and creation time) is retained for 90 days. Raw inputs, signatures and recovery secrets are not written to the merchant cache. Hashes are not anonymization. Redis expiry is automatic; recovery does not extend either deadline. Public blockchain records remain permanent.</p>
+    <p className="mt-6">Maha Strategies LLC operates these services. Updated 16 October 2026. This notice covers the released modular services, the six demand tools and their discovery measurement, not every Maha product. Other offers publish their own retention fields.</p>
+    <h2 className="evidence-section-title mt-8">Modular services — 16 October 2026</h2>
+    <p className="mt-4">The {PRODUCTION_ENDPOINTS.length} released modular services use Redis, not Supabase, for recovery and response measurement. {modularRetentionNotice(PRODUCTION_ENDPOINTS)} Content retention starts when the result is prepared. Minimal receipt metadata contains endpoint ID, input/result hashes, public payer, nonce, transaction, state and creation time. Raw inputs, signatures and recovery secrets are not written to the merchant cache. Hashes are not anonymization. Redis expiry is automatic. Public blockchain records remain permanent.</p>
     <p className="mt-4">Non-identifying aggregate counts distinguish new validated responses, recovery responses and responses to the known publisher-funded wallet. They expire after 90 days of aggregate inactivity and contain no wallet, input, signature or recovery secret. A validated server response is not evidence of buyer receipt or usefulness. Protected operator indexing preserves a redacted transaction report and an encrypted private recovery outbox for 90 days; it is not counted as customer revenue.</p>
     <h2 className="evidence-section-title mt-8">Inputs and recovery — six demand tools</h2>
     <p className="mt-4">Submit synthetic or sanitized data only. Do not send credentials, identity documents, payment-card data, protected health information or confidential personal records. Input validation is not a detector for private information. The tools process your JSON to produce a bounded result; the research tools use reviewed public sources and make no model calls.</p>

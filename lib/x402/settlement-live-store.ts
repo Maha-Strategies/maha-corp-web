@@ -153,9 +153,20 @@ export async function refreshStoredSettlements(store: SettlementStore, reader: S
 
 /** A failing chain never prevents the other chain from publishing its successful scan. */
 export async function refreshAllStoredSettlements() {
-  const results = await Promise.all(settlementNetworks().map(async network => {
-    try { return { network, ...await refreshStoredSettlements(settlementStore(network), evmSettlementReader(network)) } }
-    catch (error) { return { network, status: 'failed' as const, reason: settlementRefreshFailure(error), previousSnapshotRetained: true } }
+  return refreshSettlementNetworks(settlementNetworks(), network => refreshStoredSettlements(settlementStore(network), evmSettlementReader(network)))
+}
+
+/** Injectable orchestration keeps cross-chain failure and diagnostic tests entirely offline. */
+export async function refreshSettlementNetworks(networks: readonly UsdcNetwork[], refresh: (network: UsdcNetwork) => ReturnType<typeof refreshStoredSettlements>) {
+  const results = await Promise.all(networks.map(async network => {
+    try { return { network, ...await refresh(network) } }
+    catch (error) {
+      const reason = settlementRefreshFailure(error)
+      // This used to exist only in the cron response body, which Vercel's
+      // request logs do not retain. Log only the network and allowlisted reason.
+      console.error('Settlement refresh failed; previous snapshot retained.', { network, reason })
+      return { network, status: 'failed' as const, reason, previousSnapshotRetained: true }
+    }
   }))
   return { status: results.some(result => result.status === 'failed') ? 'degraded' : 'updated', networks: results }
 }

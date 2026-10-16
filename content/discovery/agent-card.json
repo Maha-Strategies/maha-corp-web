@@ -253,64 +253,6 @@
       "blockedBy": []
     },
     {
-      "id": "book-edition-the-imagined-life",
-      "status": "available",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-imagined-life/edition",
-      "provides": "the complete normalized Markdown edition of The Imagined Life with an ordered section manifest and deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "redistribution or resale rights",
-        "model-training rights",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "3000000",
-        "assetSymbol": "USDC",
-        "autonomous": true,
-        "payableNow": true
-      },
-      "payableNow": true,
-      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint.",
-      "method": "POST",
-      "description": "Purchase the complete machine-readable edition of The Imagined Life as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
-      "blockedBy": []
-    },
-    {
-      "id": "book-edition-the-volcanic-engine",
-      "status": "available",
-      "endpoint": "https://www.mahastrategies.com/api/v1/books/the-volcanic-engine/edition",
-      "provides": "the complete normalized Markdown edition of The Volcanic Engine with an ordered section manifest and deterministic receipt",
-      "notProvided": [
-        "exclusive access",
-        "redistribution or resale rights",
-        "model-training rights",
-        "copyright transfer",
-        "editorial analysis",
-        "factual certification",
-        "recommendation"
-      ],
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "network": "eip155:8453",
-        "amount": "3500000",
-        "assetSymbol": "USDC",
-        "autonomous": true,
-        "payableNow": true
-      },
-      "payableNow": true,
-      "retention": "The request and complete delivered edition are returned transiently and are not stored by this endpoint.",
-      "method": "POST",
-      "description": "Purchase the complete machine-readable edition of The Volcanic Engine as normalized Markdown with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. Includes non-exclusive personal or internal machine use; no redistribution, resale, model-training rights, copyright transfer, analysis, factual certification, or recommendation. The public web edition remains free.",
-      "blockedBy": []
-    },
-    {
       "id": "celestial-position-snapshot",
       "status": "available",
       "endpoint": "https://www.mahastrategies.com/api/v1/calculations/positions",

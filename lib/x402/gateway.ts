@@ -32,6 +32,7 @@ import { isScienceProduct } from './science/contracts.ts'
 import { validatePreSettlementBody } from './pre-settlement-body.ts'
 import { createMicroAdmissionGuard } from './micro-recovery.ts'
 import { offerById } from './offers.ts'
+import { retiredProductForPath } from './retired-offers.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
 // refusal, or admission as a paid caller. Sits between proxy.ts and the
@@ -41,7 +42,7 @@ import { offerById } from './offers.ts'
 export type X402Outcome =
   | { kind: 'not_applicable' }
   | { kind: 'challenge'; status: 402; header: string; body: unknown }
-  | { kind: 'refused'; status: 400 | 402 | 409 | 413 | 415 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
+  | { kind: 'refused'; status: 400 | 402 | 409 | 410 | 413 | 415 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
   | {
       kind: 'paid'
       /** True when this settled earlier and was not charged again. */
@@ -96,6 +97,7 @@ function confirmerFor(config: X402Config, requirement: PaymentRequirement): Sett
  * terminal for this request.
  */
 export async function resolveX402(request: Request, dependencies: Dependencies = {}): Promise<X402Outcome> {
+  if (retiredProductForPath(new URL(request.url).pathname)) return { kind: 'refused', status: 410, code: 'product_retired', message: 'This experiment has ended. Do not submit a payment; use the book section service instead.' }
   let config: X402Config | null
   try {
     config = dependencies.config !== undefined ? dependencies.config : x402Config()

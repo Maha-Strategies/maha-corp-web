@@ -33,11 +33,9 @@ import {
   EVIDENCE_RETENTION_MATRIX_OFFER,
   GOVERNED_CONTEXT_VERIFICATION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
-  IMAGINED_LIFE_EDITION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   VOLCANIC_ENGINE_SECTION_OFFER,
-  VOLCANIC_ENGINE_EDITION_OFFER,
   X402_OFFERS,
 } from '../lib/x402/offers.ts'
 
@@ -79,10 +77,12 @@ test('the Maha seller maps the full released catalogue to the adopted digital of
     ['maha:research-intake-evidence-pack:v1', '1.00', RESEARCH_INTAKE_EVIDENCE_PACK_OFFER],
     ['maha:book-section:the-imagined-life:v0.1', '0.005', IMAGINED_LIFE_SECTION_OFFER],
     ['maha:book-section:the-volcanic-engine:v0.1', '0.005', VOLCANIC_ENGINE_SECTION_OFFER],
-    ['maha:book-edition:the-imagined-life:v0.1', '2.99', IMAGINED_LIFE_EDITION_OFFER],
-    ['maha:book-edition:the-volcanic-engine:v0.1', '2.99', VOLCANIC_ENGINE_EDITION_OFFER],
   ] as const
   assert.equal(MAHA_CARP_DIGITAL_OFFERS.length, X402_OFFERS.filter(o => o.status === 'available' && o.availability.payableInProduction && o.availability.blockedBy.length === 0).length)
+  for (const title of ['the-imagined-life', 'the-volcanic-engine']) {
+    assert.ok(!MAHA_CARP_DIGITAL_OFFERS.some(offer => offer.offeringRef === `maha:book-edition:${title}:v0.1`))
+    assert.ok(MAHA_CARP_DIGITAL_OFFERS.some(offer => offer.offeringRef === `maha:book-section:${title}:v0.1`))
+  }
   for (const [offeringRef, , x402] of expected) {
     const offer = MAHA_CARP_DIGITAL_OFFERS.find((candidate) => candidate.offeringRef === offeringRef)
     assert.ok(offer)

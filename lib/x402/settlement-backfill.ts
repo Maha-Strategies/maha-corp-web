@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import { networkSeed, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from './settlement-live-store.ts'
-import { refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
+import { BACKFILL_SCAN_LIMITS, refreshSettlementLedger, type SettlementReader } from './settlement-refresh.ts'
 
 /** Scan outside the short publication lock; publish only a complete, unchanged-base repair. */
 export async function backfillSettlements(options: {
@@ -23,7 +23,7 @@ export async function backfillSettlements(options: {
   if (!Number.isInteger(maxPasses) || maxPasses < 1 || maxPasses > 1000) throw new Error('invalid_backfill_limit')
   let complete: LiveSnapshot | undefined
   for (let pass = 0; pass < maxPasses; pass++) {
-    const result = await refreshSettlementLedger(ledger, reader)
+    const result = await refreshSettlementLedger(ledger, reader, new Date(), BACKFILL_SCAN_LIMITS)
     ledger = result.ledger
     options.progress?.(ledger.scannedToBlock, head.toString())
     if (result.caughtUp) {

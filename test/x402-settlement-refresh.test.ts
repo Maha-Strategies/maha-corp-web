@@ -5,7 +5,7 @@ import { ledgerFromRows, refreshSettlementLedger, MAX_SCAN_BLOCKS, MAX_TIMESTAMP
 import { bundledLedger, readPublicSettlementLedger, refreshStoredSettlements, validLiveSnapshot, type LiveSnapshot, type SettlementStore } from '../lib/x402/settlement-live-store.ts'
 import { buildLedger } from '../lib/x402/settlement-ledger.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from '../lib/x402/operator-settlement-receipts.ts'
-import { payableOffers } from '../lib/x402/offers.ts'
+import { payableOffers, settlementOffers } from '../lib/x402/offers.ts'
 import { modularLedgerPrices } from '../lib/api-v1/production-release.ts'
 import { OPERATOR_WALLETS, MAHA_PAYEE } from '../lib/x402/discovery-payment-recipe.ts'
 
@@ -14,7 +14,7 @@ const row = (block: bigint, index = 0): Transfer => ({ payer: `0x${'a'.repeat(40
 const reader = (head: bigint, rows: Transfer[] = []): SettlementReader => ({ finalizedBlock: async () => head,
   transfers: async (from, to) => rows.filter(r => r.blockNumber >= from && r.blockNumber <= to), timestamp: async () => now.toISOString() })
 
-test('an approved fifty-transfer launch refreshes without losing operator rows; larger timestamp workloads fail closed', async () => {
+test('an approved fifty-transfer launch refreshes without losing operator rows; larger windows advance a complete prefix', async () => {
   const previous = ledgerFromRows([], BigInt(1), BigInt(100), now.toISOString())
   const rows = Array.from({ length: MAX_TIMESTAMP_BLOCKS + 1 }, (_, i) => ({ ...row(BigInt(110 + i)),
     payer: OPERATOR_WALLETS[0], transactionHash: '0x' + (i + 1).toString(16).padStart(64, '0') }))
@@ -23,7 +23,10 @@ test('an approved fifty-transfer launch refreshes without losing operator rows; 
   assert.equal(refreshed.ledger.entries.length, 50)
   assert.equal(refreshed.ledger.summary.canarySettlements, 50)
   assert.equal(refreshed.ledger.summary.externalSettlements, 0)
-  await assert.rejects(refreshSettlementLedger(previous, reader(BigInt(300), rows), now), /scan_requires_offline_backfill/)
+  const bounded = await refreshSettlementLedger(previous, reader(BigInt(300), rows), now)
+  assert.equal(bounded.ledger.entries.length, MAX_TIMESTAMP_BLOCKS)
+  assert.equal(bounded.ledger.scannedToBlock, String(rows[MAX_TIMESTAMP_BLOCKS].blockNumber - 1n))
+  assert.equal(bounded.caughtUp, false)
 })
 const empty = () => ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
 
@@ -47,7 +50,7 @@ test('old catalogue snapshots validate and reproject without losing observed his
 
 test('scheduled scanner includes every available product and declared historical price', () => {
   const ledger = ledgerFromRows([], BigInt(1), BigInt(500), now.toISOString())
-  assert.deepEqual(ledger.summary.byProduct.map(o => o.id).sort(), [...payableOffers().map(o => o.id), ...modularLedgerPrices().map(o => o.id)].sort())
+  assert.deepEqual(ledger.summary.byProduct.map(o => o.id).sort(), [...settlementOffers().map(o => o.id), ...modularLedgerPrices().map(o => o.id)].sort())
   for (const offer of payableOffers()) for (const amount of offer.supersededAmounts ?? []) {
     const result = ledgerFromRows([{ ...row(BigInt(100)), amountBaseUnits: BigInt(amount) }], BigInt(1), BigInt(500), now.toISOString())
     assert.equal(result.entries[0].product?.id, offer.id)

@@ -25,7 +25,7 @@ mcp.required = { ...server, tools }; mcp.offered = { ...server, tools }
 Object.assign(workloads['tool-permission-diff'], { before: Array.from({ length: 50 }, (_, i) => ({ tool: `tool-${i}`, action: 'read', resource: `old-${i}` })), after: Array.from({ length: 50 }, (_, i) => ({ tool: `tool-${i}`, action: 'read', resource: `new-${i}` })) })
 const bundle = workloads['publication-bundle-consistency'], views = bundle.views as object[]
 bundle.views = Array.from({ length: 8 }, (_, i) => ({ ...views[i % 3], viewId: `view-${i}` }))
-const args = process.argv.slice(2), target = resolve(root, 'content/discovery/micro-next12-cost-observation-v13.json')
+const args = process.argv.slice(2), target = resolve(root, 'content/discovery/micro-next12-cost-observation-v14.json')
 if (args.length !== 1 || !['--capture', '--check'].includes(args[0])) throw new Error('Use --capture once or --check. No build/network mode.')
 if (args[0] === '--capture' && existsSync(target)) throw new Error('immutable-profile-already-exists')
 if (args[0] === '--check') {
@@ -47,7 +47,7 @@ if (args[0] === '--check') {
   }
   if (remoteCalls) throw new Error('unexpected remote call')
   if (microDigest(snapshotImplementation()) !== implementationDigest) throw new Error('implementation-changed-during-capture; no artifact written')
-  const body = { version: 'micro-next12-cost-observation/13', supersedes: 'micro-next12-cost-observation-v12.json', revisionReason: 'Rebind unchanged bounded workloads after the owner-approved original compiler repricing to 0.005001 USDC. Preserve v1-v12 byte-for-byte. This is a fresh local observation, not a rewrite of historical measurements or a measurement of cloud billing.', basis: 'local-process; one example and 31 capped high-size fixture repetitions per product, not an exhaustive worst-case proof, cloud billing or Vercel bill. Wall-clock timings are sensitive to uncontrolled host load and scheduling; no causal attribution to contention or guaranteed 100 ms latency.', observedAt: new Date().toISOString(), implementationFiles, implementationFileDigests, implementationDigest, workloadsDigest: microDigest(workloads), nodeVersion: process.version, observations, remoteCalls, deploymentBuilds: 0, paymentAttempts: 0, indexingPurchases: 0, cloudBillingMeasured: false, exhaustiveWorstCaseProof: false }
+  const body = { version: 'micro-next12-cost-observation/14', supersedes: 'micro-next12-cost-observation-v13.json', revisionReason: 'Rebind unchanged bounded workloads after owner-approved retirement of two whole-book pricing experiments. Preserve v1-v13 byte-for-byte. This is a fresh local observation, not a rewrite of historical measurements or a measurement of cloud billing.', basis: 'local-process; one example and 31 capped high-size fixture repetitions per product, not an exhaustive worst-case proof, cloud billing or Vercel bill. Wall-clock timings are sensitive to uncontrolled host load and scheduling; no causal attribution to contention or guaranteed 100 ms latency.', observedAt: new Date().toISOString(), implementationFiles, implementationFileDigests, implementationDigest, workloadsDigest: microDigest(workloads), nodeVersion: process.version, observations, remoteCalls, deploymentBuilds: 0, paymentAttempts: 0, indexingPurchases: 0, cloudBillingMeasured: false, exhaustiveWorstCaseProof: false }
   writeFileSync(target, JSON.stringify({ ...body, digest: microDigest(body) }, null, 2) + '\n', { flag: 'wx' })
 }
 console.log('Twelve local cost observations checked; cloud cost and demand remain unknown.')

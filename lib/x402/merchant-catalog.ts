@@ -88,8 +88,8 @@ export function createMerchantCatalogueReader(options: { baseUrl: string; fetchI
     return snapshot
   }
 }
-/** Owner deliberately left these five higher-priced offers unindexed on 11 October. */
+/** Remaining active higher-priced offers deliberately left unindexed; retired experiments are not inventory. */
 export const INTENTIONALLY_UNINDEXED_OFFERS = new Set([
-  'research-intake-evidence-pack', 'book-edition-the-imagined-life', 'book-edition-the-volcanic-engine',
+  'research-intake-evidence-pack',
   'book-epub-the-maha-principle', 'book-epub-the-orbital-mind',
 ])

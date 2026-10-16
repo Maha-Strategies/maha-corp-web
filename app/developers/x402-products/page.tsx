@@ -11,6 +11,8 @@ import { readPublicSettlementLedger } from '@/lib/x402/settlement-live-store'
 import { SettlementAutoRefresh } from '../settlement/auto-refresh'
 import { PRODUCTION_ENDPOINTS } from '@/lib/api-v1/production-release'
 import { readModularDeliveryMeter } from '@/lib/api-v1/delivery-meter'
+import { modularRetentionNotice, retentionDuration } from '@/lib/api-v1/retention-notice'
+import { recoverySeconds } from '@/lib/api-v1/types'
 
 export const metadata: Metadata = {
   title: 'x402 Products and Prices | Maha Strategies',
@@ -39,7 +41,7 @@ export default async function X402ProductsPage() {
       <p className="evidence-copy mt-4">{X402_OFFERS.length} declared products: {available} released and {X402_OFFERS.length - available} withheld or preview. Prices below are per request or bounded batch, not per input record. Withheld prices are proposals, not purchase invitations.</p>
       <p className="evidence-copy mt-4">Only a valid 402 challenge confirms that a released route is enabled for payment. Catalogue availability does not confirm Bazaar indexing. Never repay automatically after an uncertain outcome.</p>
       <p className="evidence-copy mt-4">Successful responses, Bazaar paid calls and attributed transfers are separate evidence. Do not add them together. Response meters are best-effort, can include retries, and do not prove unique buyers or complete historical coverage. The compiler uses its dedicated x402 response history, not a sum of overlapping meters. Operator labels are self-reported, not verified customer attribution.</p>
-      <p className="evidence-copy mt-3">{usage.available ? `Usage meter: ${usage.firstObservedAt ? `${usage.firstObservedAt} through ${usage.lastObservedAt}` : 'no events recorded'}.` : 'Usage meter unavailable — call counts are unknown, not zero.'} Settlement snapshot: {snapshot.ledger.observedAt} ({snapshot.source === 'bundled_fallback' ? 'dated fallback' : snapshot.stale ? 'refresh overdue' : 'saved scan'}). Refreshes while visible every five minutes.</p>
+      <p className="evidence-copy mt-3">{usage.available ? `Usage meter: ${usage.firstObservedAt ? `${usage.firstObservedAt} through ${usage.lastObservedAt}` : 'no events recorded'}.` : 'Usage meter unavailable — call counts are unknown, not zero.'} Settlement snapshot: {snapshot.ledger.observedAt} ({snapshot.source === 'bundled_fallback' ? 'dated fallback' : snapshot.stale ? 'refresh overdue' : !snapshot.caughtUp ? 'catching up — more finalized blocks remain' : 'saved scan — caught up'}). Refreshes while visible every five minutes.</p>
       <p className="evidence-copy mt-3">Bazaar merchant lookup: {index.checkedAt}. {index.available ? `${indexed} declared product URLs observed${index.complete ? ' in a complete lookup' : ' in an incomplete lookup'}.` : 'Lookup unavailable; indexed count is unknown.'} Presence is observed catalogue membership, not proof of matching metadata, search rank, organic discovery or customer demand.</p>
       <p className="evidence-copy mt-3">{index.available ? `${qualityKnown} observed listings have 30-day call metrics; ${indexed - qualityKnown} have metrics pending or unavailable. ${namesPending} observed listings have a name not yet recorded by Bazaar.` : 'Bazaar activity metrics unavailable.'} Pending metrics are not zero activity. Bazaar metrics can include publisher-funded tests and update on a six-hour schedule. Corrected discovery names and task-specific tags are served now; cached listing metadata may require a later successful payment to update.</p>
       <div className="mt-6 flex flex-wrap gap-4"><Link className="evidence-link" href="/developers/settlement">Live settlement ledger ↗</Link><Link className="evidence-link" href="/api/docs/openapi">API schemas ↗</Link><Link className="evidence-link" href="/developers/x402-buyer">Buyer and recovery guide ↗</Link><Link className="evidence-link" href="/developers/x402-privacy">Data handling and retention ↗</Link><Link className="evidence-link" href="/developers">Developer hub ↗</Link></div>
@@ -48,7 +50,7 @@ export default async function X402ProductsPage() {
     <section id="modular" className="evidence-section scroll-mt-8">
       <h2 className="evidence-section-title">{PRODUCTION_ENDPOINTS.length} released modular services</h2>
       <p className="evidence-copy mt-3">Base USDC; exact input-bound buyer/recovery adapter required. These new modular URLs include some adaptations of existing algorithms. Publisher-funded indexing is operator activity, not customer revenue. Costs and margins remain unmeasured; no external model spending is enabled.</p>
-      <p className="evidence-copy mt-3">Result content: 24 hours. Minimal purchase metadata: 90 days from creation; recovery does not extend deadlines. Non-identifying Redis response aggregates expire after 90 days of inactivity. Counters reflect validated server responses, not proof the buyer received or benefited from them. No Supabase writes are added by these services.</p>
+      <p className="evidence-copy mt-3">{modularRetentionNotice(PRODUCTION_ENDPOINTS)} Non-identifying Redis response aggregates expire after 90 days of inactivity. Counters reflect validated server responses, not proof the buyer received or benefited from them. No Supabase writes are added by these services.</p>
       <Link className="evidence-link mt-3 inline-block" href="/api/v1/discovery/search">Free two-stage discovery ↗</Link>
       <div className="mt-6 grid gap-4 md:grid-cols-2">{PRODUCTION_ENDPOINTS.map(e => {
         const listing = index.listings?.['https://www.mahastrategies.com' + e.path], s = settled.get('modular-' + e.id)
@@ -57,6 +59,7 @@ export default async function X402ProductsPage() {
           <div className="flex flex-wrap items-baseline justify-between gap-3"><h3 className="evidence-card-title">{e.name}</h3><span className="font-mono">{e.amount.padStart(7, '0').slice(0, -6)}.{e.amount.padStart(7, '0').slice(-6)} USDC</span></div>
           <p className="evidence-kicker mt-3">{e.domain} · {e.category} · Tier {e.pricing?.tier}</p>
           <p className="evidence-card-copy mt-3">{e.description}</p><p className="mt-3 break-all font-mono text-xs">{e.method} {e.path}</p>
+          <p className="evidence-card-copy mt-3 text-xs">Result recovery: {retentionDuration(recoverySeconds(e))} from creation; recovery does not extend this deadline.</p>
           <p className="evidence-card-copy mt-3 text-xs">{productIndexLabel(index, e.path)}</p>
           <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
             <div><dt>New paid responses recorded</dt><dd>{recorded ?? 'Not recorded'}</dd></div>

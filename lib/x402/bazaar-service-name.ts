@@ -18,8 +18,6 @@ export const BAZAAR_SERVICE_NAMES: Readonly<Record<string, string>> = Object.fre
   'governed-context-verification-pack': 'Maha Governed Context Pack',
   'book-section-the-imagined-life': 'The Imagined Life - Section',
   'book-section-the-volcanic-engine': 'The Volcanic Engine - Section',
-  'book-edition-the-imagined-life': 'The Imagined Life - Edition',
-  'book-edition-the-volcanic-engine': 'The Volcanic Engine - Edition',
   'tiruvaymoli-context-packet': 'Tiruvaymoli Context Packet',
   'bracketed-polynomial-root': 'Bracketed Polynomial Root',
   'covariance-uncertainty': 'Covariance Uncertainty',

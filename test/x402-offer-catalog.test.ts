@@ -360,8 +360,6 @@ test('every price stated outside the catalogue matches the catalogue', () => {
     '/api/v1/research/intake': 'research-intake-evidence-pack',
     '/api/v1/books/the-imagined-life/section': 'book-section-the-imagined-life',
     '/api/v1/books/the-volcanic-engine/section': 'book-section-the-volcanic-engine',
-    '/api/v1/books/the-imagined-life/edition': 'book-edition-the-imagined-life',
-    '/api/v1/books/the-volcanic-engine/edition': 'book-edition-the-volcanic-engine',
     '/api/v1/mps/audit': 'mps-autonomous-audit',
   }
   let checked = 0
@@ -377,7 +375,7 @@ test('every price stated outside the catalogue matches the catalogue', () => {
       checked += 1
     }
   }
-  assert.ok(checked >= 11, `expected at least 11 stated prices, checked ${checked}`)
+  assert.ok(checked >= 9, `expected at least 9 active stated prices, checked ${checked}`)
 
   // 2. The buyer recipe refuses anything but the exact published price.
   assert.equal(EXPECTED_PRICE_BASE_UNITS, BigInt(amountOf('context-compression')))

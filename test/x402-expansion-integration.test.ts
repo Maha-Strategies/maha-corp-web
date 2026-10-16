@@ -16,11 +16,11 @@ test('56 bounded products substitute for expensive indexing and preserve existin
   assert.equal(TARGETS.length, 56); assertExpansionPlan()
   assert.equal(EXPANSION_MAX_SERVICE_BASE_UNITS, '2735500')
   assert.equal(CONFIRMATION, 'PUBLISHER_FUNDED_EXPANSION_56_ONCE_MAX_2_7355_USDC')
-  assert.equal(payableOffers().length, 161)
+  assert.equal(payableOffers().length, 159)
   const prices = TARGETS.map(t => BigInt(t.amount))
   assert.equal(new Set(prices).size, 56)
   assert.ok(prices.every(p => p >= BigInt(2000) && p <= BigInt(390000)))
-  for (const id of ['research-intake-evidence-pack', 'book-edition-the-imagined-life', 'book-edition-the-volcanic-engine', 'book-epub-the-maha-principle', 'book-epub-the-orbital-mind']) {
+  for (const id of ['research-intake-evidence-pack', 'book-epub-the-maha-principle', 'book-epub-the-orbital-mind']) {
     assert.ok(!(EXPANSION_INDEXING_IDS as readonly string[]).includes(id))
     assert.ok(X402_OFFERS.find(o => o.id === id)?.availability.payableInProduction)
   }

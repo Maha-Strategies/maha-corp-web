@@ -10,6 +10,7 @@ import { privateDeploymentPathDecision } from '@/lib/workflows/deployment-bounda
 import { federationCanonicalHostForPath, federationHostAllowsPath, normalizedRequestHost } from '@/lib/federation-host-routing'
 import { COLLECTION_INTERNAL_PATH } from '@/lib/collection-hub-paths'
 import { carriesProxyAssertedHeader, forwardedRequestHeaders } from '@/lib/proxy-request-headers'
+import { retiredProductForPath, retiredProductResponse } from '@/lib/x402/retired-offers'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -39,6 +40,8 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   if (privateBoundary === 'redirect_console') return NextResponse.redirect(new URL('/admin/orchestration', request.url))
   if (privateBoundary === 'deny') return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
   if (!pathname.startsWith('/api/v1/')) return forward(request)
+  // Before API credit consumption, x402 configuration, verification or settlement.
+  if (request.method !== 'OPTIONS' && retiredProductForPath(pathname)) return retiredProductResponse(pathname)
   const gate = apiProxyGate(pathname, request.method, apiKeyServiceConfigured())
   if (gate === 'preflight') return new NextResponse(null, { status: 204, headers: API_CORS_HEADERS })
   if (gate === 'self_managed') return forward(request, API_CORS_HEADERS)
