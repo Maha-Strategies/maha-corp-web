@@ -244,7 +244,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
 /**
  * Turns the deployment's enablement list into priced resources.
  *
- * JSON: [{"method":"POST","path":"/api/v1/compress","amount":"1000","description":"…","concurrencyCap":8}]
+ * JSON: [{"method":"POST","path":"/api/v1/compress","amount":"5001","description":"…","concurrencyCap":8}]
  * `pathPrefix` is still read as a synonym for `path`, so a deployment carrying
  * the pre-catalog spelling keeps working rather than dropping payments the
  * moment this ships.

@@ -11,13 +11,14 @@ export function visibleEndpoint(e: Endpoint, local = false) {
   return e.status === 'released' && e.productionApproved || local && e.status === 'local-implemented'
 }
 export const describeEndpoint = (e: Endpoint) => ({ id: e.id, name: e.name, description: e.description, method: e.method, path: e.path, domain: e.domain,
-  ...(e.productionApproved ? { examples: releaseExample(e.id) && { input: releaseExample(e.id)!.input, output: releaseExample(e.id)!.output } } : {}),
+  ...(e.productionApproved ? { examples: releaseExample(e.id) && { input: releaseExample(e.id)!.input, output: releaseExample(e.id)!.output,
+    ...(releaseExample(e.id)!.output === null ? { outputOmittedReason: 'Paid reading text is not a free discovery example.' } : {}) } } : {}),
   ...(publicBookMetadata(e.id) ? { book: publicBookMetadata(e.id) } : {}),
   category: e.category, tags: e.tags, price_usdc: e.price_usdc, amount: e.amount, schema: e.schema, estimated_compute_cost: e.estimated_compute_cost,
   cost_basis: e.cost_basis, pricing: e.pricing, execution_cost: e.execution_cost, status: e.status, paymentEnabled: e.productionApproved, recovery: {
     binding: modularRecoveryContract(e.id),
     retentionSeconds: recoverySeconds(e), receiptRetentionSeconds: RECEIPT_RETENTION_SECONDS, inputHashHeader: 'X-Maha-Input-Hash', privateSecretHeader: 'X-Maha-Recovery-Secret',
-    complimentaryCorrection: e.id === 'publication-pinned-brief',
+    complimentaryCorrection: false,
     recoveryMode: 'X-Maha-Recovery-Mode: retained-result', automaticRepayment: false,
     capsulePrivate: true, requiresMahaBuyerAdapter: true },
   limitations: ['Costs are planning assumptions, not measurements or a guarantee of margin.', 'An unavailable product must not be purchased.',

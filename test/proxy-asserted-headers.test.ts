@@ -147,9 +147,9 @@ const event = { waitUntil: (promise: Promise<unknown>) => { void promise } } as 
 
 const ORIGIN = 'https://www.mahastrategies.com'
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
-const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'One compression', concurrencyCap: 8 }
+const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '5001', description: 'One compression', concurrencyCap: 8 }
 const accepted: PaymentRequirement = {
-  scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
+  scheme: 'exact', network: 'eip155:8453', amount: '5001', payTo: '0xSettlement',
   maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
 }
 const signature = async () => encode({

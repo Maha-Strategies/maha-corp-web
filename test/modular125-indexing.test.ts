@@ -14,7 +14,7 @@ import { paymentRequiredHeaderBytes, PAYMENT_REQUIRED_HEADER_LIMIT } from '../li
 const env = { GITHUB_ACTIONS: 'true', GITHUB_REF: 'refs/heads/main', GITHUB_RUN_ATTEMPT: '1', MODULAR125_CONFIRMATION: NEXT_CONFIRMATION, MODULAR125_OUTPUT_PATH: '/tmp/test-only-evidence.json' }
 const unpaidOnlyFacilitator = { verify: async () => { throw Error('no_paid_request_allowed') }, settle: async () => { throw Error('no_settlement_allowed') } }
 test('125 exact reviewed CPU/WASM contracts fit the observed wallet without model spending or unreviewed sources', () => {
-  assert.equal(PRODUCTION_ENDPOINTS.length, 958); assert.equal(NEXT_PRODUCTION_ENDPOINTS.length, 125)
+  assert.equal(PRODUCTION_ENDPOINTS.length, 1000); assert.equal(NEXT_PRODUCTION_ENDPOINTS.length, 125)
   assert.equal(NEXT_PRODUCTION_ENDPOINTS.reduce((n, e) => n + BigInt(e.amount), 0n), NEXT_CAP)
   assert.equal(3588786n - NEXT_CAP, 14691n)
   assert.equal(MODULAR_NEXT_ADDITIONS.customerRevenue, false); assert.equal(MODULAR_NEXT_ADDITIONS.organicDemand, false)

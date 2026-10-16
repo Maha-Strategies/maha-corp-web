@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { privateKeyToAccount } from 'viem/accounts'
-import { PRODUCTION_ENDPOINTS, ORIGINAL_PRODUCTION_ENDPOINTS, PRODUCTION_ADDITION_ENDPOINTS, NEXT_PRODUCTION_ENDPOINTS, BATCH201_PRODUCTION_ENDPOINTS, BATCH132_PRODUCTION_ENDPOINTS, MODULAR_RELEASE, MODULAR_ADDITIONS, MODULAR_NEXT_ADDITIONS, MODULAR_201_ADDITIONS, releaseExample, modularLedgerPrices } from '../lib/api-v1/production-release.ts'
+import { PRODUCTION_ENDPOINTS as ALL_PRODUCTION_ENDPOINTS, PREVIOUS_958_PRODUCTION_ENDPOINTS as PRODUCTION_ENDPOINTS, ORIGINAL_PRODUCTION_ENDPOINTS, PRODUCTION_ADDITION_ENDPOINTS, NEXT_PRODUCTION_ENDPOINTS, BATCH201_PRODUCTION_ENDPOINTS, BATCH132_PRODUCTION_ENDPOINTS, MODULAR_RELEASE, MODULAR_ADDITIONS, MODULAR_NEXT_ADDITIONS, MODULAR_201_ADDITIONS, releaseExample, modularLedgerPrices } from '../lib/api-v1/production-release.ts'
 import { ENDPOINTS } from '../lib/api-v1/endpoints.registry.ts'
 import { handlerFor } from '../lib/api-v1/handlers.ts'
 import { createEndpointRouter } from '../lib/api-v1/router.ts'
@@ -34,10 +34,10 @@ test('958-product release preserves the original 826 and adds only the approved 
   assert.equal(PRODUCTION_ADDITION_ENDPOINTS.reduce((n, e) => n + BigInt(e.amount), 0n), 2534496n)
   assert.equal(MODULAR_ADDITIONS.maximumBaseUnits, '2534496'); assert.equal(MODULAR_ADDITIONS.automaticRepayment, false)
   assert.equal(ENDPOINTS.filter(e => e.status === 'local-implemented').length, 1000)
-  assert.ok(ENDPOINTS.every(e => !e.productionApproved)); assert.equal(searchEndpoints({}).totalMatches, 958)
+  assert.ok(ENDPOINTS.every(e => !e.productionApproved)); assert.equal(searchEndpoints({}).totalMatches, 1000)
   assert.ok(PRODUCTION_ENDPOINTS.every(e => e.execution_cost?.mode === 'local-cpu-wasm' && !e.execution_cost.liveModelSpendApproved && e.sourceReview !== 'pending'))
-  assert.equal(new Set(modularLedgerPrices().map(e => e.id)).size, 958)
-  assert.equal(describeById('book-section-the-maha-principle'), undefined)
+  assert.equal(new Set(modularLedgerPrices().map(e => e.id)).size, 1000)
+  assert.equal(describeById('book-section-the-maha-principle')?.status, 'released')
 })
 for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response loss and no-repayment recovery: ' + e.id, async () => {
   let now = CLOCK, settlements = 0, recorded = 0
@@ -82,7 +82,9 @@ for (const e of PRODUCTION_ENDPOINTS) test('production quote, delivery, response
 })
 test('unselected and unbuilt products cannot receive a production quote', async () => {
   const router = createEndpointRouter({ environment: env })
-  for (const e of ENDPOINTS.filter(e => !PRODUCTION_ENDPOINTS.some(p => p.id === e.id))) {
+  for (const e of ENDPOINTS.filter(e => !ALL_PRODUCTION_ENDPOINTS.some(p => p.id === e.id))) {
     assert.equal((await router(new Request(ORIGIN + e.path, { method: e.method }))).status, 404)
   }
+  assert.equal((await router(new Request(ORIGIN + '/api/v1/verify/unknown/not-released', { method: 'POST' }))).status, 404)
+  assert.equal((await router(new Request(ORIGIN + ALL_PRODUCTION_ENDPOINTS[0].path, { method: 'GET' }))).status, 404)
 })

@@ -25,5 +25,5 @@ export function bookMetadata(id: string) {
 export const publicBookMetadata = (id: string) => {
   const m = bookMetadata(id)
   return m ? { bookId: m.bookId, title: m.title, editionDigest: m.editionDigest, editionBasis: m.editionBasis, readingUnits: m.sections,
-    formatNote: m.formatNote, sourceSelectionReviewRequiredBeforeDeployment: true } : undefined
+    formatNote: m.formatNote, sourceSelectionReviewRequiredBeforeDeployment: snapshot.sourceSelectionReviewRequiredBeforeDeployment } : undefined
 }

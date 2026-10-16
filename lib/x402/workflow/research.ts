@@ -90,7 +90,7 @@ function source(url: string, response: PublicRead, at: number, providerUpdatedAt
   return { url, retrievedAt: new Date(at).toISOString(), rawBytesSha256: 'sha256:' + createHash('sha256').update(response.body).digest('hex'),
     providerUpdatedAt, provider: url.startsWith('https://api.crossref.org/') ? 'Crossref' as const : 'ClinicalTrials.gov' as const,
     rightsBasis: url.startsWith('https://api.crossref.org/') ? 'Crossref public bibliographic metadata only; no abstracts, authors, full text or linked files redistributed.'
-      : 'Public registry status metadata only; no study descriptions, contacts, participant data or attached documents. Distribution terms need release review.',
+      : 'Source: ClinicalTrials.gov, U.S. National Library of Medicine. Identifier/status/date snapshot only; no descriptions, contacts, participant data or attachments. Not NLM-endorsed; may not reflect the most current/accurate data.',
     sourceCompletenessEstablished: false as const }
 }
 function parseWork(response: PublicRead, doi: string) {

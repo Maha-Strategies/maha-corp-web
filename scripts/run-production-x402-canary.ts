@@ -115,7 +115,7 @@ async function run(): Promise<CanaryEvidence> {
   })
   console.log(`Canary buyer: ${account.address}`)
   console.log(`Base USDC balance: ${formatUnits(balance, 6)} USDC`)
-  if (balance < EXPECTED_PRICE_BASE_UNITS) throw new Error('The dedicated canary wallet has less than 0.001 Base USDC.')
+  if (balance < EXPECTED_PRICE_BASE_UNITS) throw new Error('The dedicated canary wallet has less than 0.005001 Base USDC.')
 
   let challenged = false
   const paidFetch = createPaidFetch({

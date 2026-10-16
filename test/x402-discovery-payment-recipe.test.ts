@@ -19,12 +19,12 @@ const requirement = {
   maxTimeoutSeconds: 60, asset: BASE_USDC, extra: { name: 'USD Coin', version: '2' },
 }
 
-test('the recipe accepts only the expected payment below its hard ceiling', () => {
-  assert.ok(EXPECTED_PRICE_BASE_UNITS < SPEND_CEILING_BASE_UNITS)
+test('the recipe accepts only the expected payment at its exact hard ceiling', () => {
+  assert.equal(EXPECTED_PRICE_BASE_UNITS, SPEND_CEILING_BASE_UNITS)
   assert.doesNotThrow(() => assertSpendPolicy(requirement))
   assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(SPEND_CEILING_BASE_UNITS + BigInt(1)) }), /per-call ceiling/)
   // Any amount other than the published one, under the ceiling, is still refused.
-  assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(EXPECTED_PRICE_BASE_UNITS + BigInt(1_000)) }), /expects exactly/)
+  assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(EXPECTED_PRICE_BASE_UNITS - BigInt(1)) }), /expects exactly/)
   assert.throws(() => assertSpendPolicy({ ...requirement, payTo: '0x0000000000000000000000000000000000000000' }), /payee is not allowlisted/)
 })
 

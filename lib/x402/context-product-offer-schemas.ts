@@ -100,7 +100,7 @@ export const CONTEXT_BUDGET_LADDER_DISCOVERY: OfferDiscoveryContract = {
     properties: {
       version: { type: 'string', const: '0.1' }, offerId: { type: 'string', const: 'context-budget-ladder' },
       clientRequestId: { type: 'string' }, inputDigest: { type: 'string', pattern: SHA },
-      economicBasis: economicBasisSchema('context-compression', '1000', '5000'),
+      economicBasis: economicBasisSchema('context-compression', '5001', '12000'),
       runs: { type: 'array', minItems: 5, maxItems: 5, items: { type: 'object', additionalProperties: false, properties: { tokenBudget: { type: 'integer' }, contextPack: contextPackSchema() }, required: ['tokenBudget', 'contextPack'] } },
       comparison: { type: 'array', minItems: 5, maxItems: 5, items: { type: 'object', additionalProperties: false, properties: { tokenBudget: { type: 'integer' }, compiledEstimatedTokens: { type: 'integer' }, tokensSaved: { type: 'integer' }, sourceCoveragePercent: { type: 'number' }, includedPassageIds: { type: 'array', items: { type: 'string' } }, outputHash: { type: 'string', pattern: SHA } }, required: ['tokenBudget', 'compiledEstimatedTokens', 'tokensSaved', 'sourceCoveragePercent', 'includedPassageIds', 'outputHash'] } },
       boundaries: { type: 'array', items: { type: 'string' } }, sourceTextStored: { type: 'boolean', const: false }, compiledContextStored: { type: 'boolean', const: false }, receiptDigest: { type: 'string', pattern: SHA },

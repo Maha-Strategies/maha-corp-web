@@ -13,8 +13,8 @@ import { DISCOVERY_PROBLEM_COPY } from '../x402/discovery-problem-copy.ts'
 import { DEMAND6_IDS, DEMAND6_INPUTS, DEMAND6_RESULTS, DEMAND6_SAMPLES, type Demand6Id } from '../x402/demand6/contracts.ts'
 import { buildDemandProduct, type DemandDependencies } from '../x402/demand6/products.ts'
 import { DEMAND6_SOURCE_REGISTRY } from '../x402/demand6/sources.ts'
-import { runMpsAudit, MPS_TAGS, MPS_ACTIONS } from '../mps-audit-engine.ts'
-import { createModelCostBudget, type ExecutionCost } from './cost-policy.ts'
+import type { ExecutionCost } from './cost-policy.ts'
+import { MPS_CONTRACT_INPUT, MPS_CONTRACT_RESULT, auditMpsContract } from './mps-contract.ts'
 import type { HandlerContract, JsonSchema } from './types.ts'
 
 // No provider SDK, database client or secret lookup. A future model connector
@@ -38,7 +38,11 @@ const port = (id: string, description: string, request: z.ZodType, resultSchema:
   input: input({ request }), resultSchema, sample: { dataClass: 'synthetic', nonpersonalMetadata: true, request: sample }, run })
 
 const core: Port[] = [
-  port('context-compression', 'Rank and pack supplied public/synthetic passages with keyword or BM25 scoring, source IDs and hashes. Token counts are model-neutral estimates, not billing or factual verification.', z.object({ ...context, tokenBudget: budget }).strict(), objectSchema({ contextPack: contextPackSchema() }), { ...base, tokenBudget: 256 }, async request => ({ contextPack: compileContextPack(parseContextPackRequest(request)) })),
+  port('context-compression', 'Rank and pack supplied public/synthetic passages with keyword or BM25 scoring, source IDs and hashes. Token counts are model-neutral estimates, not billing or factual verification.', z.object({ ...context, tokenBudget: budget }).strict(), objectSchema({ contextPack: contextPackSchema() }), { ...base, tokenBudget: 256 }, async request => {
+    const contextPack = compileContextPack(parseContextPackRequest(request))
+    contextPack.packId = 'ctxpack_' + demandDigest(request).slice(7, 39)
+    return { contextPack }
+  }),
   port('context-budget-ladder', 'Compare five ascending declared context budgets over the same supplied documents. No source lookup, model or answer-quality claim.', z.object({ ...context, tokenBudgets: budgets }).strict(), projectSchema(CONTEXT_BUDGET_LADDER_DISCOVERY.outputSchema, ['runs', 'comparison']), { ...base, tokenBudgets: [64, 96, 128, 192, 256] }, async request => project(buildContextBudgetLadder(request), ['runs', 'comparison'])),
   port('deep-context-evaluation', 'Measure exact supplied-span retention at one context budget. Retention is not factual accuracy or downstream answer quality.', z.object({ ...context, tokenBudget: budget, requiredEvidence: evidence }).strict(), projectSchema(DEEP_CONTEXT_EVALUATION_DISCOVERY.outputSchema, ['contextPack', 'evidence', 'metrics', 'warnings']), { ...base, tokenBudget: 256, requiredEvidence }, async request => {
     const result = evaluateContextPack(parseContextEvaluationRequest(request))
@@ -50,18 +54,12 @@ const core: Port[] = [
   }),
   port('evidence-retention-matrix', 'Measure exact supplied evidence retention across five ascending budgets. Return pinned context runs and an evidence frontier; no model or truth/completeness claim.', z.object({ ...context, tokenBudgets: budgets, requiredEvidence: evidence }).strict(), projectSchema(EVIDENCE_RETENTION_MATRIX_DISCOVERY.outputSchema, ['runs', 'evidenceFrontier']), { ...base, tokenBudgets: [64, 96, 128, 192, 256], requiredEvidence }, async request => project(buildEvidenceRetentionMatrix(request), ['runs', 'evidenceFrontier'])),
 ]
-const mpsResult = z.object({ mps_version: z.literal('0.1'), input_hash: digest, claims: z.array(z.object({ excerpt: z.string().min(1).max(2000), tag: z.enum(MPS_TAGS), rationale: z.string().min(1).max(1000), action: z.enum(MPS_ACTIONS) }).strict()).min(1).max(32) }).strict()
-core.push(port('mps-autonomous-audit', 'Model-assisted provenance-tag audit of one supplied public/synthetic passage. Adapter tested with a mocked model only; no live provider is configured. Execution requires separately approved cost envelope and spending. Tags are model assessments, not independently verified facts.', z.object({ passage: z.string().trim().min(1).max(6000) }).strict(), z.toJSONSchema(mpsResult), { passage: 'This synthetic result still needs independent source verification before publication.' }, async (request, deps, amount) => {
-  if (!deps.model) throw Error('model_connector_not_configured_no_spending')
-  const model = deps.model, cost = createModelCostBudget(amount, model.policy)
-  cost.reserve(model.maximumCallCostUsd)
-  const passage = (request as { passage: string }).passage
-  return mpsResult.parse(await runMpsAudit(passage, async prompt => {
-    const raw = await model.run(prompt, { maximumCostUsd: model.maximumCallCostUsd, maximumOutputTokens: 2048 })
-    if (Buffer.byteLength(raw) > 24000) throw Error('model_response_over_limit')
-    return raw
-  }))
-}))
+// Historical ID is retained for price allocation; discovery names the actual
+// CPU-only replacement. No autonomous/model assessment is performed.
+core.push(port('mps-autonomous-audit', 'MPS provenance-contract audit: check caller-declared claim tags, exact excerpts, evidence-reference IDs and action consistency. CPU only; no model calls, source fetching, truth judgments or certification of VERIFIED labels.', MPS_CONTRACT_INPUT,
+  z.toJSONSchema(MPS_CONTRACT_RESULT), { passage: 'This synthetic result still needs independent source verification before publication.',
+    sources: [], claims: [{ id: 'claim1', excerpt: 'This synthetic result still needs independent source verification before publication.',
+      tag: 'UNVERIFIED', action: 'verify', sourceIds: [], verificationRecorded: false }] }, async request => auditMpsContract(request)))
 for (const productId of Object.keys(SYNTHETIC_CALCULATION_INPUTS) as CelestialProductId[]) {
   const shape = { dataClass: z.enum(['public', 'synthetic']), instantUtc: utc }
   const request = productId === 'celestial-position-snapshot' ? z.object(shape).strict()

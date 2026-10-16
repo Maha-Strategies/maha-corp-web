@@ -9,6 +9,7 @@ import {
   type ScoringMode,
 } from '../context-compiler.ts'
 import { evaluateContextPack, parseContextEvaluationRequest } from '../context-pack-evaluator.ts'
+import { CONTEXT_COMPILER_AMOUNT } from './compiler-current-price.ts'
 
 export const CONTEXT_BUDGET_LADDER_VERSION = '0.1' as const
 export const EVIDENCE_RETENTION_MATRIX_VERSION = '0.1' as const
@@ -85,7 +86,7 @@ export function buildContextBudgetLadder(inputValue: unknown) {
     offerId: 'context-budget-ladder' as const,
     clientRequestId: input.clientRequestId,
     inputDigest,
-    economicBasis: { componentOfferId: 'context-compression', componentRuns: CONTEXT_PRODUCT_RUNS, componentPriceBaseUnits: '1000', priceBaseUnits: '5000' },
+    economicBasis: { componentOfferId: 'context-compression', componentRuns: CONTEXT_PRODUCT_RUNS, componentPriceBaseUnits: CONTEXT_COMPILER_AMOUNT, priceBaseUnits: '12000' },
     runs,
     comparison: runs.map(({ tokenBudget, contextPack }) => ({
       tokenBudget,

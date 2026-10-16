@@ -45,7 +45,7 @@ export function bookPackHandler(productId: BookPackId, amount: string): HandlerC
     const result = { sections, concepts, relationshipBasis: 'caller-declared-reading-links-not-evidence-of-truth' as const,
       license: 'Personal reading or internal use only. No redistribution, resale, model-training rights or copyright transfer.' as const }
     const data = output.parse({ version: 'maha-pinned-book-pack/1', productId, inputHash: demandDigest(i), result, resultHash: demandDigest(result), chargedAmount: amount,
-      limitations: ['Exact selected-EPUB units only; source selection and rights still require release review. No images, PDF layout, third-party or excluded manuscript content.',
+      limitations: ['Owner-authorized selected-EPUB units only, pinned after publisher release review. No images, PDF layout, third-party or excluded manuscript content.',
         'Concept labels and links are caller declarations, not semantic entailment, factual or clinical certification.',
         'Result content is retained for 24 hours and receipt metadata for 90 days. Original deadlines do not extend; no automatic repayment.',
         'Paid pack text must remain private. The source archive and recovery outbox must not be publicly uploaded.'] })

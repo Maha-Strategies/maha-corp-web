@@ -5,6 +5,13 @@ import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { EBOOK_IDS, ebookArtifacts } from './lib/x402/ebook-contract.ts'
 import { MODULAR_RUNTIME_TRACES } from './lib/api-v1/runtime-assets.ts'
+import bookMetadata from './content/api-v1-books/metadata.json' with { type: 'json' }
+
+// A public Git checkout intentionally lacks paid reading text. Refuse a hosted
+// build that would replace the working private server bundle with missing assets.
+if (process.env.VERCEL === '1') for (const book of bookMetadata.books) {
+  if (!existsSync(resolve('content/api-v1-books', book.bookId + '.json'))) throw Error('Private reading-unit assets are required; use the approved private server-bundle deployment.')
+}
 
 // An enabled book release must never be built without its private assets.
 // CLI uploads include them only in server functions, never public/ or Git.

@@ -126,7 +126,7 @@ async function requireFundedBaseUsdcWallet(wallet: RecipeWallet): Promise<void> 
   console.log(`   wallet=${wallet.address}`)
   console.log(`   Base USDC balance=${formatUnits(balance, 6)} USDC`)
   if (balance < EXPECTED_PRICE_BASE_UNITS) {
-    throw new Error(`Wallet ${wallet.address} has insufficient Base USDC. Fund this CDP account with at least 0.001 USDC, then retry.`)
+    throw new Error(`Wallet ${wallet.address} has insufficient Base USDC. Fund this CDP account with at least 0.005001 USDC, then retry.`)
   }
 }
 

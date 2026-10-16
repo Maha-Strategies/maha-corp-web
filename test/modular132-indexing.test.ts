@@ -28,7 +28,7 @@ test('atomic private outbox replacement preserves the earlier capsule when repla
   } finally { rmSync(directory, { recursive: true, force: true }) }
 })
 test('132 exact reviewed CPU/WASM contracts fit the observed wallet without model spending or unreviewed sources', () => {
-  assert.equal(PRODUCTION_ENDPOINTS.length, 958); assert.equal(BATCH132_PRODUCTION_ENDPOINTS.length, 132)
+  assert.equal(PRODUCTION_ENDPOINTS.length, 1000); assert.equal(BATCH132_PRODUCTION_ENDPOINTS.length, 132)
   assert.equal(BATCH132_PRODUCTION_ENDPOINTS.reduce((n, e) => n + BigInt(e.amount), 0n), BATCH132_CAP)
   assert.equal(7071050n - BATCH132_CAP, 74996n)
   assert.equal(MODULAR_132_ADDITIONS.customerRevenue, false); assert.equal(MODULAR_132_ADDITIONS.organicDemand, false)

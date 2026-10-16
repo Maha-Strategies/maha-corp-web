@@ -16,7 +16,7 @@
 const SUPPORTED = new Set([
   'type', 'const', 'enum', 'required', 'properties', 'additionalProperties',
   'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'minimum',
-  'maximum', 'pattern', 'description', 'default', 'title',
+  'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'pattern', 'format', 'description', 'default', 'title',
   'oneOf', 'anyOf', 'allOf',
   '$schema',
   'uniqueItems', 'propertyNames', 'minProperties', 'maxProperties',
@@ -82,6 +82,18 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   }
 
   if (typeof value === 'string') {
+    if (typeof schema.format === 'string') {
+      let valid = false
+      if (schema.format === 'uri') {
+        try { const u = new URL(value); valid = /^[a-z][a-z0-9+.-]*:/i.test(value) && !!u.protocol && !/\s/.test(value) } catch { /* invalid URI */ }
+      } else if (schema.format === 'date' || schema.format === 'date-time') {
+        const day = value.slice(0, 10), stamp = Date.parse(day + 'T00:00:00Z')
+        const validDay = /^\d{4}-\d{2}-\d{2}$/.test(day) && Number.isFinite(stamp) && new Date(stamp).toISOString().slice(0, 10) === day
+        valid = validDay && (schema.format === 'date' ? value === day
+          : /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(value) && Number.isFinite(Date.parse(value)))
+      } else problems.push(`${path}: unsupported string format ${schema.format}`)
+      if (!valid) problems.push(`${path}: invalid ${schema.format}`)
+    }
     if (typeof schema.minLength === 'number' && value.length < schema.minLength) {
       problems.push(`${path}: shorter than minLength ${schema.minLength}`)
     }
@@ -96,6 +108,8 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
   if (typeof value === 'number') {
     if (typeof schema.minimum === 'number' && value < schema.minimum) problems.push(`${path}: below minimum ${schema.minimum}`)
     if (typeof schema.maximum === 'number' && value > schema.maximum) problems.push(`${path}: above maximum ${schema.maximum}`)
+    if (typeof schema.exclusiveMinimum === 'number' && value <= schema.exclusiveMinimum) problems.push(`${path}: not above exclusiveMinimum ${schema.exclusiveMinimum}`)
+    if (typeof schema.exclusiveMaximum === 'number' && value >= schema.exclusiveMaximum) problems.push(`${path}: not below exclusiveMaximum ${schema.exclusiveMaximum}`)
   }
 
   if (Array.isArray(value)) {

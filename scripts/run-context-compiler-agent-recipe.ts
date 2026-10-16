@@ -4,7 +4,7 @@
  * Safe measurement (no network and no payment):
  *   npm run recipe:context-compiler
  *
- * Production x402 call (settles exactly 0.001 USDC on Base Mainnet):
+ * Production x402 call (settles exactly 0.005001 USDC on Base Mainnet):
  *   X402_BUYER_PRIVATE_KEY=0x... npm run recipe:context-compiler:live
  *
  * The workload is four real, published Maha Strategies book chapters. The
@@ -20,11 +20,12 @@ import { encode } from 'gpt-tokenizer'
 
 import { compileContextPack, parseContextPackRequest, type ContextPackRequest } from '../lib/context-compiler.ts'
 import { createPaidFetch, type TypedDataRequest } from '../lib/x402/client.ts'
+import { CONTEXT_COMPILER_AMOUNT } from '../lib/x402/compiler-current-price.ts'
 
 const ENDPOINT = process.env.MAHA_CONTEXT_COMPILER_URL?.trim() || 'https://www.mahastrategies.com/api/v1/compress'
 const LIVE = process.argv.includes('--live')
 const REFERENCE_INPUT_PRICE_USD_PER_MILLION = Number(process.env.REFERENCE_INPUT_PRICE_USD_PER_MILLION ?? '3')
-const LOCAL_X402_FEE_USD = 0.001
+const LOCAL_X402_FEE_USD = Number(CONTEXT_COMPILER_AMOUNT) / 1e6
 
 if (!Number.isFinite(REFERENCE_INPUT_PRICE_USD_PER_MILLION) || REFERENCE_INPUT_PRICE_USD_PER_MILLION <= 0) {
   throw new Error('REFERENCE_INPUT_PRICE_USD_PER_MILLION must be a positive number.')
