@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { bazaarResourceServerExtension, declareDiscoveryExtension, validateDiscoveryExtension } from '@x402/extensions/bazaar'
-import { offerById } from './offers.ts'
+import { historicalOfferById } from './offers.ts'
 import { isCelestialProduct, verifyCelestialProduct } from './celestial-products.ts'
 import { isMicroProduct } from './micro-contracts.ts'
 import { microDigest } from './micro-products.ts'
@@ -80,7 +80,7 @@ export function checkBuyerDelivery(input: {
   }
   provenance = capture.provenance as typeof provenance
   offerId = capture.offerId
-  const offer = offerById(offerId)
+  const offer = historicalOfferById(offerId)
   if (!offer || capture.method !== offer.method || capture.resourcePath !== offer.path) {
     problems.push('offer_route_mismatch'); return report()
   }

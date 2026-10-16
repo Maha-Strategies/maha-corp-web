@@ -467,6 +467,13 @@ export const VOLCANIC_ENGINE_EDITION_OFFER = machineBookEditionOffer({
   id: 'book-edition-the-volcanic-engine', path: '/api/v1/books/the-volcanic-engine/edition', title: 'The Volcanic Engine', bookId: 'the-volcanic-engine', amount: '3500000',
 })
 
+/** Historical contracts only: reserve prices and validate old receipts, never new purchases. */
+export const RETIRED_OFFERS: readonly X402Offer[] = Object.freeze([IMAGINED_LIFE_EDITION_OFFER, VOLCANIC_ENGINE_EDITION_OFFER].map(decorateOffer))
+for (const offer of RETIRED_OFFERS) {
+  offer.status = 'withheld'
+  offer.availability = { payableInProduction: false, blockedBy: ['Permanently retired whole-book pricing experiment; use a section service instead.'] }
+}
+
 export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   CONTEXT_COMPRESSION_OFFER,
   CONTEXT_BUDGET_LADDER_OFFER,
@@ -477,22 +484,22 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   RESEARCH_INTAKE_EVIDENCE_PACK_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
   VOLCANIC_ENGINE_SECTION_OFFER,
-  IMAGINED_LIFE_EDITION_OFFER,
-  VOLCANIC_ENGINE_EDITION_OFFER,
   ...CELESTIAL_OFFERS,
   ...MICRO_OFFERS,
   BUYER_BRIEF_OFFER,
   ...EBOOK_OFFERS,
   ...LICENSED_SECTION_OFFERS,
   ...DEMAND6_OFFERS,
-].map(offer => {
+].map(decorateOffer))
+
+function decorateOffer(offer: X402Offer) {
   // Decorate once at catalog initialization, preserving exported offer identity.
   if (DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]) offer.description = DISCOVERY_PROBLEM_COPY[offer.id] ?? BAZAAR_LAUNCH_COPY[offer.id]
   if (BAZAAR_PREVIOUS_AMOUNTS[offer.id]) offer.supersededAmounts = [
     ...(offer.supersededAmounts ?? []), ...BAZAAR_PREVIOUS_AMOUNTS[offer.id],
   ]
   return offer
-}))
+}
 
 /**
  * The offers Production discovery may present as callable payment contracts.
@@ -526,6 +533,8 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
  */
 function assertDistinctPayableAmounts(): void {
   const payable = X402_OFFERS.filter((offer) => offer.availability.payableInProduction)
+  const retiredAmounts = new Set(RETIRED_OFFERS.flatMap(offer => [offer.amount, ...(offer.supersededAmounts ?? [])]))
+  if (payable.some(offer => [offer.amount, ...(offer.supersededAmounts ?? [])].some(amount => retiredAmounts.has(amount)))) throw new Error('Retired settlement prices remain reserved for historical attribution.')
   const amounts = payable.map((offer) => offer.amount)
   const ebookIds = new Set(EBOOK_OFFERS.map(offer => offer.id))
   const duplicated = [...new Set(amounts.filter((amount, index) => amounts.indexOf(amount) !== index))]
@@ -547,6 +556,10 @@ assertUniqueCohortPrices(X402_OFFERS, EXPANSION_INDEXING_IDS, OPERATOR_SETTLEMEN
 export function payableOffers(): readonly X402Offer[] {
   return X402_OFFERS.filter((offer) => offer.status === 'available')
 }
+
+/** Retirement must not erase settled payments or make historical prices reusable. */
+export function settlementOffers(): readonly X402Offer[] { return [...payableOffers(), ...RETIRED_OFFERS] }
+export function historicalOfferById(id: string): X402Offer | undefined { return offerById(id) ?? RETIRED_OFFERS.find(offer => offer.id === id) }
 
 export function offerById(id: string): X402Offer | undefined {
   return X402_OFFERS.find((offer) => offer.id === id)

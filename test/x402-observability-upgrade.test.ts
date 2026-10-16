@@ -59,7 +59,7 @@ test('inactivity covers every expected listing on page two and separates deliber
   const report = await runInactivityWatch(now, pages(rows))
   assert.equal(report.catalogueComplete, true); assert.equal(report.observedResources, expected.length + PRODUCTION_ENDPOINTS.length)
   assert.equal(report.level, 'ok'); assert.equal(report.reports.length, expected.length + PRODUCTION_ENDPOINTS.length)
-  assert.equal(report.notRequestedOfferIds.length, 5)
+  assert.equal(report.notRequestedOfferIds.length, 3)
   await assert.rejects(runInactivityWatch(now, pages(rows, (b, offset) => { if (offset) b.resources = [] })))
 })
 test('a warning does not hide an unknown listing or prematurely close an incident', async () => {

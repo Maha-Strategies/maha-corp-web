@@ -79,8 +79,6 @@ export const PRODUCT_SUMMARIES: Readonly<Record<string, string>> = Object.freeze
   'research-intake-evidence-pack': 'Organizes a question and supplied sources into a machine-generated intake packet of claims, citation gaps and unresolved questions.',
   'book-section-the-imagined-life': 'Delivers one supported section of The Imagined Life as licensed, machine-readable prose.',
   'book-section-the-volcanic-engine': 'Delivers one supported section of The Volcanic Engine as licensed, machine-readable prose.',
-  'book-edition-the-imagined-life': 'Delivers the complete licensed Markdown edition of The Imagined Life with section identifiers and file-integrity hashes.',
-  'book-edition-the-volcanic-engine': 'Delivers the complete licensed Markdown edition of The Volcanic Engine with section identifiers and file-integrity hashes.',
   'celestial-position-snapshot': 'Calculates seven classical celestial-body positions for one UTC instant in Tropical and Lahiri Sidereal frames.',
   'celestial-chart-evidence': 'Calculates a reproducible chart with celestial positions, whole-sign houses, geometric aspects and calendar factors, without interpretation.',
   'celestial-vimshottari-timing': 'Calculates a Vimshottari period timeline using declared astronomical conventions, without predicting events.',

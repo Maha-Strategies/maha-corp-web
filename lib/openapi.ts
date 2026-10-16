@@ -18,9 +18,7 @@ import { BUYER_BRIEF_OPENAPI_PATHS } from './x402/buyer-brief-openapi.ts'
 import { EBOOK_OPENAPI_PATHS } from './x402/ebook-openapi.ts'
 import { LICENSED_SECTION_OPENAPI_PATHS } from './x402/licensed-book-section-openapi.ts'
 import {
-  IMAGINED_LIFE_EDITION_OFFER,
   IMAGINED_LIFE_SECTION_OFFER,
-  VOLCANIC_ENGINE_EDITION_OFFER,
   VOLCANIC_ENGINE_SECTION_OFFER,
   X402_OFFERS,
 } from './x402/offers.ts'
@@ -413,18 +411,16 @@ export const openApiDocument = {
     },
     '/api/v1/books/the-imagined-life/edition': {
       post: {
-        tags: ['Books'], operationId: 'purchaseImaginedLifeMachineEdition', summary: 'Purchase the complete machine-readable edition of The Imagined Life', security: [{}],
-        description: 'A complete normalized Markdown edition priced at 3.00 USDC over x402 v2 on Base, with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. The public web edition remains free. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, copyright ownership, analysis, or factual certification. The complete edition is delivered in the paid response; later requests are separate purchases.',
-        requestBody: { required: true, content: { 'application/json': { schema: IMAGINED_LIFE_EDITION_OFFER.discovery.inputSchema } } },
-        responses: { '200': { description: 'Complete machine-readable edition with manifest and deterministic receipt.', content: { 'application/json': { schema: IMAGINED_LIFE_EDITION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Request body must be an empty JSON object.'), '402': errorResponse('The x402 payment challenge for 3000000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+        tags: ['Books'], operationId: 'retiredImaginedLifeMachineEdition', summary: 'Retired whole-book pricing experiment', deprecated: true, security: [{}],
+        description: 'No payment accepted. Use /api/v1/books/the-imagined-life/section instead.',
+        responses: { '410': errorResponse('This experiment has been retired. Do not submit a payment.') },
       },
     },
     '/api/v1/books/the-volcanic-engine/edition': {
       post: {
-        tags: ['Books'], operationId: 'purchaseVolcanicEngineMachineEdition', summary: 'Purchase the complete machine-readable edition of The Volcanic Engine', security: [{}],
-        description: 'A complete normalized Markdown edition priced at 3.50 USDC over x402 v2 on Base, with an ordered section manifest, per-section and whole-edition SHA-256 commitments, and a deterministic receipt. The public web edition remains free. Purchase grants non-exclusive personal or internal machine use; it does not grant redistribution, resale, model-training rights, copyright ownership, analysis, or factual certification. The complete edition is delivered in the paid response; later requests are separate purchases.',
-        requestBody: { required: true, content: { 'application/json': { schema: VOLCANIC_ENGINE_EDITION_OFFER.discovery.inputSchema } } },
-        responses: { '200': { description: 'Complete machine-readable edition with manifest and deterministic receipt.', content: { 'application/json': { schema: VOLCANIC_ENGINE_EDITION_OFFER.discovery.outputSchema } } }, '400': errorResponse('Request body must be an empty JSON object.'), '402': errorResponse('The x402 payment challenge for 3500000 USDC base units.'), '413': errorResponse('Request exceeds 1024 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+        tags: ['Books'], operationId: 'retiredVolcanicEngineMachineEdition', summary: 'Retired whole-book pricing experiment', deprecated: true, security: [{}],
+        description: 'No payment accepted. Use /api/v1/books/the-volcanic-engine/section instead.',
+        responses: { '410': errorResponse('This experiment has been retired. Do not submit a payment.') },
       },
     },
     '/api/v1/mps/audit': {

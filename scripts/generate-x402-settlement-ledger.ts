@@ -20,7 +20,7 @@ import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base } from 'viem/chains'
 
 import { BASE_USDC, MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
-import { payableOffers } from '../lib/x402/offers.ts'
+import { settlementOffers } from '../lib/x402/offers.ts'
 import { modularLedgerPrices } from '../lib/api-v1/production-release.ts'
 import { buildLedger, type OfferPrice } from '../lib/x402/settlement-ledger.ts'
 
@@ -81,7 +81,7 @@ for (let from = earliest; from <= latest; from += CHUNK + BigInt(1)) {
 // Current and superseded amounts both. A settlement made at a price the offer
 // has since left is still that offer's settlement, and filtering on the current
 // amount alone would drop it before the ledger ever saw it.
-const priced = new Set([...payableOffers().flatMap((o) => [o.amount, ...(o.supersededAmounts ?? [])]).map(BigInt), ...modularLedgerPrices().map(o => o.amountBaseUnits)])
+const priced = new Set([...settlementOffers().flatMap((o) => [o.amount, ...(o.supersededAmounts ?? [])]).map(BigInt), ...modularLedgerPrices().map(o => o.amountBaseUnits)])
 const blocks = [...new Set(rows.filter((r) => priced.has(r.amountBaseUnits)).map((r) => r.blockNumber))]
 const timestamps = new Map<bigint, string>()
 for (const blockNumber of blocks) {
@@ -90,7 +90,7 @@ for (const blockNumber of blocks) {
 }
 for (const row of rows) row.timestampUtc = timestamps.get(row.blockNumber) ?? null
 
-const offers: OfferPrice[] = [...payableOffers().map((o) => ({
+const offers: OfferPrice[] = [...settlementOffers().map((o) => ({
   id: o.id,
   ...(o.supersededAmounts?.length ? { supersededAmountsBaseUnits: o.supersededAmounts.map(BigInt) } : {}),
   // serviceName is shared across offers from one service, so two products both

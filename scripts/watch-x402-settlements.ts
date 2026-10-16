@@ -20,7 +20,7 @@
 import { formatUnits } from 'viem'
 
 import { MAHA_PAYEE, OPERATOR_WALLETS } from '../lib/x402/discovery-payment-recipe.ts'
-import { payableOffers } from '../lib/x402/offers.ts'
+import { settlementOffers } from '../lib/x402/offers.ts'
 import { buildSettlementWatch, describeWatch, type Settlement } from '../lib/x402/settlement-watch.ts'
 import { evmSettlementReader } from '../lib/x402/settlement-refresh.ts'
 import { usdcNetwork, type UsdcNetwork } from '../lib/x402/networks.ts'
@@ -31,7 +31,7 @@ import { inspectTransferEvidence, settlementReceiptReader } from '../lib/x402/se
  * new offer is counted the day it is published rather than the day someone
  * remembers to widen a constant.
  */
-const PUBLISHED_PRICES = [...new Set(payableOffers().flatMap((offer) => [offer.amount, ...(offer.supersededAmounts ?? [])]).map(BigInt))].sort((a, b) => (a < b ? -1 : 1))
+const PUBLISHED_PRICES = [...new Set(settlementOffers().flatMap((offer) => [offer.amount, ...(offer.supersededAmounts ?? [])]).map(BigInt))].sort((a, b) => (a < b ? -1 : 1))
 
 function argument(flag: string, fallback: string): string {
   const index = process.argv.indexOf(flag)

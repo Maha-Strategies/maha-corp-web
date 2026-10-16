@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
-import { X402_OFFERS, offerById } from '../lib/x402/offers.ts'
+import { X402_OFFERS, historicalOfferById as offerById } from '../lib/x402/offers.ts'
 import { bytesDigest, checkBuyerDelivery, createBuyerCapture } from '../lib/x402/buyer-delivery-check.ts'
 import { captureResponseBody } from '../lib/x402/canary-response-capture.ts'
 import { buildBookEditionReceipt } from '../lib/x402/book-edition-product.ts'
@@ -43,7 +43,7 @@ function recapture(value: ReturnType<typeof fixture>) {
 }
 
 test('all declared products have repeatable offline payload checks, not live delivery claims', async () => {
-  assert.equal(X402_OFFERS.length, 163)
+  assert.equal(X402_OFFERS.length, 161)
   // Bundles are tested against actual private pinned files below, not against
   // advertising placeholders or copyrighted bytes checked into test fixtures.
   for (const offer of X402_OFFERS.filter(o => !o.id.startsWith('book-epub-'))) {

@@ -56,8 +56,8 @@ for (const id of DEMAND6_IDS) {
   })
 }
 test('six unique owner-approved releases preserve the existing 155 payable offers', () => {
-  assert.equal(payableOffers().filter(offer => !DEMAND6_IDS.includes(offer.id as Demand6Id)).length, 155)
-  assert.equal(payableOffers().length, 161)
+  assert.equal(payableOffers().filter(offer => !DEMAND6_IDS.includes(offer.id as Demand6Id)).length, 153)
+  assert.equal(payableOffers().length, 159)
   assert.equal(new Set(DEMAND6_IDS.map(id => DEMAND6_PRODUCTS[id].amount)).size, 6)
   for (const offer of DEMAND6_OFFERS) {
     assert.equal(offer.status, 'available'); assert.equal(offer.availability.payableInProduction, true)

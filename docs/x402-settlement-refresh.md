@@ -20,8 +20,13 @@ The existing Upstash Redis stores `x402:settlement-ledger:live:v1` with environm
 namespacing. An ownership-checked 55-second lock makes publication atomic and
 prevents an expired worker from overwriting a newer snapshot. Keep the previous
 snapshot on RPC or Redis failures; inspect Vercel cron logs on errors. Large
-responses (over 1,000 logs or 40 distinct timestamp blocks per run) require an
-operator-reviewed backfill, not silent truncation.
+responses use a budget of 1,000 unique transfers and 80 distinct timestamp
+blocks per run. When either budget is reached, publication stops **before the
+next whole block**, records that exact cursor, and marks catchup incomplete.
+Later runs resume with the same 128-block recheck. Nothing after the published
+cursor is represented as scanned. If even the overlap exceeds this budget,
+the scan fails closed with `requires_backfill`; it never rolls back history or
+claims progress. RPC errors still prevent publication of the entire invocation.
 
 The settlement page reads Redis at request time, without running a chain scan.
 It shows the observation time, catchup status, and an overdue warning after two
@@ -63,7 +68,10 @@ credentials plus the configured RPC URL, then run:
 VERCEL_ENV=production MAHA_SETTLEMENT_BACKFILL_APPROVED=yes node --experimental-strip-types scripts/backfill-x402-settlements.ts --backup=/private/tmp/settlement-before-repair-UNIQUE.json
 ```
 
-The offline reader paces all requests at 500ms. It pins one finalized head,
+The offline reader paces all requests at 500ms. Unlike the cron, it permits
+1,024 timestamp blocks and 10,000 transfers per pass, still using indivisible
+block prefixes. A single block or dense overlap exceeding those limits requires
+further operator review rather than truncation. It pins one finalized head,
 scans every intervening range outside the short publication lock, validates the
 completed ledger, saves a new private backup, then publishes once only if the
 saved base has not changed. Incomplete scans, backup failures, concurrent changes
@@ -72,6 +80,65 @@ hashes, amounts and operator classification against the recovered rows. Never
 repeat payments to repair an accounting display or count operator indexing as
 external demand. Verify `/api/health/x402-settlements` and the transaction page
 after publication, then test the approved production worker separately.
+
+## October 16 local repair and deployment hold
+
+The old 80-timestamp rejection could permanently stall a high-volume scan, and
+the offline path inherited the same ceiling. Offline regression tests now cover
+1,000 operator transfers, dense-overlap backfill, atomic failure, and isolated
+chain errors. Cron logs now include only the network and sanitized failure
+category so the production failure can be diagnosed without exposing RPC URLs.
+Read-only production checks found repeated HTTP 503 responses without diagnostic
+bodies in retained logs; the public Base RPC replay was rate-limited. Therefore
+the precise live failure category remains unconfirmed. No production refresh,
+backfill, deployment or payment is authorized by this local implementation.
+
+The product-page retention banner now derives from the enforced registry:
+995 services retain results for 24 hours and five publication services for
+30 days. Each modular card shows its own deadline; purchase metadata remains
+90 days from creation. Recovery does not restart retention.
+
+The extra Git deployment `dpl_DL5roCkj45aasFXYdK59wQHqXtw6` followed merge
+`1aaaac7f0d04a2482cd4c40ad21941ed79eba55f` on October 16. Its source was Git,
+and it failed in `next.config.ts` because private reading assets were absent;
+it did not replace the approved private deployment. Actual billed cost has not
+been verified. `gitProviderOptions.createDeployments` controls **GitHub
+deployment records**, not Vercel builds (see the [Vercel SDK field contract](https://github.com/vercel/sdk/blob/main/docs/models/updateprojectcreatedeployments.md)).
+The repository instead enabled `main`, and its ignore command always allowed
+production builds. The local correction sets `git.deploymentEnabled: false`
+for all branches and makes the Git ignore command skip in every environment,
+consistent with [Vercel's documented Git build control](https://vercel.com/docs/project-configuration/git-configuration).
+Approved releases must use an explicitly invoked manual/prebuilt upload; do not
+use the GitHub-record setting as a build pause or restore an automatic `main`
+override. These safeguards are local only until approved for publication. No
+Git push or live project-setting change was made during this repair.
+
+### Separately authorized live snapshot repair — October 16
+
+After the user explicitly requested fixing the live 563-transfer ledger, a
+one-off backfill through a verified, unauthenticated Tenderly Base RPC reached
+finalized block 52668458 and published at 2026-10-16T05:16:06.509Z. The public
+page and health endpoint were verified: 1,267 counted transfers (1,176 operator,
+91 external), with all final 42 indexing transaction links visible. All 566 old
+transfer rows were preserved; the complete ledger has 1,270 rows, including
+unmatched transfers not counted as product settlements. This is a saved-data
+repair, not a deployment or additional indexing purchase. A private 0600 backup
+was saved before the atomic write. No production RPC setting was changed.
+
+Sensitive Vercel RPC variables are redacted in local environment downloads;
+a placeholder being rejected is **not** proof the actual deployed URL is
+invalid. The hosted failure category remains unconfirmed until new diagnostics
+are deployed. The permanent scan-budget fix and accurate retention notices are
+still held locally pending deployment approval.
+
+The two whole-book pricing experiments (The Imagined Life at 3 USDC and The
+Volcanic Engine at 3.5 USDC) are also retired locally, not yet live. Their exact
+routes reject before charging, stale enablement cannot reactivate them, and
+current discovery removes them. `settlementOffers()` retains their old prices
+for history while `payableOffers()` excludes them. Book-section products, paid
+EPUB/PDF bundles and all 1,000 modular services remain intact. Neither retired
+experiment was present in the complete 1,156-resource Bazaar snapshot checked
+at 2026-10-16T05:14:45.977Z, so no paid re-indexing or Bazaar deletion is needed.
 
 ## Operator receipts (ledger schema 1.1)
 

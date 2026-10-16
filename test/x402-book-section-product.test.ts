@@ -75,13 +75,15 @@ test('unknown books, sections and fields fail closed', () => {
   assert.throws(() => buildBookSectionReceipt('the-imagined-life', { sectionId: 'introduction', extra: true }), /Only sectionId/)
 })
 
-test('both complete-edition offers are $3-tier resources at widely separated settled amounts', () => {
+test('retired complete-edition prices remain historical, not purchasable', () => {
   // The Volcanic Engine edition delivers 428 KB against The Imagined Life's
   // 337 KB, so it is priced above it rather than one base unit away.
   assert.equal(IMAGINED_LIFE_EDITION_OFFER.amount, '3000000')
   assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.amount, '3500000')
-  assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/edition'), IMAGINED_LIFE_EDITION_OFFER)
-  assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/edition'), VOLCANIC_ENGINE_EDITION_OFFER)
+  assert.equal(offerFor('POST', '/api/v1/books/the-imagined-life/edition'), undefined)
+  assert.equal(offerFor('POST', '/api/v1/books/the-volcanic-engine/edition'), undefined)
+  assert.equal(IMAGINED_LIFE_EDITION_OFFER.availability.payableInProduction, false)
+  assert.equal(VOLCANIC_ENGINE_EDITION_OFFER.availability.payableInProduction, false)
   assert.equal(offerFor('GET', '/api/v1/books/the-volcanic-engine/edition'), undefined)
 })
 

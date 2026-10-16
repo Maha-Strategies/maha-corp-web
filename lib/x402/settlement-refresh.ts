@@ -1,7 +1,7 @@
 import { createPublicClient, http, parseAbiItem } from 'viem'
 import { base, arbitrum, polygon } from 'viem/chains'
 import { MAHA_PAYEE, OPERATOR_WALLETS } from './discovery-payment-recipe.ts'
-import { payableOffers } from './offers.ts'
+import { settlementOffers } from './offers.ts'
 import { modularLedgerPrices } from '../api-v1/production-release.ts'
 import { OPERATOR_SETTLEMENT_RECEIPTS } from './operator-settlement-receipts.ts'
 import { buildLedger, type SettlementLedger } from './settlement-ledger.ts'
@@ -20,10 +20,13 @@ export type SettlementReader = {
 export const RECHECK_BLOCKS = BigInt(128)
 export const SCAN_CHUNK = RPC_LOG_MAX_BLOCKS
 export const MAX_SCAN_BLOCKS = SCAN_CHUNK * BigInt(12)
-// Covers the approved fifty-call launch even when every transfer lands in a
-// different block. At 350 ms pacing, 80 timestamps plus 48 Arbitrum ranges use
-// about 45 seconds before network latency; heavier history stays offline-only.
+// Bound cron work, not lifetime volume. At 350 ms pacing, 80 timestamps plus
+// 48 Arbitrum ranges use about 45 seconds before network latency. Complete
+// block prefixes allow bursts to advance; dense overlap stays offline-only.
 export const MAX_TIMESTAMP_BLOCKS = 80
+export type SettlementScanLimits = { maxTimestampBlocks?: number; maxTransfers?: number }
+/** Offline repair is paced but is not constrained by a 60-second server function. */
+export const BACKFILL_SCAN_LIMITS = { maxTimestampBlocks: 1024, maxTransfers: 10000 } as const
 
 export function baseSettlementReader(options: { timeout?: number; retryCount?: number; minRpcIntervalMs?: number; minLogIntervalMs?: number } = {}): SettlementReader {
   return evmSettlementReader('eip155:8453', options)
@@ -84,7 +87,7 @@ export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settleme
     // amounts come too -- which would silently drop them from the published
     // totals. scripts/generate-x402-settlement-ledger.ts already passes these;
     // this path did not, and the two disagreed the moment a price moved.
-    offers: [...payableOffers().map((offer) => ({
+    offers: [...settlementOffers().map((offer) => ({
       id: offer.id,
       title: offer.id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '),
       amountBaseUnits: BigInt(offer.amount),
@@ -96,7 +99,10 @@ export function ledgerFromRows(rows: Parameters<typeof buildLedger>[0]['settleme
 }
 
 /** Bounded incremental scan. A failed chunk never advances the cursor or publishes a partial scan. */
-export async function refreshSettlementLedger(previous: SettlementLedger, reader: SettlementReader, now = new Date()) {
+export async function refreshSettlementLedger(previous: SettlementLedger, reader: SettlementReader, now = new Date(), limits: SettlementScanLimits = {}) {
+  const maxTimestampBlocks = limits.maxTimestampBlocks ?? MAX_TIMESTAMP_BLOCKS, maxTransfers = limits.maxTransfers ?? 1000
+  if (!Number.isInteger(maxTimestampBlocks) || maxTimestampBlocks < 1 || maxTimestampBlocks > BACKFILL_SCAN_LIMITS.maxTimestampBlocks
+    || !Number.isInteger(maxTransfers) || maxTransfers < 1 || maxTransfers > BACKFILL_SCAN_LIMITS.maxTransfers) throw new Error('invalid_settlement_scan_limits')
   const network = (previous.caip2Network ?? 'eip155:8453') as UsdcNetwork
   if (reader.caip2Network && reader.caip2Network !== network) throw new Error('settlement_reader_network_mismatch')
   const finalized = await reader.finalizedBlock()
@@ -107,7 +113,7 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
   // Arbitrum block numbers advance faster; a Base-sized hourly scan would fall
   // farther behind on every run. Keep each range bounded and cursor atomic.
   const limit = network === 'eip155:42161' ? MAX_SCAN_BLOCKS * BigInt(4) : MAX_SCAN_BLOCKS
-  const end = finalized < start + limit - BigInt(1) ? finalized : start + limit - BigInt(1)
+  let end = finalized < start + limit - BigInt(1) ? finalized : start + limit - BigInt(1)
   const ranges: Array<[bigint, bigint]> = []
   for (let from = start; from <= end; from += SCAN_CHUNK) ranges.push([from, from + SCAN_CHUNK - BigInt(1) < end ? from + SCAN_CHUNK - BigInt(1) : end])
   const found: Transfer[] = []
@@ -120,11 +126,12 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
           || !/^0x[a-fA-F0-9]{64}$/.test(row.transactionHash) || !/^0x[a-fA-F0-9]{40}$/.test(row.payer)
           || !Number.isInteger(row.logIndex) || row.logIndex < 0) throw new Error('invalid_transfer_range_or_identity')
         found.push(row)
+        if (found.length > BACKFILL_SCAN_LIMITS.maxTransfers * 2) throw new Error('scan_requires_offline_backfill')
       }
     })
   }
-  // Do not silently truncate a high-volume response and call it complete.
-  if (found.length > 1000) throw new Error('scan_requires_offline_backfill')
+  // Normal work budgets select a complete block prefix rather than repeatedly
+  // rejecting the same high-volume window. All received logs validate first.
   const unique = new Map<string, Transfer>()
   for (const row of found) {
     const key = `${row.transactionHash.toLowerCase()}:${row.logIndex}`
@@ -133,9 +140,25 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
       || existing.payer.toLowerCase() !== row.payer.toLowerCase())) throw new Error('conflicting_transfer_log')
     unique.set(key, row)
   }
+  const sorted = [...unique.values()].sort((a, b) => a.blockNumber < b.blockNumber ? -1 : a.blockNumber > b.blockNumber ? 1 : a.logIndex - b.logIndex)
+  const blocks: bigint[] = []
+  let admitted = 0
+  for (let i = 0; i < sorted.length;) {
+    const block = sorted[i].blockNumber
+    let next = i + 1
+    while (next < sorted.length && sorted[next].blockNumber === block) next++
+    if (blocks.length === maxTimestampBlocks || admitted + next - i > maxTransfers) {
+      end = block - 1n
+      // Never drop existing history or pretend a dense overlap is progress.
+      // A genuinely larger offline scan can repair that case without weakening
+      // the 128-block recheck or publishing an incomplete block.
+      if (end < cursor || end === cursor && finalized > cursor) throw new Error('scan_requires_offline_backfill_overlap_budget')
+      break
+    }
+    blocks.push(block); admitted += next - i; i = next
+  }
+  const completeRows = sorted.slice(0, admitted)
   const times = new Map<bigint, string>()
-  const blocks = [...new Set([...unique.values()].map((row) => row.blockNumber))]
-  if (blocks.length > MAX_TIMESTAMP_BLOCKS) throw new Error('scan_requires_offline_backfill')
   for (let i = 0; i < blocks.length; i += 4) {
     await Promise.all(blocks.slice(i, i + 4).map(async (block) => {
       const timestamp = await reader.timestamp(block)
@@ -148,6 +171,6 @@ export async function refreshSettlementLedger(previous: SettlementLedger, reader
     payer: row.payer, amountBaseUnits: BigInt(row.amountBaseUnits), blockNumber: BigInt(row.blockNumber),
     transactionHash: row.transactionHash, timestampUtc: row.timestampUtc, logIndex: row.logIndex,
   }))
-  const ledger = ledgerFromRows([...retained, ...[...unique.values()].map((row) => ({ ...row, timestampUtc: times.get(row.blockNumber)! }))], earliest, end, now.toISOString(), network)
+  const ledger = ledgerFromRows([...retained, ...completeRows.map((row) => ({ ...row, timestampUtc: times.get(row.blockNumber)! }))], earliest, end, now.toISOString(), network)
   return { ledger, caughtUp: end === finalized, finalizedBlock: finalized.toString() }
 }

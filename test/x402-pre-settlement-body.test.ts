@@ -4,7 +4,6 @@ import test from 'node:test'
 
 import { compileContextPack, maxContextPackBytes, parseContextPackRequest } from '../lib/context-compiler.ts'
 import { MAX_X402_EVALUATION_BYTES, buildDeepContextEvaluation, parseDeepContextRequest } from '../lib/deep-context-evaluation.ts'
-import { buildBookEditionReceipt } from '../lib/x402/book-edition-product.ts'
 import { MACHINE_BOOK_IDS, buildBookSectionReceipt, resolveBookSectionRequest, type MachineBookId } from '../lib/x402/book-section-product.ts'
 import { getOpenBookEdition } from '../lib/open-book-editions.ts'
 import { priceFor, requirementFor, x402Config, type X402Config } from '../lib/x402/config.ts'
@@ -37,8 +36,6 @@ const EXECUTION: Record<string, (value: unknown) => unknown> = {
   'governed-context-verification-pack': buildGovernedContextVerificationPack,
   'book-section-the-imagined-life': (value) => buildBookSectionReceipt('the-imagined-life', value),
   'book-section-the-volcanic-engine': (value) => buildBookSectionReceipt('the-volcanic-engine', value),
-  'book-edition-the-imagined-life': (value) => buildBookEditionReceipt('the-imagined-life', value),
-  'book-edition-the-volcanic-engine': (value) => buildBookEditionReceipt('the-volcanic-engine', value),
 }
 
 const ROUTES: Record<string, string> = {
@@ -197,7 +194,7 @@ test('media type, size and JSON syntax follow each route handler', async () => {
   const byId = Object.fromEntries(REGISTERED.map((offer) => [offer.id, offer]))
   assert.equal(maxContextPackBytes(null), byId['context-compression'].maxRequestBytes)
   assert.equal(MAX_X402_EVALUATION_BYTES, byId['deep-context-evaluation'].maxRequestBytes)
-  for (const id of ['context-budget-ladder', 'evidence-retention-matrix', 'governed-context-verification-pack', 'book-section-the-imagined-life', 'book-edition-the-imagined-life']) {
+  for (const id of ['context-budget-ladder', 'evidence-retention-matrix', 'governed-context-verification-pack', 'book-section-the-imagined-life']) {
     assert.match(read(ROUTES[id]), /Buffer\.byteLength\(raw, 'utf8'\) > [A-Za-z_]+\.maxRequestBytes/, `${id}: route limit is the offer's maxRequestBytes`)
   }
 })

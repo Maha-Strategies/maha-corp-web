@@ -2,6 +2,7 @@ import type { PaymentRequirement, X402Network } from './protocol.ts'
 import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
 import { catalogMismatches, offerFor } from './offers.ts'
+import { retiredProductForPath } from './retired-offers.ts'
 import type { CdpApiCredentials } from './cdp-auth.ts'
 import { EXISTING_RELEASED_MICRO_IDS } from './micro-release.ts'
 import { PLANNING_IDS } from './micro-planning-contracts.ts'
@@ -263,7 +264,7 @@ function parseResources(raw: string | undefined, contradictions: string[]): Pric
   if (!Array.isArray(parsed)) throw new Error('X402_RESOURCES must be a JSON array.')
 
   const seen = new Set<string>()
-  return parsed.map((entry) => {
+  return parsed.flatMap((entry) => {
     if (typeof entry !== 'object' || entry === null) throw new Error('Each X402_RESOURCES entry must be an object.')
     const resource = entry as Record<string, unknown>
     const rawPath = typeof resource.path === 'string' ? resource.path.trim()
@@ -272,6 +273,10 @@ function parseResources(raw: string | undefined, contradictions: string[]): Pric
 
     if (!rawPath.startsWith('/')) throw new Error('path must start with /.')
     if (method !== 'POST') throw new Error(`Only POST resources can be priced; got ${method} ${rawPath}.`)
+
+    // Stale deployment enablement cannot resurrect a retired route or disable
+    // unrelated commerce. The exact tombstone wins over old environment data.
+    if (retiredProductForPath(rawPath)) return []
 
     // An unknown path is a typo, and a typo here sells nothing while looking
     // configured. Loud at boot beats silent in production.
@@ -301,14 +306,14 @@ function parseResources(raw: string | undefined, contradictions: string[]): Pric
       throw new Error(`${method} ${rawPath} does not release its concurrency slot, so it cannot be priced. Add it to SLOT_RELEASING_ROUTES once its handler does.`)
     }
 
-    return {
+    return [{
       offerId: offer.id,
       method: offer.method,
       path: offer.path,
       amount: offer.amount,
       description: offer.description,
       concurrencyCap: offer.concurrencyCap,
-    }
+    }]
   })
 }
 

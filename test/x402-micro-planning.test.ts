@@ -51,10 +51,10 @@ test('ten authorized batch prices are explicit and require a recognized environm
 
 test('the build list binds prices, bounded measurements and current code without enabling deployment', () => {
   execFileSync(process.execPath, ['--experimental-strip-types', 'scripts/profile-planning-ten.ts', '--check'], { cwd: new URL('../', import.meta.url) })
-  const { digest, ...record } = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v9.json', import.meta.url), 'utf8'))
+  const { digest, ...record } = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v10.json', import.meta.url), 'utf8'))
   const previous = JSON.parse(readFileSync(new URL('../content/discovery/micro-planning-build-list-v8.json', import.meta.url), 'utf8'))
   assert.equal(digest, microDigest(record)); assert.deepEqual(record.buildList.map((r: { id: string }) => r.id), PLANNING_IDS)
-  assert.equal(record.version, 'micro-planning-build-list/9'); assert.equal(record.supersedes, 'micro-planning-build-list-v8.json')
+  assert.equal(record.version, 'micro-planning-build-list/10'); assert.equal(record.supersedes, 'micro-planning-build-list-v9.json')
   assert.equal(record.workloadsDigest, previous.workloadsDigest); assert.deepEqual(record.buildList, previous.buildList)
   assert.equal(record.implementationDigest, microDigest(record.implementationFiles.map((path: string) => ({ path, digest: microDigest(readFileSync(new URL('../' + path, import.meta.url), 'utf8')) }))))
   assert.deepEqual(record.implementationFileDigests, record.implementationFiles.map((path: string) => ({ path, digest: microDigest(readFileSync(new URL('../' + path, import.meta.url), 'utf8')) })))
