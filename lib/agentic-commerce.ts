@@ -1,6 +1,7 @@
 import { MPS_AUDIT_CAPABILITY } from './mps-audit-jobs.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { BOOKS } from './books.ts'
+import { CONTEXT_COMPILER_AMOUNT } from './x402/compiler-current-price.ts'
 
 export const SITE_URL = 'https://www.mahastrategies.com'
 export const AGENTIC_COMMERCE_MANIFEST_URL = `${SITE_URL}/agent-offers.json`
@@ -18,9 +19,9 @@ export const contextCompressionX402Capability = {
     network: 'eip155:8453',
     asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
     assetSymbol: 'USDC',
-    amount: '1000',
+    amount: CONTEXT_COMPILER_AMOUNT,
     amountUnit: 'base_units',
-    displayAmount: '0.001 USDC',
+    displayAmount: '0.005001 USDC',
   },
   discovery: 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp',
   buyerRecipe: `${SITE_URL}/recipes/bazaar-discovery-to-payment`,

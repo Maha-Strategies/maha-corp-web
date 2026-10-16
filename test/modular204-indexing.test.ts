@@ -1,8 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
+import { isPaidReadingProduct } from '../lib/api-v1/final42-validation.ts'
 import { ADDITION_CAP, ADDITION_CONFIRMATION, assertAdditionAdmission, assertAdditionQuote } from '../scripts/run-modular204-indexing.ts'
-import { MODULAR_ADDITIONS, PRODUCTION_ADDITION_ENDPOINTS, PRODUCTION_ENDPOINTS, releaseExample } from '../lib/api-v1/production-release.ts'
+import { FINAL42_PRODUCTION_ENDPOINTS, MODULAR_ADDITIONS, PRODUCTION_ADDITION_ENDPOINTS, PRODUCTION_ENDPOINTS, releaseExample } from '../lib/api-v1/production-release.ts'
+import { final42OfflineHandler } from '../scripts/lib/api-v1-final42-fixtures.ts'
 import { handlerFor } from '../lib/api-v1/handlers.ts'
 import { modularBazaar } from '../lib/api-v1/bazaar.ts'
 import { createEndpointRouter } from '../lib/api-v1/router.ts'
@@ -36,7 +38,7 @@ test('new indexing manifest has exact approved count, price sum and operator exc
   assert.equal(MODULAR_ADDITIONS.customerRevenue, false); assert.equal(MODULAR_ADDITIONS.organicDemand, false); assert.equal(MODULAR_ADDITIONS.automaticRepayment, false)
   assert.ok(PRODUCTION_ADDITION_ENDPOINTS.every(e => e.execution_cost?.mode === 'local-cpu-wasm' && e.sourceReview !== 'pending'))
 })
-test('all 500 seller quotes fit the response-header limit and inline inputs remain callable', async () => {
+test('all released seller quotes fit the response-header limit and inline inputs remain callable', async () => {
   const route = createEndpointRouter({ environment: { NODE_ENV: 'production', VERCEL: '1', BASE_PAYEE_ADDRESS: MODULAR_ADDITIONS.payee }, facilitator: {
     verify: async () => { throw Error('must_not_verify') }, settle: async () => { throw Error('must_not_settle') } } })
   for (const e of PRODUCTION_ENDPOINTS) {
@@ -45,12 +47,18 @@ test('all 500 seller quotes fit the response-header limit and inline inputs rema
     const encoded = response.headers.get('PAYMENT-REQUIRED')!
     assert.ok(paymentRequiredHeaderBytes(encoded) <= PAYMENT_REQUIRED_HEADER_LIMIT, e.id)
     const quote = decodeChallenge(encoded), bazaar = quote.extensions?.bazaar as { info: { input: { body: unknown } } }
-    const handler = handlerFor(e.id, e.amount)!, example = handler.input.parse(bazaar.info.input.body)
+    const handler = FINAL42_PRODUCTION_ENDPOINTS.some(p => p.id === e.id) ? final42OfflineHandler(e) : handlerFor(e.id, e.amount)!
+    const example = handler.input.parse(bazaar.info.input.body)
     // These existing vendor annotations describe byte/semantic checks enforced
     // by the parser, not additional standard JSON Schema keywords.
     const schema = { ...e.schema.input }; delete schema['x-max-request-bytes']; delete schema['x-semantic-rules']
     assert.deepEqual(validate(example, schema), [], e.id)
-    handler.output.parse(await handler.execute(example))
+    // Paid reading text deliberately is not distributed in the public checkout.
+    // Input/schema/header coverage still runs here; private delivery is exercised
+    // locally and required by the private-asset production build guard.
+    if (!isPaidReadingProduct(e.id) || existsSync('content/api-v1-books/the-maha-principle.json')) {
+      handler.output.parse(await handler.execute(example))
+    }
     if (PRODUCTION_ADDITION_ENDPOINTS.some(p => p.id === e.id)) {
       assertAdditionQuote(quote, e.id)
       const changed = structuredClone(quote); changed.accepts[0].amount = String(BigInt(e.amount) + 1n)
