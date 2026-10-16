@@ -1,6 +1,9 @@
 # Proposed x402 price ladder
 
-Companion to [`unit-costs.md`](unit-costs.md) and [`experiment-plan.md`](experiment-plan.md). Nothing here is applied. The change is supplied as an unapplied diff, [`price-ladder.diff`](price-ladder.diff).
+> **Status: superseded. Kept as the record of a 2026-09-10 proposal; do not price from it.**
+> Most of this ladder shipped in #429 and #430, with one change: `context-compression` was held at $0.001 rather than stepped to $0.002. On 2026-09-13 (#433) seven utility prices were cut and the "every pair at least 2,000 base units apart" rule below was dropped as unnecessary — distinct amounts are kept, wide spacing is not. Current prices live in `lib/x402/offers.ts` and the micro contract files; the launch rationale is in [`docs/operations/bazaar-launch-20260913.md`](../docs/operations/bazaar-launch-20260913.md).
+
+Companion to [`unit-costs.md`](unit-costs.md) and [`experiment-plan.md`](experiment-plan.md). This was written as a proposal before any of it was applied.
 
 ## First: the collisions in the brief are already fixed
 
@@ -86,24 +89,7 @@ It is **not profit-maximising**, and it is not derived from cost. [`unit-costs.m
 
 Everything above the floor is a judgment about willingness to pay, made from **twelve settlements, seven wallets, two products**. Read it as a coherent hypothesis with defensible internal ordering, not an optimum. The ordering claims one thing only: **within a tier, more delivered work should not cost less.** The current ladder violates that in at least three places; this one does not.
 
-## Applying it
+## How it was applied
 
-```bash
-git apply pricing/price-ladder.diff
-```
-
-The diff touches four files — `lib/x402/offers.ts`, `micro-contracts.ts`, `micro-next-contracts.ts`, `celestial-products.ts`. It is **not sufficient on its own.** Measured, not predicted: [VERIFIED]
-
-| | tests | failures |
-|---|--:|--:|
-| `origin/main` unmodified | 4,589 | 9 |
-| with this diff applied | 4,589 | 82 |
-
-The 9 baseline failures are Postgres-dependent and unrelated. The diff therefore causes **73 new failures across 18 files**, essentially all of them assertions that hard-code a price. Before this can merge, someone must:
-
-1. Update the hard-coded amounts in the 18 affected test files (`x402-offer-catalog`, `x402-discovery`, `x402-gateway`, `x402-route`, `x402-microproducts`, `x402-celestial-products`, `x402-tiered-offer-behavior`, `x402-mps-unit-economics`, `x402-buyer-delivery-check` and others).
-2. Regenerate `public/.well-known/x402-public-manifest.json`, which is derived from the catalog — the test run rewrites it automatically.
-3. Decide the question this document cannot: whether the increases are wanted at all.
-
-`supersededAmounts` entries are included for the two changed offers that have settlement history — `context-compression` (15 settlements at `1000`) and `mps-autonomous-audit` (2 at `100000`) — so the public ledger keeps attributing those payments after the change. The other repriced offers have no settlements at their current amounts, so they need none. [VERIFIED]
+It was not applied from a diff; that file was never committed. The ladder shipped through #429 (repricing, with `context-compression` held at $0.001) and #430 (ten further offers published), then #433 revised seven prices. Those pull requests carry the test and artifact changes this section originally listed.
 

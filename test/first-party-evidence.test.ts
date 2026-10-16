@@ -10,7 +10,7 @@ import {
   scanFirstPartyText, type FirstPartyDocument,
 } from '../lib/first-party-evidence.ts'
 import { firstPartyFor, firstPartyRoutes } from '../lib/first-party-runtime.ts'
-import { gradeEvidence, type InspectionAttestation } from '../lib/legacy-evidence-levels.ts'
+import { type InspectionAttestation } from '../lib/legacy-evidence-levels.ts'
 import supplier from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
 import claimRepair from '../content/evidence-batch-5/claim-repair.json' with { type: 'json' }
 import adoption from '../content/evidence-batch-5/adoption-manifest.json' with { type: 'json' }
