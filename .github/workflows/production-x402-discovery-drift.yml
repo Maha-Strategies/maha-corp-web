@@ -66,10 +66,22 @@ jobs:
         if: ${{ always() && (steps.check.outputs.classification != 'clean') }}
         env:
           SUMMARY: ${{ steps.check.outputs.summary || 'Runner failed; coverage incomplete' }}
+          EVIDENCE_FINGERPRINT: ${{ steps.check.outputs.evidence_fingerprint }}
         run: |
           TITLE="x402 discovery batch ${BATCH}"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
           BODY="Unpaid catalogue check: $SUMMARY. Inspect the full report artifact. Absence is distinct from payability and delivery; no paid delivery was tested. Do not refresh by payment without approval. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [[ "$EVIDENCE_FINGERPRINT" =~ ^[a-f0-9]{64}$ ]]; then
+            MARKER="<!-- maha-discovery-evidence:$EVIDENCE_FINGERPRINT -->"
+            BODY="$BODY $MARKER"
+            if [ -n "$EXISTING" ]; then
+              LAST=$(gh issue view "$EXISTING" --json body,comments --jq '.comments[-1].body // .body')
+              if printf '%s' "$LAST" | grep -Fq -- "$MARKER"; then
+                echo "Unchanged findings; keeping the incident open without another notification."
+                exit 0
+              fi
+            fi
+          fi
           if [ -n "$EXISTING" ]; then gh issue comment "$EXISTING" --body "$BODY"; else gh issue create --title "$TITLE" --body "$BODY"; fi
       - name: Close only this batch incident after a complete clean check
         if: ${{ steps.check.outputs.classification == 'clean' }}

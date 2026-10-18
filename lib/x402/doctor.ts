@@ -18,6 +18,7 @@ import {
   readDeclarationDigestExtension,
 } from './declaration-digest.ts'
 import { readMerchantResources, type MerchantResource } from './merchant-catalog.ts'
+import { describeDiscoveryDrift, type DiscoveryDriftDetails } from './discovery-drift-details.ts'
 
 export const EXTENSION_RESPONSES_HEADER = 'EXTENSION-RESPONSES'
 export const DEFAULT_BAZAAR_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery'
@@ -91,6 +92,7 @@ export type DoctorReport = {
     paidStatus?: number
     transaction?: string
     routeExistence?: RouteExistence
+    failureCode?: string
   }
   bazaar?: {
     found: boolean
@@ -102,6 +104,7 @@ export type DoctorReport = {
     metadataVersion?: string
     matchesLive?: boolean
     lastUpdated?: string
+    comparison?: DiscoveryDriftDetails
   }
   extensionResponses: Array<{ source: 'challenge' | 'crawler' | 'paid'; value: unknown }>
   findings: DoctorFinding[]
@@ -365,6 +368,28 @@ async function fetchWithTimeout(fetchImpl: typeof fetch, url: string, request: D
   try { return await fetchImpl(url, requestInit(request, controller.signal)) } finally { clearTimeout(timer) }
 }
 
+/** Only a small public machine code from an unsigned failure response.
+ * Never log arbitrary response bodies, URLs, provider messages or headers. */
+async function publicFailureCode(response: Response): Promise<string | undefined> {
+  if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') ?? '') || !response.body) return
+  const reader = response.body.getReader()
+  let timer: ReturnType<typeof setTimeout> | undefined
+  try {
+    const text = await Promise.race([
+      (async () => {
+        const parts: Uint8Array[] = []; let bytes = 0
+        for (;;) { const part = await reader.read(); if (part.done) break
+          bytes += part.value.byteLength; if (bytes > 4096) throw Error('failure_body_too_large'); parts.push(part.value) }
+        return new TextDecoder('utf-8', {fatal:true}).decode(Buffer.concat(parts))
+      })(),
+      new Promise<never>((_, reject) => {timer=setTimeout(()=>reject(Error('failure_body_timeout')),2000)}),
+    ])
+    const body = record(JSON.parse(text)), code = record(body?.error)?.code
+    return typeof code === 'string' && /^[a-z][a-z0-9_]{0,79}$/.test(code) ? code : undefined
+  } catch { return undefined }
+  finally { if (timer) clearTimeout(timer); void reader.cancel().catch(()=>{}) }
+}
+
 function bazaarResourceUrl(value: JsonRecord): string | null {
   if (typeof value.resource === 'string') return value.resource
   const resource = record(value.resource)
@@ -409,9 +434,13 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
     report.live = { status: first.status }
     extensionResponse(report, 'challenge', first)
     if (first.status !== 402) {
+      const failureCode = await publicFailureCode(first)
+      if (failureCode) report.live.failureCode = failureCode
       const negativeControl = await fetchWithTimeout(fetchImpl, negativeControlUrl(endpoint), { method: 'GET' }, timeoutMs)
       recordRouteExistence(report, endpoint, first.status, negativeControl.status)
-      add(findings, 'x402.http.challenge_status', 'error', `The unpaid request returned HTTP ${first.status}; Bazaar requires HTTP 402.`, first.status === 400 ? 'An accidental validation-first 400 prevents crawler indexing.' : undefined)
+      const detail = [first.status === 400 ? 'An accidental validation-first 400 prevents crawler indexing.' : '',
+        failureCode ? `public_failure_code=${failureCode}` : ''].filter(Boolean).join('; ')
+      add(findings, 'x402.http.challenge_status', 'error', `The unpaid request returned HTTP ${first.status}; Bazaar requires HTTP 402.`, detail || undefined)
       return finalize(report, started)
     }
     validateV2Headers(first, 'challenge', findings)
@@ -516,6 +545,7 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
             matchesLive,
             ...(indexedIntegrity ? { metadataVersion: indexedIntegrity.metadataVersion } : {}),
             ...(typeof current.lastUpdated === 'string' ? { lastUpdated: current.lastUpdated } : {}),
+            comparison: describeDiscoveryDrift(current, challenge),
           }
           if (indexedIntegrity && indexedIntegrity.canonicalResource !== canonicalResourceUrl(endpoint)) {
             add(findings, 'x402.declaration_integrity.catalog_resource', 'warning', 'The catalog digest belongs to a different canonical resource.', indexedIntegrity.canonicalResource)
@@ -524,7 +554,8 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
             const liveDigest = indexedIntegrity ? report.live.integrityDigest : comparableLiveDigest
             const scope = indexedIntegrity ? '' : `; compared=${Object.keys(comparable.indexed).join(',') || 'none'}`
             const skipped = comparable.uncompared.length > 0 && !indexedIntegrity ? `; uncompared=${comparable.uncompared.join(',')}` : ''
-            add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}${scope}${skipped}`)
+            const explanation = report.bazaar.comparison!
+            add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration. This does not establish a failed payment or delivery.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}${scope}${skipped}; paymentOptions=${explanation.paymentOptions}; changedAreas=${explanation.changedAreas.join(',') || 'digest_only_unexplained'}; automaticPayment=false`)
           } else if (!indexedIntegrity && comparable.uncompared.length > 0) {
             // Stated rather than silent: the listing matches on everything
             // comparable, and a reader should know the match is partial and

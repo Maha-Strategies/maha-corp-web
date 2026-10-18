@@ -1,5 +1,5 @@
 import { appendFile, readFile, writeFile, mkdir } from 'node:fs/promises'
-import { classifyDiscoveryReport, discoveryMonitorMatrix, discoveryMonitorBatches, type MonitorOffer } from '../lib/x402/discovery-monitor.ts'
+import { classifyDiscoveryReport, discoveryMonitorMatrix, discoveryMonitorBatches, discoveryEvidenceFingerprint, type MonitorOffer } from '../lib/x402/discovery-monitor.ts'
 import { diagnoseX402Endpoint, DEFAULT_BAZAAR_URL } from '../lib/x402/doctor.ts'
 import { createMerchantCatalogueReader } from '../lib/x402/merchant-catalog.ts'
 import { checkBookDiscoveryContract } from '../lib/x402/book-discovery-monitor.ts'
@@ -21,7 +21,7 @@ if (mode === 'matrix') {
   // Revalidate untrusted matrix input before issuing any request.
   discoveryMonitorMatrix({offers:offers.map(o=>({id:o.offer,status:'active',method:o.method,canonicalResource:o.subject,payment:{protocol:'x402'}}))})
   const readCatalogue=createMerchantCatalogueReader({baseUrl:DEFAULT_BAZAAR_URL,timeoutMs:20000})
-  const results:unknown[]=[],counts:Record<string,number>={},pending=[...offers]
+  const results:unknown[]=[],counts:Record<string,number>={},changeAreas:Record<string,number>={},paymentOptions:Record<string,number>={},pending=[...offers]
   await mkdir('discovery-reports',{recursive:true})
   await Promise.all(Array.from({length:Math.min(4,pending.length)},async()=>{
     for(let offer=pending.shift();offer;offer=pending.shift()){
@@ -33,15 +33,20 @@ if (mode === 'matrix') {
       let report:unknown=null
       try{report=await diagnoseX402Endpoint({endpoint:offer.subject,request:{method:offer.method},timeoutMs:10000,readCatalogue})}catch{/* Report missing, never assert absence. */}
       const classification=classifyDiscoveryReport(report,offer.subject,'success',offer.expectedIndexed!==false)
+      if(classification==='drift'&&report&&typeof report==='object'){
+        const comparison=(report as {bazaar?:{comparison?:{paymentOptions:string;changedAreas:string[]}}}).bazaar?.comparison
+        if(comparison){paymentOptions[comparison.paymentOptions]=(paymentOptions[comparison.paymentOptions]??0)+1;for(const area of comparison.changedAreas)changeAreas[area]=(changeAreas[area]??0)+1}
+      }
       counts[classification]=(counts[classification]??0)+1;results.push({offer:offer.offer,classification,report})
     }
   }))
   const clean=Object.entries(counts).every(([key])=>key==='clean'||key==='expected_unindexed'||key==='book_contract_only')
   const classification=clean?'clean':'attention'
-  await writeFile('discovery-reports/report.json',JSON.stringify({counts,results,paidCalls:0},null,2))
-  const summary=JSON.stringify(counts)
-  if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,`classification=${classification}\nsummary=${summary}\n`)
-  console.log(JSON.stringify({classification,counts,checked:results.length,paidCalls:0}))
+  const evidenceFingerprint=discoveryEvidenceFingerprint(results)
+  await writeFile('discovery-reports/report.json',JSON.stringify({counts,changeAreas,paymentOptions,evidenceFingerprint,results,paidCalls:0},null,2))
+  const summary=JSON.stringify({counts,paymentOptions,changeAreas})
+  if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,`classification=${classification}\nsummary=${summary}\nevidence_fingerprint=${evidenceFingerprint}\n`)
+  console.log(JSON.stringify({classification,counts,paymentOptions,changeAreas,evidenceFingerprint,checked:results.length,paidCalls:0}))
   if(!clean)process.exitCode=1
 } else if (mode === 'classify') {
   let report: unknown = null

@@ -1,5 +1,6 @@
 import type { DoctorReport } from './doctor.ts'
 import { INTENTIONALLY_UNINDEXED_OFFERS } from './merchant-catalog.ts'
+import { createHash } from 'node:crypto'
 
 const ORIGIN = 'https://www.mahastrategies.com'
 // Covers all 155 released offers, including the five deliberately unindexed
@@ -43,6 +44,31 @@ export function discoveryMonitorBatches(inventory:{include:MonitorOffer[]},size=
   return {include:Array.from({length:Math.ceil(inventory.include.length/size)},(_,batch)=>({batch:String(batch).padStart(3,'0'),offers:inventory.include.slice(batch*size,(batch+1)*size)}))}
 }
 export type MonitorClassification = 'clean' | 'expected_unindexed' | 'drift' | 'listing_missing' | 'probe_failure' | 'contract_failure' | 'warning' | 'monitor_failure'
+
+/** Stable incident identity: ignore timestamps, durations and result order.
+ * A new quote/digest/status/finding changes the fingerprint; unchanged drift
+ * remains an open incident without another notification every twelve hours. */
+export function discoveryEvidenceFingerprint(results: unknown[]): string {
+  if (!Array.isArray(results) || results.length < 1 || results.length > 50) throw Error('Invalid fingerprint batch')
+  const projection = results.map(raw => {
+    const r = raw as {offer?: unknown; classification?: unknown; report?: DoctorReport;
+      bookId?: unknown; version?: unknown; amount?: unknown; network?: unknown; quoteStatus?: unknown}
+    if (!r || typeof r.offer !== 'string' || typeof r.classification !== 'string') throw Error('Invalid fingerprint result')
+    const report = r.report
+    return { offer: r.offer, classification: r.classification,
+      ...(report ? { endpoint: report.endpoint, live: report.live ? {
+        status: report.live.status, crawlerStatus: report.live.crawlerStatus, failureCode:report.live.failureCode,
+        integrityDigest: report.live.integrityDigest, declarationDigest: report.live.declarationDigest,
+      } : null, bazaar: report.bazaar ? { found: report.bazaar.found,
+        matchesLive: report.bazaar.matchesLive, declarationDigest: report.bazaar.declarationDigest,
+        comparison: report.bazaar.comparison } : null,
+      findings: Array.isArray(report.findings) ? report.findings.map(f => ({ruleId:f.ruleId,level:f.level})).sort((a,b) => a.ruleId.localeCompare(b.ruleId)) : null,
+      } : { bookId:r.bookId,version:r.version,amount:r.amount,network:r.network,quoteStatus:r.quoteStatus }) }
+  }).sort((a,b) => a.offer.localeCompare(b.offer))
+  const encoded = JSON.stringify(projection, (_,v) => v && typeof v === 'object' && !Array.isArray(v)
+    ? Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])) : v)
+  return createHash('sha256').update(encoded).digest('hex')
+}
 
 /** A failed runner is not proof of stale metadata. Only a completed comparison can assert drift. */
 export function classifyDiscoveryReport(value: unknown, subject: string, doctorOutcome: string,expectedIndexed=true): MonitorClassification {

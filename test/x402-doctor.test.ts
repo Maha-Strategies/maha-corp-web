@@ -137,6 +137,21 @@ function otherRecords(count: number) {
   return Array.from({ length: count }, (_, i) => bazaarRecord({ resource: `https://seller.example/api/other-${i}` }))
 }
 
+test('network expansion explains but never suppresses an exact integrity mismatch', async () => {
+  const polygon = { ...requirement, network:'eip155:137', asset:'0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359' }
+  const oldIntegrity = await createDeclarationDigestExtension(challenge, '2026-10-18')
+  const live: PaymentChallenge = { ...challenge, accepts:[requirement,polygon],extensions:{...extensions} }
+  live.extensions!['declaration-integrity'] = await createDeclarationDigestExtension(live,'2026-10-18')
+  const report = await diagnoseX402Endpoint({endpoint,fetchImpl:fetchSequence([
+    challengeResponse(402,live),challengeResponse(402,live),
+    merchantResponse([bazaarRecord({extensions:{...extensions,'declaration-integrity':oldIntegrity}})]),
+  ])})
+  assert.equal(report.bazaar?.matchesLive,false)
+  assert.equal(report.bazaar?.comparison?.paymentOptions,'expanded')
+  assert.ok(report.findings.some(f=>f.ruleId==='x402.bazaar.stale_metadata'&&f.level==='warning'))
+  assert.ok(report.findings.find(f=>f.ruleId==='x402.bazaar.stale_metadata')?.detail?.includes('automaticPayment=false'))
+})
+
 for (const count of [101, 452, 1000]) {
   test(`finds the target on the last page of a complete ${count}-listing merchant catalogue`, async () => {
     const { fetchImpl, offsets } = paginatedDoctorFetch([...otherRecords(count - 1), bazaarRecord()])
@@ -244,6 +259,23 @@ test('reports a declared not-found resource as absent', async () => {
 
   assert.equal(report.live?.routeExistence?.verdict, 'absent')
   assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.route_existence.absent'), true)
+})
+
+test('records a bounded public dependency code without logging the unsigned body',async()=>{
+  const report=await diagnoseX402Endpoint({endpoint,fetchImpl:fetchSequence([
+    Response.json({error:{code:'seller_notifications_not_ready'},privateMessage:'DO_NOT_LOG_THIS'}, {status:503}),
+    new Response(null,{status:404}),
+  ])})
+  assert.equal(report.live?.failureCode,'seller_notifications_not_ready')
+  assert.ok(report.findings.find(f=>f.ruleId==='x402.http.challenge_status')?.detail?.includes('public_failure_code=seller_notifications_not_ready'))
+  assert.ok(!JSON.stringify(report).includes('DO_NOT_LOG_THIS'))
+})
+test('ignores oversized or non-code failure bodies',async()=>{
+  for(const body of [{error:{code:'unsafe https://private.invalid'}},{error:{code:'safe_code'},padding:'x'.repeat(5000)}]){
+    const report=await diagnoseX402Endpoint({endpoint,fetchImpl:fetchSequence([Response.json(body,{status:503}),new Response(null,{status:404})])})
+    assert.equal(report.live?.failureCode,undefined)
+    assert.equal(report.ok,false)
+  }
 })
 
 test('records route existence when a malformed challenge fails decoder interop', async () => {
