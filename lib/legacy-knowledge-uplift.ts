@@ -1,10 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
-import {
-  EVIDENCE_LEVELS, gradeEvidence,
-  type EvidenceLevel, type EvidenceProfile, type InspectionAttestation, type InspectionDepth,
-} from './legacy-evidence-levels.ts'
+import { gradeEvidence, type EvidenceProfile, type InspectionAttestation } from './legacy-evidence-levels.ts'
 
 /**
  * Uplift for the legacy /knowledge corpus.
