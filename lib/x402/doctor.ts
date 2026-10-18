@@ -17,7 +17,7 @@ import {
   declarationDigest as computeDeclarationDigest,
   readDeclarationDigestExtension,
 } from './declaration-digest.ts'
-import { readMerchantResources } from './merchant-catalog.ts'
+import { readMerchantResources, type MerchantResource } from './merchant-catalog.ts'
 
 export const EXTENSION_RESPONSES_HEADER = 'EXTENSION-RESPONSES'
 export const DEFAULT_BAZAAR_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery'
@@ -51,6 +51,8 @@ export type DoctorOptions = {
   timeoutMs?: number
   fetchImpl?: typeof fetch
   paidProbe?: PaidProbe
+  /** Trusted read-only complete catalogue cache, shared by a monitor batch. */
+  readCatalogue?: (payTo:string)=>Promise<MerchantResource[]>
 }
 
 /**
@@ -476,7 +478,7 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
         // Absence is only meaningful after every page has been validated.
         // The shared reader bounds time, bytes and inventory, and rejects
         // truncated, duplicate, wrong-merchant or changing snapshots.
-        const resources = await readMerchantResources(merchant.href, {
+        const resources = options.readCatalogue ? await options.readCatalogue(payTo) : await readMerchantResources(merchant.href, {
           fetchImpl, expectedPayTo: payTo, timeoutMs, includeDeclarations: true,
         })
         const current = resources.find((resource) => {

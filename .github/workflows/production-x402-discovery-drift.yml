@@ -1,53 +1,22 @@
 name: Production x402 discovery drift
-
-# Catches the failure mode the 2026-08-08 infrastructure review found by hand:
-# the live PAYMENT-REQUIRED declaration and the Coinbase Bazaar listing can
-# disagree, so an autonomous buyer routes on a stale schema, price or
-# description while the endpoint itself is entirely healthy. Nothing else in
-# the platform notices -- the endpoint returns a valid 402, the canary settles,
-# release health is green, and the listing is quietly wrong.
-#
-# x402-doctor already detects it and already exits non-zero under
-# --fail-on-warning. It simply ran only when somebody remembered. This is the
-# schedule.
-#
-# One job per payable offer, because drift is per-listing. A single job over
-# both endpoints would report the first failure and stop, and the two offers
-# drift for unrelated reasons at unrelated times -- Context Compression was
-# stale on 2026-08-11 while Deep Context Evaluation, indexed the same week,
-# was current. Sharing an issue would have merged those into one story.
-#
-# Read-only. No payment is signed, no settlement is made, and no wallet key is
-# available to this workflow -- the drift question is answerable from the
-# public declaration and the public listing alone. Refreshing a stale listing
-# requires a bounded settlement, which stays a deliberate operator action in
-# the separate canary workflow rather than something a cron job does with
-# money.
-
 on:
   schedule:
-    # Twice daily, offset from the release-health and canary crons so a Bazaar
-    # outage does not read as three separate incidents at once.
     - cron: '43 5,17 * * *'
   workflow_dispatch:
-  # Metadata-affecting releases are exactly when drift appears, so the check
-  # also runs after a push that touches the declaration or the discovery layer.
   push:
     branches: [main]
     paths:
       - 'lib/x402/**'
-      - 'lib/openapi.ts'
+      - 'lib/api-v1/**'
+      - 'content/api-v1/**'
       - 'content/discovery/**'
-      - 'app/api/v1/compress/**'
-
+      - 'app/api/v1/**'
 permissions:
   contents: read
   issues: write
-
 concurrency:
   group: production-x402-discovery-drift
   cancel-in-progress: true
-
 jobs:
   inventory:
     runs-on: ubuntu-latest
@@ -59,107 +28,52 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - name: Load every active x402 offer from the production manifest
-        id: inventory
-        run: node --experimental-strip-types scripts/x402-discovery-monitor.ts matrix
-      - name: Report inventory failure without asserting listing drift
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TITLE="x402 discovery monitoring inventory failed"
-          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-          BODY="The public offer inventory could not be loaded or validated. Listing drift has not been established. No payments were made. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          if [ -n "$EXISTING" ]; then gh issue comment "$EXISTING" --body "$BODY"; else gh issue create --title "$TITLE" --body "$BODY"; fi
+      - id: inventory
+        name: Require complete legacy and 1000-product modular manifests
+        run: node --experimental-strip-types scripts/x402-discovery-inventory.ts
   drift:
     needs: inventory
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 20
     strategy:
-      # One stale listing must not hide the state of the other.
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 2
       matrix: ${{ fromJSON(needs.inventory.outputs.matrix) }}
     env:
       GH_TOKEN: ${{ github.token }}
-      SUBJECT: ${{ matrix.subject }}
-      OFFER: ${{ matrix.offer }}
-      OFFER_NAME: ${{ matrix.name }}
-      METHOD: ${{ matrix.method }}
-      REPORT: ${{ github.workspace }}/x402-doctor-${{ matrix.offer }}.json
+      OFFERS_JSON: ${{ toJSON(matrix.offers) }}
+      BATCH: ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-
-      # --fail-on-warning is the point: stale Bazaar metadata is reported as a
-      # warning rather than an error, because the endpoint is still serving
-      # correctly. For a buyer routing on the listing it is not a warning.
-      #
-      # Informational notes -- a missing observable EXTENSION-RESPONSES header
-      # is the standing example -- are counted separately from warnings by the
-      # doctor and cannot fail this gate. That is deliberate: they describe
-      # what a facilitator chose to forward, not anything wrong with the offer.
-      #
-      # No --body. The doctor probes each endpoint with that offer's own
-      # declared crawler request, so the two offers are each exercised against
-      # the contract they actually publish rather than a shared payload.
-      - name: Check live declaration against Bazaar
-        id: doctor
-        run: |
-          npm run x402:doctor -- "$SUBJECT" \
-            --method "$METHOD" \
-            --fail-on-warning \
-            --format json \
-            --output "$REPORT"
-
-      - name: Classify completed evidence separately from execution failures
-        id: classify
+      - name: Use the lockfile-compatible npm resolver
+        run: npm install --global npm@11.17.0
+      - name: Install locked monitor dependencies without lifecycle scripts
+        run: npm ci --ignore-scripts
+      - name: Unpaid checks with one shared complete Bazaar snapshot per batch
+        id: check
+        run: node --experimental-strip-types scripts/x402-discovery-monitor.ts batch
+      - uses: actions/upload-artifact@v7
         if: always()
-        env:
-          DOCTOR_OUTCOME: ${{ steps.doctor.outcome }}
-        run: node --experimental-strip-types scripts/x402-discovery-monitor.ts classify
-
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v7
         with:
-          name: x402-doctor-report-${{ matrix.offer }}
-          path: ${{ env.REPORT }}
+          name: x402-discovery-batch-${{ matrix.batch }}
+          path: discovery-reports
           retention-days: 30
-
-      # An unattended schedule has nobody watching the run list, so a failure
-      # has to leave something a person will actually see. Deduplicated by
-      # title so a persistent drift does not open one issue per run, and keyed
-      # by offer so two drifting listings are two stories.
-      - name: Open or update an evidence-specific monitoring issue
-        if: ${{ always() && (steps.classify.outputs.classification != 'clean') }}
+      - name: Record bounded aggregate incident, not one email per route
+        if: ${{ always() && (steps.check.outputs.classification != 'clean') }}
         env:
-          CLASSIFICATION: ${{ steps.classify.outputs.classification || 'monitor_failure' }}
+          SUMMARY: ${{ steps.check.outputs.summary || 'Runner failed; coverage incomplete' }}
         run: |
-          TITLE="x402 discovery ${CLASSIFICATION}: ${OFFER_NAME}"
+          TITLE="x402 discovery batch ${BATCH}"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-          BODY=$(printf 'Classification: **%s** for **%s**.\n\nEndpoint: %s\n\nOnly drift means a completed comparison found stale metadata. listing_missing means a completed lookup found no listing; probe_failure means the observation could not complete; monitor_failure means the runner or report is incomplete. Other findings require inspection of the report artifact. No paid delivery was tested. No payment was signed or settled. Do not refresh a listing with a payment without explicit spending authorization.\n\nRun: %s\n' "$CLASSIFICATION" "$OFFER_NAME" "$SUBJECT" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
-          if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body "$BODY"
-          else
-            gh issue create --title "$TITLE" --body "$BODY" --label x402 || \
-            gh issue create --title "$TITLE" --body "$BODY"
-          fi
-
-      # Closes itself when the drift clears, so the issue list stays a list of
-      # things that are currently wrong.
-      - name: Close the drift issue when clean
-        if: ${{ always() && steps.classify.outputs.classification == 'clean' }}
+          BODY="Unpaid catalogue check: $SUMMARY. Inspect the full report artifact. Absence is distinct from payability and delivery; no paid delivery was tested. Do not refresh by payment without approval. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ -n "$EXISTING" ]; then gh issue comment "$EXISTING" --body "$BODY"; else gh issue create --title "$TITLE" --body "$BODY"; fi
+      - name: Close only this batch incident after a complete clean check
+        if: ${{ steps.check.outputs.classification == 'clean' }}
         run: |
-          for CLASSIFICATION in drift listing_missing probe_failure contract_failure warning monitor_failure; do
-            TITLE="x402 discovery ${CLASSIFICATION}: ${OFFER_NAME}"
-            EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-            if [ -n "$EXISTING" ]; then
-              gh issue comment "$EXISTING" --body "Unsigned checks completed: the live declaration and Bazaar listing now agree. Paid delivery was not tested."
-              gh issue close "$EXISTING"
-            fi
-          done
+          TITLE="x402 discovery batch ${BATCH}"
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "Complete unpaid batch check is clean. See the report artifact; no paid delivery or customer demand is asserted."; fi
