@@ -126,7 +126,7 @@ jobs:
             --argjson objectCount 18 \
             '{schemaVersion:"maha-preview-mcp-migration-evidence/1.1",prerequisiteMigration:$prerequisiteMigration,migration:$migration,commit:$commit,prerequisiteMigrationSha256:$prerequisiteMigrationSha256,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
             > "$MCP_MIGRATION_EVIDENCE"
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '26'
           cache: npm
