@@ -1,0 +1,90 @@
+{
+  "evidenceVersion": "maha-context-proof-evidence-v1.0.0",
+  "frozenAt": "2026-08-20",
+  "proofContractVersion": 3,
+  "canonicalizationAddendumVersion": "maha-context-proof-canonicalization-v3.1.0",
+  "contractArtifacts": [
+    {
+      "path": "docs/context-compiler-proof-contract.md",
+      "sha256": "05af04dc42a51216f0e99896d1bcc0f16318f735980c681e647359e85b7d7323"
+    },
+    {
+      "path": "docs/context-compiler-proof-contract-v3.1.md",
+      "sha256": "b422c21a3136c8235dc0bc83abafa659d5edb2b30b225468cda827ad4618b77e"
+    },
+    {
+      "path": "lib/context-proof-canonicalization.ts",
+      "sha256": "8f520377b10704b3d52271e51ec9670504745a2f572a576935ceefdb197f10dc"
+    },
+    {
+      "path": "lib/context-proof-fixture.ts",
+      "sha256": "afe6e512814febf49e523e239965d2964339027559aa973c93173857db47a89c"
+    },
+    {
+      "path": "test/fixtures/context-proof/index.json",
+      "sha256": "6734814e5103b82167dde15a2fff434e98ccf9a34186cb4881ece996dd5459b1"
+    },
+    {
+      "path": "test/fixtures/context-proof-addendum-v3.1/index.json",
+      "sha256": "2d72f2d1d1d3e414d3b741342c24174755249990d8e349ffef15327320a8e2f5"
+    }
+  ],
+  "partnerEvidence": {
+    "source": "ogurec14 private SP1 feasibility harness",
+    "classification": "partner-reported; fixture bytes and Maha-side commitments are independently reproducible, but proof artifacts were not committed to this repository",
+    "fixtureCount": 6,
+    "claims": [
+      "All six fixtures parsed using the real nested envelope.",
+      "representative-n70 and boundary-n128 generated and verified real proofs with public values structurally matching expectedPublicValues.",
+      "unsupported-n129 and the retained-duplicate adversary rejected before proving and without charging.",
+      "partial coverage reproduced exactly as 3 of 4 sources and 7500 basis points.",
+      "Production inputHash and outputHash were re-derived under the v3.1 canonicalization rules.",
+      "Invalid reported-token arithmetic hard-failed as rejected_invalid_token_arithmetic with no proof and no charge.",
+      "An omitted title is omitted from the hash preimage; an explicit null title is rejected as unreachable input.",
+      "Real prove execution exposed and fixed a host-to-guest transport regression that ordinary unit tests did not catch."
+    ],
+    "performance": {
+      "representativeN70": {
+        "runs": 5,
+        "medianSeconds": 51.4,
+        "minimumSeconds": 48.7,
+        "maximumSeconds": 52.2
+      },
+      "boundaryN128": {
+        "runs": 5,
+        "medianSeconds": 34.4,
+        "minimumSeconds": 33.7,
+        "maximumSeconds": 35.8
+      },
+      "approximateProofSizeMegabytes": 2.9,
+      "reportedPeakMemoryGiB": {
+        "minimum": 10,
+        "maximum": 15
+      },
+      "interpretation": "Source-byte hashing load, not retained-passage count alone, dominated this comparison; N=70 invoked about 3.1 times as many SHA precompile syscalls as N=128."
+    },
+    "toolchain": {
+      "sp1Version": "6.4.0",
+      "cargoProveRevision": "f66b4bf",
+      "dockerImage": "ghcr.io/succinctlabs/sp1:v6.4.0",
+      "dockerImageDigest": "sha256:f06182d4f00fd8aa937077def1bd71ef0d8b03ea3ca88da0ebae67c4b28290ea",
+      "requiredBuildMode": "cargo prove build --docker"
+    },
+    "reproducibility": {
+      "reportedArchitectures": [
+        "arm64 macOS",
+        "x86_64 Linux"
+      ],
+      "latestAlignedElfDigest": null,
+      "latestAlignedSp1VerifyingKey": null,
+      "status": "pending exact identifiers from the final schema-aligned build"
+    }
+  },
+  "acceptance": {
+    "contractFrozen": true,
+    "fixtureBytesFrozen": true,
+    "publicContextCompilerResponseChanged": false,
+    "proofServiceAcceptedForProduction": false,
+    "remainingGate": "Record and independently reproduce the final schema-aligned guest ELF digest and SP1 verifying key, then bind proof files or their digests to this evidence checkpoint."
+  }
+}

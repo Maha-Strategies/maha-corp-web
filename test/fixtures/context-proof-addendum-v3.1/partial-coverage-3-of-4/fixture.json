@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "maha-context-proof-fixture-v1",
+  "proofContractVersion": 3,
+  "fixtureId": "partial-coverage-3-of-4",
+  "description": "Sanitized four-source fixture retaining three relevant sources and omitting one irrelevant source.",
+  "privacyClassification": "sanitized_synthetic_or_published_source",
+  "normalizationBasis": "normalized_source_v1",
+  "offsetEncoding": "utf8",
+  "offsetRange": "half_open",
+  "hashEncoding": "sha256:<64_lowercase_hex>",
+  "tokenAccounting": {
+    "tokenEstimatorVersion": "maha_model_neutral_v1",
+    "budgetMode": "guaranteed",
+    "declaredTokenBudget": 128,
+    "compilerSelectionBudget": 92,
+    "retainedPassageReportedTokens": 39,
+    "compiledContextReportedTokens": 73,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false
+  },
+  "proofDecision": {
+    "status": "success",
+    "shouldAttemptProof": true,
+    "retainedPassageCount": 3,
+    "maximumSupportedRetainedPassages": 128,
+    "chargePermitted": true
+  },
+  "compilerCommitments": {
+    "inputHash": "sha256:ce273694341aa729089a528b02abcc8696b8c4bc5b389cab962073455b2bfbec",
+    "outputHash": "sha256:dcf14a2fd30e6074caefe303b85ed9dc612d9ad0038669decabaf1658476ee67",
+    "originalEstimatedTokens": 54,
+    "compiledEstimatedTokens": 73,
+    "sourceCoveragePercent": 75,
+    "duplicatePassagesRemoved": 0
+  },
+  "claimBoundaries": {
+    "provesNormalizedSourceHashBinding": true,
+    "provesRetainedPassageByteRangeBinding": true,
+    "provesRetainedSetHashUniqueness": true,
+    "provesSourceCoverageArithmetic": true,
+    "provesReportedTokenArithmetic": true,
+    "provesCandidateSetCompleteness": false,
+    "provesRankingCorrectness": false,
+    "provesTokenEstimatorCorrectness": false,
+    "provesProviderTokenizerCompatibility": false,
+    "provesSemanticCompleteness": false
+  },
+  "privateWitness": {
+    "request": {
+      "task": "Retain the signed canary threshold, credential rotation evidence, and rollback trigger.",
+      "tokenBudget": 128,
+      "documents": [
+        {
+          "id": "release",
+          "title": "Release control",
+          "text": "The signed canary threshold requires success in every production region before release."
+        },
+        {
+          "id": "rotation",
+          "title": "Credential rotation",
+          "text": "Credential rotation evidence must include reviewer identity and a stable evidence digest."
+        },
+        {
+          "id": "rollback",
+          "title": "Rollback control",
+          "text": "Rollback begins when error rate exceeds two percent for five consecutive minutes."
+        },
+        {
+          "id": "irrelevant",
+          "title": "Office note",
+          "text": "The office garden receives water on Tuesday and the kitchen inventory is counted monthly."
+        }
+      ],
+      "provenance": "compact",
+      "scoring": "bm25",
+      "budgetMode": "guaranteed"
+    },
+    "sources": [
+      {
+        "sourceId": "release",
+        "title": "Release control",
+        "normalizedBytesLen": 87,
+        "sourceHash": "sha256:8024fdcc2aecff5c17cafd26f29ab83c49c20774d9d385b30df352ad4df55c68",
+        "normalizedText": "The signed canary threshold requires success in every production region before release."
+      },
+      {
+        "sourceId": "rotation",
+        "title": "Credential rotation",
+        "normalizedBytesLen": 89,
+        "sourceHash": "sha256:9caf4e6ffbefb74e5e06daf9dda6e7a7e02df31fb9946fe28430e8b385e76664",
+        "normalizedText": "Credential rotation evidence must include reviewer identity and a stable evidence digest."
+      },
+      {
+        "sourceId": "rollback",
+        "title": "Rollback control",
+        "normalizedBytesLen": 81,
+        "sourceHash": "sha256:644a01f33cc59f878606c0821b18272c0295edfffcf0aa49565018d664fce941",
+        "normalizedText": "Rollback begins when error rate exceeds two percent for five consecutive minutes."
+      },
+      {
+        "sourceId": "irrelevant",
+        "title": "Office note",
+        "normalizedBytesLen": 89,
+        "sourceHash": "sha256:b863659408237ca0da0d313cc1f87094bd9d6744a9ae1f37e8b954b45f13a02b",
+        "normalizedText": "The office garden receives water on Tuesday and the kitchen inventory is counted monthly."
+      }
+    ],
+    "candidatePassages": [
+      {
+        "passageId": "release:1",
+        "sourceId": "release",
+        "sourceStartByte": 0,
+        "sourceEndByte": 87,
+        "text": "The signed canary threshold requires success in every production region before release.",
+        "passageHash": "sha256:8024fdcc2aecff5c17cafd26f29ab83c49c20774d9d385b30df352ad4df55c68",
+        "reportedEstimatedTokens": 13,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "rotation:1",
+        "sourceId": "rotation",
+        "sourceStartByte": 0,
+        "sourceEndByte": 89,
+        "text": "Credential rotation evidence must include reviewer identity and a stable evidence digest.",
+        "passageHash": "sha256:9caf4e6ffbefb74e5e06daf9dda6e7a7e02df31fb9946fe28430e8b385e76664",
+        "reportedEstimatedTokens": 13,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "rollback:1",
+        "sourceId": "rollback",
+        "sourceStartByte": 0,
+        "sourceEndByte": 81,
+        "text": "Rollback begins when error rate exceeds two percent for five consecutive minutes.",
+        "passageHash": "sha256:644a01f33cc59f878606c0821b18272c0295edfffcf0aa49565018d664fce941",
+        "reportedEstimatedTokens": 13,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "irrelevant:1",
+        "sourceId": "irrelevant",
+        "sourceStartByte": 0,
+        "sourceEndByte": 89,
+        "text": "The office garden receives water on Tuesday and the kitchen inventory is counted monthly.",
+        "passageHash": "sha256:b863659408237ca0da0d313cc1f87094bd9d6744a9ae1f37e8b954b45f13a02b",
+        "reportedEstimatedTokens": 15,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": false,
+        "dropReason": "budget_or_render_limit"
+      }
+    ],
+    "retainedPassageIdsInOutputOrder": [
+      "rotation:1",
+      "release:1",
+      "rollback:1"
+    ],
+    "compiledContext": "# Context Pack\n\nTask: Retain the signed canary threshold, credential rotation evidence, and rollback trigger.\n\n\n\n[rotation:1] Credential rotation evidence must include reviewer identity and a stable evidence digest.\n\n[release:1] The signed canary threshold requires success in every production region before release.\n\n[rollback:1] Rollback begins when error rate exceeds two percent for five consecutive minutes."
+  },
+  "expectedPublicValues": {
+    "proofContractVersion": 3,
+    "status": "success",
+    "sources": [
+      {
+        "sourceId": "release",
+        "sourceHash": "sha256:8024fdcc2aecff5c17cafd26f29ab83c49c20774d9d385b30df352ad4df55c68"
+      },
+      {
+        "sourceId": "rotation",
+        "sourceHash": "sha256:9caf4e6ffbefb74e5e06daf9dda6e7a7e02df31fb9946fe28430e8b385e76664"
+      },
+      {
+        "sourceId": "rollback",
+        "sourceHash": "sha256:644a01f33cc59f878606c0821b18272c0295edfffcf0aa49565018d664fce941"
+      },
+      {
+        "sourceId": "irrelevant",
+        "sourceHash": "sha256:b863659408237ca0da0d313cc1f87094bd9d6744a9ae1f37e8b954b45f13a02b"
+      }
+    ],
+    "retainedPassages": [
+      {
+        "passageId": "rotation:1",
+        "sourceId": "rotation",
+        "sourceStartByte": 0,
+        "sourceEndByte": 89,
+        "passageHash": "sha256:9caf4e6ffbefb74e5e06daf9dda6e7a7e02df31fb9946fe28430e8b385e76664"
+      },
+      {
+        "passageId": "release:1",
+        "sourceId": "release",
+        "sourceStartByte": 0,
+        "sourceEndByte": 87,
+        "passageHash": "sha256:8024fdcc2aecff5c17cafd26f29ab83c49c20774d9d385b30df352ad4df55c68"
+      },
+      {
+        "passageId": "rollback:1",
+        "sourceId": "rollback",
+        "sourceStartByte": 0,
+        "sourceEndByte": 81,
+        "passageHash": "sha256:644a01f33cc59f878606c0821b18272c0295edfffcf0aa49565018d664fce941"
+      }
+    ],
+    "inputHash": "sha256:ce273694341aa729089a528b02abcc8696b8c4bc5b389cab962073455b2bfbec",
+    "outputHash": "sha256:dcf14a2fd30e6074caefe303b85ed9dc612d9ad0038669decabaf1658476ee67",
+    "tokenBudget": 128,
+    "compilerSelectionBudget": 92,
+    "retainedPassageReportedTokens": 39,
+    "compiledContextReportedTokens": 73,
+    "includedPassageCount": 3,
+    "coverageNumerator": 3,
+    "coverageDenominator": 4,
+    "coveragePercentageBps": 7500,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false,
+    "tokenEstimatorVersion": "maha_model_neutral_v1"
+  },
+  "prototypeCompatibility": {
+    "guestDigestAssessed": "sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0",
+    "verifyingKeyAssessed": "0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d",
+    "compatible": false,
+    "blockers": [
+      "Prototype guest recomputes whitespace token counts; v1 must prove arithmetic over Maha-reported counts without claiming estimator verification.",
+      "Prototype guest derives different inputHash and outputHash values instead of validating Maha production hashes.",
+      "Prototype guest reselects passages in source/offset order; v1 must validate the compiler-retained set without claiming BM25 ranking correctness.",
+      "Prototype guest computes byte coverage; Maha production coverage is the number of represented sources over total sources.",
+      "Prototype guest has no unsupported_passage_count preflight for retained passage counts above 128.",
+      "Prototype public values omit the explicit token-estimator non-claims required by proof contract v3."
+    ]
+  }
+}
