@@ -3,6 +3,7 @@ import { classifyDiscoveryReport, discoveryMonitorMatrix, discoveryMonitorBatche
 import { diagnoseX402Endpoint, DEFAULT_BAZAAR_URL } from '../lib/x402/doctor.ts'
 import { createMerchantCatalogueReader } from '../lib/x402/merchant-catalog.ts'
 import { checkBookDiscoveryContract } from '../lib/x402/book-discovery-monitor.ts'
+import { createUnpaidMonitorFetch } from '../lib/x402/monitor-transport.ts'
 
 const mode = process.argv[2]
 if (mode === 'matrix') {
@@ -21,9 +22,10 @@ if (mode === 'matrix') {
   // Revalidate untrusted matrix input before issuing any request.
   discoveryMonitorMatrix({offers:offers.map(o=>({id:o.offer,status:'active',method:o.method,canonicalResource:o.subject,payment:{protocol:'x402'}}))})
   const readCatalogue=createMerchantCatalogueReader({baseUrl:DEFAULT_BAZAAR_URL,timeoutMs:20000})
+  const monitorFetch=createUnpaidMonitorFetch()
   const results:unknown[]=[],counts:Record<string,number>={},changeAreas:Record<string,number>={},paymentOptions:Record<string,number>={},pending=[...offers]
   await mkdir('discovery-reports',{recursive:true})
-  await Promise.all(Array.from({length:Math.min(4,pending.length)},async()=>{
+  await Promise.all(Array.from({length:1},async()=>{
     for(let offer=pending.shift();offer;offer=pending.shift()){
       if(offer.offer.startsWith('book-bundle-v2-')){
         try{const report=await checkBookDiscoveryContract(offer.subject);counts.book_contract_only=(counts.book_contract_only??0)+1;results.push({offer:offer.offer,...report})}
@@ -31,7 +33,7 @@ if (mode === 'matrix') {
         continue
       }
       let report:unknown=null
-      try{report=await diagnoseX402Endpoint({endpoint:offer.subject,request:{method:offer.method},timeoutMs:10000,readCatalogue})}catch{/* Report missing, never assert absence. */}
+      try{report=await diagnoseX402Endpoint({endpoint:offer.subject,request:{method:offer.method},timeoutMs:20000,readCatalogue,fetchImpl:monitorFetch})}catch{/* Report missing, never assert absence. */}
       const classification=classifyDiscoveryReport(report,offer.subject,'success',offer.expectedIndexed!==false)
       if(classification==='drift'&&report&&typeof report==='object'){
         const comparison=(report as {bazaar?:{comparison?:{paymentOptions:string;changedAreas:string[]}}}).bazaar?.comparison

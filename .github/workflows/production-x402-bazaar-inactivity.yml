@@ -73,30 +73,18 @@ jobs:
 
       - name: Escalate to an issue
         if: failure()
+        env:
+          MONITOR_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
-          if [ -f "$REPORT" ]; then
-            DETAIL=$(node -e '
-              const r = JSON.parse(require("fs").readFileSync(process.env.REPORT, "utf8"))
-              const rows = r.reports.map((o) => `| ${o.offerId} | ${o.level} | ${o.reason} | ${o.lastCalledAt ?? "unknown"} | ${o.daysRemaining ?? "unknown"} | ${o.totalCallsL30Days ?? "?"} | ${o.uniquePayersL30Days ?? "?"} | ${o.coveredByCanary ? "canary" : "manual"} |`)
-              console.log([
-                `Removal threshold: ${r.removalAfterDays} days without a settlement.`,
-                "",
-                "| offer | level | reason | last settled | days left | l30d calls | l30d payers | coverage |",
-                "| --- | --- | --- | --- | --- | --- | --- | --- |",
-                ...rows,
-              ].join("\n"))
-            ')
-          else
-            DETAIL='The watch failed before producing a complete report; treat listing state as unknown. A partial lookup does not establish missing listings.'
-          fi
-          BODY=$(printf '%s\n\nRun: %s\n\n**Do not settle automatically.** Refreshing a listing is a manually dispatched, reviewer-protected settlement with an exact ceiling — see docs/production-x402-canary.md. Deep Context Evaluation has no automatic coverage by design.\n\nA canary-covered offer reported as `automation_should_have_fired` means the scheduled canary did not run; fix the canary rather than paying by hand.\n' "$DETAIL" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+          BODY_FILE="$RUNNER_TEMP/bazaar-inactivity-issue.md"
+          node scripts/render-inactivity-issue.mjs "$REPORT" "$BODY_FILE"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body "$BODY"
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
           else
-            gh issue create --title "$TITLE" --body "$BODY" --label x402 || \
-            gh issue create --title "$TITLE" --body "$BODY"
+            gh issue create --title "$TITLE" --body-file "$BODY_FILE" --label x402 || \
+            gh issue create --title "$TITLE" --body-file "$BODY_FILE"
           fi
 
       - name: Close the issue when every listing is back inside its margin

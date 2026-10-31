@@ -43,7 +43,7 @@ export function discoveryMonitorBatches(inventory:{include:MonitorOffer[]},size=
   if(!Number.isInteger(size)||size<1||size>50||!inventory.include.length||inventory.include.length>MAX_MONITORED_X402_OFFERS)throw Error('Invalid monitor batches')
   return {include:Array.from({length:Math.ceil(inventory.include.length/size)},(_,batch)=>({batch:String(batch).padStart(3,'0'),offers:inventory.include.slice(batch*size,(batch+1)*size)}))}
 }
-export type MonitorClassification = 'clean' | 'expected_unindexed' | 'drift' | 'listing_missing' | 'probe_failure' | 'contract_failure' | 'warning' | 'monitor_failure'
+export type MonitorClassification = 'clean' | 'expected_unindexed' | 'drift' | 'listing_missing' | 'probe_failure' | 'probe_rate_limited' | 'contract_failure' | 'warning' | 'monitor_failure'
 
 /** Stable incident identity: ignore timestamps, durations and result order.
  * A new quote/digest/status/finding changes the fingerprint; unchanged drift
@@ -83,6 +83,9 @@ export function classifyDiscoveryReport(value: unknown, subject: string, doctorO
   if (errors !== report.summary.errors || warnings !== report.summary.warnings) return 'monitor_failure'
   const rules = new Set(report.findings.map((finding) => finding.ruleId))
   if (rules.has('x402.network') || rules.has('x402.bazaar.lookup')) return 'probe_failure'
+  if ((report.live?.status === 429 || report.live?.crawlerStatus === 429)
+    && report.findings.filter(f => f.level === 'error').every(f =>
+      ['x402.http.challenge_status', 'x402.bazaar.crawler_status'].includes(f.ruleId))) return 'probe_rate_limited'
   if (errors) return 'contract_failure'
   if (rules.has('x402.bazaar.stale_metadata') && report.live?.declarationDigest && report.bazaar?.found === true && report.bazaar.matchesLive === false) return 'drift'
   if (rules.has('x402.bazaar.not_found') && report.bazaar?.found === false) return !expectedIndexed&&report.live?.status===402&&report.bazaar.catalogueComplete===true&&warnings===1?'expected_unindexed':'listing_missing'
