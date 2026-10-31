@@ -1,5 +1,7 @@
 # x402 endpoint unit costs — measured
 
+> **Status: dated measurement (2026-09-10).** The compute and latency figures are still the measurements they were. The prices and margins beside them are the catalogue of that day: `context-compression` was later held at $0.001 instead of the $0.002 step-up discussed here, and seven utility prices were cut on 2026-09-13 (#433). Re-run `node --experimental-strip-types scripts/measure-x402-unit-costs.ts --out <path>` before using any margin figure.
+
 Measured 2026-09-10 on the author's machine, at `origin/main` d9d5558a.
 Harness: [`scripts/measure-x402-unit-costs.ts`](../scripts/measure-x402-unit-costs.ts). 31 timed iterations per endpoint per payload, after one warm call.
 

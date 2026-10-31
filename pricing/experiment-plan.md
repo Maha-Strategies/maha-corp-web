@@ -1,5 +1,7 @@
 # Pricing experiment plan
 
+> **Status: dated analysis (2026-09-10).** The method — Poisson power, exposure versus price — still holds. The demand counts are a snapshot: by 2026-09-13 external settlements had reached 14 across 9 wallets, still on the same two products. The prices it refers to were revised on 2026-09-13 (#433); see [`ladder-proposal.md`](ladder-proposal.md) for what changed.
+
 Companion to [`unit-costs.md`](unit-costs.md) and [`ladder-proposal.md`](ladder-proposal.md).
 
 ## 1. Our demand record, in full
