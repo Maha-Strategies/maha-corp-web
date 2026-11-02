@@ -12,6 +12,12 @@ const valid = (): PaymentChallenge => ({ x402Version: 2, resource: { url: RESOUR
 }] })
 
 test('fixed matrix terms pass', () => assert.doesNotThrow(() => assertMatrixTerms(valid())))
+test('accepts one exact Base requirement alongside other network options', () => {
+  const challenge = valid()
+  challenge.accepts.unshift({ ...challenge.accepts[0]!, network: 'eip155:42161' })
+  challenge.accepts.push({ ...challenge.accepts[1]!, network: 'eip155:137' })
+  assert.doesNotThrow(() => assertMatrixTerms(challenge))
+})
 for (const [field, value] of Object.entries({ amount: '50001', network: 'eip155:1', asset: '0xwrong', payTo: '0xwrong', scheme: 'upto' })) {
   test(`rejects changed ${field}`, () => {
     const challenge = valid()
