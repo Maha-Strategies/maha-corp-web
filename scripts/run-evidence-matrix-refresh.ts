@@ -16,8 +16,10 @@ export const AMOUNT = '50000'
 export const CONFIRMATION = 'PUBLISHER_FUNDED_MATRIX_ONCE_MAX_0_05_USDC'
 
 export function assertMatrixTerms(challenge: PaymentChallenge): void {
-  const [term] = challenge.accepts
-  if (challenge.x402Version !== 2 || challenge.resource.url !== RESOURCE || challenge.accepts.length !== 1
+  // The live challenge offers Base, Arbitrum and Polygon. Sign only on Base.
+  const baseTerms = challenge.accepts.filter(term => term.network === BASE_NETWORK)
+  const [term] = baseTerms
+  if (challenge.x402Version !== 2 || challenge.resource.url !== RESOURCE || baseTerms.length !== 1
     || !term || term.scheme !== 'exact' || term.network !== BASE_NETWORK || term.amount !== AMOUNT
     || term.asset.toLowerCase() !== BASE_USDC.toLowerCase() || term.payTo.toLowerCase() !== MAHA_PAYEE.toLowerCase()
     || term.extra?.name !== 'USD Coin' || term.extra?.version !== '2') {
