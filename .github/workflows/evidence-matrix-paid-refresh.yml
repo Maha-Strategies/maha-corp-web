@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'PUBLISHER_FUNDED_MATRIX_ONCE_MAX_0_05_USDC'
+        description: 'Matrix 0.05 or reviewed at-risk 35 max 2.1155 USDC confirmation'
         required: true
         type: string
 
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.run_attempt == 1
+    if: github.run_attempt == 1 && inputs.confirmation == 'PUBLISHER_FUNDED_MATRIX_ONCE_MAX_0_05_USDC'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: production-x402-canary
@@ -46,5 +46,38 @@ jobs:
         with:
           name: evidence-matrix-refresh-${{ github.run_id }}
           path: ${{ env.MATRIX_REFRESH_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90
+
+  refresh-at-risk-35:
+    if: github.run_attempt == 1 && inputs.confirmation == 'PUBLISHER_FUNDED_AT_RISK_35_ONCE_MAX_2_1155_USDC'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production-x402-canary
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      AT_RISK_REFRESH_CONFIRMATION: ${{ inputs.confirmation }}
+      AT_RISK_REFRESH_OUTPUT_PATH: ${{ github.workspace }}/at-risk-refresh-evidence.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Test fixed payment boundaries
+        run: node --experimental-strip-types --test test/at-risk-bazaar-refresh.test.ts
+      - name: Read-only live preflight for all 35
+        run: node --experimental-strip-types scripts/run-at-risk-bazaar-refresh.ts
+      - name: Publisher-funded purchases, one per stale listing
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: node --experimental-strip-types scripts/run-at-risk-bazaar-refresh.ts --pay
+      - name: Preserve sanitized settlement evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: at-risk-refresh-${{ github.run_id }}
+          path: ${{ env.AT_RISK_REFRESH_OUTPUT_PATH }}
           if-no-files-found: warn
           retention-days: 90
