@@ -1,17 +1,17 @@
 import {test} from 'node:test'
 import assert from 'node:assert/strict'
-import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence} from '../scripts/run-workflow-evidence-eight.mjs'
+import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence} from '../scripts/run-workflow-buyer-science-eight.mjs'
 test('frozen batch cannot exceed cap or authorize any target twice',()=>{
-  assert.equal(CAP,1420780n)
+  assert.equal(CAP,1432664n)
   assert.deepEqual(TARGETS.map(e=>[e.id,e.amount]),[
-    ["workflow-contract-amendment-handoff","215000"],
-    ["workflow-claim-control-evidence-review-v1","154990"],
-    ["workflow-revision-provenance-export-review-v1","214990"],
-    ["workflow-citation-correction-handoff-v1","124950"],
-    ["workflow-incident-evidence-handoff","175850"],
-    ["workflow-publication-release-consistency","145000"],
-    ["workflow-robotics-run-handoff","185000"],
-    ["workflow-procurement-response-readiness","205000"],
+    ["workflow-quantum-calibration-review","125000"],
+    ["workflow-meeting-action-handoff","155750"],
+    ["workflow-recovery-review-v1","175995"],
+    ["workflow-signed-tool-admission-review-v1","164990"],
+    ["workflow-context-revision-evidence-handoff-v2","174980"],
+    ["workflow-materials-test-review","225000"],
+    ["workflow-scientific-manifest-handoff-v2","215999"],
+    ["workflow-research-options-brief-v1","194950"],
   ])
   const cap=budget()
   for(const e of TARGETS)cap.reserve(e)

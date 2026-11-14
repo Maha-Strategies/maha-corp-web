@@ -15,24 +15,24 @@ import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
 import { MAHA_PAYEE } from '../lib/x402/merchant-identity.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 
-export const CAP = 1420780n
-export const REF = 'refs/heads/codex/workflow-evidence-eight-20261114'
-export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_EVIDENCE_EIGHT_ONCE_MAX_1420780'
-const SCOPE = 'maha-workflow-evidence-eight/2026-11-14'
+export const CAP = 1432664n
+export const REF = 'refs/heads/codex/workflow-buyer-science-eight-20261114'
+export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_BUYER_SCIENCE_EIGHT_ONCE_MAX_1432664'
+const SCOPE = 'maha-workflow-buyer-science-eight/2026-11-14'
 const ORIGIN = 'https://www.mahastrategies.com'
 const CDP = 'https://api.cdp.coinbase.com/platform/v2/x402'
 const WALLET = '0x7b7ff44288fade4a1829aba2584dfceb952146f2'
 const NETWORK = 'eip155:8453'
 const usdc = usdcNetwork(NETWORK)
 const frozen = [
-  ["workflow-contract-amendment-handoff","/api/v1/context/workflows/contract-amendment-handoff","215000","18fc2ae0b41a8acc0b2ffe192ce32fd315c5534bb4048981b75cf43486d4958e","1d204c442a80f4991f3af236884df3f4c95b2d728bfa0fce3048f39dcdf43ce0"],
-  ["workflow-claim-control-evidence-review-v1","/api/v1/verify/workflows/claim-control-evidence-review-v1","154990","cc1b16b108d6627d7dce1a223f0ffa2e3eb791a0ed8e4d77c656b08e4c60b5f9","03e4c4946cfaf6068d1818bca7842f93ba6adfe42744257bc820d2907192f51c"],
-  ["workflow-revision-provenance-export-review-v1","/api/v1/verify/workflows/revision-provenance-export-review-v1","214990","4935195cd580cf7627deec1ea2a960b2deab94e2e85b98c26baf00bc5f71f6dd","c6c0c598c5b2f39ea1adb8b30bdfe2121c5f6e44705d07e8101a29003f90a28b"],
-  ["workflow-citation-correction-handoff-v1","/api/v1/verify/workflows/citation-correction-handoff-v1","124950","af130704df6e3920ef923a61776b3377f2edea8dd4b0b2099cb83a762785f149","963ac6be718a898e30f5550c726d2874d2b5f430b88d5e67a8bd600debf86c27"],
-  ["workflow-incident-evidence-handoff","/api/v1/context/workflows/incident-evidence-handoff","175850","e09aa49e37f559f0bb3006234d1bf2a009871cff9b6299a188567e7075fe4909","7c2c2d299754345c4998e6dd44e2c9f8cea68d1897131b670689fffa01427cc4"],
-  ["workflow-publication-release-consistency","/api/v1/intel/workflows/publication-release-consistency","145000","4cbf44872f9a5c0d6cbaafeab712cc3702a0f9c0867f2497a6fb0e073ede50d1","30794f1d4c958a7f740b7bd28f781ea5066c4b967a855619e99972603a5c7564"],
-  ["workflow-robotics-run-handoff","/api/v1/compute/workflows/robotics-run-handoff","185000","384f926da358d2ecae0ede4679eb488a9aba8d6cd21b80899870e75bdb739e05","2b395b3df05fca413f74fefbef077aa9e844cd5d09f63d79b355a6b7db417e96"],
-  ["workflow-procurement-response-readiness","/api/v1/intel/workflows/procurement-response-readiness","205000","03bc92018f582377ae58eea74abbcdb8157926a3ff3726ac4a3a99cac232902c","1c9e126d34181497d8b54e4e7dba6cde079f95519fac5188e803d174f084a99b"]
+  ["workflow-quantum-calibration-review","/api/v1/verify/workflows/quantum-calibration-review","125000","a0d445fc032c75fc454f772804ddf5a8415c45a00e465c516db0c206c575fc6d","deacb5c581d475fa8fbe8300d67276140145938ef690b2bad6d6bdd2f062008c"],
+  ["workflow-meeting-action-handoff","/api/v1/context/workflows/meeting-action-handoff","155750","17c5bf318540eceda61be4614f64f421d6d50bb5a89d9d6fbd33cd81d4e66e3c","670f043503b131db291122c1aea7d70a61c894e9cac2aa7dcd7067a582514a3a"],
+  ["workflow-recovery-review-v1","/api/v1/verify/workflows/recovery-review-v1","175995","868daa4f821e91e82e9dc589401ddee3ab1f38d7047963e3c27339ca65f2e82f","b48505bbfa44b5993704c2b934e0b3da8f8fd64490e98e7fb07a9209c85510d1"],
+  ["workflow-signed-tool-admission-review-v1","/api/v1/verify/workflows/signed-tool-admission-review-v1","164990","170bd6a910bbbed6f4e907fea83cf3f157c74bfef2a9c0f184d817e4d39d67ea","536b1de21854749ee485c4c21f36063e64130089a782e5c9ba9f986934e9fdfb"],
+  ["workflow-context-revision-evidence-handoff-v2","/api/v1/context/workflows/context-revision-evidence-handoff-v2","174980","3635805ab6dbfe4f364785c38b0d4bfe5635f2ae61256d21ae349553395e52ee","6bf567951990131b2002ccda00416bc0072ca8f55d48fd4b80d9af9a53a40242"],
+  ["workflow-materials-test-review","/api/v1/compute/workflows/materials-test-review","225000","d16bdcb675d4214a22404d29bbcc1d02c89cc85dc9ee0a4522514c6d139a030e","77ea3085266662a0c1e476d37ce727e3bd9cf5fc17ba1fb89d0d811b92f315df"],
+  ["workflow-scientific-manifest-handoff-v2","/api/v1/verify/workflows/scientific-manifest-handoff-v2","215999","1066c7c8f8cbde9f826336738897184d265cf728f51268a20fead26a76339f71","aa4f948101d58370afb8bc36321c22fc0224fe7ec11b4770bc6eed452f73962e"],
+  ["workflow-research-options-brief-v1","/api/v1/intel/workflows/research-options-brief-v1","194950","c5ef4c3dd0c3a17d5ec3a4a3f8dbb51b3057d082cf35fdca3fc5174f9782a0e8","cdbba7fb7eab3dde3c3921020cb07ca936f21c3f25147d177a59d64f7f5fd539"]
 ]
 export const TARGETS = Object.freeze(frozen.map(([id,path,amount,plan,input]) =>
   Object.freeze({id,path,amount,planHash:'sha256:'+plan,inputHash:'sha256:'+input})))
@@ -43,7 +43,7 @@ const post = (body) => ({method:'POST',headers:{'content-type':'application/json
 const merchantTransport = (url, init={}) => {
   if(new URL(url).origin !== ORIGIN) fail('unexpected_merchant_origin')
   return fetch(url, {...init,redirect:'error',signal:AbortSignal.timeout(20000),
-    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-evidence-eight/1','x-maha-discovery-source':'maha_canary'}})
+    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-buyer-science-eight/1','x-maha-discovery-source':'maha_canary'}})
 }
 async function read(url, init, requester=fetch) {
   const response=await requester(url, {...init,redirect:'error',signal:AbortSignal.timeout(16000),cache:'no-store'})
@@ -160,7 +160,7 @@ export async function sequence(targets, isListed, buy, confirmListing, event=asy
 function guard(){
   const e=process.env
   if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REPOSITORY!=='Maha-Strategies/maha-corp-web'||e.GITHUB_REF!==REF||e.GITHUB_RUN_ATTEMPT!=='1'
-    ||e.WORKFLOW_EVIDENCE_EIGHT_CONFIRMATION!==APPROVAL||!e.WORKFLOW_EVIDENCE_EIGHT_EVIDENCE||dirname(e.WORKFLOW_EVIDENCE_EIGHT_EVIDENCE)!==e.RUNNER_TEMP)
+    ||e.WORKFLOW_BUYER_SCIENCE_EIGHT_CONFIRMATION!==APPROVAL||!e.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE||dirname(e.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE)!==e.RUNNER_TEMP)
     fail('protected_exact_branch_and_confirmation_required')
 }
 async function saveJson(path,value){
@@ -186,7 +186,7 @@ async function run(mode){
   if(await client.getChainId()!==8453)fail('wrong_payment_chain')
   const balance=await client.readContract({address:usdc.asset,abi,functionName:'balanceOf',args:[account.address]})
   if(balance<CAP)fail('insufficient_balance')
-  const out=process.env.WORKFLOW_EVIDENCE_EIGHT_EVIDENCE, cap=budget(), packets=[]
+  const out=process.env.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE, cap=budget(), packets=[]
   const key=createHmac('sha256',k).update(SCOPE+':encrypted-capsule-v1').digest()
   const log={scope:SCOPE,classification:'publisher-funded-operator-activity',customerRevenue:false,automaticRepayment:false,
     state:'in_progress',approvedAtomic:String(CAP),authorizedAtomic:'0',confirmedAtomic:'0',steps:[]}
@@ -246,7 +246,7 @@ async function run(mode){
     })
     index=await snapshot()
     for(const e of TARGETS)if(!await findExact(e,index))fail('final_snapshot_incomplete_do_not_repay')
-    log.state='all_evidence_eight_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
+    log.state='all_buyer_science_eight_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
   }catch(err){log.state='stopped_no_repayment';await save();throw err}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)run(process.argv[2]).catch(e=>{
