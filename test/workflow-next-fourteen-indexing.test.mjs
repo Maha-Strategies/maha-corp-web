@@ -1,17 +1,23 @@
 import {test} from 'node:test'
 import assert from 'node:assert/strict'
-import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence} from '../scripts/run-workflow-buyer-science-eight.mjs'
+import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence,requirePassingDelivery} from '../scripts/run-workflow-next-fourteen.mjs'
 test('frozen batch cannot exceed cap or authorize any target twice',()=>{
-  assert.equal(CAP,1432664n)
+  assert.equal(CAP,2568734n)
   assert.deepEqual(TARGETS.map(e=>[e.id,e.amount]),[
-    ["workflow-quantum-calibration-review","125000"],
-    ["workflow-meeting-action-handoff","155750"],
-    ["workflow-recovery-review-v1","175995"],
-    ["workflow-signed-tool-admission-review-v1","164990"],
-    ["workflow-context-revision-evidence-handoff-v2","174980"],
-    ["workflow-materials-test-review","225000"],
-    ["workflow-scientific-manifest-handoff-v2","215999"],
-    ["workflow-research-options-brief-v1","194950"],
+    ["workflow-contract-revision-handoff-v1","175999"],
+    ["workflow-agent-credential-handoff-v1","205997"],
+    ["workflow-source-excerpt-handoff-review-v1","194990"],
+    ["workflow-research-reference-maintenance-v1","49950"],
+    ["workflow-publication-revision-handoff-v2","175996"],
+    ["workflow-tabular-delivery-v1","205998"],
+    ["workflow-robotics-revision-handoff-v1","165999"],
+    ["workflow-biology-assay-correction-handoff-v1","214970"],
+    ["workflow-materials-property-condition-handoff-v1","144995"],
+    ["workflow-calibrated-measurement-handoff-v2","182997"],
+    ["workflow-celestial-timing-plan-review-v1","214993"],
+    ["workflow-extractive-source-handoff-v1","244950"],
+    ["workflow-publication-metadata-diligence-v1","194950"],
+    ["workflow-trial-registry-evidence-handoff","195950"],
   ])
   const cap=budget()
   for(const e of TARGETS)cap.reserve(e)
@@ -40,4 +46,9 @@ test('listing must agree on exact URL, method, chain, asset, amount, and payee',
   assert.equal(listingMatches({...row,resource:row.resource+'-other'},e),false)
   assert.equal(listingMatches({...row,accepts:[{...row.accepts[0],amount:'1'}]},e),false)
   assert.equal(listingMatches({...row,extensions:{}},e),false)
+})
+test('a paid hold cannot be counted as a successful workflow or trigger another purchase',()=>{
+  assert.doesNotThrow(()=>requirePassingDelivery({overallStatus:'REQUIREMENTS_SATISFIED'}))
+  assert.throws(()=>requirePassingDelivery({overallStatus:'HELD'}),/paid_nonpassing_workflow_do_not_repay/)
+  assert.throws(()=>requirePassingDelivery(null),/paid_nonpassing_workflow_do_not_repay/)
 })

@@ -15,35 +15,41 @@ import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
 import { MAHA_PAYEE } from '../lib/x402/merchant-identity.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 
-export const CAP = 1432664n
-export const REF = 'refs/heads/codex/workflow-buyer-science-eight-20261114'
-export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_BUYER_SCIENCE_EIGHT_ONCE_MAX_1432664'
-const SCOPE = 'maha-workflow-buyer-science-eight/2026-11-14'
+export const CAP = 2568734n
+export const REF = 'refs/heads/codex/workflow-next-fourteen-20261114'
+export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_NEXT_FOURTEEN_ONCE_MAX_2568734'
+const SCOPE = 'maha-workflow-next-fourteen/2026-11-14'
 const ORIGIN = 'https://www.mahastrategies.com'
 const CDP = 'https://api.cdp.coinbase.com/platform/v2/x402'
 const WALLET = '0x7b7ff44288fade4a1829aba2584dfceb952146f2'
 const NETWORK = 'eip155:8453'
 const usdc = usdcNetwork(NETWORK)
 const frozen = [
-  ["workflow-quantum-calibration-review","/api/v1/verify/workflows/quantum-calibration-review","125000","a0d445fc032c75fc454f772804ddf5a8415c45a00e465c516db0c206c575fc6d","deacb5c581d475fa8fbe8300d67276140145938ef690b2bad6d6bdd2f062008c"],
-  ["workflow-meeting-action-handoff","/api/v1/context/workflows/meeting-action-handoff","155750","17c5bf318540eceda61be4614f64f421d6d50bb5a89d9d6fbd33cd81d4e66e3c","670f043503b131db291122c1aea7d70a61c894e9cac2aa7dcd7067a582514a3a"],
-  ["workflow-recovery-review-v1","/api/v1/verify/workflows/recovery-review-v1","175995","868daa4f821e91e82e9dc589401ddee3ab1f38d7047963e3c27339ca65f2e82f","b48505bbfa44b5993704c2b934e0b3da8f8fd64490e98e7fb07a9209c85510d1"],
-  ["workflow-signed-tool-admission-review-v1","/api/v1/verify/workflows/signed-tool-admission-review-v1","164990","170bd6a910bbbed6f4e907fea83cf3f157c74bfef2a9c0f184d817e4d39d67ea","536b1de21854749ee485c4c21f36063e64130089a782e5c9ba9f986934e9fdfb"],
-  ["workflow-context-revision-evidence-handoff-v2","/api/v1/context/workflows/context-revision-evidence-handoff-v2","174980","3635805ab6dbfe4f364785c38b0d4bfe5635f2ae61256d21ae349553395e52ee","6bf567951990131b2002ccda00416bc0072ca8f55d48fd4b80d9af9a53a40242"],
-  ["workflow-materials-test-review","/api/v1/compute/workflows/materials-test-review","225000","d16bdcb675d4214a22404d29bbcc1d02c89cc85dc9ee0a4522514c6d139a030e","77ea3085266662a0c1e476d37ce727e3bd9cf5fc17ba1fb89d0d811b92f315df"],
-  ["workflow-scientific-manifest-handoff-v2","/api/v1/verify/workflows/scientific-manifest-handoff-v2","215999","1066c7c8f8cbde9f826336738897184d265cf728f51268a20fead26a76339f71","aa4f948101d58370afb8bc36321c22fc0224fe7ec11b4770bc6eed452f73962e"],
-  ["workflow-research-options-brief-v1","/api/v1/intel/workflows/research-options-brief-v1","194950","c5ef4c3dd0c3a17d5ec3a4a3f8dbb51b3057d082cf35fdca3fc5174f9782a0e8","cdbba7fb7eab3dde3c3921020cb07ca936f21c3f25147d177a59d64f7f5fd539"]
+  ["workflow-contract-revision-handoff-v1","/api/v1/verify/workflows/contract-revision-handoff-v1","175999","864cd839ceaa4d0e58cf4b51b9bdf102fabbfdd21b2e6d27db0ce156050c9939","25804c30bc5f1b9aee8162d7845c903a6a00e39d03761e83d0b337e91f815ba6"],
+  ["workflow-agent-credential-handoff-v1","/api/v1/verify/workflows/agent-credential-handoff-v1","205997","ba6855f1a7e456a5d9e9e9a49f8b8cc56fc9e4d036b6cc8e90d2b94920bd6ef7","abde7f0c891416136368256b5b2306c76568dae8b1852d88e40fe468310d761b"],
+  ["workflow-source-excerpt-handoff-review-v1","/api/v1/verify/workflows/source-excerpt-handoff-review-v1","194990","f31d9fe792782134c5afbb89285ab1dbd82622cb4a760e638fa1dd7426df2c7a","7daaa50131cbb74d946df658b2120228d73d06559923ba301ea294d3b236048a"],
+  ["workflow-research-reference-maintenance-v1","/api/v1/library/workflows/research-reference-maintenance","49950","1e5b1af4f99c9f5ddd84fd11a88eb7bb11a4a37a3176521833d60228347ca37d","65ae23911bd310214afb9229552ba5a045d4af4a89f35795b8d766f491f8b5a5"],
+  ["workflow-publication-revision-handoff-v2","/api/v1/verify/workflows/publication-revision-handoff-v2","175996","6ad6465fc40d3b94d5bdcb26d235fa164323a0da30f8c5de6978fd14ab3ded35","6974e6c23f54b607a1296d388b4ad43f54152daa2d6a28d8eca35bb359730621"],
+  ["workflow-tabular-delivery-v1","/api/v1/verify/workflows/tabular-delivery-v1","205998","39e6b7d373e9388bb23f94afd532d580c9db88e2d4e8bdcbe7d6d223dff7697e","0262f2a26606fb7adab089623285033dde6920fa7fe25cfe47838fc41e038e96"],
+  ["workflow-robotics-revision-handoff-v1","/api/v1/verify/workflows/robotics-revision-handoff-v1","165999","f90b82d013633e9db7c420833a1ab770ddc6b6c91ad165d85abca39ad48dbe33","989fa39a6140773425d20593c91e884a908df20bc9b6db35c16b140d5685f015"],
+  ["workflow-biology-assay-correction-handoff-v1","/api/v1/verify/workflows/biology-assay-correction-handoff-v1","214970","0cc7a2f3f843aec53881e999b90afac33a06ae66e9dc2b2806b2f09e3e819465","805c0ceb8705a200b963749b746031ed94bf430a4c27aea87f6435df1e2ecf72"],
+  ["workflow-materials-property-condition-handoff-v1","/api/v1/compute/workflows/materials-property-condition-handoff-v1","144995","07627c6d25f9f072a53a596881f341c15746c07b8a26fbbfc30ffe4d42240750","2a5be3a9a2779304dc4334a9ca21cec3d46cb146698be3e4bbee94142eee78e8"],
+  ["workflow-calibrated-measurement-handoff-v2","/api/v1/compute/workflows/calibrated-measurement-handoff-v2","182997","f11039389b928528000ecc3c509586d3562f2f534551d1e90ac011748073c78e","e0d02525f81b3a779dc6f270192dc2803c7bf5982adeca84150af39a11bb3ffd"],
+  ["workflow-celestial-timing-plan-review-v1","/api/v1/celestial/workflows/celestial-timing-plan-review-v1","214993","2136e4b5e24cb1733f62e5f914f02373d3c9eb362bde776d300515587a1ad551","6ee0828cb6c033f2a48d3238c021c49375748c8f6a8d11f484b00eedbd11a18c"],
+  ["workflow-extractive-source-handoff-v1","/api/v1/intel/workflows/extractive-source-handoff-v1","244950","35f0028c798809ddcc5896e97fbee260890f7cce7899c19667117792d7f81b75","8f5327035f44406da9096884072637f9149a40439d9b87bac7d763cb87ae073f"],
+  ["workflow-publication-metadata-diligence-v1","/api/v1/intel/workflows/publication-metadata-diligence-v1","194950","1501b03cfaf76eb7f0ae5e40bc96a75d652f641bd31b46f079d7bd49d1877664","93e53574699ef5caab665f31cfce5df38241aae657bd31de649e0c3604257241"],
+  ["workflow-trial-registry-evidence-handoff","/api/v1/intel/workflows/trial-registry-evidence-handoff","195950","20185f943789d93df226c0d8bdbe869ef8f46a0080525dd177b2733a4a26a063","491b8003a881c678be9ccbd40e64f7a3db02550fd0feef2a0181f0ee0a8bbc0a"]
 ]
 export const TARGETS = Object.freeze(frozen.map(([id,path,amount,plan,input]) =>
   Object.freeze({id,path,amount,planHash:'sha256:'+plan,inputHash:'sha256:'+input})))
-if (TARGETS.length!==8 || new Set(TARGETS.map(e=>e.id)).size!==8
-  || new Set(TARGETS.map(e=>e.path)).size!==8 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
+if (TARGETS.length!==14 || new Set(TARGETS.map(e=>e.id)).size!==14
+  || new Set(TARGETS.map(e=>e.path)).size!==14 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
 const fail = (code) => { throw Error(code) }
 const post = (body) => ({method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
 const merchantTransport = (url, init={}) => {
   if(new URL(url).origin !== ORIGIN) fail('unexpected_merchant_origin')
   return fetch(url, {...init,redirect:'error',signal:AbortSignal.timeout(20000),
-    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-buyer-science-eight/1','x-maha-discovery-source':'maha_canary'}})
+    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-next-fourteen/1','x-maha-discovery-source':'maha_canary'}})
 }
 async function read(url, init, requester=fetch) {
   const response=await requester(url, {...init,redirect:'error',signal:AbortSignal.timeout(16000),cache:'no-store'})
@@ -105,6 +111,9 @@ export function budget() {
     seen.add(e.id);authorized+=BigInt(e.amount)
   }}
 }
+export function requirePassingDelivery(data) {
+  if(data?.overallStatus!=='REQUIREMENTS_SATISFIED')fail('paid_nonpassing_workflow_do_not_repay')
+}
 export function contract(e) {
   return {id:e.id,path:e.path,amount:e.amount,recoverySeconds:86400,
     validateInput(input) {
@@ -160,7 +169,7 @@ export async function sequence(targets, isListed, buy, confirmListing, event=asy
 function guard(){
   const e=process.env
   if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REPOSITORY!=='Maha-Strategies/maha-corp-web'||e.GITHUB_REF!==REF||e.GITHUB_RUN_ATTEMPT!=='1'
-    ||e.WORKFLOW_BUYER_SCIENCE_EIGHT_CONFIRMATION!==APPROVAL||!e.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE||dirname(e.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE)!==e.RUNNER_TEMP)
+    ||e.WORKFLOW_NEXT_FOURTEEN_CONFIRMATION!==APPROVAL||!e.WORKFLOW_NEXT_FOURTEEN_EVIDENCE||dirname(e.WORKFLOW_NEXT_FOURTEEN_EVIDENCE)!==e.RUNNER_TEMP)
     fail('protected_exact_branch_and_confirmation_required')
 }
 async function saveJson(path,value){
@@ -186,7 +195,7 @@ async function run(mode){
   if(await client.getChainId()!==8453)fail('wrong_payment_chain')
   const balance=await client.readContract({address:usdc.asset,abi,functionName:'balanceOf',args:[account.address]})
   if(balance<CAP)fail('insufficient_balance')
-  const out=process.env.WORKFLOW_BUYER_SCIENCE_EIGHT_EVIDENCE, cap=budget(), packets=[]
+  const out=process.env.WORKFLOW_NEXT_FOURTEEN_EVIDENCE, cap=budget(), packets=[]
   const key=createHmac('sha256',k).update(SCOPE+':encrypted-capsule-v1').digest()
   const log={scope:SCOPE,classification:'publisher-funded-operator-activity',customerRevenue:false,automaticRepayment:false,
     state:'in_progress',approvedAtomic:String(CAP),authorizedAtomic:'0',confirmedAtomic:'0',steps:[]}
@@ -224,6 +233,9 @@ async function run(mode){
       const rc=await client.waitForTransactionReceipt({hash:result.transaction,timeout:45000,pollingInterval:2500})
       if(!receiptMatchesAuthorization(rc,{transaction:result.transaction,payer,payee:MAHA_PAYEE,amount:e.amount,nonce}))fail('receipt_not_bound_do_not_repay')
       log.confirmedAtomic=String(BigInt(log.confirmedAtomic)+BigInt(e.amount))
+      step.overallStatus=result.data.overallStatus
+      if(step.overallStatus!=='REQUIREMENTS_SATISFIED'){step.state='paid_nonpassing_do_not_repay';await save()}
+      requirePassingDelivery(result.data)
       step.state='settled_delivery_confirmed_awaiting_listing';await save();console.log(JSON.stringify(step))
     },async e=>{
       for(let n=0;n<38;n++){
@@ -246,7 +258,7 @@ async function run(mode){
     })
     index=await snapshot()
     for(const e of TARGETS)if(!await findExact(e,index))fail('final_snapshot_incomplete_do_not_repay')
-    log.state='all_buyer_science_eight_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
+    log.state='all_next_fourteen_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
   }catch(err){log.state='stopped_no_repayment';await save();throw err}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)run(process.argv[2]).catch(e=>{
