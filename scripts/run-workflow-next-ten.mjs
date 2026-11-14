@@ -15,20 +15,16 @@ import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
 import { MAHA_PAYEE } from '../lib/x402/merchant-identity.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 
-export const CAP = 2568734n
-export const REF = 'refs/heads/codex/workflow-next-fourteen-20261114'
-export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_NEXT_FOURTEEN_ONCE_MAX_2568734'
-const SCOPE = 'maha-workflow-next-fourteen/2026-11-14'
+export const CAP = 1941798n
+export const REF = 'refs/heads/codex/workflow-next-ten-20261114'
+export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_NEXT_TEN_ONCE_MAX_1941798'
+const SCOPE = 'maha-workflow-next-ten/2026-11-14'
 const ORIGIN = 'https://www.mahastrategies.com'
 const CDP = 'https://api.cdp.coinbase.com/platform/v2/x402'
 const WALLET = '0x7b7ff44288fade4a1829aba2584dfceb952146f2'
 const NETWORK = 'eip155:8453'
 const usdc = usdcNetwork(NETWORK)
 const frozen = [
-  ["workflow-contract-revision-handoff-v1","/api/v1/verify/workflows/contract-revision-handoff-v1","175999","864cd839ceaa4d0e58cf4b51b9bdf102fabbfdd21b2e6d27db0ce156050c9939","25804c30bc5f1b9aee8162d7845c903a6a00e39d03761e83d0b337e91f815ba6"],
-  ["workflow-agent-credential-handoff-v1","/api/v1/verify/workflows/agent-credential-handoff-v1","205997","ba6855f1a7e456a5d9e9e9a49f8b8cc56fc9e4d036b6cc8e90d2b94920bd6ef7","abde7f0c891416136368256b5b2306c76568dae8b1852d88e40fe468310d761b"],
-  ["workflow-source-excerpt-handoff-review-v1","/api/v1/verify/workflows/source-excerpt-handoff-review-v1","194990","f31d9fe792782134c5afbb89285ab1dbd82622cb4a760e638fa1dd7426df2c7a","7daaa50131cbb74d946df658b2120228d73d06559923ba301ea294d3b236048a"],
-  ["workflow-research-reference-maintenance-v1","/api/v1/library/workflows/research-reference-maintenance","49950","1e5b1af4f99c9f5ddd84fd11a88eb7bb11a4a37a3176521833d60228347ca37d","65ae23911bd310214afb9229552ba5a045d4af4a89f35795b8d766f491f8b5a5"],
   ["workflow-publication-revision-handoff-v2","/api/v1/verify/workflows/publication-revision-handoff-v2","175996","6ad6465fc40d3b94d5bdcb26d235fa164323a0da30f8c5de6978fd14ab3ded35","6974e6c23f54b607a1296d388b4ad43f54152daa2d6a28d8eca35bb359730621"],
   ["workflow-tabular-delivery-v1","/api/v1/verify/workflows/tabular-delivery-v1","205998","39e6b7d373e9388bb23f94afd532d580c9db88e2d4e8bdcbe7d6d223dff7697e","0262f2a26606fb7adab089623285033dde6920fa7fe25cfe47838fc41e038e96"],
   ["workflow-robotics-revision-handoff-v1","/api/v1/verify/workflows/robotics-revision-handoff-v1","165999","f90b82d013633e9db7c420833a1ab770ddc6b6c91ad165d85abca39ad48dbe33","989fa39a6140773425d20593c91e884a908df20bc9b6db35c16b140d5685f015"],
@@ -42,14 +38,14 @@ const frozen = [
 ]
 export const TARGETS = Object.freeze(frozen.map(([id,path,amount,plan,input]) =>
   Object.freeze({id,path,amount,planHash:'sha256:'+plan,inputHash:'sha256:'+input})))
-if (TARGETS.length!==14 || new Set(TARGETS.map(e=>e.id)).size!==14
-  || new Set(TARGETS.map(e=>e.path)).size!==14 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
+if (TARGETS.length!==10 || new Set(TARGETS.map(e=>e.id)).size!==10
+  || new Set(TARGETS.map(e=>e.path)).size!==10 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
 const fail = (code) => { throw Error(code) }
 const post = (body) => ({method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
 const merchantTransport = (url, init={}) => {
   if(new URL(url).origin !== ORIGIN) fail('unexpected_merchant_origin')
   return fetch(url, {...init,redirect:'error',signal:AbortSignal.timeout(20000),
-    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-next-fourteen/1','x-maha-discovery-source':'maha_canary'}})
+    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-next-ten/1','x-maha-discovery-source':'maha_canary'}})
 }
 async function read(url, init, requester=fetch) {
   const response=await requester(url, {...init,redirect:'error',signal:AbortSignal.timeout(16000),cache:'no-store'})
@@ -169,7 +165,7 @@ export async function sequence(targets, isListed, buy, confirmListing, event=asy
 function guard(){
   const e=process.env
   if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REPOSITORY!=='Maha-Strategies/maha-corp-web'||e.GITHUB_REF!==REF||e.GITHUB_RUN_ATTEMPT!=='1'
-    ||e.WORKFLOW_NEXT_FOURTEEN_CONFIRMATION!==APPROVAL||!e.WORKFLOW_NEXT_FOURTEEN_EVIDENCE||dirname(e.WORKFLOW_NEXT_FOURTEEN_EVIDENCE)!==e.RUNNER_TEMP)
+    ||e.WORKFLOW_NEXT_TEN_CONFIRMATION!==APPROVAL||!e.WORKFLOW_NEXT_TEN_EVIDENCE||dirname(e.WORKFLOW_NEXT_TEN_EVIDENCE)!==e.RUNNER_TEMP)
     fail('protected_exact_branch_and_confirmation_required')
 }
 async function saveJson(path,value){
@@ -195,7 +191,7 @@ async function run(mode){
   if(await client.getChainId()!==8453)fail('wrong_payment_chain')
   const balance=await client.readContract({address:usdc.asset,abi,functionName:'balanceOf',args:[account.address]})
   if(balance<CAP)fail('insufficient_balance')
-  const out=process.env.WORKFLOW_NEXT_FOURTEEN_EVIDENCE, cap=budget(), packets=[]
+  const out=process.env.WORKFLOW_NEXT_TEN_EVIDENCE, cap=budget(), packets=[]
   const key=createHmac('sha256',k).update(SCOPE+':encrypted-capsule-v1').digest()
   const log={scope:SCOPE,classification:'publisher-funded-operator-activity',customerRevenue:false,automaticRepayment:false,
     state:'in_progress',approvedAtomic:String(CAP),authorizedAtomic:'0',confirmedAtomic:'0',steps:[]}
@@ -258,7 +254,7 @@ async function run(mode){
     })
     index=await snapshot()
     for(const e of TARGETS)if(!await findExact(e,index))fail('final_snapshot_incomplete_do_not_repay')
-    log.state='all_next_fourteen_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
+    log.state='all_next_ten_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
   }catch(err){log.state='stopped_no_repayment';await save();throw err}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)run(process.argv[2]).catch(e=>{
