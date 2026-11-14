@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.run_attempt == 1
+    if: github.run_attempt == 1 && inputs.confirmation == 'PUBLISHER_FUNDED_MATRIX_ONCE_MAX_0_05_USDC'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: production-x402-canary
@@ -46,5 +46,41 @@ jobs:
         with:
           name: evidence-matrix-refresh-${{ github.run_id }}
           path: ${{ env.MATRIX_REFRESH_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90
+
+  workflow-four:
+    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/workflow-four-indexing-20261114' && inputs.confirmation == 'PUBLISHER_FUNDED_WORKFLOW_FOUR_ONCE_MAX_399991'
+    runs-on: ubuntu-latest
+    timeout-minutes: 88
+    environment: production-x402-canary
+    env:
+      WORKFLOW_FOUR_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24
+      - run: npm install --global npm@11.17.0 --ignore-scripts
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --experimental-strip-types --test test/workflow-four-indexing.test.mjs
+      - name: Check four exact live inputs, unsigned quotes and Coinbase validation
+        run: node --experimental-strip-types scripts/run-workflow-four-indexing.mjs --plan
+      - name: Authorize each route once, waiting for its exact listing before the next
+        env:
+          BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+          WORKFLOW_FOUR_EVIDENCE: ${{ runner.temp }}/workflow-four-evidence.json
+        run: node --experimental-strip-types scripts/run-workflow-four-indexing.mjs --pay
+      - name: Preserve redacted evidence and encrypted recovery capsules
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: workflow-four-bazaar-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/workflow-four-evidence.json
+            ${{ runner.temp }}/workflow-four-evidence.json.encrypted.json
           if-no-files-found: warn
           retention-days: 90
