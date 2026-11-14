@@ -1,10 +1,13 @@
 import {test} from 'node:test'
 import assert from 'node:assert/strict'
-import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence} from '../scripts/run-workflow-eight-indexing.mjs'
+import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence} from '../scripts/run-workflow-final-three.mjs'
 test('frozen batch cannot exceed cap or authorize any target twice',()=>{
-  assert.equal(CAP,1267436n)
-  assert.equal(TARGETS.length,8)
-  assert.equal(new Set(TARGETS.map(e=>e.path)).size,8)
+  assert.equal(CAP,475990n)
+  assert.deepEqual(TARGETS.map(e=>[e.id,e.amount]),[
+    ['workflow-catalogue-import-readiness-review-v1','184990'],
+    ['workflow-package-release-handoff','165500'],
+    ['workflow-client-api-upgrade','125500'],
+  ])
   const cap=budget()
   for(const e of TARGETS)cap.reserve(e)
   assert.equal(cap.authorized,CAP)
