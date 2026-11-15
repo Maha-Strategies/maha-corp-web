@@ -15,21 +15,16 @@ import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
 import { MAHA_PAYEE } from '../lib/x402/merchant-identity.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 
-export const CAP = 1941798n
-export const REF = 'refs/heads/codex/workflow-next-ten-20261114'
-export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_NEXT_TEN_ONCE_MAX_1941798'
-const SCOPE = 'maha-workflow-next-ten/2026-11-14'
+export const CAP = 1033840n
+export const REF = 'refs/heads/codex/workflow-final-five-20261115'
+export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_FINAL_FIVE_ONCE_MAX_1033840'
+const SCOPE = 'maha-workflow-final-five/2026-11-15'
 const ORIGIN = 'https://www.mahastrategies.com'
 const CDP = 'https://api.cdp.coinbase.com/platform/v2/x402'
 const WALLET = '0x7b7ff44288fade4a1829aba2584dfceb952146f2'
 const NETWORK = 'eip155:8453'
 const usdc = usdcNetwork(NETWORK)
 const frozen = [
-  ["workflow-publication-revision-handoff-v2","/api/v1/verify/workflows/publication-revision-handoff-v2","175996","6ad6465fc40d3b94d5bdcb26d235fa164323a0da30f8c5de6978fd14ab3ded35","6974e6c23f54b607a1296d388b4ad43f54152daa2d6a28d8eca35bb359730621"],
-  ["workflow-tabular-delivery-v1","/api/v1/verify/workflows/tabular-delivery-v1","205998","39e6b7d373e9388bb23f94afd532d580c9db88e2d4e8bdcbe7d6d223dff7697e","0262f2a26606fb7adab089623285033dde6920fa7fe25cfe47838fc41e038e96"],
-  ["workflow-robotics-revision-handoff-v1","/api/v1/verify/workflows/robotics-revision-handoff-v1","165999","f90b82d013633e9db7c420833a1ab770ddc6b6c91ad165d85abca39ad48dbe33","989fa39a6140773425d20593c91e884a908df20bc9b6db35c16b140d5685f015"],
-  ["workflow-biology-assay-correction-handoff-v1","/api/v1/verify/workflows/biology-assay-correction-handoff-v1","214970","0cc7a2f3f843aec53881e999b90afac33a06ae66e9dc2b2806b2f09e3e819465","805c0ceb8705a200b963749b746031ed94bf430a4c27aea87f6435df1e2ecf72"],
-  ["workflow-materials-property-condition-handoff-v1","/api/v1/compute/workflows/materials-property-condition-handoff-v1","144995","07627c6d25f9f072a53a596881f341c15746c07b8a26fbbfc30ffe4d42240750","2a5be3a9a2779304dc4334a9ca21cec3d46cb146698be3e4bbee94142eee78e8"],
   ["workflow-calibrated-measurement-handoff-v2","/api/v1/compute/workflows/calibrated-measurement-handoff-v2","182997","f11039389b928528000ecc3c509586d3562f2f534551d1e90ac011748073c78e","e0d02525f81b3a779dc6f270192dc2803c7bf5982adeca84150af39a11bb3ffd"],
   ["workflow-celestial-timing-plan-review-v1","/api/v1/celestial/workflows/celestial-timing-plan-review-v1","214993","2136e4b5e24cb1733f62e5f914f02373d3c9eb362bde776d300515587a1ad551","6ee0828cb6c033f2a48d3238c021c49375748c8f6a8d11f484b00eedbd11a18c"],
   ["workflow-extractive-source-handoff-v1","/api/v1/intel/workflows/extractive-source-handoff-v1","244950","35f0028c798809ddcc5896e97fbee260890f7cce7899c19667117792d7f81b75","8f5327035f44406da9096884072637f9149a40439d9b87bac7d763cb87ae073f"],
@@ -38,14 +33,14 @@ const frozen = [
 ]
 export const TARGETS = Object.freeze(frozen.map(([id,path,amount,plan,input]) =>
   Object.freeze({id,path,amount,planHash:'sha256:'+plan,inputHash:'sha256:'+input})))
-if (TARGETS.length!==10 || new Set(TARGETS.map(e=>e.id)).size!==10
-  || new Set(TARGETS.map(e=>e.path)).size!==10 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
+if (TARGETS.length!==5 || new Set(TARGETS.map(e=>e.id)).size!==5
+  || new Set(TARGETS.map(e=>e.path)).size!==5 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
 const fail = (code) => { throw Error(code) }
 const post = (body) => ({method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
 const merchantTransport = (url, init={}) => {
   if(new URL(url).origin !== ORIGIN) fail('unexpected_merchant_origin')
   return fetch(url, {...init,redirect:'error',signal:AbortSignal.timeout(20000),
-    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-next-ten/1','x-maha-discovery-source':'maha_canary'}})
+    headers:{...Object.fromEntries(new Headers(init.headers)), 'user-agent':'maha-operator-workflow-final-five/1','x-maha-discovery-source':'maha_canary'}})
 }
 async function read(url, init, requester=fetch) {
   const response=await requester(url, {...init,redirect:'error',signal:AbortSignal.timeout(16000),cache:'no-store'})
@@ -165,7 +160,7 @@ export async function sequence(targets, isListed, buy, confirmListing, event=asy
 function guard(){
   const e=process.env
   if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REPOSITORY!=='Maha-Strategies/maha-corp-web'||e.GITHUB_REF!==REF||e.GITHUB_RUN_ATTEMPT!=='1'
-    ||e.WORKFLOW_NEXT_TEN_CONFIRMATION!==APPROVAL||!e.WORKFLOW_NEXT_TEN_EVIDENCE||dirname(e.WORKFLOW_NEXT_TEN_EVIDENCE)!==e.RUNNER_TEMP)
+    ||e.WORKFLOW_FINAL_FIVE_CONFIRMATION!==APPROVAL||!e.WORKFLOW_FINAL_FIVE_EVIDENCE||dirname(e.WORKFLOW_FINAL_FIVE_EVIDENCE)!==e.RUNNER_TEMP)
     fail('protected_exact_branch_and_confirmation_required')
 }
 async function saveJson(path,value){
@@ -191,7 +186,7 @@ async function run(mode){
   if(await client.getChainId()!==8453)fail('wrong_payment_chain')
   const balance=await client.readContract({address:usdc.asset,abi,functionName:'balanceOf',args:[account.address]})
   if(balance<CAP)fail('insufficient_balance')
-  const out=process.env.WORKFLOW_NEXT_TEN_EVIDENCE, cap=budget(), packets=[]
+  const out=process.env.WORKFLOW_FINAL_FIVE_EVIDENCE, cap=budget(), packets=[]
   const key=createHmac('sha256',k).update(SCOPE+':encrypted-capsule-v1').digest()
   const log={scope:SCOPE,classification:'publisher-funded-operator-activity',customerRevenue:false,automaticRepayment:false,
     state:'in_progress',approvedAtomic:String(CAP),authorizedAtomic:'0',confirmedAtomic:'0',steps:[]}
@@ -254,7 +249,7 @@ async function run(mode){
     })
     index=await snapshot()
     for(const e of TARGETS)if(!await findExact(e,index))fail('final_snapshot_incomplete_do_not_repay')
-    log.state='all_next_ten_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
+    log.state='all_final_five_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
   }catch(err){log.state='stopped_no_repayment';await save();throw err}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)run(process.argv[2]).catch(e=>{
