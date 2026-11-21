@@ -43,3 +43,9 @@ test('a paid hold cannot be counted as a successful workflow or trigger another 
   assert.throws(()=>requirePassingDelivery({overallStatus:'HELD'}),/paid_nonpassing_workflow_do_not_repay/)
   assert.throws(()=>requirePassingDelivery(null),/paid_nonpassing_workflow_do_not_repay/)
 })
+import {validUnsignedChallenge} from '../scripts/run-workflow-final-five.mjs'
+test('unsigned quotes require HTTP 402 and a nonempty header strictly below 8000 bytes',()=>{
+  assert.equal(validUnsignedChallenge(402,'x'.repeat(7999)),true)
+  for(const [status,value] of [[302,'x'],[200,'x'],[402,''],[402,null],[402,'x'.repeat(8000)]])
+    assert.equal(validUnsignedChallenge(status,value),false)
+})

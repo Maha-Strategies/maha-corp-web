@@ -119,10 +119,13 @@ export function contract(e) {
       return data
     }}
 }
+export function validUnsignedChallenge(status, encoded) {
+  return status === 402 && typeof encoded === 'string' && encoded.length > 0 && Buffer.byteLength(encoded) < 8000
+}
 async function assertQuote(e,input) {
   const q=await merchantTransport(ORIGIN+e.path,post(input))
   const encoded=q.headers.get('payment-required');await q.body?.cancel()
-  if(q.status!==302||!encoded||Buffer.byteLength(encoded)>=8000)fail('workflow_unsigned_challenge_invalid')
+  if(!validUnsignedChallenge(q.status,encoded))fail('workflow_unsigned_challenge_invalid')
   const c=decodeChallenge(encoded),a=c.accepts[0],b=c.extensions?.bazaar
   if(c.x402Version!==2||c.resource.url!==ORIGIN+e.path||c.accepts.length!==1||!sameTerms(a,e)
     ||!b||b.info?.input?.method!=='POST'||!validateDiscoveryExtensionSpec(b).valid||!validateDiscoveryExtension(b).valid)
