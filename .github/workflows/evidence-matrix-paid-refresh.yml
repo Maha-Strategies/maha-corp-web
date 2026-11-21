@@ -1,12 +1,12 @@
 name: Evidence Matrix publisher-funded refresh
-run-name: Index final five buyer workflows (1.033840 USDC cap)
+run-name: Index remaining four buyer workflows (0.850843 USDC cap)
 
 # Manual only. This branch cannot dispatch any other payment job.
 on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'PUBLISHER_FUNDED_WORKFLOW_FINAL_FIVE_ONCE_MAX_1033840'
+        description: 'PUBLISHER_FUNDED_WORKFLOW_REMAINING_FOUR_ONCE_MAX_850843'
         required: true
         type: string
 
@@ -17,13 +17,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  workflow-final-five:
-    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/workflow-final-five-20261115' && inputs.confirmation == 'PUBLISHER_FUNDED_WORKFLOW_FINAL_FIVE_ONCE_MAX_1033840'
+  workflow-remaining-four:
+    if: github.run_attempt == 1 && github.ref == 'refs/heads/codex/workflow-remaining-four-20261121' && inputs.confirmation == 'PUBLISHER_FUNDED_WORKFLOW_REMAINING_FOUR_ONCE_MAX_850843'
     runs-on: ubuntu-latest
     timeout-minutes: 190
     environment: production-x402-canary
     env:
-      WORKFLOW_FINAL_FIVE_CONFIRMATION: ${{ inputs.confirmation }}
+      WORKFLOW_REMAINING_FOUR_CONFIRMATION: ${{ inputs.confirmation }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -34,21 +34,21 @@ jobs:
       - run: npm install --global npm@11.17.0 --ignore-scripts
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node --experimental-strip-types --test test/workflow-final-five-indexing.test.mjs
-      - name: Check the five exact live inputs, quotes and public listings
+      - name: Check the four exact live inputs, quotes and public listings
         run: node --experimental-strip-types scripts/run-workflow-final-five.mjs --plan
       - name: Authorize each route once, waiting for its exact listing before the next
         env:
           BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-          WORKFLOW_FINAL_FIVE_EVIDENCE: ${{ runner.temp }}/workflow-final-five-evidence.json
+          WORKFLOW_REMAINING_FOUR_EVIDENCE: ${{ runner.temp }}/workflow-remaining-four-evidence.json
         run: node --experimental-strip-types scripts/run-workflow-final-five.mjs --pay
       - name: Preserve redacted evidence and encrypted recovery capsules
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: workflow-final-five-bazaar-${{ github.run_id }}
+          name: workflow-remaining-four-bazaar-${{ github.run_id }}
           path: |
-            ${{ runner.temp }}/workflow-final-five-evidence.json
-            ${{ runner.temp }}/workflow-final-five-evidence.json.encrypted.json
+            ${{ runner.temp }}/workflow-remaining-four-evidence.json
+            ${{ runner.temp }}/workflow-remaining-four-evidence.json.encrypted.json
           if-no-files-found: warn
           retention-days: 90
