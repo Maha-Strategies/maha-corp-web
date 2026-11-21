@@ -2,9 +2,8 @@ import {test} from 'node:test'
 import assert from 'node:assert/strict'
 import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence,requirePassingDelivery} from '../scripts/run-workflow-final-five.mjs'
 test('frozen batch cannot exceed cap or authorize any target twice',()=>{
-  assert.equal(CAP,390900n)
+  assert.equal(CAP,195950n)
   assert.deepEqual(TARGETS.map(e=>[e.id,e.amount]),[
-    ["workflow-publication-metadata-diligence-v1","194950"],
     ["workflow-trial-registry-evidence-handoff","195950"],
   ])
   assert.equal(TARGETS.some(e=>e.id==='workflow-research-reference-maintenance-v1'),false)
@@ -19,9 +18,9 @@ test('frozen batch cannot exceed cap or authorize any target twice',()=>{
 })
 test('no next purchase until exact listing; no automatic repayment; already listed skipped',async()=>{
   const changes=[]
-  await assert.rejects(sequence(TARGETS,async e=>e===TARGETS[0],async e=>changes.push(['purchase',e.id]),
+  await assert.rejects(sequence(TARGETS,async()=>false,async e=>changes.push(['purchase',e.id]),
     async e=>{changes.push(['verify listing',e.id]);return false},async(e,s)=>changes.push([s,e.id])),/settled_listing_unconfirmed_do_not_repay/)
-  assert.deepEqual(changes,[['already_listed_no_payment',TARGETS[0].id],['purchase',TARGETS[1].id],['verify listing',TARGETS[1].id]])
+  assert.deepEqual(changes,[['purchase',TARGETS[0].id],['verify listing',TARGETS[0].id]])
   changes.length=0
   await assert.rejects(sequence(TARGETS,async()=>false,async e=>{changes.push(e.id);throw Error('unknown_payment')},async()=>true),/unknown_payment/)
   assert.deepEqual(changes,[TARGETS[0].id])
@@ -38,20 +37,17 @@ test('listing must agree on exact URL, method, chain, asset, amount, and payee',
   assert.equal(listingMatches({...row,accepts:[{...row.accepts[0],amount:'1'}]},e),false)
   assert.equal(listingMatches({...row,extensions:{}},e),false)
 })
-test('a missing first listing prevents the second purchase; a verified first listing releases it',async()=>{
-  for(const firstListed of [false,true]){
+test('record listing separately from workflow quality without a second purchase',async()=>{
+  for(const overallStatus of ['INCONCLUSIVE','REQUIREMENTS_SATISFIED']){
     const events=[]
-    const [first,second]=TARGETS
-    const run=sequence(TARGETS,async()=>false,async e=>events.push('buy:'+e.id),async e=>{
-      events.push('lookup:'+e.id)
-      return e===second || firstListed
-    })
-    if(firstListed) await run
-    else await assert.rejects(run,/settled_listing_unconfirmed_do_not_repay/)
-    assert.deepEqual(events,['buy:'+first.id,'lookup:'+first.id,...(firstListed?['buy:'+second.id,'lookup:'+second.id]:[])])
+    const run=sequence(TARGETS,async()=>false,async()=>{events.push('buy');return {overallStatus}},
+      async()=>{events.push('lookup');return true},async(_,state)=>events.push(state))
+    if(overallStatus==='REQUIREMENTS_SATISFIED') await run
+    else await assert.rejects(run,/paid_nonpassing_workflow_do_not_repay/)
+    assert.deepEqual(events,['buy','lookup','listed_verified'])
   }
 })
-test('when both exact listings already exist there is no purchase',async()=>{
+test('when Trial is already listed there is no purchase',async()=>{
   await sequence(TARGETS,async()=>true,()=>assert.fail('unexpected payment'),()=>assert.fail('unexpected paid-listing check'))
 })
 test('a paid hold cannot be counted as a successful workflow or trigger another purchase',()=>{

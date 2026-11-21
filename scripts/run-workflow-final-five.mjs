@@ -15,9 +15,9 @@ import { receiptMatchesAuthorization } from '../lib/api-v1/base-proof.ts'
 import { MAHA_PAYEE } from '../lib/x402/merchant-identity.ts'
 import { usdcNetwork } from '../lib/x402/networks.ts'
 
-export const CAP = 390900n
-export const REF = 'refs/heads/codex/workflow-remaining-two-20261121'
-export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_REMAINING_TWO_ONCE_MAX_390900'
+export const CAP = 195950n
+export const REF = 'refs/heads/codex/workflow-trial-only-20261121'
+export const APPROVAL = 'PUBLISHER_FUNDED_WORKFLOW_TRIAL_ONLY_ONCE_MAX_195950'
 // Keep the original nonce namespace so an earlier authorization cannot be paid again.
 const SCOPE = 'maha-workflow-final-five/2026-11-15'
 const ORIGIN = 'https://www.mahastrategies.com'
@@ -26,13 +26,12 @@ const WALLET = '0x7b7ff44288fade4a1829aba2584dfceb952146f2'
 const NETWORK = 'eip155:8453'
 const usdc = usdcNetwork(NETWORK)
 const frozen = [
-  ["workflow-publication-metadata-diligence-v1","/api/v1/intel/workflows/publication-metadata-diligence-v1","194950","1501b03cfaf76eb7f0ae5e40bc96a75d652f641bd31b46f079d7bd49d1877664","93e53574699ef5caab665f31cfce5df38241aae657bd31de649e0c3604257241"],
   ["workflow-trial-registry-evidence-handoff","/api/v1/intel/workflows/trial-registry-evidence-handoff","195950","20185f943789d93df226c0d8bdbe869ef8f46a0080525dd177b2733a4a26a063","491b8003a881c678be9ccbd40e64f7a3db02550fd0feef2a0181f0ee0a8bbc0a"]
 ]
 export const TARGETS = Object.freeze(frozen.map(([id,path,amount,plan,input]) =>
   Object.freeze({id,path,amount,planHash:'sha256:'+plan,inputHash:'sha256:'+input})))
-if (TARGETS.length!==2 || new Set(TARGETS.map(e=>e.id)).size!==2
-  || new Set(TARGETS.map(e=>e.path)).size!==2 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
+if (TARGETS.length!==1 || new Set(TARGETS.map(e=>e.id)).size!==1
+  || new Set(TARGETS.map(e=>e.path)).size!==1 || TARGETS.reduce((n,e)=>n+BigInt(e.amount),0n)!==CAP) throw Error('incorrect_batch_or_cap')
 const fail = (code) => { throw Error(code) }
 const post = (body) => ({method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
 const merchantTransport = (url, init={}) => {
@@ -153,15 +152,16 @@ async function readTarget(e){
 export async function sequence(targets, isListed, buy, confirmListing, event=async()=>{}) {
   for(const target of targets){
     if(await isListed(target)){ await event(target,'already_listed_no_payment'); continue }
-    await buy(target)
+    const delivery=await buy(target)
     if(!await confirmListing(target))fail('settled_listing_unconfirmed_do_not_repay')
     await event(target,'listed_verified')
+    requirePassingDelivery(delivery)
   }
 }
 function guard(){
   const e=process.env
   if(e.GITHUB_ACTIONS!=='true'||e.GITHUB_REPOSITORY!=='Maha-Strategies/maha-corp-web'||e.GITHUB_REF!==REF||e.GITHUB_RUN_ATTEMPT!=='1'
-    ||e.WORKFLOW_REMAINING_TWO_CONFIRMATION!==APPROVAL||!e.WORKFLOW_REMAINING_TWO_EVIDENCE||dirname(e.WORKFLOW_REMAINING_TWO_EVIDENCE)!==e.RUNNER_TEMP)
+    ||e.WORKFLOW_TRIAL_ONLY_CONFIRMATION!==APPROVAL||!e.WORKFLOW_TRIAL_ONLY_EVIDENCE||dirname(e.WORKFLOW_TRIAL_ONLY_EVIDENCE)!==e.RUNNER_TEMP)
     fail('protected_exact_branch_and_confirmation_required')
 }
 async function saveJson(path,value){
@@ -187,7 +187,7 @@ async function run(mode){
   if(await client.getChainId()!==8453)fail('wrong_payment_chain')
   const balance=await client.readContract({address:usdc.asset,abi,functionName:'balanceOf',args:[account.address]})
   if(balance<CAP)fail('insufficient_balance')
-  const out=process.env.WORKFLOW_REMAINING_TWO_EVIDENCE, cap=budget(), packets=[]
+  const out=process.env.WORKFLOW_TRIAL_ONLY_EVIDENCE, cap=budget(), packets=[]
   const key=createHmac('sha256',k).update(SCOPE+':encrypted-capsule-v1').digest()
   const log={scope:SCOPE,classification:'publisher-funded-operator-activity',customerRevenue:false,automaticRepayment:false,
     state:'in_progress',approvedAtomic:String(CAP),authorizedAtomic:'0',confirmedAtomic:'0',steps:[]}
@@ -226,9 +226,8 @@ async function run(mode){
       if(!receiptMatchesAuthorization(rc,{transaction:result.transaction,payer,payee:MAHA_PAYEE,amount:e.amount,nonce}))fail('receipt_not_bound_do_not_repay')
       log.confirmedAtomic=String(BigInt(log.confirmedAtomic)+BigInt(e.amount))
       step.overallStatus=result.data.overallStatus
-      if(step.overallStatus!=='REQUIREMENTS_SATISFIED'){step.state='paid_nonpassing_do_not_repay';await save()}
-      requirePassingDelivery(result.data)
       step.state='settled_delivery_confirmed_awaiting_listing';await save();console.log(JSON.stringify(step))
+      return result.data
     },async e=>{
       for(let n=0;n<38;n++){
         let listed
@@ -250,7 +249,7 @@ async function run(mode){
     })
     index=await snapshot()
     for(const e of TARGETS)if(!await findExact(e,index))fail('final_snapshot_incomplete_do_not_repay')
-    log.state='all_remaining_two_exact_listings_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
+    log.state='trial_exact_listing_verified';await save();console.log(JSON.stringify({state:log.state,confirmedAtomic:log.confirmedAtomic}))
   }catch(err){log.state='stopped_no_repayment';await save();throw err}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)run(process.argv[2]).catch(e=>{
