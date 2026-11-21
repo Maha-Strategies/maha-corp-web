@@ -2,14 +2,14 @@ import {test} from 'node:test'
 import assert from 'node:assert/strict'
 import {CAP,TARGETS,budget,contract,listingMatches,exactFromSurfaces,sequence,requirePassingDelivery} from '../scripts/run-workflow-final-five.mjs'
 test('frozen batch cannot exceed cap or authorize any target twice',()=>{
-  assert.equal(CAP,850843n)
+  assert.equal(CAP,635850n)
   assert.deepEqual(TARGETS.map(e=>[e.id,e.amount]),[
-    ["workflow-celestial-timing-plan-review-v1","214993"],
     ["workflow-extractive-source-handoff-v1","244950"],
     ["workflow-publication-metadata-diligence-v1","194950"],
     ["workflow-trial-registry-evidence-handoff","195950"],
   ])
   assert.equal(TARGETS.some(e=>e.id==='workflow-research-reference-maintenance-v1'),false)
+  assert.throws(()=>budget().reserve({id:'workflow-celestial-timing-plan-review-v1',amount:'214993'}),/duplicate_or_unapproved/)
   const cap=budget()
   for(const e of TARGETS)cap.reserve(e)
   assert.equal(cap.authorized,CAP)
